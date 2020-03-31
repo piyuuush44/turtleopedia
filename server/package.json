@@ -1,0 +1,35 @@
+{
+  "name": "piyappbackend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start_dev": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "celebrate": "^12.0.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-async-handler": "^1.1.4",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "morgan-json": "^1.1.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "airbnb": "0.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "jest": "^25.2.4",
+    "nodemon": "^2.0.2"
+  }
+}
