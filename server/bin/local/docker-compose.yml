@@ -1,11 +1,11 @@
-version: '3'
+version: '3.7'
 
 services:
   api_service:
     build:
       context: ../..
-      dockerfile: ./Dockerfile
-    image: node:13
+      dockerfile: bin/local/Dockerfile
+    image: node:13.12
     container_name: api_service
     restart: unless-stopped
     env_file: .env
@@ -24,9 +24,9 @@ services:
       - app-network
     command: './bin/local/service_start.sh'
 
-  db:
+  db_service:
     image: mongo:4.2.5-bionic
-    container_name: db
+    container_name: db_service
     restart: unless-stopped
     env_file: .env
     environment:

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
-source $PROJECT_ROOT/piyAppBackend/bin/setup.sh
+source $PROJECT_ROOT/server/bin/setup.sh
 
 # Ensure docker
 if command -v docker &>/dev/null; then
@@ -11,10 +11,10 @@ else
   exit 1
 fi
 
-cd $PROJECT_ROOT/piyAppBackend
+cd $PROJECT_ROOT/server
 yarn install
 
-cd $PROJECT_ROOT/piyAppBackend/bin/local
+cd $PROJECT_ROOT/server/bin/local
 
 # System shut down in case it was running already
 print_ok "Shutting down local containers if they are up"
