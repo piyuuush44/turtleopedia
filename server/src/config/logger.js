@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'test') {
     name: 'console',
     transports: [new winston.transports.Console()],
     level,
-    defaultMeta: { service: 'api-service' },
+    defaultMeta: {service: 'api-service'},
     format: winston.format.combine(...loggerFormats),
   });
 } else {
@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'test') {
     name: 'console',
     transports: [new winston.transports.Console()],
     level,
-    defaultMeta: { service: 'api-service' },
+    defaultMeta: {service: 'api-service'},
     format: winston.format.combine(...loggerFormats),
   });
 }

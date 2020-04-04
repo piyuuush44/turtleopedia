@@ -14,9 +14,9 @@ module.exports = class ServerError extends AppError {
   * @param {Error} cause - The underlying cause of the error that should
   *  be logged
   */
-  constructor({ message, httpStatus, cause }) {
+  constructor({message, httpStatus, cause}) {
     const updatedMessage = message || 'Looks like something went wrong. Please wait and try again in a few minutes.';
     const status = httpStatus || 500;
-    super({ message: updatedMessage, httpStatus: status, cause: cause });
+    super({message: updatedMessage, httpStatus: status, cause: cause});
   }
 };

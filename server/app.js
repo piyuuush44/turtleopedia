@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const morganJson = require('morgan-json');
-const { isCelebrate } = require('celebrate');
+const {isCelebrate} = require('celebrate');
 const logger = require('./src/config/logger');
 
 require('./src/config/passport');
@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'local') {
   });
 }
 
-app.use(morgan(morganFormat, { stream: logger.stream }));
+app.use(morgan(morganFormat, {stream: logger.stream}));
 
 registerAllRoutes(app);
 // catch 404 and forward to error handler
@@ -87,20 +87,34 @@ app.use((err, req, res, next) => {
       res.status(400).send(getErrorResponse(400, 'Input validation error'));
     }
   } else if (err.name === 'UnauthorizedError') {
-    res.status(401).send(getErrorResponse(401, 'Unauthorized. Missing or invalid token'));
+    res.status(401).send(getErrorResponse(
+        401,
+        'Unauthorized. Missing or invalid token',
+    ));
   } else if (err instanceof AppError) {
     if (err instanceof ServerError) {
-      res.status(err.httpStatus).send(getErrorResponse(err.httpStatus, 'Looks like something went wrong. Please wait and try again in a few minutes.'));
+      res.status(err.httpStatus).send(getErrorResponse(
+          err.httpStatus,
+          'Looks like something went wrong.' +
+          ' Please wait and try again in a few minutes.',
+      ));
     } else {
       // eslint-disable-next-line max-len
       // All HTTP requests must have a response, so let's send back an error with its httpStatus and message
-      res.status(err.httpStatus).send(getErrorResponse(err.httpStatus, err.message));
+      res.status(err.httpStatus).send(getErrorResponse(
+          err.httpStatus,
+          err.message,
+      ));
     }
   } else {
     // If it is an uncaught exception, pass it back as an Internal Server Error
-    res.status(500).send(getErrorResponse(500, 'Looks like something went wrong. Please wait and try again in a few minutes.'));
+    res.status(500).send(
+        getErrorResponse(
+            500,
+            'Looks like something went wrong.' +
+            ' Please wait and try again in a few minutes.',
+        ));
   }
 });
-
 
 module.exports = app;
