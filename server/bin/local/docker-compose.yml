@@ -1,10 +1,25 @@
 version: '3.7'
 
 services:
+  db_service:
+    image: mongo:4.2.5-bionic
+    container_name: db_service
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
   api_service:
     build:
       context: ../..
-      dockerfile: bin/local/Dockerfile
+      dockerfile: ./bin/local/Dockerfile
     image: node:13
     container_name: api_service
     restart: unless-stopped
@@ -23,21 +38,9 @@ services:
     networks:
       - app-network
     command:
-      - './bin/local/service_start.sh'
-      - './bin/local/port_polling_function.sh db:27017'
-
-  db_service:
-    image: mongo:4.2.5-bionic
-    container_name: db_service
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
-    volumes:
-      - dbdata:/data/db
-    networks:
-      - app-network
+      - '/opt/api_service/bin/local/service_start.sh'
+    links:
+      - db_service
 
 networks:
   app-network:

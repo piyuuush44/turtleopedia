@@ -3,10 +3,10 @@
 # Terminate script if any step returns with non-zero exit code, i.e. is unsuccessful
 set -e
 
-# Load the setup file
-source ../setup.sh
+source /opt/api_service/bin/setup.sh
 
 date
 
-print_ok "Starting the server"
-./node_modules/nodemon/bin/nodemon.js ./bin/www.js
+/opt/api_service/node_modules/.bin/nodemon /opt/api_service/bin/www
+
+print_ok 'Started the server! Thanks'

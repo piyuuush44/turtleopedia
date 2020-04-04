@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
+
 source $PROJECT_ROOT/server/bin/setup.sh
 
 # Ensure docker
@@ -19,8 +20,8 @@ cd $PROJECT_ROOT/server/bin/local
 
 # System shut down in case it was running already
 print_ok "Shutting down local containers if they are up"
-sudo docker-compose down --volumes
+docker-compose down --volumes
 
 # System start up
 print_ok "Starting the service up"
-sudo docker-compose up
+docker-compose up

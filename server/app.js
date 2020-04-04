@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const morganJson = require('morgan-json');
 const {isCelebrate} = require('celebrate');
 const logger = require('./src/config/logger');
-require('./src/config/mongo');
+// require('./src/config/mongo');
 // require('./src/config/passport');
 
 const AppError = require('./src/errors').app;
