@@ -12,14 +12,15 @@ else
 fi
 
 cd $PROJECT_ROOT/server
-yarn install
+print_ok "Running npm install to update dependencies"
+npm install
 
 cd $PROJECT_ROOT/server/bin/local
 
 # System shut down in case it was running already
 print_ok "Shutting down local containers if they are up"
-docker-compose down --volumes
+sudo docker-compose down --volumes
 
 # System start up
 print_ok "Starting the service up"
-docker-compose up
+sudo docker-compose up
