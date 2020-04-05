@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  db_service:
+  db-server:
+    container_name: db-server
     image: mongo:4.2.5-bionic
-    container_name: db_service
     restart: unless-stopped
     env_file: .env
     environment:
@@ -32,7 +32,7 @@ services:
     environment:
       - MONGO_USERNAME=$MONGO_USERNAME
       - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=db
+      - MONGO_HOSTNAME=$MONGO_HOSTNAME
       - MONGO_PORT=$MONGO_PORT
       - MONGO_DB=$MONGO_DB
     ports:
@@ -40,7 +40,7 @@ services:
     networks:
       - app-network
     links:
-      - db_service
+      - db-server
 
 networks:
   app-network:

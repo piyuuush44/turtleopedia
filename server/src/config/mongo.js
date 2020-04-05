@@ -9,23 +9,23 @@ const {
   MONGO_PORT,
   MONGO_DB,
   MONGO_URL_SUBSTRING,
-}= process.env;
+} = process.env;
 
 
 let url;
 if (process.env.NODE_ENV === 'prod') {
   url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
 } else {
-  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
+  url = `${MONGO_URL_SUBSTRING}://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
 }
 console.log(url);
 
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  reconnectTries: Number.MAX_VALUE,
-  reconnectInterval: 500,
-  connectTimeoutMS: 10000,
+  // reconnectTries: Number.MAX_VALUE,
+  // reconnectInterval: 500,
+  // connectTimeoutMS: 10000,
 };
 
 mongoose.connect(url, options)
