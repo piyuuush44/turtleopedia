@@ -15,8 +15,12 @@ module.exports = class ServerError extends AppError {
   *  be logged
   */
   constructor({message, httpStatus, cause}) {
-    const updatedMessage = message || 'Looks like something went wrong. Please wait and try again in a few minutes.';
+    const updatedMessage = message ||
+        'Looks like something went wrong. ' +
+        'Please wait and try again in a few minutes.';
     const status = httpStatus || 500;
-    super({message: updatedMessage, httpStatus: status, cause: cause});
+    super(
+        {message: updatedMessage, httpStatus: status, cause: cause},
+    );
   }
 };

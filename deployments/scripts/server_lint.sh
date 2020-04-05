@@ -12,5 +12,5 @@ cd $PROJECT_ROOT/server
 
 # Run the lint step
 print_start 'Running the lint step'
-npm lint
+npm run lint
 print_ok 'Done'
