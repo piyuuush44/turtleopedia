@@ -29,12 +29,6 @@ services:
       - '../../node_modules:/opt/api_server/node_modules'
     command:
       - './bin/local/service_start.sh'
-    environment:
-      - MONGO_USERNAME=$MONGO_USERNAME
-      - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=$MONGO_HOSTNAME
-      - MONGO_PORT=$MONGO_PORT
-      - MONGO_DB=$MONGO_DB
     ports:
       - "3000:3000"
     networks:

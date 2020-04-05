@@ -25,7 +25,8 @@ exports.jwtStrategyCallback = async (jwtPayload, done) => {
     return done(null, user);
   } catch (err) {
     return done(new ServerError(
-        {message: 'Got an error in JWT Strategy Callback',
+        {
+          message: 'Got an error in JWT Strategy Callback',
           cause: err,
         }));
   }
@@ -34,3 +35,5 @@ passport.use(new JwtStrategy({
   jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET_KEY,
 }, exports.jwtStrategyCallback));
+
+console.log(process.env);
