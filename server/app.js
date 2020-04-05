@@ -6,23 +6,28 @@ const morgan = require('morgan');
 const morganJson = require('morgan-json');
 const {isCelebrate} = require('celebrate');
 const logger = require('./src/config/logger');
+const cors = require('cors');
+
 require('./src/config/mongo');
-// require('./src/config/passport');
+require('./src/config/passport');
 
 const AppError = require('./src/errors').app;
 const ServerError = require('./src/errors').server;
 
 const app = express();
 
+// configuring the application
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+// cors active
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// registering all our application routes
 const registerAllRoutes = require('./src/app');
 
 logger.stream = {
