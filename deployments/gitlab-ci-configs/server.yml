@@ -18,8 +18,8 @@ test_server:
   services:
     - mongo:4.2.5-bionic
   variables:
-    - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
-    - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    - MONGO_INITDB_ROOT_USERNAME:$MONGO_USERNAME
+    - MONGO_INITDB_ROOT_PASSWORD:$MONGO_PASSWORD
   only:
     - dev
     - master
