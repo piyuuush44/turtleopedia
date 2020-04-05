@@ -1,0 +1,20 @@
+image: registry.gitlab.com/skynetaps/skynet:latest
+
+variables:
+  DEV_STAGE_NAME: dev
+  PROD_STAGE_NAME: prod
+  STAGING_STAGE_NAME: staging
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+
+# Build Step
+.manual_step: &manual_step
+  when: manual
+  allow_failure: false
+
+include:
+  - local: '/deployments/gitlab-ci-configs/server.yml'

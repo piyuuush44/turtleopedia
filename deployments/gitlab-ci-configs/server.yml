@@ -1,0 +1,82 @@
+build_server:
+  stage: build
+  image: node:13
+  only:
+    - dev
+    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+  script: source deployments/scripts/server_build.sh
+  artifacts:
+    paths:
+      - server/node_modules/
+
+test_server:
+  stage: test
+  image: node:13
+  dependencies:
+    - build_server
+  services:
+    - mongo:4.2.5-bionic
+  variables:
+    - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+    - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+  only:
+    - dev
+    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+  script: source deployments/scripts/server_test.sh
+
+lint_server:
+  stage: test
+  image: node:13
+  dependencies:
+    - build_server
+  only:
+    - dev
+    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+  script: source deployments/scripts/server_lint.sh
+
+.package_server: &package_server
+  stage: package
+  services:
+    - docker:dind
+  variables:
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+  script: source deployments/scripts/server_package.sh
+
+package_server:staging:
+  extends: .package_server
+  only:
+    - master
+
+  environment:
+    name: staging
+    url: ${STAGING_API_URL}
+
+.deploy_server: &deploy_server
+  extends: .manual_step
+  stage: deploy
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+  script:
+    - source deployments/scripts/server_deploy.sh
+
+deploy_server:staging:
+  extends: .deploy_server
+  only:
+    - master
+  variables:
+    AWS_ACCOUNT: ${STAGING_AWS_ACCOUNT}
+  environment:
+    name: staging
+    url: ${STAGING_API_URL}
+  dependencies:
+    - package_server:staging
