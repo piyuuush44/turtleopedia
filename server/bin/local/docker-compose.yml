@@ -16,14 +16,19 @@ services:
     networks:
       - app-network
 
-  api_service:
+  api-server:
+    container_name: api-server
     build:
       context: ../..
       dockerfile: ./bin/local/Dockerfile
-    image: node:13
-    container_name: api_service
-    restart: unless-stopped
     env_file: .env
+    restart: unless-stopped
+    volumes:
+      - '../..:/opt/api_server/'
+      - '../../package.json:/opt/api_server/package.json'
+      - '../../node_modules:/opt/api_server/node_modules'
+    command:
+      - './bin/local/service_start.sh'
     environment:
       - MONGO_USERNAME=$MONGO_USERNAME
       - MONGO_PASSWORD=$MONGO_PASSWORD
@@ -32,13 +37,8 @@ services:
       - MONGO_DB=$MONGO_DB
     ports:
       - "3000:3000"
-    volumes:
-      - ../..:/opt/api_service
-      - ../../node_modules:/opt/api_service/node_modules
     networks:
       - app-network
-    command:
-      - '/opt/api_service/bin/local/service_start.sh'
     links:
       - db_service
 
