@@ -45,7 +45,7 @@ lint_server:
   services:
     - docker:dind
   variables:
-    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_REGISTRY_IMAGE: st
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
@@ -57,7 +57,7 @@ package_server:staging:
 
   environment:
     name: staging
-    url: ${STAGING_API_URL}
+    url: st
 
 .deploy_server: &deploy_server
   extends: .manual_step
@@ -65,7 +65,7 @@ package_server:staging:
   services:
     - docker:dind
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    - docker login -u gitlab-ci-token -p CI_JOB_TOKEN registry.gitlab.com
   script:
     - source deployments/scripts/server_deploy.sh
 
@@ -74,9 +74,9 @@ deploy_server:staging:
   only:
     - master
   variables:
-    AWS_ACCOUNT: ${STAGING_AWS_ACCOUNT}
+    AWS_ACCOUNT: hi
   environment:
     name: staging
-    url: ${STAGING_API_URL}
+    url: st
   dependencies:
     - package_server:staging
