@@ -12,10 +12,10 @@ module.exports = class TokenError extends ClientError {
   * @param {Error} cause - The underlying cause of the error that should
   *
   */
-  constructor({ message, cause }) {
+  constructor({message, cause}) {
     // Set the status to 401
     const httpStatus = 401;
     const updatedMessage = message || 'Unauthorized. Missing or invalid token';
-    super({ message: updatedMessage, httpStatus: httpStatus, cause: cause });
+    super({message: updatedMessage, httpStatus: httpStatus, cause: cause});
   }
 };

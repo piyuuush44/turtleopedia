@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { celebrate } = require('celebrate');
+const {celebrate} = require('celebrate');
 const balluRoutes = require('./ballu/routes')();
 
 module.exports = (app) => {

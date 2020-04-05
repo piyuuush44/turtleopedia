@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
+
 source $PROJECT_ROOT/server/bin/setup.sh
 
 # Ensure docker
@@ -12,7 +13,8 @@ else
 fi
 
 cd $PROJECT_ROOT/server
-yarn install
+print_ok "Running npm install to update dependencies"
+npm install
 
 cd $PROJECT_ROOT/server/bin/local
 
