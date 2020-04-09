@@ -35,5 +35,3 @@ passport.use(new JwtStrategy({
   jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.JWT_SECRET_KEY,
 }, exports.jwtStrategyCallback));
-
-console.log(process.env);

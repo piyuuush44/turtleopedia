@@ -16,16 +16,13 @@ let url;
 if (process.env.NODE_ENV === 'prod') {
   url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
 } else {
-  url = `${MONGO_URL_SUBSTRING}://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`;
+  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
 }
-console.log(url);
 
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  // reconnectTries: Number.MAX_VALUE,
-  // reconnectInterval: 500,
-  // connectTimeoutMS: 10000,
+  connectTimeoutMS: 10000,
 };
 
 mongoose.connect(url, options)
