@@ -88,3 +88,24 @@ exports.postPasswordResetEmail = async (req, res, next) => {
     next(new ClientError({message: e}));
   }
 };
+
+exports.putProfileUpdate = async (req, res, next) => {
+  try {
+    const {user} = req;
+
+    user.first_name = req.body.first_name;
+    user.last_name = req.body.last_name;
+    user.phone = req.body.phone;
+
+    await user.save();
+
+    return res.json({
+      result: {
+        user: user,
+      },
+      message: 'User updated successfully',
+    });
+  } catch (e) {
+    next(new ClientError({message: e}));
+  }
+};
