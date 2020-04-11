@@ -1,5 +1,5 @@
+import 'package:ballu/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     int _selectedIndex = 0;
     const TextStyle optionStyle =
-        TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
     const List<Widget> _widgetOptions = <Widget>[
       Text(
         'Index 0: Home',

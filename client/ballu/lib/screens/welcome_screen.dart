@@ -1,8 +1,9 @@
+import 'package:ballu/screens/register_screen.dart';
+import 'package:ballu/widgets/auth_button.dart';
+import 'package:ballu/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterapp/screens/login_screen.dart';
-import 'package:flutterapp/screens/register_screen.dart';
-import 'package:flutterapp/widgets/auth_button.dart';
-import 'package:flutterapp/widgets/title_widget.dart';
+
+import 'login_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key key, this.title}) : super(key: key);
