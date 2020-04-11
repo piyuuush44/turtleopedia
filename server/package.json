@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "seed": "node ./db/seeds",
     "test": "jest test/unit --silent --forceExit --runInBand",
     "lint": "./node_modules/eslint/bin/eslint.js src/",
     "start": "./node_modules/nodemon/bin/nodemon.js app.js"

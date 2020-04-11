@@ -1,6 +1,8 @@
 const logger = require('./logger');
 const mongoose = require('mongoose');
 const util = require('util');
+// temporarily disabling seeding
+// const seed = require('../../db/seeds');
 
 const {
   MONGO_USERNAME,
@@ -26,5 +28,6 @@ const options = {
 };
 
 mongoose.connect(url, options)
-    .then((_) => logger.info('Connected to mongo'))
+    .then((_) => logger.info('connected to mongo'))
+    // .then((_) => seed())
     .catch((error) => logger.error(util.inspect(error)));

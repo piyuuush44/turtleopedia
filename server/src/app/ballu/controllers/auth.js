@@ -34,9 +34,6 @@ exports.postRegister = async (req, res, next) => {
     const hash = await authUtils.getPasswordHash(req.body.password);
 
     user = new User();
-    user.first_name = req.body.first_name;
-    user.last_name = req.body.last_name;
-    user.phone = req.body.phone;
     user.email = req.body.email;
     user.password_hash = hash;
 

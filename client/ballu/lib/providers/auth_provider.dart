@@ -1,10 +1,158 @@
-import 'dart:async';
+//import 'dart:async';
+//import 'dart:convert';
+//
+//import 'package:flutter/widgets.dart';
+//import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:http/http.dart' as http;
+//
+//import '../models/http_exception.dart';
+//
+//class AuthProvider with ChangeNotifier {
+//  String _token;
+//  DateTime _expiryDate;
+//  String _userId;
+//  Timer _authTimer;
+//
+//  bool get isAuthentic {
+//    print('inside is authentic');
+//    print(token != null);
+//    return token != null;
+////    return false;
+//  }
+//
+//  String get userId {
+//    return _userId;
+//  }
+//
+//  String get token {
+//    if (_expiryDate != null &&
+//        _expiryDate.isAfter(DateTime.now()) &&
+//        _token != null) {
+//      return _token;
+//    }
+//    return null;
+//  }
+//
+//  Future<void> login(String email, String password) async {
+////    final url = 'http://192.168.1.16:3000/ballu/login';
+////    try {
+////      final response = await http.post(
+////        url,
+////        body: {'email': email, 'password': password},
+////      );
+////      if (response.statusCode == 200) {
+////        final responseBody = json.decode(response.body);
+////        _token = responseBody['result']['token'];
+////        _userId = responseBody['result']['user']['_id'];
+////        _expiryDate = DateTime.now().add(Duration(seconds: 300));
+//    _token = 'dsfsdf';
+//    _userId = 'sdfsdf';
+//    _expiryDate = DateTime.now().add(Duration(seconds: 300));
+//    notifyListeners();
+//
+//    _autoLogout();
+//
+//    final prefs = await SharedPreferences.getInstance();
+//
+//    final userData = json.encode({
+//      'token': _token,
+//      'userId': _userId,
+//      'expiryDate': _expiryDate.toIso8601String(),
+//    });
+//    prefs.setString('userData', userData);
+////        print(userData);
+////      } else {
+////        throw HttpException(response.body);
+////      }
+////    } catch (error) {
+////      throw error;
+////    }
+//  }
+//
+//  Future<void> signup(String email, String password) async {
+////    final url = 'http://192.168.1.16:3000/ballu/register';
+////    try {
+////      final response = await http.post(
+////        url,
+////        body: {'email': email, 'password': password},
+////      );
+////      if (response.statusCode == 200) {
+////        final responseBody = json.decode(response.body);
+////        _token = responseBody['result']['token'];
+////        _userId = responseBody['result']['user']['_id'];
+////        _expiryDate = DateTime.now().add(Duration(seconds: 300));
+////        _autoLogout();
+//    _token = 'j';
+//    notifyListeners();
+//
+////        final prefs = await SharedPreferences.getInstance();
+////
+////        final userData = json.encode({
+////          'token': _token,
+////          'userId': _userId,
+////          'expiryDate': _expiryDate.toIso8601String(),
+////        });
+////        prefs.setString('userData', userData);
+////      } else {
+////        throw HttpException(response.body);
+////      }
+////    } catch (error) {
+////      print(error);
+////      throw error;
+////    }
+//  }
+//
+//  Future<void> logout() async {
+//    _userId = null;
+//    _token = null;
+//    _expiryDate = null;
+//    if (_authTimer != null) {
+//      _authTimer.cancel();
+//      _authTimer = null;
+//    }
+//    notifyListeners();
+//
+//    final prefs = await SharedPreferences.getInstance();
+//    prefs.clear();
+//  }
+//
+//  Future<bool> tryAutoLogin() async {
+//    final prefs = await SharedPreferences.getInstance();
+//    if (!prefs.containsKey('userData')) {
+//      return false;
+//    }
+//    final extractedData =
+//        json.decode(prefs.getString('userData')) as Map<String, Object>;
+//    final expiryDate = DateTime.parse(extractedData['expiryDate']);
+//    if (expiryDate.isBefore(DateTime.now())) {
+//      return false;
+//    }
+//    _token = extractedData['token'];
+//    _userId = extractedData['userId'];
+//    _expiryDate = expiryDate;
+//    _autoLogout();
+//    notifyListeners();
+//    return true;
+//  }
+//
+//  void _autoLogout() {
+//    if (_authTimer != null) {
+//      _authTimer.cancel();
+//    }
+//    final time = _expiryDate.difference(DateTime.now()).inSeconds;
+//    _authTimer = Timer(Duration(seconds: time), () => login);
+//  }
+//}
+
+
+
 import 'dart:convert';
-import 'dart:html';
+import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../models/http_exception.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -13,12 +161,8 @@ class AuthProvider with ChangeNotifier {
   String _userId;
   Timer _authTimer;
 
-  bool get isAuthentic {
+  bool get isAuth {
     return token != null;
-  }
-
-  String get userId {
-    return _userId;
   }
 
   String get token {
@@ -30,87 +174,59 @@ class AuthProvider with ChangeNotifier {
     return null;
   }
 
-  Future<void> _authenticate(
-      String email, String password, String urlParam) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlParam?key=AIzaSyDdaMB59wCz4fqZIoC8r7LhzL3O6h2YQIU';
-    try {
-      final response = await http.post(url,
-          body: json.encode({
-            'email': email,
-            'password': password,
-          }));
-      final responseBody = json.decode(response.body);
-      if (responseBody['error'] != null) {
-        throw HttpException(responseBody['error']['message']);
-      }
-      _token = responseBody['idToken'];
-      _userId = responseBody['localId'];
-      _expiryDate = DateTime.now().add(Duration(seconds: 300));
-      _autoLogout();
-
-      final prefs = await SharedPreferences.getInstance();
-
-      final userData = json.encode({
-        'token': token,
-        'userId': userId,
-        'expiryDate': _expiryDate.toIso8601String(),
-      });
-      prefs.setString('userData', userData);
-
-      notifyListeners();
-    } catch (error) {
-      throw error;
-    }
+  String get userId {
+    return _userId;
   }
 
-  Future<void> login(String email, String password) async {
-    final url = 'signup url';
-    try {
-      final response = await http.post(
-        url,
-        body: {'email': email, 'passowrd': password},
-      );
-      if (response.statusCode == 200) {
-        final responseBody = json.decode(response.body);
-        _token = responseBody['idToken'];
-        _userId = responseBody['localId'];
-        _expiryDate = DateTime.now().add(Duration(seconds: 300));
-        _autoLogout();
-
-        final prefs = await SharedPreferences.getInstance();
-
-        final userData = json.encode({
-          'token': token,
-          'userId': userId,
-          'expiryDate': _expiryDate.toIso8601String(),
-        });
-        prefs.setString('userData', userData);
-
-        notifyListeners();
-      }else{
-        throw HttpException(response.body);
-      }
-    } catch (error) {
-      throw error;
-    }
+  Future<void> _authenticate(
+      String email, String password, String urlSegment) async {
+    _token = 'hi';
+    notifyListeners();
+//    final url =
+//        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/$urlSegment?key=AIzaSyC13spCwP_f_SalxEbkB-wjedoF8iYENlQ';
+//    try {
+//      final response = await http.post(
+//        url,
+//        body: json.encode(
+//          {
+//            'email': email,
+//            'password': password,
+//            'returnSecureToken': true,
+//          },
+//        ),
+//      );
+//      final responseData = json.decode(response.body);
+//      if (responseData['error'] != null) {
+//        throw HttpException(responseData['error']['message']);
+//      }
+//      _token = responseData['idToken'];
+//      _userId = responseData['localId'];
+    _expiryDate = DateTime.now().add(Duration(
+      seconds: 600000,
+    ));
+//      );
+//      _autoLogout();
+//      notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    final userData = json.encode(
+      {
+        'token': _token,
+        'userId': _userId,
+        'expiryDate': _expiryDate.toIso8601String(),
+      },
+    );
+    prefs.setString('userData', userData);
+//    } catch (error) {
+//      throw error;
+//    }
   }
 
   Future<void> signup(String email, String password) async {
-    return _authenticate(email, password, 'signUp');
+    return _authenticate(email, password, 'signupNewUser');
   }
 
-  Future<void> logout() async {
-    _userId = null;
-    _token = null;
-    _expiryDate = null;
-    if (_authTimer != null) {
-      _authTimer.cancel();
-      _authTimer = null;
-    }
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-    notifyListeners();
+  Future<void> login(String email, String password) async {
+    return _authenticate(email, password, 'verifyPassword');
   }
 
   Future<bool> tryAutoLogin() async {
@@ -118,25 +234,40 @@ class AuthProvider with ChangeNotifier {
     if (!prefs.containsKey('userData')) {
       return false;
     }
-    final extractedData =
-        json.decode(prefs.getString('userData')) as Map<String, Object>;
-    final expiryDate = DateTime.parse(extractedData['expiryDate']);
+    final extractedUserData =
+    json.decode(prefs.getString('userData')) as Map<String, Object>;
+    final expiryDate = DateTime.parse(extractedUserData['expiryDate']);
+
     if (expiryDate.isBefore(DateTime.now())) {
       return false;
     }
-    _token = extractedData['token'];
-    _userId = extractedData['userId'];
+    _token = extractedUserData['token'];
+    _userId = extractedUserData['userId'];
     _expiryDate = expiryDate;
-    _autoLogout();
     notifyListeners();
+    _autoLogout();
     return true;
+  }
+
+  Future<void> logout() async {
+    _token = null;
+    _userId = null;
+    _expiryDate = null;
+    if (_authTimer != null) {
+      _authTimer.cancel();
+      _authTimer = null;
+    }
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    // prefs.remove('userData');
+    prefs.clear();
   }
 
   void _autoLogout() {
     if (_authTimer != null) {
       _authTimer.cancel();
     }
-    final time = _expiryDate.difference(DateTime.now()).inSeconds;
-    _authTimer = Timer(Duration(seconds: time), () => login);
+    final timeToExpiry = _expiryDate.difference(DateTime.now()).inSeconds;
+    _authTimer = Timer(Duration(seconds: timeToExpiry), logout);
   }
 }
