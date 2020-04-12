@@ -6,7 +6,8 @@
     "seed": "node ./db/seeds",
     "test": "jest test/unit --silent --forceExit --runInBand",
     "lint": "./node_modules/eslint/bin/eslint.js src/",
-    "start": "./node_modules/nodemon/bin/nodemon.js app.js"
+    "start": "node ./bin/www",
+    "start_dev": "./node_modules/nodemon/bin/nodemon.js ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^4.0.1",

@@ -1,8 +1,6 @@
 const logger = require('./logger');
 const mongoose = require('mongoose');
 const util = require('util');
-// temporarily disabling seeding
-// const seed = require('../../db/seeds');
 
 const {
   MONGO_USERNAME,
@@ -15,10 +13,10 @@ const {
 
 
 let url;
-if (process.env.NODE_ENV === 'prod') {
-  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
-} else {
+if (process.env.NODE_ENV === 'local') {
   url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`;
+} else {
+  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
 }
 
 const options = {
