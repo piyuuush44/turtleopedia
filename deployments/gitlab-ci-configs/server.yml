@@ -54,8 +54,6 @@ package_server:staging:
   extends: .package_server
   only:
     - master
-    - dev
-
   environment:
     name: staging
     url: st
