@@ -44,7 +44,7 @@ lint_server:
   services:
     - docker:dind
   variables:
-    CI_REGISTRY_IMAGE: st
+    CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
@@ -53,6 +53,7 @@ package_server:staging:
   extends: .package_server
   only:
     - master
+    - dev
 
   environment:
     name: staging
@@ -65,13 +66,12 @@ package_server:staging:
     - docker:dind
   before_script:
     - docker login -u gitlab-ci-token -p CI_JOB_TOKEN registry.gitlab.com
-  script:
-    - source deployments/scripts/server_deploy.sh
 
 deploy_server:staging:
   extends: .deploy_server
   only:
     - master
+    - dev
   variables:
     AWS_ACCOUNT: hi
   environment:
@@ -79,3 +79,5 @@ deploy_server:staging:
     url: st
   dependencies:
     - package_server:staging
+  script:
+    - source deployments/scripts/server_deploy_heroku.sh
