@@ -63,8 +63,6 @@ package_server:staging:
   stage: deploy
   services:
     - docker:dind
-  before_script:
-    - docker login -u gitlab-ci-token -p CI_JOB_TOKEN registry.gitlab.com
 
 deploy_server:staging:
   extends: .deploy_server
