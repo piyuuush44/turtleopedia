@@ -66,15 +66,13 @@ package_server:staging:
 
 deploy_server:staging:
   extends: .deploy_server
+  image : ruby:latest
   only:
     - master
     - dev
   variables:
     HEROKU_APP_NAME: $HEROKU_APP_STAGING
     HEROKU_API_KEY: $HEROKU_API_KEY
-  environment:
-    name: staging
-    url: st
   dependencies:
     - package_server:staging
   script:

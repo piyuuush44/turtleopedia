@@ -9,4 +9,4 @@ cd $PROJECT_ROOT/server
 apt-get update -qy
 apt-get install -y ruby-dev
 gem install dpl
-dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+dpl --provider=heroku --app=skynet-api-server-staging --api-key=431d874b-039f-41cf-b5bf-10fa967b613d
