@@ -19,6 +19,8 @@ if (process.env.NODE_ENV === 'local') {
   url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB}`;
 }
 
+logger.info(url);
+
 const options = {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -27,5 +29,4 @@ const options = {
 
 mongoose.connect(url, options)
     .then((_) => logger.info('connected to mongo'))
-    // .then((_) => seed())
     .catch((error) => logger.error(util.inspect(error)));
