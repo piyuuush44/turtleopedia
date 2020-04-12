@@ -71,8 +71,8 @@ deploy_server:staging:
     - master
     - dev
   variables:
-    HEROKU_APP_NAME: $HEROKU_APP_STAGING
-    HEROKU_API_KEY: $HEROKU_API_KEY
+    HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
+    HEROKU_API_KEY: ${HEROKU_API_KEY}
   dependencies:
     - package_server:staging
   script:
