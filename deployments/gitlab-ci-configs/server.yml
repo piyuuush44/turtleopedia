@@ -70,7 +70,8 @@ deploy_server:staging:
     - master
     - dev
   variables:
-    AWS_ACCOUNT: hi
+    HEROKU_APP_NAME: $HEROKU_APP_NAME
+    HEROKU_API_KEY: $HEROKU_API_KEY
   environment:
     name: staging
     url: st
