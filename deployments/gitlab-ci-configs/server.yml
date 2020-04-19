@@ -41,12 +41,12 @@ lint_server:
 
 .package_server: &package_server
   stage: package
+  image: docker:latest
   services:
     - docker:dind
   variables:
     CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
   before_script:
-    - docker info
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
