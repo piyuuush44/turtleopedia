@@ -11,7 +11,7 @@ stages:
   - package
   - deploy
 
-# Build Step
+# For manual triggering Step
 .manual_step: &manual_step
   when: manual
   allow_failure: false
