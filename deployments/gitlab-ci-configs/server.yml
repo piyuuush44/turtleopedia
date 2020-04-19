@@ -44,7 +44,7 @@ lint_server:
   services:
     - docker:dind
   variables:
-    CI_REGISTRY_IMAGE: ${CI_REGISTRY_IMAGE}
+    CI_REGISTRY_IMAGE: skynet
   script: source deployments/scripts/server_package.sh
 
 package_server:staging:
