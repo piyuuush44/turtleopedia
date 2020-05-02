@@ -1,11 +1,13 @@
 const asyncHandler = require('express-async-handler');
 const {celebrate} = require('celebrate');
 const balluRoutes = require('./ballu/routes')();
+const heliumRoutes = require('./helium/routes')();
 
 module.exports = (app) => {
   let routes = [];
 
   routes = routes.concat(balluRoutes);
+  routes = routes.concat(heliumRoutes);
 
   routes.forEach((r) => {
     const args = [];

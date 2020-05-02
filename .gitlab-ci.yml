@@ -1,4 +1,4 @@
-image: registry.gitlab.com/skynetaps/skynet
+image: registry.gitlab.com/skynetaps/skynet:latest
 
 variables:
   DEV_STAGE_NAME: dev

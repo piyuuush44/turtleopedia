@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const User = require('../../src/models/user');
+const User = require('../../src/app/ballu/models/user');
 
 module.exports = async ()=>{
   try {

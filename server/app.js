@@ -8,7 +8,7 @@ const {isCelebrate} = require('celebrate');
 const logger = require('./src/config/logger');
 const cors = require('cors');
 const util = require('util');
-require('./src/config/mongo');
+require('./src/config/db');
 require('./src/config/passport');
 
 const AppError = require('./src/errors').app;

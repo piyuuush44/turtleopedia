@@ -4,7 +4,7 @@ const passportJWT = require('passport-jwt');
 
 const TokenError = require('../errors').token;
 const ServerError = require('../errors').server;
-const User = require('../models/user');
+const User = require('../app/ballu/models/user');
 
 const JwtStrategy = passportJWT.Strategy;
 const extractJwt = passportJWT.ExtractJwt;

@@ -1,12 +1,14 @@
 const ClientError = require('../../../errors').client;
-const User = require('../../../models/user');
+const User = require('../models/user');
 const authUtils = require('../../../utils/auth_utils');
 
 exports.postLogin = async (req, res, next) => {
   try {
     const user = await User.findOne({email: req.body.email});
     if (!user) {
-      next(new ClientError({message: 'Invalid request! User not found'}));
+      return next(new ClientError({
+        message: 'Invalid request! User not found',
+      }));
     }
     const token = authUtils.signJwt(
         {id: user.id},
@@ -28,7 +30,7 @@ exports.postLogin = async (req, res, next) => {
 exports.postRegister = async (req, res, next) => {
   let user = await User.findOne({email: req.body.email});
   if (user) {
-    next(new ClientError({message: 'User already found '}));
+    return next(new ClientError({message: 'User already found '}));
   }
   try {
     const hash = await authUtils.getPasswordHash(req.body.password);
@@ -75,7 +77,7 @@ exports.postPasswordReset = async (req, res, next) => {
       message: 'User registered successfully',
     });
   } catch (e) {
-    next(new ClientError({message: e}));
+    return next(new ClientError({message: e}));
   }
 };
 
@@ -106,6 +108,6 @@ exports.putProfileUpdate = async (req, res, next) => {
       message: 'User updated successfully',
     });
   } catch (e) {
-    next(new ClientError({message: e}));
+    return next(new ClientError({message: e}));
   }
 };
