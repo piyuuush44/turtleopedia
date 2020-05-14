@@ -3,7 +3,7 @@ const HealthController = require('../controllers/health');
 module.exports = [
   {
     method: 'get',
-    route: '/health',
+    route: '/',
     controller: HealthController.get,
   },
 ];

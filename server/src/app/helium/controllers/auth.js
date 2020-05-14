@@ -95,9 +95,7 @@ exports.putProfileUpdate = async (req, res, next) => {
   try {
     const {user} = req;
 
-    user.first_name = req.body.first_name;
-    user.last_name = req.body.last_name;
-    user.phone = req.body.phone;
+    user.name = req.body.name;
 
     await user.save();
 

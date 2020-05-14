@@ -1,7 +1,27 @@
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
-const User = require('../models/user');
+const Questions = require('../models/question');
 const ClientError = require('../../../errors/client');
+
+/**
+ * This method checks if the question is available or not and assigns
+ * the {@link req.question}
+ * If the question is not found,
+ * it throws an 204 ie no content.
+ *
+ */
+exports.checkQuestionById = asyncHandler(async (req, res, next) => {
+  const questionId = req.params.question_id;
+  const question = await Questions.findById(questionId);
+  if (!question) {
+    return next(new ClientError({
+      message: `Question not found for id: ${questionId}`,
+    }));
+  }
+  req.question = question;
+  next();
+});
+
 
 /**
  * This method checks if the customer is authenticated or not and assigns
@@ -23,5 +43,9 @@ exports.checkUserExists = asyncHandler(async (req, res, next) => {
   if (!user) {
     return next(new ClientError({message: `User not found for id: ${id}`}));
   }
+  next();
+});
+
+exports.checkQuizById = asyncHandler(async (req, res, next)=>{
   next();
 });

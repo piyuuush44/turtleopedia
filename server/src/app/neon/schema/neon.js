@@ -1,4 +1,5 @@
 const {Joi} = require('celebrate');
+const constants = require('../../../utils/constants');
 
 module.exports = {
   postRegister: {
@@ -27,7 +28,9 @@ module.exports = {
     },
     body: Joi.object()
         .keys({
-          name: Joi.string().required(),
+          first_name: Joi.string().required(),
+          last: Joi.string().required(),
+          phone: Joi.string().valid(constants.PHONE_REGEX).required(),
         }),
   },
 };

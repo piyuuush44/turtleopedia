@@ -64,6 +64,12 @@ registerAllRoutes(app);
 app.use((req, res, next) => {
   res.json(createError(404));
 });
+const getErrorResponse = (httpStatus, message) => ({
+  error: {
+    httpStatus: httpStatus,
+    message: message,
+  },
+});
 
 // error handler
 app.use((err, req, res, next) => {
@@ -87,12 +93,12 @@ app.use((err, req, res, next) => {
       res.send(createError(
           err.httpStatus,
           'Looks like something went wrong.' +
-          ' Please wait and try again in a few minutes.',
+                ' Please wait and try again in a few minutes.',
       ));
     } else {
-      // eslint-disable-next-line max-len
-      // All HTTP requests must have a response, so let's send back an error with its httpStatus and message
-      res.send(createError(
+      // All HTTP requests must have a response,
+      // so let's send back an error with its httpStatus and message
+      res.send(getErrorResponse(
           err.httpStatus,
           err.message,
       ));
@@ -103,7 +109,7 @@ app.use((err, req, res, next) => {
         createError(
             500,
             'Looks like something went wrong.' +
-            ' Please wait and try again in a few minutes.',
+                ' Please wait and try again in a few minutes.',
         ));
   }
 });

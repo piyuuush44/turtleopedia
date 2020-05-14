@@ -1,6 +1,6 @@
 const Controller = require('../controllers/auth');
 const Schema = require('../schema/auth');
-const Middleware = require('../middlewares/auth');
+const Middleware = require('../middlewares/middlewares');
 
 module.exports = [
 // apis for auth
@@ -11,8 +11,7 @@ module.exports = [
     schema_validation: Schema.postRegister,
     controller: Controller.postRegister,
   },
-  {
-    // logs in an user
+  {// logs in an user
     method: 'post',
     route: '/login',
     schema_validation: Schema.postLogin,
