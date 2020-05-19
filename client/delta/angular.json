@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "delta": {
@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/.htaccess"
             ],
             "styles": [
               "src/styles.css"
@@ -119,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "delta"
+    }
+  },
+  "defaultProject": "delta",
+  "cli": {
+    "analytics": "2c3c852e-5617-4839-a18d-cd01ba9cf0cc"
+  }
 }
