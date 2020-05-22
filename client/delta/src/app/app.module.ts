@@ -7,22 +7,16 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/auth.interceptor";
 import {ResponseIntercept} from "./shared/response.intercept";
 import {LoaderInterceptorService} from "./shared/loader.interceptor";
-import { BlogComponent } from './core/blog/blog.component';
-import { HomeComponent } from './core/blog/home/home.component';
-import { SingleviewComponent } from './core/blog/singleview/singleview.component';
-import { ContactComponent } from './core/blog/contact/contact.component';
-import { CategoryComponent } from './core/blog/category/category.component';
+import {BlogModule} from "./core/blog/blog.module";
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BlogComponent,
-    HomeComponent,
-    SingleviewComponent,
-    ContactComponent,
-    CategoryComponent
+
   ],
   imports: [
+    BlogModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule
