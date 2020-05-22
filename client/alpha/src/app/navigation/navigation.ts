@@ -123,22 +123,22 @@ export const navigation: FuseNavigation[] = [
                     fg   : '#FFFFFF'
                 }
             },
-            {
-                id       : 'file-manager',
-                title    : 'File Manager',
-                translate: 'NAV.FILE_MANAGER',
-                type     : 'item',
-                icon     : 'folder',
-                url      : '/apps/file-manager'
-            },
-            {
-                id       : 'contacts',
-                title    : 'Contacts',
-                translate: 'NAV.CONTACTS',
-                type     : 'item',
-                icon     : 'account_box',
-                url      : '/apps/contacts'
-            },
+            // {
+            //     id       : 'file-manager',
+            //     title    : 'File Manager',
+            //     translate: 'NAV.FILE_MANAGER',
+            //     type     : 'item',
+            //     icon     : 'folder',
+            //     url      : '/apps/file-manager'
+            // },
+            // {
+            //     id       : 'contacts',
+            //     title    : 'Contacts',
+            //     translate: 'NAV.CONTACTS',
+            //     type     : 'item',
+            //     icon     : 'account_box',
+            //     url      : '/apps/contacts'
+            // },
             {
                 id       : 'to-do',
                 title    : 'To-Do',
@@ -185,48 +185,48 @@ export const navigation: FuseNavigation[] = [
                         type : 'item',
                         url  : '/pages/auth/login'
                     },
-                    {
-                        id   : 'login-v2',
-                        title: 'Login v2',
-                        type : 'item',
-                        url  : '/pages/auth/login-2'
-                    },
+                    // {
+                    //     id   : 'login-v2',
+                    //     title: 'Login v2',
+                    //     type : 'item',
+                    //     url  : '/pages/auth/login-2'
+                    // },
                     {
                         id   : 'register',
                         title: 'Register',
                         type : 'item',
                         url  : '/pages/auth/register'
                     },
-                    {
-                        id   : 'register-v2',
-                        title: 'Register v2',
-                        type : 'item',
-                        url  : '/pages/auth/register-2'
-                    },
+                    // {
+                    //     id   : 'register-v2',
+                    //     title: 'Register v2',
+                    //     type : 'item',
+                    //     url  : '/pages/auth/register-2'
+                    // },
                     {
                         id   : 'forgot-password',
                         title: 'Forgot Password',
                         type : 'item',
                         url  : '/pages/auth/forgot-password'
                     },
-                    {
-                        id   : 'forgot-password-v2',
-                        title: 'Forgot Password v2',
-                        type : 'item',
-                        url  : '/pages/auth/forgot-password-2'
-                    },
+                    // {
+                    //     id   : 'forgot-password-v2',
+                    //     title: 'Forgot Password v2',
+                    //     type : 'item',
+                    //     url  : '/pages/auth/forgot-password-2'
+                    // },
                     {
                         id   : 'reset-password',
                         title: 'Reset Password',
                         type : 'item',
                         url  : '/pages/auth/reset-password'
                     },
-                    {
-                        id   : 'reset-password-v2',
-                        title: 'Reset Password v2',
-                        type : 'item',
-                        url  : '/pages/auth/reset-password-2'
-                    },
+                    // {
+                    //     id   : 'reset-password-v2',
+                    //     title: 'Reset Password v2',
+                    //     type : 'item',
+                    //     url  : '/pages/auth/reset-password-2'
+                    // },
                     {
                         id   : 'lock-screen',
                         title: 'Lock Screen',
@@ -295,32 +295,32 @@ export const navigation: FuseNavigation[] = [
                 icon : 'build',
                 url  : '/pages/maintenance'
             },
-            {
-                id      : 'pricing',
-                title   : 'Pricing',
-                type    : 'collapsable',
-                icon    : 'attach_money',
-                children: [
-                    {
-                        id   : 'style-1',
-                        title: 'Style 1',
-                        type : 'item',
-                        url  : '/pages/pricing/style-1'
-                    },
-                    {
-                        id   : 'style-2',
-                        title: 'Style 2',
-                        type : 'item',
-                        url  : '/pages/pricing/style-2'
-                    },
-                    {
-                        id   : 'style-3',
-                        title: 'Style 3',
-                        type : 'item',
-                        url  : '/pages/pricing/style-3'
-                    }
-                ]
-            },
+            // {
+            //     id      : 'pricing',
+            //     title   : 'Pricing',
+            //     type    : 'collapsable',
+            //     icon    : 'attach_money',
+            //     children: [
+            //         {
+            //             id   : 'style-1',
+            //             title: 'Style 1',
+            //             type : 'item',
+            //             url  : '/pages/pricing/style-1'
+            //         },
+            //         {
+            //             id   : 'style-2',
+            //             title: 'Style 2',
+            //             type : 'item',
+            //             url  : '/pages/pricing/style-2'
+            //         },
+            //         {
+            //             id   : 'style-3',
+            //             title: 'Style 3',
+            //             type : 'item',
+            //             url  : '/pages/pricing/style-3'
+            //         }
+            //     ]
+            // },
             {
                 id   : 'profile',
                 title: 'Profile',
@@ -328,33 +328,33 @@ export const navigation: FuseNavigation[] = [
                 icon : 'person',
                 url  : '/pages/profile'
             },
-            {
-                id      : 'search',
-                title   : 'Search',
-                type    : 'collapsable',
-                icon    : 'search',
-                children: [
-                    {
-                        id   : 'search-classic',
-                        title: 'Classic',
-                        type : 'item',
-                        url  : '/pages/search/classic'
-                    },
-                    {
-                        id   : 'search-modern',
-                        title: 'Modern',
-                        type : 'item',
-                        url  : '/pages/search/modern'
-                    }
-                ]
-            },
-            {
-                id   : 'faq',
-                title: 'Faq',
-                type : 'item',
-                icon : 'help',
-                url  : '/pages/faq'
-            },
+            // {
+            //     id      : 'search',
+            //     title   : 'Search',
+            //     type    : 'collapsable',
+            //     icon    : 'search',
+            //     children: [
+            //         {
+            //             id   : 'search-classic',
+            //             title: 'Classic',
+            //             type : 'item',
+            //             url  : '/pages/search/classic'
+            //         },
+            //         {
+            //             id   : 'search-modern',
+            //             title: 'Modern',
+            //             type : 'item',
+            //             url  : '/pages/search/modern'
+            //         }
+            //     ]
+            // },
+            // {
+            //     id   : 'faq',
+            //     title: 'Faq',
+            //     type : 'item',
+            //     icon : 'help',
+            //     url  : '/pages/faq'
+            // },
             {
                 id   : 'knowledge-base',
                 title: 'Knowledge Base',
