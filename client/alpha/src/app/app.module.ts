@@ -17,10 +17,13 @@ import {fuseConfig} from 'app/fuse-config';
 
 import {AppComponent} from 'app/app.component';
 import {LayoutModule} from 'app/layout/layout.module';
-import {FakeDbService} from "../../../alphaold/src/app/fake-db/fake-db.service";
+import {FakeDbService} from "./fake-db/fake-db.service";
 import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 
 const appRoutes: Routes = [
+    {
+        path: '', redirectTo: 'apps/dashboards/analytics', pathMatch: 'full'
+    },
     {
         path: 'apps',
         loadChildren: () => import( './main/main.module').then(module => module.MainModule)

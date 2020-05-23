@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-
 import {FuseSharedModule} from '@fuse/shared.module';
 
 const routes: Routes = [
@@ -14,8 +13,32 @@ const routes: Routes = [
     },
     {
         path: 'blog',
-        loadChildren: () => import('./blog/blog.module').then(module => module.BlogModule)
-    }
+        loadChildren: () => import('./blogapp/blog.module').then(module => module.BlogModule)
+    },
+    {
+        path: 'auth/forgot-password',
+        loadChildren: () => import('./authentication/forgot-password/forgot-password.module').then(module => module.ForgotPasswordModule)
+    },
+    {
+        path: 'auth/lock',
+        loadChildren: () => import('./authentication/lock/lock.module').then(module => module.LockModule)
+    },
+    {
+        path: 'auth/login',
+        loadChildren: () => import('./authentication/login/login.module').then(module => module.LoginModule)
+    },
+    {
+        path: 'auth/mail-confirm',
+        loadChildren: () => import('./authentication/mail-confirm/mail-confirm.module').then(module => module.MailConfirmModule)
+    },
+    {
+        path: 'auth/register',
+        loadChildren: () => import('./authentication/register/register.module').then(module => module.RegisterModule)
+    },
+    {
+        path: 'auth/reset-password',
+        loadChildren: () => import('./authentication/reset-password/reset-password.module').then(module => module.ResetPasswordModule)
+    },
 ];
 
 @NgModule({
