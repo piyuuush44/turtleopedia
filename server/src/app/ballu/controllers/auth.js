@@ -23,7 +23,7 @@ exports.postLogin = async (req, res, next) => {
       message: 'User found successfully',
     });
   } catch (e) {
-    next(new ClientError({message: e.message}));
+    return next(new ClientError({message: e.message}));
   }
 };
 
@@ -54,7 +54,7 @@ exports.postRegister = async (req, res, next) => {
       message: 'User registered successfully',
     });
   } catch (e) {
-    next(new ClientError({message: e}));
+    return next(new ClientError({message: e}));
   }
 };
 
@@ -87,7 +87,7 @@ exports.postPasswordResetEmail = async (req, res, next) => {
       message: 'Email send successfully',
     });
   } catch (e) {
-    next(new ClientError({message: e}));
+    return next(new ClientError({message: e}));
   }
 };
 

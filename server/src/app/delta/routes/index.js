@@ -1,11 +1,11 @@
 const health = require('./health');
-const delta = require('./delta');
+const posts = require('./posts');
 
 module.exports = () => {
   let routes = [];
 
   routes = routes.concat(health);
-  routes = routes.concat(delta);
+  routes = routes.concat(posts);
 
   routes.forEach((r) => {
     r.route = `/delta${r.route}`;
