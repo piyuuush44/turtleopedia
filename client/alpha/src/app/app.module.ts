@@ -22,6 +22,9 @@ import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 
 const appRoutes: Routes = [
     {
+        path: '', redirectTo: 'apps/dashboards/analytics', pathMatch: 'full'
+    },
+    {
         path: 'apps',
         loadChildren: () => import( './main/main.module').then(module => module.MainModule)
     },

@@ -1,6 +1,6 @@
 export class ECommerceFakeDb
 {
-    public static products = [
+    public static blogs = [
         {
             'id'              : '1',
             'name'            : 'A Walk Amongst Friends - Canvas Print',
@@ -1612,7 +1612,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -1696,7 +1696,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -1780,7 +1780,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -1864,7 +1864,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -1948,7 +1948,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2032,7 +2032,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2116,7 +2116,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2200,7 +2200,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2284,7 +2284,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2368,7 +2368,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2452,7 +2452,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2536,7 +2536,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2620,7 +2620,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2704,7 +2704,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2788,7 +2788,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2872,7 +2872,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -2956,7 +2956,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -3040,7 +3040,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -3124,7 +3124,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',
@@ -3208,7 +3208,7 @@ export class ECommerceFakeDb
                     'lng'    : -95.8420876
                 }
             },
-            'products'       : [
+            'blogs'       : [
                 {
                     'id'      : 1,
                     'name'    : 'A Walk Amongst Friends - Canvas Print',

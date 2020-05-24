@@ -33,8 +33,52 @@ export const navigation: FuseNavigation[] = [
                 title: 'Blog',
                 type: 'collapsable',
                 icon: 'blog',
-                url: '/apps/blog'
-            }
+                url: '/apps/blog/all'
+            },
+            {
+                id: 'authentication',
+                title: 'Authentication',
+                type: 'collapsable',
+                icon: 'authentication',
+                children: [
+                    {
+                        id: 'login',
+                        title: 'Login',
+                        type: 'item',
+                        url: '/apps/auth/login'
+                    },
+                    {
+                        id: 'register',
+                        title: 'Registration',
+                        type: 'item',
+                        url: '/apps/auth/register'
+                    },
+                    {
+                        id: 'forgot-password',
+                        title: 'Forgot Password',
+                        type: 'item',
+                        url: '/apps/auth/forgot-password'
+                    },
+                    {
+                        id: 'lock',
+                        title: 'Lock',
+                        type: 'item',
+                        url: '/apps/auth/lock'
+                    },
+                    {
+                        id: 'reset-password',
+                        title: 'Reset Password',
+                        type: 'item',
+                        url: '/apps/auth/reset-password'
+                    },
+                    {
+                        id: 'mail-confirm',
+                        title: 'Mail Confirm',
+                        type: 'item',
+                        url: '/apps/auth/mail-confirm'
+                    },
+                ]
+            },
         ]
     },
 ];
