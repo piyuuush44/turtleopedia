@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  post: {
+  post_id: {
     type: mongoose.Schema.Types.ObjectID, ref: 'Posts', required: true,
   },
-  parent_comment: {
+  parent_comment_id: {
     type: mongoose.Schema.Types.ObjectID, ref: 'Comments', required: false,
   },
   text: {type: String, required: true},
-  user: {
+  user_id: {
     type: mongoose.Schema.Types.ObjectID, ref: 'Users', required: true,
   },
 },

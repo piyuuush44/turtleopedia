@@ -37,4 +37,13 @@ module.exports = {
       post_id: Joi.string().required(),
     },
   },
+  postComment: {
+    params: {
+      post_id: Joi.string().required(),
+    },
+    body: {
+      parent_comment_id: Joi.string(),
+      text: Joi.string().required(),
+    },
+  },
 };

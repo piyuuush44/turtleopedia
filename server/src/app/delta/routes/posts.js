@@ -35,4 +35,11 @@ module.exports = [
     middlewares: [Middleware.checkPostById],
     schema_validation: Schema.deletePostById,
   },
+  {
+    method: 'post',
+    route: '/:post_id/comments',
+    controller: Controller.postComment,
+    middlewares: [Middleware.checkPostById],
+    schema_validation: Schema.postComment,
+  },
 ];

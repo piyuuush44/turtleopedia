@@ -1,3 +1,4 @@
+const Comments = require('../models/comments');
 const Posts = require('../models/posts');
 const ClientError = require('../../../errors').client;
 
@@ -38,19 +39,23 @@ exports.getPosts = async (req, res, next) => {
 };
 
 exports.putUpdatePostById = async (req, res, next) => {
-  const {post} = req;
-  const {title, category, content} = req.body;
+  try {
+    const {post} = req;
+    const {title, category, content} = req.body;
 
-  post.title = title;
-  post.category = category;
-  post.content = content;
+    post.title = title;
+    post.category = category;
+    post.content = content;
 
-  await post.save();
+    await post.save();
 
-  return res.json({
-    result: {post: post},
-    message: 'Blog post updated successfully',
-  });
+    return res.json({
+      result: {post: post},
+      message: 'Blog post updated successfully',
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
 };
 
 exports.deletePostById = async (req, res, next) => {
@@ -63,5 +68,34 @@ exports.deletePostById = async (req, res, next) => {
 };
 
 exports.postComment = async (req, res, next) => {
+  try {
+    const {text, parentCommentId} = req.body;
+    const comment = new Comments();
+    comment.post_id = req.post._id;
+    comment.text = text;
+    comment.user_id = req.user._id;
 
+    if (parentCommentId) {
+      comment.parent_comment_id = parentCommentId;
+    }
+    await comment.save();
+    return res.json({
+      result: {comment: comment},
+      message: 'Comment created successfully',
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
+};
+
+exports.getCommentsByPost = async (req, res, next) => {
+  const {_id} = req.post;
+  let query;
+  query['post_id'] = _id;
+
+  const comments = await Comments.find(query);
+  return res.json({
+    result: {comments: comments},
+    message: `Comments returned successfully for post id: ${_id}`,
+  });
 };
