@@ -1,3 +1,3 @@
 exports.get = async (req, res) => {
-  return res.json('hello');
+  return res.json('Hi manish');
 };

@@ -6,7 +6,7 @@ module.exports = {
     body: Joi.object()
         .keys({
           title: Joi.string().required(),
-          category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
+          // category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
           content: Joi.array().required(),
         }),
   },
@@ -14,7 +14,7 @@ module.exports = {
     body: Joi.object()
         .keys({
           title: Joi.string().required(),
-          category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
+          // category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
           content: Joi.array().required(),
         }),
     params: {

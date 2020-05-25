@@ -28,7 +28,7 @@ const options = {
 };
 
 mongoose.connect(url, options)
-    .then((_) => logger.info(`connected to ${MONGO_DB_HELIUM}`))
+    .then((_) => logger.info(`connected to mongo db`))
     .catch((error) => logger.error(util.inspect(error)));
 
 module.exports = mongoose;
