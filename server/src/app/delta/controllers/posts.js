@@ -99,3 +99,16 @@ exports.getCommentsByPost = async (req, res, next) => {
     message: `Comments returned successfully for post id: ${_id}`,
   });
 };
+
+exports.postFilterPost = async (req, res, next) => {
+  const {category} = req.body.category;
+  let query;
+  if (category) {
+  query['category'] = category;
+  }
+  const posts = await Posts.find(query);
+  return res.json({
+    result: {posts: posts},
+    message: `Blog Posts with category ${category} returned successfully`,
+  });
+};

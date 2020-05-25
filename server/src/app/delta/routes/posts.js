@@ -42,4 +42,10 @@ module.exports = [
     middlewares: [Middleware.checkPostById],
     schema_validation: Schema.postComment,
   },
+  {
+    method: 'post',
+    route: '/post/:category',
+    controller: Controller.postFilterPost,
+    schema_validation: Schema.postFilterPost,
+  },
 ];

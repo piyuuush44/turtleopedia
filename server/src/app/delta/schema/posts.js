@@ -46,4 +46,9 @@ module.exports = {
       text: Joi.string().required(),
     },
   },
+  postFilterPost: {
+    body: {
+      category: Joi.string().required(),
+    },
+  },
 };
