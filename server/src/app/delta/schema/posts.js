@@ -1,12 +1,16 @@
 const {Joi} = require('celebrate');
 const constants = require('../../../utils/constants');
+const utils = require('../../../utils/utils');
 
 module.exports = {
   postPosts: {
     body: Joi.object()
         .keys({
           title: Joi.string().required(),
-          // category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
+          category: Joi.string().valid(
+              utils.convertArrayKeyToString(constants.BLOG_POST_CATEGORIES),
+          )
+              .required(),
           content: Joi.array().required(),
         }),
   },
@@ -14,7 +18,9 @@ module.exports = {
     body: Joi.object()
         .keys({
           title: Joi.string().required(),
-          // category: Joi.string().valid(constants.BLOG_POST_TYPES).required(),
+          category: Joi.string().valid(
+              utils.convertArrayKeyToString(constants.BLOG_POST_CATEGORIES),
+          ).required(),
           content: Joi.array().required(),
         }),
     params: {

@@ -3,9 +3,18 @@ const mongoose = require('mongoose');
 const constants = require('../../../utils/constants');
 
 const schema = new mongoose.Schema({
-  title: {type: String, required: true},
-  content: {type: Array, required: true},
-  category: {type: String, enum: constants.BLOG_POST_TYPES, required: true},
+  title: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: Array,
+    required: true,
+  },
+  category: {type: String,
+    enum: constants.BLOG_POST_CATEGORIES,
+    required: true,
+  },
 },
 {timestamps: true},
 );
