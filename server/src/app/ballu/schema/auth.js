@@ -30,7 +30,7 @@ module.exports = {
         .keys({
           first_name: Joi.string().required(),
           last: Joi.string().required(),
-          // phone: Joi.string().valid(constants.PHONE_REGEX).required(),
+          phone: Joi.string().valid(constants.PHONE_REGEX).required(),
         }),
   },
 };
