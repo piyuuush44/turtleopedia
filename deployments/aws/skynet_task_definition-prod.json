@@ -1,0 +1,234 @@
+{
+  "volumes": [],
+  "family": "instanthome_server",
+  "executionRoleArn": "arn:aws:iam::495083617542:role/ecsTaskExecutionRole",
+  "networkMode": "awsvpc",
+  "taskRoleArn": "arn:aws:iam::495083617542:role/tokyo-prod-ecs-role",
+  "containerDefinitions": [
+    {
+      "essential":true,
+      "image":"906394416424.dkr.ecr.us-east-1.amazonaws.com/aws-for-fluent-bit:latest",
+      "name":"log_router",
+      "firelensConfiguration":{
+        "type":"fluentbit",
+        "options":{
+          "enable-ecs-log-metadata":"true",
+          "config-file-type": "file",
+          "config-file-value": "/fluent-bit/configs/parse-json.conf"
+        }
+      }
+    },
+    {
+      "logConfiguration": {
+        "logDriver": "awsfirelens",
+        "options": {
+          "Name": "datadog",
+          "dd_service": "api-service",
+          "dd_source": "node",
+          "dd_tags": "project:api-service,env:prod",
+          "TLS": "on",
+          "Host": "http-intake.logs.datadoghq.com",
+          "provider": "ecs"
+        },
+        "secretOptions": [
+          {
+            "name": "apikey",
+            "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/DATADOG_API_KEY"
+          }
+        ]
+      },
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "containerPort": 3000
+        }
+      ],
+      "memoryReservation": 512,
+      "volumesFrom": [],
+      "image": "495083617542.dkr.ecr.ap-south-1.amazonaws.com/instanthome/server:latest-prod",
+      "name": "instanthome_server",
+      "environment": [
+        {
+          "name": "DB_NAME",
+          "value": "instanthome_db_prod"
+        },
+        {
+          "name": "SERVER_PORT",
+          "value": "3000"
+        },
+        {
+          "name": "DB_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "NODE_ENV",
+          "value": "prod"
+        },
+        {
+          "name": "BERLIN_BASE_URL",
+          "value": "https://corporate.instanthome.com"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DB_HOST",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/DB_HOST"
+        },
+        {
+          "name": "DB_USER",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/DB_USER"
+        },
+        {
+          "name": "DB_PASSWORD",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/DB_PASSWORD"
+        },
+        {
+          "name": "TWO_FACTOR_AUTH_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/TWO_FACTOR_AUTH_KEY"
+        },
+        {
+          "name": "GOOGLE_CLIENT_ID",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/GOOGLE_CLIENT_ID"
+        },
+        {
+          "name": "GOOGLE_CLIENT_SECRET",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/GOOGLE_CLIENT_SECRET"
+        },
+        {
+          "name": "JWT_SECRET_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/JWT_SECRET_KEY"
+        },
+        {
+          "name": "AGENT_JWT_SECRET_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/AGENT_JWT_SECRET_KEY"
+        },
+        {
+          "name": "JWT_EMAIL_UPDATE_SECRET_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/JWT_EMAIL_UPDATE_SECRET_KEY"
+        },
+        {
+          "name": "JWT_EMAIL_UPDATE_TOKEN_EXPIRATION",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/JWT_EMAIL_UPDATE_TOKEN_EXPIRATION"
+        },
+        {
+          "name": "FACEBOOK_APP_ID",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/FACEBOOK_APP_ID"
+        },
+        {
+          "name": "FACEBOOK_APP_SECRET",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/FACEBOOK_APP_SECRET"
+        },
+        {
+          "name": "APP_BASE_URL",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/APP_BASE_URL"
+        },
+        {
+          "name": "SENDGRID_API_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/SENDGRID_API_KEY"
+        },
+        {
+          "name": "ASSET_S3_BUCKET",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/ASSET_S3_BUCKET"
+        },
+        {
+          "name": "IMGIX_URL_PREFIX",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/IMGIX_URL_PREFIX"
+        },
+        {
+          "name": "AUTH0_AUDIENCE",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/AUTH0_AUDIENCE"
+        },
+        {
+          "name": "AUTH0_DOMAIN",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/AUTH0_DOMAIN"
+        },
+        {
+          "name": "API_KEY_FRESH_SALES",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/API_KEY_FRESH_SALES"
+        },
+        {
+          "name": "CENTRAL_SALES_HUB",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/CENTRAL_SALES_HUB"
+        },
+        {
+          "name": "KINESIS_CUSTOMER_STREAM",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/KINESIS_CUSTOMER_STREAM_NAME"
+        },
+        {
+          "name": "OTP_SECRET_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/OTP_SECRET_KEY"
+        },
+        {
+          "name": "OTP_DEFAULT_VALIDITY_SEC",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/OTP_DEFAULT_VALIDITY_SEC"
+        },
+        {
+          "name": "SQS_NOTIFICATION_QUEUE_URL",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/SQS_NOTIFICATION_QUEUE_URL"
+        },
+        {
+          "name": "INTERNAL_ASSET_S3_BUCKET",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/INTERNAL_ASSET_S3_BUCKET"
+        },
+        {
+          "name": "SQS_DEFAULT_DELAY_QUEUE",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/SQS_DEFAULT_DELAY_QUEUE"
+        }
+      ]
+    },
+    {
+      "name": "datadog-agent",
+      "image": "datadog/agent:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 8126,
+          "protocol": "tcp",
+          "containerPort": 8126
+        },
+        {
+          "hostPort": 8125,
+          "protocol": "udp",
+          "containerPort": 8125
+        }
+      ],
+      "environment": [
+        {
+          "name": "ECS_FARGATE",
+          "value": "true"
+        },
+        {
+          "name": "DD_DOGSTATSD_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        },
+        {
+          "name": "DD_PROCESS_AGENT_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_DOCKER_LABELS_AS_TAGS",
+          "value": "true"
+        },
+        {
+          "name": "DD_RUNTIME_METRICS_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_ENABLED",
+          "value": "true"
+        },
+        {
+          "name": "DD_APM_NON_LOCAL_TRAFFIC",
+          "value": "true"
+        }
+      ],
+      "secrets": [
+        {
+          "name": "DD_API_KEY",
+          "valueFrom": "arn:aws:ssm:ap-south-1:495083617542:parameter/DATADOG_API_KEY"
+        }
+      ]
+    }
+  ]
+}

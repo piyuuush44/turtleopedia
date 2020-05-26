@@ -1,0 +1,77 @@
+{
+    "volumes": [],
+    "family": "instanthome_server",
+    "executionRoleArn": "arn:aws:iam::495083617542:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "taskRoleArn": "arn:aws:iam::495083617542:role/tokyo-staging-ecs-role",
+    "containerDefinitions": [
+      {
+        "essential":true,
+        "image":"906394416424.dkr.ecr.us-east-1.amazonaws.com/aws-for-fluent-bit:latest",
+        "name":"log_router",
+        "firelensConfiguration":{
+          "type":"fluentbit",
+          "options":{
+            "enable-ecs-log-metadata":"true",
+            "config-file-type": "file",
+            "config-file-value": "/fluent-bit/configs/parse-json.conf"
+          }
+        }
+      },
+      {
+        "logConfiguration": {
+          "logDriver": "awsfirelens",
+          "options": {
+            "Name": "datadog",
+            "dd_service": "api-service",
+            "dd_source": "node",
+            "dd_tags": "project:api-service,env:staging",
+            "TLS": "on",
+            "Host": "http-intake.logs.datadoghq.com",
+            "provider": "ecs"
+          },
+          "secretOptions": [
+            {
+              "name": "apikey",
+              "valueFrom": "arn:aws:ssm:ap-southeast-1:495083617542:parameter/DATADOG_API_KEY"
+            }
+          ]
+        },
+        "portMappings": [
+          {
+            "hostPort": 3000,
+            "protocol": "tcp",
+            "containerPort": 3000
+          }
+        ],
+        "memoryReservation": 256,
+        "volumesFrom": [],
+        "image": "495083617542.dkr.ecr.ap-southeast-1.amazonaws.com/instanthome/server:latest-staging",
+        "name": "instanthome_server",
+        "environment": [
+          {
+            "name": "DB_NAME",
+            "value": "instanthome_db_staging"
+          },
+          {
+            "name": "SERVER_PORT",
+            "value": "3000"
+          },
+          {
+            "name": "DB_PORT",
+            "value": "5432"
+          },
+          {
+            "name": "NODE_ENV",
+            "value": "staging"
+          }
+        ],
+        "secrets": [
+          {
+            "name": "DB_HOST",
+            "valueFrom": "arn:aws:ssm:ap-southeast-1:495083617542:parameter/DB_HOST"
+          }
+        ]
+      }
+    ]
+  }

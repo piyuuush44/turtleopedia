@@ -1,0 +1,79 @@
+build_server:
+  stage: build
+  image: node:13
+  only:
+    - dev
+    - master
+
+  script: source deployments/scripts/server_build.sh
+  artifacts:
+    paths:
+      - server/node_modules/
+
+test_server:
+  stage: test
+  image: node:13
+  dependencies:
+    - build_server
+  services:
+    - mongo:4.2.5-bionic
+  variables:
+    MONGO_INITDB_ROOT_USERNAME: ballu
+    MONGO_INITDB_ROOT_PASSWORD: skynetballu123
+  only:
+    - dev
+    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+  script: source deployments/scripts/server_test.sh
+
+lint_server:
+  stage: test
+  image: node:13
+  dependencies:
+    - build_server
+  only:
+    - dev
+    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+  script: source deployments/scripts/server_lint.sh
+
+.package_server: &package_server
+  stage: package
+  services:
+    - docker:dind
+  variables:
+    CI_REGISTRY_IMAGE: skynet
+  script: source deployments/scripts/server_package.sh
+
+package_server:staging:
+  extends: .package_server
+  only:
+    - master
+    - dev
+  environment:
+    name: staging
+    url: st
+
+.deploy_server: &deploy_server
+  stage: deploy
+  services:
+    - docker:dind
+
+deploy_server:staging:
+  extends: .deploy_server
+  image : ruby:latest
+  only:
+    - master
+    - dev
+  environment:
+    name: staging
+    url: https://$HEROKU_APP_NAME.herokuapp.com
+  variables:
+    HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
+    HEROKU_API_KEY: ${HEROKU_API_KEY}
+  dependencies:
+    - package_server:staging
+  script:
+    - source deployments/scripts/server_deploy_heroku.sh
