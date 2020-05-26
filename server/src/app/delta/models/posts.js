@@ -1,4 +1,4 @@
-const logger = global;
+const logger = require('../../../config/logger');
 const mongoose = require('mongoose');
 const constants = require('../../../utils/constants');
 

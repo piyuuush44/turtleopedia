@@ -26,7 +26,7 @@ exports.getPostById = async (req, res, next) => {
   const {post} = req;
   return res.json({
     result: {post: post},
-    message: `Blog post with id ${req.params.id} returned successfully`,
+    message: `Blog post with id ${req.params.post_id} returned successfully`,
   });
 };
 
@@ -90,7 +90,7 @@ exports.postComment = async (req, res, next) => {
 
 exports.getCommentsByPost = async (req, res, next) => {
   const {_id} = req.post;
-  let query;
+  const query = {};
   query['post_id'] = _id;
 
   const comments = await Comments.find(query);
