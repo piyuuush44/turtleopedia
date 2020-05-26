@@ -99,3 +99,12 @@ exports.getCommentsByPost = async (req, res, next) => {
     message: `Comments returned successfully for post id: ${_id}`,
   });
 };
+
+exports.deleteCommentById = async (req, res, next) => {
+  const {_id} = req.comment;
+  await Comments.deleteOne({_id: _id});
+
+  return res.json({
+    message: `Comment with id : ${_id} deleted successfully`,
+  });
+};

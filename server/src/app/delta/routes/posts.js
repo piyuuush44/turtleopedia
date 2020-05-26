@@ -13,7 +13,9 @@ module.exports = [
     method: 'get',
     route: '/post/:post_id',
     controller: Controller.getPostById,
-    middlewares: [Middleware.checkPostById],
+    middlewares: [
+      Middleware.checkPostById,
+    ],
     schema_validation: Schema.getPostById,
   },
   {
@@ -25,21 +27,46 @@ module.exports = [
     method: 'put',
     route: '/post/:post_id',
     controller: Controller.putUpdatePostById,
-    middlewares: [Middleware.checkPostById],
+    middlewares: [
+      Middleware.checkPostById,
+    ],
     schema_validation: Schema.putUpdatePostById,
   },
   {
     method: 'delete',
     route: '/post/:post_id',
     controller: Controller.deletePostById,
-    middlewares: [Middleware.checkPostById],
+    middlewares: [
+      Middleware.checkPostById,
+    ],
     schema_validation: Schema.deletePostById,
   },
   {
     method: 'post',
     route: '/:post_id/comments',
     controller: Controller.postComment,
-    middlewares: [Middleware.checkPostById],
+    middlewares: [
+      Middleware.checkPostById,
+    ],
     schema_validation: Schema.postComment,
+  },
+  {
+    method: 'get',
+    route: '/:post_id/comments',
+    controller: Controller.getCommentsByPost,
+    middlewares: [
+      Middleware.checkPostById,
+    ],
+    schema_validation: Schema.getCommentsByPost,
+  },
+  {
+    method: 'delete',
+    route: '/:post_id/comments/:comment_id',
+    controller: Controller.deleteCommentById,
+    middlewares: [
+      Middleware.checkPostById,
+      Middleware.checkCommentById,
+    ],
+    schema_validation: Schema.deleteCommentById,
   },
 ];

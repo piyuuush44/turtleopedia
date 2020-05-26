@@ -46,4 +46,15 @@ module.exports = {
       text: Joi.string().required(),
     },
   },
+  getCommentsByPost: {
+    params: {
+      post_id: Joi.string().required(),
+    },
+  },
+  deleteCommentById: {
+    params: {
+      post_id: Joi.string().required(),
+      comment_id: Joi.string().required(),
+    },
+  },
 };
