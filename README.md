@@ -1,4 +1,4 @@
-Turtleopedia main repository
+**Turtleopedia main repository**
 Jump into individual directories for further information on how to run various services and apps.
 
 Pipeline Status
