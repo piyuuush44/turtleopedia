@@ -1,6 +1,8 @@
 const Comments = require('../models/comments');
 const Posts = require('../models/posts');
 const ClientError = require('../../../errors').client;
+const controllerUtils = require('../../../utils/controller_utils');
+const constants = require('../../../utils/constants');
 
 exports.postPosts = async (req, res, next) => {
   try {
@@ -31,11 +33,16 @@ exports.getPostById = async (req, res, next) => {
 };
 
 exports.getPosts = async (req, res, next) => {
-  const posts = await Posts.find();
-  return res.json({
-    result: {posts: posts},
-    message: 'All Blog post returned successfully',
-  });
+  const limit = +req.query.limit || 10;
+  const offset = +req.query.offset || 0;
+  const posts = await Posts.find().skip(offset).limit(limit);
+  const count = await Posts.count();
+  return res.json(controllerUtils.getPaginatedResponse(
+      posts,
+      count,
+      req.query,
+      constants.DELTA_POSTS_PAGINATED_URL,
+  ));
 };
 
 exports.putUpdatePostById = async (req, res, next) => {
