@@ -115,3 +115,16 @@ exports.deleteCommentById = async (req, res, next) => {
     message: `Comment with id : ${_id} deleted successfully`,
   });
 };
+
+exports.postFilterPost = async (req, res, next) => {
+  const {category} = req.body;
+  let query={};
+  if (category) {
+  query['category'] = category;
+  }
+  const posts = await Posts.find(query);
+  return res.json({
+    result: {posts: posts},
+    message: `Blog Posts with category ${category} returned successfully`,
+  });
+};

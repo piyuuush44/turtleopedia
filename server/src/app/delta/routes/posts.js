@@ -69,4 +69,10 @@ module.exports = [
     ],
     schema_validation: Schema.deleteCommentById,
   },
+  {
+    method: 'post',
+    route: '/filterPosts',
+    controller: Controller.postFilterPost,
+    schema_validation: Schema.postFilterPost,
+  },
 ];

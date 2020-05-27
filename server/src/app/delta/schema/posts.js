@@ -54,6 +54,9 @@ module.exports = {
     params: {
       post_id: Joi.string().required(),
       comment_id: Joi.string().required(),
+  postFilterPost: {
+    body: {
+      category: Joi.string().required(),
     },
   },
 };
