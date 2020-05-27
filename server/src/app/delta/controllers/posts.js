@@ -101,8 +101,8 @@ exports.getCommentsByPost = async (req, res, next) => {
 };
 
 exports.postFilterPost = async (req, res, next) => {
-  const {category} = req.body.category;
-  let query;
+  const {category} = req.body;
+  let query={};
   if (category) {
   query['category'] = category;
   }

@@ -44,7 +44,7 @@ module.exports = [
   },
   {
     method: 'post',
-    route: '/post/:category',
+    route: '/filterPosts',
     controller: Controller.postFilterPost,
     schema_validation: Schema.postFilterPost,
   },
