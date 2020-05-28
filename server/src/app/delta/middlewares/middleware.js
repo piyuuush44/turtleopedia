@@ -2,6 +2,8 @@ const asyncHandler = require('express-async-handler');
 const Comments = require('../models/comments');
 const Posts = require('../models/posts');
 const ClientError = require('../../../errors/client');
+const passport = require('passport');
+const User = require('../models/user');
 
 /**
  * This method checks if the post is available or not, and assigns
@@ -10,6 +12,7 @@ const ClientError = require('../../../errors/client');
  * it throws an 204 ie no content.
  *
  */
+
 exports.checkPostById = asyncHandler(async (req, res, next) => {
   const postId = req.params.post_id;
   const post = await Posts.findById(postId);
@@ -40,3 +43,29 @@ exports.checkCommentById = asyncHandler(async (req, res, next) => {
   req.comment = comment;
   next();
 });
+
+
+
+/**
+ * This method checks if the customer is authenticated or not and assigns
+ * the {@link req.user}
+ * parameter to the customer object if authenticated.
+ * If the customer is not authenticated,
+ * it throws an 401.    
+ *
+ */
+exports.isAuthentic = passport.authenticate('jwt', {session: false});
+
+/**
+ * This method checks if user id passed via param is valid or not
+ * and returns 401 if its invalid
+ */
+exports.checkUserExists = asyncHandler(async (req, res, next) => {
+  const {id} = req.params;
+  const user =await User.findById(id);
+  if (!user) {
+    return next(new ClientError({message: `User not found for id: ${id}`}));
+  }
+  next();
+});
+
