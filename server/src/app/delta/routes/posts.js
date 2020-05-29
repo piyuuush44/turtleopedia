@@ -24,6 +24,11 @@ module.exports = [
     controller: Controller.getPosts,
   },
   {
+    method: 'get',
+    route: '/postCount',
+    controller: Controller.getPostCount,
+  },
+  {
     method: 'put',
     route: '/post/:post_id',
     controller: Controller.putUpdatePostById,

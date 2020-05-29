@@ -118,13 +118,29 @@ exports.deleteCommentById = async (req, res, next) => {
 
 exports.postFilterPost = async (req, res, next) => {
   const {category} = req.body;
-  let query={};
+  const query = {};
   if (category) {
-  query['category'] = category;
+    query['category'] = category;
   }
   const posts = await Posts.find(query);
   return res.json({
     result: {posts: posts},
     message: `Blog Posts with category ${category} returned successfully`,
+  });
+};
+
+exports.getPostCount = async (req, res, next) => {
+  const posts = await Posts.aggregate(
+      [
+        {
+          '$group': {
+            '_id': '$category',
+            'count': {'$sum': 1},
+          },
+        }],
+  );
+  return res.json({
+    result: {count: posts},
+    message: `Blog Posts with category count returned successfully`,
   });
 };
