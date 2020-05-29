@@ -1,6 +1,6 @@
 const BCRYPT_HASH_ROUNDS = 10;
 const PHONE_REGEX = /^\+[0-9]{1,4}[0-9]{10}$/;
-const BLOG_POST_CATEGORIES = ['technology', 'lifestyle'];
+const BLOG_POST_CATEGORIES = ['technology', 'lifestyle', 'entertainment'];
 const DELTA_POSTS_PAGINATED_URL = 'http://delta/posts?';
 
 module.exports = {

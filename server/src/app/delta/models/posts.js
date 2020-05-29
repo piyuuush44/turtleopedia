@@ -7,9 +7,21 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  is_top: {
+    type: Boolean,
+    default: false,
+  },
+  image_url: {
+    type: String,
+  },
   content: {
     type: Array,
     required: true,
+  },
+  tags: {type: Array},
+  user_id: {
+    // todo in future keep required as true
+    type: mongoose.Schema.Types.ObjectID, ref: 'Users', required: false,
   },
   category: {type: String,
     enum: constants.BLOG_POST_CATEGORIES,

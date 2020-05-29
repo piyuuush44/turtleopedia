@@ -11,6 +11,8 @@ module.exports = {
           )
               .required(),
           content: Joi.array().required(),
+          is_top: Joi.boolean(),
+          image_url: Joi.string(),
         }),
   },
   putUpdatePostById: {
@@ -21,6 +23,8 @@ module.exports = {
               ...constants.BLOG_POST_CATEGORIES,
           ).required(),
           content: Joi.array().required(),
+          is_top: Joi.boolean(),
+          image_url: Joi.string(),
         }),
     params: {
       post_id: Joi.string().required(),
@@ -58,7 +62,8 @@ module.exports = {
   },
   postFilterPost: {
     body: {
-      category: Joi.string().required(),
+      category: Joi.string(),
+      is_top: Joi.boolean(),
     },
   },
 };
