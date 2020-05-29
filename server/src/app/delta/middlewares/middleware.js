@@ -1,8 +1,8 @@
+const passport = require('passport');
 const asyncHandler = require('express-async-handler');
 const Comments = require('../models/comments');
 const Posts = require('../models/posts');
 const ClientError = require('../../../errors/client');
-const passport = require('passport');
 const User = require('../models/user');
 
 /**
@@ -13,7 +13,6 @@ const User = require('../models/user');
  *
  */
  
- exports.isAuthentic = passport.authenticate('jwt', {session: false});
 
 exports.checkPostById = asyncHandler(async (req, res, next) => {
   const postId = req.params.post_id;
@@ -56,6 +55,8 @@ exports.checkCommentById = asyncHandler(async (req, res, next) => {
  * it throws an 401.    
  *
  */
+ 
+  exports.isAuthentic = passport.authenticate('jwt', {session: false});
 
 /**
  * This method checks if user id passed via param is valid or not
