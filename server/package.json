@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "seed": "node ./db/seeds",
-    "test": "jest test/unit --silent --forceExit --runInBand",
+    "test": "jest test/unit --forceExit --runInBand",
     "lint": "./node_modules/eslint/bin/eslint.js src/",
     "start": "node ./bin/www",
     "start_dev": "./node_modules/nodemon/bin/nodemon.js ./bin/www"

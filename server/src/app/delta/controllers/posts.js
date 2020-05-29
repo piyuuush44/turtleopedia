@@ -118,9 +118,9 @@ exports.deleteCommentById = async (req, res, next) => {
 
 exports.postFilterPost = async (req, res, next) => {
   const {category} = req.body;
-  let query={};
+  const query={};
   if (category) {
-  query['category'] = category;
+    query['category'] = category;
   }
   const posts = await Posts.find(query);
   return res.json({
