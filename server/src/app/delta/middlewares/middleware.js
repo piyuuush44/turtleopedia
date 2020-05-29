@@ -12,6 +12,8 @@ const User = require('../models/user');
  * it throws an 204 ie no content.
  *
  */
+ 
+ exports.isAuthentic = passport.authenticate('jwt', {session: false});
 
 exports.checkPostById = asyncHandler(async (req, res, next) => {
   const postId = req.params.post_id;
@@ -54,7 +56,6 @@ exports.checkCommentById = asyncHandler(async (req, res, next) => {
  * it throws an 401.    
  *
  */
-exports.isAuthentic = passport.authenticate('jwt', {session: false});
 
 /**
  * This method checks if user id passed via param is valid or not

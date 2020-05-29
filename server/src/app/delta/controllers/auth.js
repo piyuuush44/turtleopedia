@@ -21,7 +21,7 @@ exports.postLogin = async (req, res, next) => {
     }
 
     const token = authUtils.signJwt(
-        {id: user.id},
+        {id: user._id},
         process.env.DELTA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
@@ -52,7 +52,7 @@ exports.postRegister = async (req, res, next) => {
     await user.save();
 
     const token = authUtils.signJwt(
-        {id: user.id},
+        {id: user._id},
         process.env.DELTA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
@@ -75,7 +75,7 @@ exports.postPasswordReset = async (req, res, next) => {
     await user.save();
 
     const token = authUtils.signJwt(
-        {id: user.id},
+        {id: user._id},
         process.env.DELTA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
