@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db-server:
     container_name: db-server
-    image: mongo:4.2.5-bionic
+    image: mongo:latest
     restart: unless-stopped
     env_file: .env
     environment:
@@ -16,7 +16,7 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo db-server:27017/test --quiet 1
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u $MONGO_USERNAME -p $MONGO_PASSWORD --quiet | grep 1
       interval: 10s
       timeout: 10s
       retries: 5

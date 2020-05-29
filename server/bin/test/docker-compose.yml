@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  test-db-server:
+    container_name: test-db-server
+    image: mongo:latest
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - "27017:27017"
+    volumes:
+      - test-dbdata:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u $MONGO_USERNAME -p $MONGO_PASSWORD --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  test-dbdata:
+  node_modules:

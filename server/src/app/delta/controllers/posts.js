@@ -1,6 +1,8 @@
 const Comments = require('../models/comments');
 const Posts = require('../models/posts');
 const ClientError = require('../../../errors').client;
+const controllerUtils = require('../../../utils/controller_utils');
+const constants = require('../../../utils/constants');
 
 exports.postPosts = async (req, res, next) => {
   try {
@@ -26,16 +28,21 @@ exports.getPostById = async (req, res, next) => {
   const {post} = req;
   return res.json({
     result: {post: post},
-    message: `Blog post with id ${req.params.id} returned successfully`,
+    message: `Blog post with id ${req.params.post_id} returned successfully`,
   });
 };
 
 exports.getPosts = async (req, res, next) => {
-  const posts = await Posts.find();
-  return res.json({
-    result: {posts: posts},
-    message: 'All Blog post returned successfully',
-  });
+  const limit = +req.query.limit || 10;
+  const offset = +req.query.offset || 0;
+  const posts = await Posts.find().skip(offset).limit(limit);
+  const count = await Posts.count();
+  return res.json(controllerUtils.getPaginatedResponse(
+      posts,
+      count,
+      req.query,
+      constants.DELTA_POSTS_PAGINATED_URL,
+  ));
 };
 
 exports.putUpdatePostById = async (req, res, next) => {
@@ -90,7 +97,7 @@ exports.postComment = async (req, res, next) => {
 
 exports.getCommentsByPost = async (req, res, next) => {
   const {_id} = req.post;
-  let query;
+  const query = {};
   query['post_id'] = _id;
 
   const comments = await Comments.find(query);
@@ -106,5 +113,18 @@ exports.deleteCommentById = async (req, res, next) => {
 
   return res.json({
     message: `Comment with id : ${_id} deleted successfully`,
+  });
+};
+
+exports.postFilterPost = async (req, res, next) => {
+  const {category} = req.body;
+  const query={};
+  if (category) {
+    query['category'] = category;
+  }
+  const posts = await Posts.find(query);
+  return res.json({
+    result: {posts: posts},
+    message: `Blog Posts with category ${category} returned successfully`,
   });
 };
