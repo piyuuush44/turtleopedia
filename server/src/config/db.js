@@ -26,9 +26,13 @@ const options = {
   useNewUrlParser: true,
   connectTimeoutMS: 10000,
 };
-
 mongoose.connect(url, options)
-    .then((_) => logger.info(`connected to mongo db`))
-    .catch((error) => logger.error(util.inspect(error)));
+    .then((_) => {
+      logger.info(`connected to mongo db`);
+    })
+    .catch((error) => {
+      logger.error(util.inspect(error));
+    });
+
 
 module.exports = mongoose;
