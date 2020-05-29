@@ -7,6 +7,9 @@ module.exports = [
     method: 'post',
     route: '/posts',
     controller: Controller.postPosts,
+    // middlewares: [
+    //   Middleware.is,
+    // ],
     schema_validation: Schema.postPosts,
   },
   {
@@ -22,11 +25,6 @@ module.exports = [
     method: 'get',
     route: '/posts',
     controller: Controller.getPosts,
-  },
-  {
-    method: 'get',
-    route: '/postCount',
-    controller: Controller.getPostCount,
   },
   {
     method: 'put',
