@@ -1,9 +1,6 @@
 build_server:
   stage: build
   image: node:13
-  only:
-    - dev
-    - master
 
   script: source deployments/scripts/server_build.sh
   artifacts:
@@ -20,10 +17,6 @@ test_server:
   variables:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123
-  only:
-    - dev
-    - master
-    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
 
   script: source deployments/scripts/server_test.sh
 
@@ -32,10 +25,7 @@ lint_server:
   image: node:13
   dependencies:
     - build_server
-  only:
-    - dev
-    - master
-    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
 
   script: source deployments/scripts/server_lint.sh
 
@@ -76,4 +66,4 @@ deploy_server:staging:
   dependencies:
     - package_server:staging
   script:
-    - source deployments/scripts/server_deploy_heroku.sh
+    - source deployments/scripts/server_deploy_gcp.sh
