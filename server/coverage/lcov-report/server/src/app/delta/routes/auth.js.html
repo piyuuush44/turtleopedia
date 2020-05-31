@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for server/src/app/delta/models/posts.js</title>
+    <title>Code coverage report for server/src/app/delta/routes/auth.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../../../prettify.css" />
     <link rel="stylesheet" href="../../../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">server/src/app/delta/models</a> posts.js</h1>
+        <h1><a href="../../../../../index.html">All files</a> / <a href="index.html">server/src/app/delta/routes</a> auth.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/0</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -84,7 +84,17 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -105,39 +115,59 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const logger = require('../../../config/logger');
-const mongoose = require('mongoose');
-const constants = require('../../../utils/constants');
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Controller = require('../controllers/auth');
+const Schema = require('../schema/auth');
+const Middleware = require('../middlewares/middleware');
 &nbsp;
-const schema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
+module.exports = [
+// apis for auth
+  {
+    // Register a new user
+    method: 'post',
+    route: '/register',
+    schema_validation: Schema.postRegister,
+    controller: Controller.postRegister,
   },
-  content: {
-    type: Array,
-    required: true,
+  {
+    // logs in an user
+    method: 'post',
+    route: '/login',
+    schema_validation: Schema.postLogin,
+    controller: Controller.postLogin,
   },
-  category: {type: String,
-    enum: constants.BLOG_POST_CATEGORIES,
-    required: true,
+  {
+    // logs in an user
+    method: 'post',
+    route: '/password_reset',
+    middlewares: [Middleware.isAuthentic],
+    schema_validation: Schema.postPasswordReset,
+    controller: Controller.postPasswordReset,
   },
-},
-{timestamps: true},
-);
-&nbsp;
-schema.post('save', () =&gt; {
-  logger.info(`Post saved successfully`);
-});
-&nbsp;
-const myDB = mongoose.connection.useDb(process.env.MONGO_DB_DELTA);
-module.exports = myDB.model('Posts', schema);
+  {
+    // update user's info
+    method: 'put',
+    route: '/profile/:id',
+    middlewares: [Middleware.isAuthentic],
+    schema_validation: Schema.putProfileUpdate,
+    controller: Controller.putProfileUpdate,
+  },
+];
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
