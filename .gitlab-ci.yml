@@ -1,4 +1,4 @@
-image: registry.gitlab.com/skynetaps/skynet:latest
+image: registry.gitlab.com/turtleopedia/turtleopedia:latest
 
 variables:
   DEV_STAGE_NAME: dev
