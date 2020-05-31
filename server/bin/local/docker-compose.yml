@@ -1,41 +1,46 @@
 version: '3.7'
 
 services:
-  api_service:
-    build:
-      context: ../..
-      dockerfile: bin/local/Dockerfile
-    image: node:13.12
-    container_name: api_service
-    restart: unless-stopped
-    env_file: .env
-    environment:
-      - MONGO_USERNAME=$MONGO_USERNAME
-      - MONGO_PASSWORD=$MONGO_PASSWORD
-      - MONGO_HOSTNAME=db
-      - MONGO_PORT=$MONGO_PORT
-      - MONGO_DB=$MONGO_DB
-    ports:
-      - "3000:3000"
-    volumes:
-      - ../..:/opt/api_service
-      - ../../node_modules:/opt/api_service/node_modules
-    networks:
-      - app-network
-    command: './bin/local/service_start.sh'
-
-  db_service:
-    image: mongo:4.2.5-bionic
-    container_name: db_service
+  db-server:
+    container_name: db-server
+    image: mongo:latest
     restart: unless-stopped
     env_file: .env
     environment:
       - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - "27017:27017"
     volumes:
       - dbdata:/data/db
     networks:
       - app-network
+    healthcheck:
+      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u $MONGO_USERNAME -p $MONGO_PASSWORD --quiet | grep 1
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  api-server:
+    container_name: api-server
+    build:
+      context: ../..
+      dockerfile: ./bin/local/Dockerfile
+    env_file: .env
+    restart: unless-stopped
+    volumes:
+      - '../..:/opt/api_server/'
+      - '../../package.json:/opt/api_server/package.json'
+      - '../../node_modules:/opt/api_server/node_modules'
+    command:
+      - './bin/local/service_start.sh'
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    links:
+      - db-server
 
 networks:
   app-network:

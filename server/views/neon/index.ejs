@@ -1,0 +1,135 @@
+<html lang="en">
+<%- include('html_assets/head.ejs') %>
+
+<body class="text-center">
+<div class="col-md-2 col-sm-2 advert">
+    <%- include('html_assets/advertisement.ejs') %>
+</div>
+<div class="col-md-8 col-sm-8">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="masthead mb-auto">
+            <div class="inner">
+                <h3 class="masthead-brand">Turtle Video Downloader</h3>
+                <nav class="nav nav-masthead justify-content-center">
+                    <a class="nav-link active">Home</a>
+                </nav>
+            </div>
+        </header>
+
+
+        <main role="main" id="mainContent" class="inner cover">
+            <%- include('html_assets/main.ejs') %>
+        </main>
+
+        <main role="main" id="downloadContent" class="inner cover" style="display: none">
+            <h3 class="cover-heading mb-3">Your video links are found successfully</h3>
+            <div class="row text-center">
+
+                <div class="col-md-12 p-2">
+                    <h4 class="cover-heading mb-2" id="videoTitle">
+
+                    </h4>
+                    <img class="prevImage"
+                         src="https://images.pexels.com/photos/853168/pexels-photo-853168.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                         id="previewImage" alt="">
+
+                </div>
+                <div class="col-md-12 p-2">
+                    <button id="downloadVideo" class="btn btn-lg btn-secondary">Download Now</button>
+                </div>
+            </div>
+
+        </main>
+
+        <%- include('html_assets/footer.ejs') %>
+
+
+    </div>
+
+</div>
+<div class="col-md-2 col-sm-2 advert">
+    <%- include('html_assets/advertisement.ejs') %>
+</div>
+<div class="loader" style="display: none"></div>
+<script>
+    const response = {
+        result: {
+            download: {"sd": "https://video.fdel25-1.fna.fbcdn.net/v/t42.9040-2/83336456_793727301093323_599541485645332480_n.mp4?_nc_cat=110&_nc_sid=985c63&efg=eyJ2ZW5jb2RlX3RhZyI6InN2ZV9zZCJ9&_nc_oc=AQl5nzAYvzUGP0p2lZL6vI77yiTRamCBgQNHnfOQBkKR6s75xCs1zgS5bljZgnDfU_M&_nc_ht=video.fdel25-1.fna&oh=ff2c096914814a6544e9999d0dc0882e&oe=5EBD44DE"},
+            thumb: "https://graph.facebook.com/474902890122834/picture",
+            title: "Sarcastic us",
+            error: null
+        }
+    }
+    let isFacebook
+    let isYoutube
+    let videoUrl;
+
+    $(document).ready(
+        () => {
+            isFacebook = false
+            isYoutube = false
+        }
+    )
+
+    $("#downloadVideo").click(() => {
+        window.location.href = videoUrl
+    })
+
+    $("#getLink").click(
+        () => {
+            const finalUrl = $("#link").val()
+            if (finalUrl.length === 0) {
+                alert('Please enter a url')
+                return;
+            }
+            if (finalUrl.includes('youtube') || finalUrl.includes('youtu')) {
+                isYoutube = true
+            } else if (finalUrl.includes('facebook')) {
+                isFacebook = true
+
+            } else {
+                alert('Please enter a valid url')
+                return;
+            }
+            httpRequest(finalUrl)
+        }
+    )
+
+    function httpRequest(videoUrl) {
+        $.ajax(
+            {
+                type: 'GET',
+                url: `<%= url %>/download?url=${videoUrl}`,
+                beforeSend: function () {
+                    $(".loader").show();
+                },
+                success: (data, status, xhr) => {
+                    $(".loader").hide();
+                    $("#mainContent").hide();
+                    $("#downloadContent").show();
+
+                    if (xhr.status === 200 || xhr.status === 304) {
+                        $("#mainContent").hide()
+                        if (isFacebook) {
+                            $(".cover-container").html("< p > hi < /p>");
+                            $("#previewImage").attr('src', data.result.thumb);
+                            $("#videoTitle").text(data.result.title);
+                            if (data.result.download.hd) {
+                                videoUrl = data.result.download.hd;
+                            } else {
+                                videoUrl = data.result.download.sd;
+                            }
+                        }
+                    } else {
+                        alert('Some error occured!');
+                    }
+                },
+                error: () => {
+                    console.log('Some error occurred');
+                }
+            }
+        )
+    }
+</script>
+</body>
+</html>

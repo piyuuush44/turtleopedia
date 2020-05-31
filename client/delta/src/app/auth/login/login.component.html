@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-md-8 offset-md-1 mt-5 mb-5 p-5 d-flex shadow-boxed">
+    <div class="col-md-6 login-image">
+      <img src="../../../assets/img/login.jpg" alt="">
+    </div>
+    <div class="col-md-6">
+      <div class="col-md-12 d-flex mt-3 mb-3 social-login">
+        <span class="h3">Log in with</span>
+        <a [href]="googleLoginUrl">
+          <img src="../../../assets/icons/google.png" alt="">
+        </a>
+        <span class="h5">OR</span>
+        <a [href]="fbLoginUrl">
+          <img src="../../../assets/icons/fb.png" alt="">
+        </a>
+      </div>
+      <div class="col-md-12">
+        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Mobile No</label>
+            <input ngModel type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter Mobile" name="mobile"
+                   pattern="/^-?\d+\.?\d*$/" onkeypress="if((this.value.length==10)) return false;"
+                   oninput="validity.valid||(value='');"
+                   required>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your Details with anyone
+              else.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password" ngModel id="exampleInputPassword1"
+                   placeholder="Password" required minlength="10">
+          </div>
+          <div class="form-group">
+            <small *ngIf="mobileCheckToken" style="color: red">Invalid login details !!
+            </small>
+          </div>
+          <button type="submit" class="btn btn-uspl">Submit</button>
+          <a [routerLink]="'/forgotpassword'">
+            <span class="pl-5"> <strong>Forgot Password?</strong> </span>
+          </a>
+
+        </form>
+      </div>
+      <div class="col-md-12 text-center mt-3 mb-5">
+        <span>New here?</span>
+        <a [routerLink]="'/register'">
+          <span class="h5 pl-2">Create new account?</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

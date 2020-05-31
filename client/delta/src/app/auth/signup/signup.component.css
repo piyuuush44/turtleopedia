@@ -1,0 +1,29 @@
+input.ng-invalid.ng-touched {
+    border: 1px red solid;
+}
+
+.signup-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-image img {
+    width: 80%;
+    border-radius: 10px;
+}
+
+.shadow-boxed {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 3px 30px 0 rgba(0, 0, 0, .1);
+}
+
+.social-signup {
+    justify-content: space-evenly;
+}
+
+.social-signup img {
+    width: 40px;
+    height: 40px;
+}
