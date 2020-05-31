@@ -1,10 +1,16 @@
 const request = require('supertest');
 const app = require('../../../app');
 const Posts = require('../../../src/app/delta/models/posts');
-let server;
+
+const server = request(app);
 
 beforeEach(() => {
-  server = request(app);
+// it runs before each block
+});
+
+afterEach(async () => {
+  // deleting the created new post after every test case
+  await Posts.deleteMany();
 });
 
 describe('Check postPost for all categories', () => {
@@ -113,3 +119,27 @@ describe('should delete a post -> deletePostById', () => {
     expect(response.body.error.httpStatus).toEqual(400);
   });
 });
+//
+// describe('should return count of all blog post for each category', () => {
+//   it('', async () => {
+//     const post = new Posts();
+//     post.title = 'hi';
+//     post.category = 'technology';
+//     post.content = [];
+//     await post.save();
+//
+//     const post2 = new Posts();
+//     post2.title = 'hi';
+//     post2.category = 'lifestyle';
+//     post2.content = [];
+//     await post2.save();
+//
+//     const url = `/delta/postCount`;
+//     const response = await server.get(url);
+//     console.log(response.body.result.count);
+//     expect(response.status)
+//         .toEqual(200);
+//     expect(response.body.result.count[0]._id).toEqual('technology');
+//     expect(response.body.result.count[1]._id).toEqual('lifestyle');
+//   });
+// });

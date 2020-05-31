@@ -6,12 +6,20 @@ const constants = require('../../../utils/constants');
 
 exports.postPosts = async (req, res, next) => {
   try {
-    const {title, category, content} = req.body;
+    // const {user} = req;
+    // eslint-disable-next-line camelcase
+    const {title, category, content, is_top, image_url} = req.body;
+    // eslint-disable-next-line camelcase
+    const isTop = is_top ? is_top : false;
+    // eslint-disable-next-line camelcase
+    const imageUrl = image_url ? image_url : '';
 
     const post = new Posts();
     post.title = title;
     post.category = category;
     post.content = content;
+    post.is_top = isTop;
+    post.image_url = imageUrl;
 
     await post.save();
 
@@ -118,7 +126,7 @@ exports.deleteCommentById = async (req, res, next) => {
 
 exports.postFilterPost = async (req, res, next) => {
   const {category} = req.body;
-  const query={};
+  const query = {};
   if (category) {
     query['category'] = category;
   }
