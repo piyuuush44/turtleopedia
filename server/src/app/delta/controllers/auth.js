@@ -1,19 +1,22 @@
+const bcrypt = require('bcrypt');
 const ClientError = require('../../../errors').client;
 const User = require('../models/user');
-const bcrypt = require('bcrypt');
 const authUtils = require('../../../utils/auth_utils');
 
 exports.postLogin = async (req, res, next) => {
   try {
     const user = await User.findOne({email: req.body.email});
-   
+
     if (!user) {
       return next(new ClientError({
         message: 'Invalid request! User not found',
       }));
     }
-    
-    const passCheck = await bcrypt.compare(req.body.password,user.password_hash)
+
+    const passCheck = await bcrypt.compare(
+        req.body.password,
+        user.password_hash,
+    );
     if (!passCheck) {
       return next(new ClientError({
         message: 'Invalid request! Wrong Password',
