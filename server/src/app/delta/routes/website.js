@@ -6,4 +6,9 @@ module.exports = [
     route: '/webdata',
     controller: WebsiteController.getWebsiteData,
   },
+  {
+    method:'post',
+    route:'/contactus',
+    controller:WebsiteController.contactUs,
+  },
 ];
