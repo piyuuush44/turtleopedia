@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const util = require('../../../src/utils/auth_utils');
 const app = require('../../../app');
 
-const Posts = require('../../../src/app/alpha/models/posts');
 const User = require('../../../src/app/alpha/models/user');
 
 let server;
