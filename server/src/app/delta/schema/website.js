@@ -1,5 +1,6 @@
+const {Joi} = require('celebrate');
 module.exports = {
-    contactUs: {
+    postContactUs: {
       body: Joi.object()
           .keys({
             name: Joi.string().required(),

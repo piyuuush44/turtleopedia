@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const siteUtils = require('../utils/website');
 const constants = require('../../../utils/constants');
-const ContactUs = require('../models/contactus');
+const ContactUs = require('../models/contact');
 
 exports.getWebsiteData = async (req, res, next) => {
   const data = {};
@@ -19,7 +19,7 @@ exports.getWebsiteData = async (req, res, next) => {
   });
 };
 
-exports.contactUs=async (req,res,next)=>{
+exports.postContactUs=async (req,res,next)=>{
   try{
   const {name, email, message} = req.body;
   const contactus = new ContactUs();

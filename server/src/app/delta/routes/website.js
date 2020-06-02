@@ -1,4 +1,5 @@
 const WebsiteController = require('../controllers/website');
+const Schema=require('../schema/website');
 
 module.exports = [
   {
@@ -9,6 +10,7 @@ module.exports = [
   {
     method:'post',
     route:'/contactus',
-    controller:WebsiteController.contactUs,
+    controller:WebsiteController.postContactUs,
+    schema_validation: Schema.postContactUs,
   },
 ];
