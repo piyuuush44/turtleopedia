@@ -60,9 +60,10 @@ module.exports = {
       comment_id: Joi.string().required(),
     },
   },
-  postFilterPost: {
-    body: {
-      category: Joi.string(),
+  getFilterPost: {
+    query: {
+      category: Joi.string().valid(
+        ...constants.BLOG_POST_CATEGORIES,),
       is_top: Joi.boolean(),
     },
   },
