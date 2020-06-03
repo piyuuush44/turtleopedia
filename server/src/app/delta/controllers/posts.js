@@ -127,7 +127,6 @@ exports.deleteCommentById = async (req, res, next) => {
 exports.getFilterPost = async (req, res, next) => {
   const limit = +req.query.limit || 10;
   const offset = +req.query.offset || 0;
-  console.log(offset);
   const {category} = req.query;
   const categoryArray = category.split(',');
   const posts = await Posts.aggregate([{$match : {category : {$in : categoryArray}}}]).skip(offset).limit(limit);
