@@ -8,9 +8,9 @@ module.exports = [
     controller: WebsiteController.getWebsiteData,
   },
   {
-    method:'post',
-    route:'/contactus',
-    controller:WebsiteController.postContactUs,
+    method: 'post',
+    route: '/contactus',
+    controller: WebsiteController.postContactUs,
     schema_validation: Schema.postContactUs,
   },
 ];

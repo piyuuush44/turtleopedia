@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { BlogRoutingModule } from './blog-routing.module';
+import {BlogRoutingModule} from './blog-routing.module';
 import {BlogComponent} from "./blog.component";
 import {HomeComponent} from "./home/home.component";
 import {SingleviewComponent} from "./singleview/singleview.component";
@@ -12,6 +12,7 @@ import {CategoriesComponent} from "./categories/categories.component";
 import {AdvertisingComponent} from "./advertising/advertising.component";
 import {MasonryBoxComponent} from "./masonry-box/masonry-box.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
+import {BlogService} from "./blog.service";
 
 
 @NgModule({
@@ -30,6 +31,10 @@ import {SidebarComponent} from "./sidebar/sidebar.component";
   imports: [
     CommonModule,
     BlogRoutingModule
+  ],
+  providers: [
+    BlogService
   ]
 })
-export class BlogModule { }
+export class BlogModule {
+}

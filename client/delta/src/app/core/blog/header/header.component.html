@@ -65,8 +65,8 @@
           <li class="nav-item">
             <a class="nav-link color-green-hover" routerLinkActive="active" routerLink="/blog/home">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link color-green-hover" routerLinkActive="active" routerLink="/blog/category">Technology</a>
+          <li class="nav-item" *ngFor="let d of data.categories">
+            <a class="nav-link color-green-hover" routerLinkActive="active" routerLink="/blog/category/{{d}}">{{d}}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link color-green-hover" routerLinkActive="active" routerLink="/blog/contact">Contact</a>
@@ -75,4 +75,7 @@
       </div>
     </nav>
   </div><!-- end container -->
+
 </header><!-- end header -->
+
+

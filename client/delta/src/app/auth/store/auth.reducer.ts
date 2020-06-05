@@ -1,10 +1,10 @@
 import {AuthActions} from './auth.actions';
-import {ProfileModel} from '../../core/model/profile.model';
+// import {WebdataModel} from '../../core/model/profile.model';
 
 export interface AuthState {
   token: string;
   authenticated: boolean;
-  profile: ProfileModel;
+  // profile: WebdataModel;
 }
 
 const profile = JSON.parse(localStorage.getItem('user'));
@@ -14,20 +14,20 @@ const initialState: AuthState = {
 
   authenticated: localStorage.getItem('Authorization') !== null,
 
-  profile: localStorage.getItem('Authorization') ? Object.assign(new ProfileModel(), profile) : new ProfileModel()
+  // profile: localStorage.getItem('Authorization') ? Object.assign(new WebdataModel(), profile) : new WebdataModel()
 };
 
 export function AuthReducer(state = initialState, action: AuthActions) {
   switch (action.type) {
-    case 'SET_PROFILE': {
-      console.log('executing set profile');
-      localStorage.setItem('user', JSON.stringify(action.payload));
-      const profileObject: ProfileModel = action.payload;
-      return {
-        ...state,
-        profile: profileObject
-      };
-    }
+    // case 'SET_PROFILE': {
+    //   console.log('executing set profile');
+    //   localStorage.setItem('user', JSON.stringify(action.payload));
+    //   const profileObject: WebdataModel = action.payload;
+    //   return {
+    //     ...state,
+    //     profile: profileObject
+    //   };
+    // }
     case 'SIGNIN': {
       console.log('executing sign in action');
       return {
