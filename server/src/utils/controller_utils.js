@@ -29,5 +29,11 @@ exports.getPaginatedResponse = (dbResponse, totalCount, query, baseUrl) => {
     newQuery.offset = offset + dbResponse.length;
     response._links.next = baseUrl + querystring.stringify(newQuery);
   }
+  // If there are next links, include the previous link also
+  if (offset > 0) {
+    const newQuery = Object.assign({}, query);
+    newQuery.offset = offset - limit;
+    response._links.previous = baseUrl + querystring.stringify(newQuery);
+  }
   return response;
 };
