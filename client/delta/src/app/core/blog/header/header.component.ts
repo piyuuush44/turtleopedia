@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WebdataModel} from "../../model/webdata.model";
-import {select, Store} from "@ngrx/store";
-import {AppState} from "../../../store/app.reducer";
-import {coreStateSelecter} from "../../store/core.selector";
+import {blogCategories} from "../../../shared/constants";
 
 @Component({
   selector: 'app-header',
@@ -10,17 +7,12 @@ import {coreStateSelecter} from "../../store/core.selector";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  data: WebdataModel = new WebdataModel([], [], [], []);
+  data: Array<String>;
 
-  constructor(private store: Store<AppState>) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(coreStateSelecter)).subscribe(
-      value => {
-        this.data = value
-        console.log(this.data)
-      }
-    )
+    this.data = blogCategories
   }
 }
