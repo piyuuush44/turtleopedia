@@ -124,15 +124,17 @@ exports.deleteCommentById = async (req, res, next) => {
   });
 };
 
-exports.postFilterPost = async (req, res, next) => {
-  const {category} = req.body;
-  const query = {};
-  if (category) {
-    query['category'] = category;
-  }
-  const posts = await Posts.find(query);
-  return res.json({
-    result: {posts: posts},
-    message: `Blog Posts with category ${category} returned successfully`,
-  });
+exports.getFilterPost = async (req, res, next) => {
+  const limit = +req.query.limit || 10;
+  const offset = +req.query.offset || 0;
+  const {category} = req.query;
+  const categoryArray = category.split(',');
+  const posts = await Posts.aggregate([{$match : {category : {$in : categoryArray}}}]).skip(offset).limit(limit);
+  const count = await Posts.count();
+  return res.json(controllerUtils.getPaginatedResponse(
+      posts,
+      count,
+      req.query,
+      constants.DELTA_CATEGORY_PAGINATED_URL,
+  ));
 };

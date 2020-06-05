@@ -73,9 +73,9 @@ module.exports = [
     schema_validation: Schema.deleteCommentById,
   },
   {
-    method: 'post',
+    method: 'get',
     route: '/filterPosts',
-    controller: Controller.postFilterPost,
-    schema_validation: Schema.postFilterPost,
+    controller: Controller.getFilterPost,
+    schema_validation: Schema.getFilterPost,
   },
 ];
