@@ -137,3 +137,34 @@ describe('should delete a post -> deletePostById', () => {
     expect(response.body.error.httpStatus).toEqual(400);
   });
 });
+
+
+describe('should get a posts by category -> getFilterPost', () => {
+  it('should get the posts by category ', async () => {
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+
+    const posts = await post.save();
+
+    const url = `/delta/filterPosts?category=${posts.category}`;
+    console.log(url);
+    const response = await server.get(url);
+     console.log(response.body);
+
+    expect(response.status)
+        .toEqual(200);
+    expect(response.body.result.post.category).toEqual(posts.category);
+  });
+  it('should return error that no post is found for the given category',
+      async () => {
+        const url = `/delta/filterPosts`;
+
+        const body = {
+          category: 'aisehi'
+        };
+        const response = await server.get(url);
+        expect(response.body.error.httpStatus).toEqual(400);
+      });
+});
