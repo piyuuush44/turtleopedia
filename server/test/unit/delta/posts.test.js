@@ -21,13 +21,17 @@ describe('Create a new Post /delta/posts', () => {
           title: 'title',
           content: [],
           category: 'technology',
+          slug_url:'abcdef',
+          feature_content:'abc'
         };
         const response = await server.post(url)
             .send(body);
-
+       // console.log(response.body);
+       // console.log(response.status);
         expect(response.status)
             .toEqual(200);
-
+        expect(response.body.result.post.slug_url).toEqual(body.slug_url);
+        expect(response.body.result.post.feature_content).toEqual(body.feature_content);
         expect(response.body.result.post.title).toEqual(body.title);
         expect(response.body.result.post.content).toEqual(body.content);
         expect(response.body.result.post.category).toEqual(body.category);
