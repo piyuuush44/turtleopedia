@@ -18,6 +18,12 @@ const schema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  slug_url:{
+      type:String,
+  },
+  feature_content:{
+    type:String,
+  },
   tags: {type: Array},
   user_id: {
     // todo in future keep required as true

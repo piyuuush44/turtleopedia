@@ -8,7 +8,7 @@ exports.postPosts = async (req, res, next) => {
   try {
     // const {user} = req;
     // eslint-disable-next-line camelcase
-    const {title, category, content, is_top, image_url} = req.body;
+    const {title, category, content, is_top, image_url,slug_url,feature_content} = req.body;
     // eslint-disable-next-line camelcase
     const isTop = is_top ? is_top : false;
     // eslint-disable-next-line camelcase
@@ -20,6 +20,8 @@ exports.postPosts = async (req, res, next) => {
     post.content = content;
     post.is_top = isTop;
     post.image_url = imageUrl;
+    post.slug_url=slug_url;
+    post.feature_content=feature_content;
 
     await post.save();
 
