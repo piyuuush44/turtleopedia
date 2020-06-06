@@ -41,7 +41,7 @@ lint_server:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-    DOCKER_IMAGE_TAG: 'gcr.io/turtleopedia/turtleopedia'
+    DOCKER_IMAGE_TAG: 'asia.gcr.io/turtleopedia/turtleopedia'
   script: source deployments/scripts/server_package.sh
 
 package_server:staging:
