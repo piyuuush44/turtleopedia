@@ -6,8 +6,8 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/server
 
-echo $GCP_SERVICE_KEY
-echo "$GCP_SERVICE_KEY" >key.json
+echo $GCP_K8_KEY
+echo "$GCP_K8_KEY" >key.json
 
 gcloud auth activate-service-account --key-file key.json
 gcloud config set project turtleopedia
