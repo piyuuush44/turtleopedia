@@ -38,12 +38,6 @@ lint_server:
   stage: package
   services:
     - docker:dind
-  only:
-    - master
-    - dev
-  environment:
-    name: staging
-    url: http:turtleopedia.com
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
