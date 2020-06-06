@@ -36,7 +36,6 @@ lint_server:
 
 .package_server:
   stage: package
-  image: docker:latest
   services:
     - docker:dind
   variables:
