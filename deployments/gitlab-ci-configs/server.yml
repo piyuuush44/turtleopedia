@@ -43,17 +43,6 @@ lint_server:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
   before_script:
-    # Install CA certs, openssl to https downloads, python for gcloud sdk
-    - apk add --update make ca-certificates openssl python
-    - update-ca-certificates
-    # Write our GCP service account private key into a file
-    - echo $GCP_SERVICE_KEY > ${HOME}/gcloud-service-key.json
-    # Download and install Google Cloud SDK
-    - wget https://dl.google.com/dl/cloudsdk/release/google-cloud-sdk.tar.gz
-    - tar zxvf google-cloud-sdk.tar.gz && ./google-cloud-sdk/install.sh --usage-reporting=false --path-update=true
-    - google-cloud-sdk/bin/gcloud --quiet components update
-    - google-cloud-sdk/bin/gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-    - docker login -u _json_key --password-stdin https://us.gcr.io < ${HOME}/gcloud-service-key.json
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
@@ -73,17 +62,18 @@ package_server:staging:
 
 deploy_server:staging:
   extends: .deploy_server
-  image: ruby:latest
+  image: docker:git
+  services:
+    - docker:dind
   only:
     - master
     - dev
   environment:
-    name: staging
+    name: prod
     url: https://$HEROKU_APP_NAME.herokuapp.com
-  variables:
-    HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
-    HEROKU_API_KEY: ${HEROKU_API_KEY}
   dependencies:
     - package_server:staging
+  before_script:
+    - docker login -u _json_key --password-stdin https://gcr.io
   script:
     - source deployments/scripts/server_deploy_gcp.sh
