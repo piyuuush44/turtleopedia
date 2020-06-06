@@ -39,6 +39,7 @@ lint_server:
   services:
     - docker:dind
   only:
+    - master
     - dev
   environment:
     name: staging
