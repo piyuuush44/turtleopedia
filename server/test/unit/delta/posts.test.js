@@ -1,6 +1,6 @@
 const request = require('supertest');
 const app = require('../../../app');
-const Posts = require('../../../src/app/delta/models/posts');
+const Posts = require('../../../src/models/posts');
 
 const server = request(app);
 
@@ -21,17 +21,18 @@ describe('Create a new Post /delta/posts', () => {
           title: 'title',
           content: [],
           category: 'technology',
-          slug_url:'abcdef',
-          feature_content:'abc'
+          slug_url: 'abcdef',
+          feature_content: 'abc',
         };
         const response = await server.post(url)
             .send(body);
-       // console.log(response.body);
-       // console.log(response.status);
+        // console.log(response.body);
+        // console.log(response.status);
         expect(response.status)
             .toEqual(200);
         expect(response.body.result.post.slug_url).toEqual(body.slug_url);
-        expect(response.body.result.post.feature_content).toEqual(body.feature_content);
+        expect(response.body.result.post.feature_content)
+            .toEqual(body.feature_content);
         expect(response.body.result.post.title).toEqual(body.title);
         expect(response.body.result.post.content).toEqual(body.content);
         expect(response.body.result.post.category).toEqual(body.category);
@@ -147,24 +148,25 @@ describe('should get a posts by category -> getFilterPost', () => {
     post.content = [];
 
     const posts = await post.save();
-
     const url = `/delta/filterPosts?category=${posts.category}`;
-    console.log(url);
     const response = await server.get(url);
-     console.log(response.body);
-
     expect(response.status)
         .toEqual(200);
-    expect(response.body.result.post.category).toEqual(posts.category);
+    expect(response.body.results[0].category).toEqual(posts.category);
+    expect(response.body.results[0].title).toEqual(posts.title);
   });
   it('should return error that no post is found for the given category',
       async () => {
         const url = `/delta/filterPosts`;
 
-        const body = {
-          category: 'aisehi'
-        };
         const response = await server.get(url);
-        expect(response.body.error.httpStatus).toEqual(400);
+        expect(response.status)
+            .toEqual(200);
+        expect(response.body.results.length).toEqual(0);
       });
+
+
+//  todo jayant add test case when limit is one offset is zero
+//    todo add test case when limit is one offset is one
+//    todo add test when more than one category are passed to this api
 });

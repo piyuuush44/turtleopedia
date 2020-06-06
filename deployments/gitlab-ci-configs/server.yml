@@ -13,7 +13,7 @@ test_server:
   dependencies:
     - build_server
   services:
-    - mongo:4.2.5-bionic
+    - mongo:latest
   variables:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123

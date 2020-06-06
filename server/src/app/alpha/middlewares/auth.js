@@ -1,6 +1,6 @@
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
-const User = require('../models/user');
+const User = require('../../../models/user');
 const ClientError = require('../../../errors/client');
 
 /**

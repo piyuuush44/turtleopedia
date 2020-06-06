@@ -11,14 +11,13 @@ describe('Check Contact Us', () => {
       async () => {
         const url = '/delta/contactus';
         const body = {
-          name:'mv',
-          email:'abc@abc.com',
+          name: 'mv',
+          email: 'abc@abc.com',
           message: 'testing api',
         };
-        const response = await server.post('/delta/contactus').send(body);
-       // console.log(response.status);
-       // console.log(response.body);
+        const response = await server.post(url).send(body);
         expect(response.status).toEqual(200);
-        expect(response.body.message).toEqual('Thanks for Contacting Us, We will reply back shortly!')
+        expect(response.body.message)
+            .toEqual('Thanks for Contacting Us, We will reply back shortly!');
       });
 });

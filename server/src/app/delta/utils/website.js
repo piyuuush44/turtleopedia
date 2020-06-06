@@ -1,4 +1,4 @@
-const Posts = require('../models/posts');
+const Posts = require('../../../models/posts');
 
 exports.categoryCount = async () => Posts.aggregate(
     [

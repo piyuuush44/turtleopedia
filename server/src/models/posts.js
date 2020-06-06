@@ -1,6 +1,6 @@
-const logger = require('../../../config/logger');
+const logger = require('../config/logger');
 const mongoose = require('mongoose');
-const constants = require('../../../utils/constants');
+const constants = require('../utils/constants');
 
 const schema = new mongoose.Schema({
   title: {
@@ -18,11 +18,11 @@ const schema = new mongoose.Schema({
     type: Array,
     required: true,
   },
-  slug_url:{
-      type:String,
+  slug_url: {
+    type: String,
   },
-  feature_content:{
-    type:String,
+  feature_content: {
+    type: String,
   },
   tags: {type: Array},
   user_id: {

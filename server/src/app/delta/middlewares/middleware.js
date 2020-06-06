@@ -1,9 +1,9 @@
 const passport = require('passport');
 const asyncHandler = require('express-async-handler');
-const Comments = require('../models/comments');
-const Posts = require('../models/posts');
+const Comments = require('../../../models/comments');
+const Posts = require('../../../models/posts');
 const ClientError = require('../../../errors/client');
-const User = require('../models/user');
+const User = require('../../../models/user');
 
 /**
  * This method checks if the post is available or not, and assigns

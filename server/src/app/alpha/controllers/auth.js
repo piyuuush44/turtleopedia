@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const ClientError = require('../../../errors').client;
-const User = require('../models/user');
+const User = require('../../../models/user');
 const authUtils = require('../../../utils/auth_utils');
 
 exports.postLogin = async (req, res, next) => {

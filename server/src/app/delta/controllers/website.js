@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const siteUtils = require('../utils/website');
 const constants = require('../../../utils/constants');
-const ContactUs = require('../models/contact');
+const ContactUs = require('../../../models/contact');
 
 exports.getWebsiteData = async (req, res, next) => {
   const data = {};

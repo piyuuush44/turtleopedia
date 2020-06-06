@@ -1,17 +1,22 @@
-const Comments = require('../models/comments');
-const Posts = require('../models/posts');
+const Comments = require('../../../models/comments');
+const Posts = require('../../../models/posts');
 const ClientError = require('../../../errors').client;
 const controllerUtils = require('../../../utils/controller_utils');
 const constants = require('../../../utils/constants');
-
+/* eslint-disable camelcase */
 exports.postPosts = async (req, res, next) => {
   try {
     // const {user} = req;
-    // eslint-disable-next-line camelcase
-    const {title, category, content, is_top, image_url,slug_url,feature_content} = req.body;
-    // eslint-disable-next-line camelcase
+    const {
+      title,
+      category,
+      content,
+      is_top,
+      image_url,
+      slug_url,
+      feature_content,
+    } = req.body;
     const isTop = is_top ? is_top : false;
-    // eslint-disable-next-line camelcase
     const imageUrl = image_url ? image_url : '';
 
     const post = new Posts();
@@ -20,8 +25,8 @@ exports.postPosts = async (req, res, next) => {
     post.content = content;
     post.is_top = isTop;
     post.image_url = imageUrl;
-    post.slug_url=slug_url;
-    post.feature_content=feature_content;
+    post.slug_url = slug_url;
+    post.feature_content = feature_content;
 
     await post.save();
 
@@ -33,6 +38,7 @@ exports.postPosts = async (req, res, next) => {
     return next(new ClientError({message: e.message}));
   }
 };
+/* eslint-enable camelcase */
 
 exports.getPostById = async (req, res, next) => {
   const {post} = req;
@@ -131,7 +137,7 @@ exports.getFilterPost = async (req, res, next) => {
   const offset = +req.query.offset || 0;
   const {category} = req.query;
   const categoryArray = category ? category.split(',') :
-      constants.BLOG_POST_CATEGORIES;
+        constants.BLOG_POST_CATEGORIES;
   const posts = await Posts.aggregate(
       [
         {
