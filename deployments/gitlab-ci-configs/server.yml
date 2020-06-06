@@ -34,7 +34,7 @@ lint_server:
 
   script: source deployments/scripts/server_lint.sh
 
-.package_server: &package_server
+.package_server:
   stage: package
   services:
     - docker:dind
