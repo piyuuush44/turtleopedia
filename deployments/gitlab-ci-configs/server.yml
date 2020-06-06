@@ -52,14 +52,14 @@ lint_server:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
-#package_server:staging:
-#  extends: .package_server
-#  only:
-#    - master
-#    - dev
-#  environment:
-#    name: staging
-#    url: http://turtleopedia.com
+package_server:staging:
+  extends: .package_server
+  only:
+    - master
+    - dev
+  environment:
+    name: staging
+    url: http://turtleopedia.com
 
 .deploy_server: &deploy_server
   stage: deploy
@@ -78,7 +78,7 @@ deploy_server:staging:
   variables:
     HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
     HEROKU_API_KEY: ${HEROKU_API_KEY}
-#  dependencies:
-#    - package_server:staging
+  dependencies:
+    - package_server:staging
   script:
     - source deployments/scripts/server_deploy_gcp.sh
