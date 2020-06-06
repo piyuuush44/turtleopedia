@@ -38,6 +38,9 @@ lint_server:
   stage: package
   services:
     - docker:dind
+  environment:
+    name: staging
+    url: http:turtleopedia.com
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
@@ -46,19 +49,19 @@ lint_server:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
-package_server:staging:
-  extends: .package_server
-  only:
-    - master
-    - dev
-  environment:
-    name: staging
-    url: http://turtleopedia.com
-
-.deploy_server: &deploy_server
-  stage: deploy
-  services:
-    - docker:dind
+#package_server:staging:
+#  extends: .package_server
+#  only:
+#    - master
+#    - dev
+#  environment:
+#    name: staging
+#    url: http://turtleopedia.com
+#
+#.deploy_server: &deploy_server
+#  stage: deploy
+#  services:
+#    - docker:dind
 
 deploy_server:staging:
   extends: .deploy_server
