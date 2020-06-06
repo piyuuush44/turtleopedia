@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const ClientError = require('../../../errors').client;
 const User = require('../models/user');
 const authUtils = require('../../../utils/auth_utils');
@@ -10,6 +11,16 @@ exports.postLogin = async (req, res, next) => {
         message: 'Invalid request! User not found',
       }));
     }
+    const passCheck = await bcrypt.compare(
+        req.body.password,
+        user.password_hash,
+    );
+    if (!passCheck) {
+      return next(new ClientError({
+        message: 'Invalid request! Wrong Password',
+      }));
+    }
+
     const token = authUtils.signJwt(
         {id: user.id},
         process.env.BALLU_JWT_SECRET_KEY,
