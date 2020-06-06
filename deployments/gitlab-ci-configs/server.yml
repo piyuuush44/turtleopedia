@@ -1,7 +1,8 @@
 build_server:
   stage: build
   image: node:13
-
+  only:
+    - master
   script: source deployments/scripts/server_build.sh
   artifacts:
     paths:
@@ -10,6 +11,8 @@ build_server:
 test_server:
   stage: test
   image: node:13
+  only:
+    - master
   dependencies:
     - build_server
   services:
@@ -23,6 +26,8 @@ test_server:
 lint_server:
   stage: test
   image: node:13
+  only:
+    - master
   dependencies:
     - build_server
 
