@@ -75,7 +75,7 @@ deploy_server:staging:
   variables:
     HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
     HEROKU_API_KEY: ${HEROKU_API_KEY}
-  dependencies:
-    - package_server:staging
+#  dependencies:
+#    - package_server:staging
   script:
     - source deployments/scripts/server_deploy_gcp.sh
