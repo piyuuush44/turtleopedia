@@ -62,8 +62,9 @@ module.exports = {
   },
   getFilterPost: {
     query: {
-      category: Joi.string().valid(
-        ...constants.BLOG_POST_CATEGORIES,),
+      limit: Joi.number(),
+      offset: Joi.number(),
+      category: Joi.string(),
       is_top: Joi.boolean(),
     },
   },

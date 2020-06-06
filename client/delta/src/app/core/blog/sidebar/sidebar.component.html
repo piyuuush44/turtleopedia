@@ -9,9 +9,9 @@
     </form>
   </div><!-- end widget -->
 
-  <div class="widget">
+  <div class="widget" *ngIf="data.recent_posts.length>0">
     <h2 class="widget-title">Recent Posts</h2>
-    <div class="blog-list-widget" *ngFor="let post of data.recent_posts ">
+    <div class="blog-list-widget" *ngFor="let post of data.recent_posts | slice:0:5 ">
       <div class="list-group">
         <a href="garden-single.html"
            class="list-group-item list-group-item-action flex-column align-items-start">
@@ -44,11 +44,11 @@
     </div><!-- end Instagram wrapper -->
   </div><!-- end widget -->
 
-  <div class="widget">
+  <div class="widget" *ngIf="data.count.length>0">
     <h2 class="widget-title">Popular Categories</h2>
     <div class="link-widget">
       <ul>
-        <li *ngFor="let cat of data.count"><a href="#">{{cat._id}} <span>({{cat.count}})</span></a></li>
+        <li *ngFor="let cat of data.count | slice:0:5 "><a href="#">{{cat._id}} <span>({{cat.count}})</span></a></li>
       </ul>
     </div><!-- end link-widget -->
   </div><!-- end widget popular categories -->

@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     default: false,
   },
   image_url: {
-    type: String,
+    type: Array,
   },
   content: {
     type: Array,
@@ -23,7 +23,8 @@ const schema = new mongoose.Schema({
     // todo in future keep required as true
     type: mongoose.Schema.Types.ObjectID, ref: 'Users', required: false,
   },
-  category: {type: String,
+  category: {
+    type: String,
     enum: constants.BLOG_POST_CATEGORIES,
     required: true,
   },

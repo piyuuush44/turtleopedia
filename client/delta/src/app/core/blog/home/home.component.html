@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="blog-list clearfix">
-    <div class="blog-box row">
+    <div class="blog-box row" *ngFor="let post of posts.results | slice:0:6">
       <div class="col-md-4">
         <div class="post-media">
           <a routerLink="/blog/singleBlog" title="">
@@ -11,14 +11,12 @@
       </div><!-- end col -->
 
       <div class="blog-meta big-meta col-md-8">
-        <span class="bg-aqua"><a routerLink="/blog/singleBlog" title="">Indoor</a></span>
-        <h4><a routerLink="/blog/singleBlog" title="">The best twenty plant species you can look at at home</a>
+        <span class="bg-aqua"><a routerLink="/blog/singleBlog" title="">{{post.category}}</a></span>
+        <h4><a routerLink="/blog/singleBlog" title="">{{post.title}}</a>
         </h4>
-        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor.
-          Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor
-          odio.</p>
-        <small><a routerLink="/blog/singleBlog" title=""><i class="fa fa-eye"></i> 1887</a></small>
-        <small><a routerLink="/blog/singleBlog" title=""></a></small>
+        <p>{{post.content}}</p>
+        <small><a routerLink="/blog/singleBlog" title=""><i class="fa fa-eye"></i> Total views</a></small>
+        <small><a routerLink="/blog/singleBlog" title="">{{post.createdAt}}</a></small>
         <small><a routerLink="/blog/singleBlog" title="">by Matilda</a></small>
       </div><!-- end meta -->
     </div><!-- end blog-box -->

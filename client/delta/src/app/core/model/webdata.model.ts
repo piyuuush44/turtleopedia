@@ -1,24 +1,5 @@
-interface ImageObject {
-  link: String;
-}
-
-export interface Posts {
-  _id: String;
-  title: String;
-  category: String;
-  image_url: ImageObject[];
-  is_top: Boolean;
-  content: [];
-  tags: [];
-  createdAt: String;
-  updatedAt: String;
-
-}
-
-export interface PostCount {
-  _id: String;
-  count: Number;
-}
+import {Posts} from "./posts.model";
+import {PostCount} from "./postcount.interface";
 
 export class WebdataModel {
   constructor(

@@ -2,8 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WebdataModel} from "../../model/webdata.model";
 import {select, Store} from "@ngrx/store";
 import {AppState} from "../../../store/app.reducer";
-import {coreStateSelecter} from "../../store/core.selector";
-import {Observable} from "rxjs";
+import {coreStateWebsiteDataSelector} from "../../store/core.selector";
 
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +16,9 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('first ', this.data)
-    this.store.pipe(select(coreStateSelecter)).subscribe(
+    this.store.pipe(select(coreStateWebsiteDataSelector)).subscribe(
       value => {
         this.data = value
-        console.log('second', this.data)
-
       }
     )
   }

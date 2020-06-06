@@ -128,8 +128,19 @@ exports.getFilterPost = async (req, res, next) => {
   const limit = +req.query.limit || 10;
   const offset = +req.query.offset || 0;
   const {category} = req.query;
-  const categoryArray = category.split(',');
-  const posts = await Posts.aggregate([{$match : {category : {$in : categoryArray}}}]).skip(offset).limit(limit);
+  const categoryArray = category ? category.split(',') :
+      constants.BLOG_POST_CATEGORIES;
+  const posts = await Posts.aggregate(
+      [
+        {
+          $match: {
+            category: {
+              $in: categoryArray,
+            },
+          },
+        },
+      ],
+  ).skip(offset).limit(limit);
   const count = await Posts.count();
   return res.json(controllerUtils.getPaginatedResponse(
       posts,
