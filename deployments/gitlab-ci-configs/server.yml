@@ -42,8 +42,8 @@ lint_server:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
   before_script:
-    - ${GCP_SERVICE_KEY}  > ${HOME}/gcloud-service-key.json
-    - docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
+    - $GCP_SERVICE_KEY  > $HOME/gcloud-service-key.json
+    - docker login -u _json_key --password-stdin https://gcr.io < $HOME/gcloud-service-key.json
 #    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
