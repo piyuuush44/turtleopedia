@@ -14,7 +14,7 @@ cd $PROJECT_ROOT/server
 
 
 #docker push $CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG
-
+echo $GCP_SERVICE_KEY
 echo "$GCP_SERVICE_KEY" >key.json
 docker login -u _json_key --password-stdin https://eu.gcr.io <key.json
 
