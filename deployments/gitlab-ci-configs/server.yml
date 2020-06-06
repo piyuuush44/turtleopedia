@@ -57,11 +57,11 @@ lint_server:
 #  environment:
 #    name: staging
 #    url: http://turtleopedia.com
-#
-#.deploy_server: &deploy_server
-#  stage: deploy
-#  services:
-#    - docker:dind
+
+.deploy_server: &deploy_server
+  stage: deploy
+  services:
+    - docker:dind
 
 deploy_server:staging:
   extends: .deploy_server
