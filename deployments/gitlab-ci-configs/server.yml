@@ -31,7 +31,6 @@ lint_server:
   dependencies:
     - build_server
 
-
   script: source deployments/scripts/server_lint.sh
 
 .package_server:
