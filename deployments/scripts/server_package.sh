@@ -14,7 +14,6 @@ echo "$SERVICE_ACCOUNT_KEY" >key.json
 docker login -u _json_key --password-stdin https://gcr.io <key.json
 
 docker push $DOCKER_IMAGE_TAG:$CI_ENVIRONMENT_SLUG
-
 #$GCP_SERVICE_KEY  > ${HOME}/gcloud-service-key.json
 #docker login -u _json_key --password-stdin https://gcr.io < ${HOME}/gcloud-service-key.json
 #docker build -t gcr.io/projectid/app:${CI_COMMIT_SHA} .
