@@ -34,7 +34,10 @@ lint_server:
   services:
     - docker:dind
   variables:
-    CI_REGISTRY_IMAGE: skynet
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_ENVIRONMENT_SLUG: prod
+  before_script:
+    docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
   script: source deployments/scripts/server_package.sh
 
 package_server:staging:
@@ -44,7 +47,7 @@ package_server:staging:
     - dev
   environment:
     name: staging
-    url: st
+    url: http://turtleopedia.com
 
 .deploy_server: &deploy_server
   stage: deploy

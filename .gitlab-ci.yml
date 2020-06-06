@@ -5,6 +5,8 @@ variables:
   PROD_STAGE_NAME: prod
   STAGING_STAGE_NAME: staging
 
+  SERVER_CI_REGISTRY_IMAGE: registry.gitlab.com/turtleopedia/turtleopedia
+
 stages:
   - build
   - test
