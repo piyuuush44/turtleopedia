@@ -6,6 +6,12 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/server
 
-docker pull $CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG
-docker tag $CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG gcr.io/turtleopedia/turtleopedia:$CI_ENVIRONMENT_SLUG
-docker push gcr.io/turtleopedia/turtleopedia:$CI_ENVIRONMENT_SLUG
+echo $GCP_SERVICE_KEY
+echo "$GCP_SERVICE_KEY" >key.json
+
+gcloud auth activate-service-account --key-file key.json
+gcloud config set project turtleopedia
+gcloud config set compute/zone us-central1-c
+gcloud container clusters get-credentials turtleopedia-production
+kubectl set image deployment/turtleopedia-production turtleopedia-production=$DOCKER_IMAGE_TAG:$CI_ENVIRONMENT_SLUG
+

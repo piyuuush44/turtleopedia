@@ -60,7 +60,7 @@ package_server:staging:
 
 deploy_server:staging:
   extends: .deploy_server
-  image: docker:git
+  image: google/cloud-sdk:latest
   services:
     - docker:dind
   only:
@@ -71,7 +71,9 @@ deploy_server:staging:
     url: https://$HEROKU_APP_NAME.herokuapp.com
   dependencies:
     - package_server:staging
-  before_script:
-    - docker login -u ${GCP_SERVICE_KEY} --password-stdin https://gcr.io
+  variables:
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_ENVIRONMENT_SLUG: prod
+    DOCKER_IMAGE_TAG: 'asia.gcr.io/turtleopedia/turtleopedia'
   script:
     - source deployments/scripts/server_deploy_gcp.sh
