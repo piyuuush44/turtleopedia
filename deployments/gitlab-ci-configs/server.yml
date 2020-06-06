@@ -41,10 +41,7 @@ lint_server:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-  before_script:
-    - echo $GCLOUD_SERVICE_KEY | base64 -d > ${HOME}/gcloud-service-key.json
-    - docker login -u _json_key --password-stdin https://gcr.io < $HOME/gcloud-service-key.json
-#    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN registry.gitlab.com
+    DOCKER_IMAGE_TAG: 'gcr.io/turtleopedia/turtleopedia'
   script: source deployments/scripts/server_package.sh
 
 package_server:staging:
