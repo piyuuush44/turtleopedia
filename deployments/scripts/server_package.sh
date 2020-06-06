@@ -3,7 +3,7 @@
 set -e
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
-pip install docker
+#pip install docker
 
 cd $PROJECT_ROOT/server
 
