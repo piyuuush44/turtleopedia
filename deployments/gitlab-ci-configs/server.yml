@@ -38,6 +38,8 @@ lint_server:
   stage: package
   services:
     - docker:dind
+  only:
+    - dev
   environment:
     name: staging
     url: http:turtleopedia.com
