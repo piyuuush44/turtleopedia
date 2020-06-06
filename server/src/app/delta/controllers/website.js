@@ -19,21 +19,20 @@ exports.getWebsiteData = async (req, res, next) => {
   });
 };
 
-exports.postContactUs=async (req,res,next)=>{
-  try{
-  const {name, email, message} = req.body;
-  const contactus = new ContactUs();
-  contactus.name = name;
-  contactus.email=email;
-  contactus.message=message;
- 
-  await contactus.save();
+exports.postContactUs=async (req, res, next)=>{
+  try {
+    const {name, email, message} = req.body;
+    const contactus = new ContactUs();
+    contactus.name = name;
+    contactus.email=email;
+    contactus.message=message;
 
-  return res.json({
-    message: 'Thanks for Contacting Us, We will reply back shortly!',
-  });
-  }
-  catch (e) {
+    await contactus.save();
+
+    return res.json({
+      message: 'Thanks for Contacting Us, We will reply back shortly!',
+    });
+  } catch (e) {
     return next(new ClientError({message: e.message}));
   }
 };

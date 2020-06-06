@@ -13,8 +13,8 @@ module.exports = {
           content: Joi.array().required(),
           is_top: Joi.boolean(),
           image_url: Joi.string(),
-          slug_url:Joi.string(),
-          feature_content:Joi.string(),
+          slug_url: Joi.string(),
+          feature_content: Joi.string(),
         }),
   },
   putUpdatePostById: {

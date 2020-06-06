@@ -21,7 +21,13 @@ exports.getVideoDownload = async (req, res, next) => {
         });
       }
     }
-    return next(new ClientError({message: 'Request video is either removed or not available publically!'}));
+    const videoMessage =
+            'Request video is either removed or not available publically!';
+    return next(new ClientError(
+        {
+          message: videoMessage,
+        },
+    ));
   } catch (e) {
     return next(new ClientError({message: e}));
   }

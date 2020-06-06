@@ -12,8 +12,6 @@ const User = require('../../../models/user');
  * it throws an 204 ie no content.
  *
  */
- 
-
 exports.checkPostById = asyncHandler(async (req, res, next) => {
   const postId = req.params.post_id;
   const post = await Posts.findById(postId);
@@ -46,17 +44,15 @@ exports.checkCommentById = asyncHandler(async (req, res, next) => {
 });
 
 
-
 /**
  * This method checks if the customer is authenticated or not and assigns
  * the {@link req.user}
  * parameter to the customer object if authenticated.
  * If the customer is not authenticated,
- * it throws an 401.    
+ * it throws an 401.
  *
  */
- 
-  exports.isAuthentic = passport.authenticate('jwt', {session: false});
+exports.isAuthentic = passport.authenticate('jwt', {session: false});
 
 /**
  * This method checks if user id passed via param is valid or not
