@@ -1,4 +1,4 @@
-image: registry.gitlab.com/turtleopedia/turtleopedia:latest
+image: asia.gcr.io/turtleopedia/turtleopedia:prod
 
 variables:
   DEV_STAGE_NAME: dev
