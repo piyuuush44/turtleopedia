@@ -6,8 +6,10 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/server
 
-echo $GCP_K8_KEY
-echo "$GCP_K8_KEY" >key.json
+echo "$GCP_SERVICE_KEY" >storagekey.json
+docker login -u _json_key --password-stdin https://asia.gcr.io <storagekey.json
+
+echo "Docker logged in successfully"
 
 gcloud auth activate-service-account --key-file key.json
 
