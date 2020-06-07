@@ -25,4 +25,4 @@ gcloud container clusters get-credentials turtleopedia-production --zone=us-cent
 
 echo "Cluster auth set successfully"
 
-kubectl set image deployment/turtleopedia-production turtleopedia-production=$DOCKER_IMAGE_TAG:$CI_ENVIRONMENT_SLUG
+kubectl set image deployment/turtleopedia-production turtleopedia=$DOCKER_IMAGE_TAG:$CI_ENVIRONMENT_SLUG
