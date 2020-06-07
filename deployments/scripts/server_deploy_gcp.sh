@@ -21,7 +21,7 @@ gcloud config set compute/zone us-central1-c
 
 echo "Zone set successfully"
 
-gcloud container clusters get-credentials turtleopedia-production --zone=us-central1-c
+gcloud container clusters get-credentials turtleopedia-production --zone=asia-south1-b
 
 echo "Cluster auth set successfully"
 
