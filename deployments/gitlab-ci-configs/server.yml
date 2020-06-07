@@ -48,6 +48,7 @@ package_server:staging:
   extends: .package_server
   only:
     - master
+    - dev
   environment:
     name: prod
     url: http://turtleopedia.com
