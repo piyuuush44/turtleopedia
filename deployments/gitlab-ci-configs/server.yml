@@ -1,8 +1,6 @@
 build_server:
   stage: build
   image: node:13
-  only:
-    - master
   script: source deployments/scripts/server_build.sh
   artifacts:
     paths:
@@ -11,8 +9,6 @@ build_server:
 test_server:
   stage: test
   image: node:13
-  only:
-    - master
   dependencies:
     - build_server
   services:
@@ -25,8 +21,6 @@ test_server:
 lint_server:
   stage: test
   image: node:13
-  only:
-    - master
   dependencies:
     - build_server
   script: source deployments/scripts/server_lint.sh
@@ -46,7 +40,7 @@ package_server:production:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-    GCR_URL: $GCR_REGION_URL
+    GCR_URL: ${GCR_REGION_URL}
   environment:
     name: prod
     url: http://turtleopedia.com
