@@ -36,7 +36,6 @@ package_server:production:
   extends: .package_server
   only:
     - master
-    - dev
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
@@ -60,7 +59,6 @@ deploy_server:production:
     - docker:dind
   only:
     - master
-    - dev
   environment:
     name: prod
     url: https://$HEROKU_APP_NAME.herokuapp.com
