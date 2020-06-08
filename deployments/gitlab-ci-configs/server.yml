@@ -3,7 +3,7 @@ build_server:
   image: node:13
   script: source deployments/scripts/server_build.sh
   only:
-    - dev
+    - master
   artifacts:
     paths:
       - server/node_modules/
@@ -16,7 +16,7 @@ test_server:
   services:
     - mongo:latest
   only:
-    - dev
+    - master
   variables:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123
@@ -26,7 +26,7 @@ lint_server:
   stage: test
   image: node:13
   only:
-    - dev
+    - master
   dependencies:
     - build_server
   script: source deployments/scripts/server_lint.sh
