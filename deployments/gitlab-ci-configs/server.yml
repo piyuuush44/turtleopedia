@@ -20,7 +20,6 @@ test_server:
   variables:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123
-
   script: source deployments/scripts/server_test.sh
 
 lint_server:
@@ -30,7 +29,6 @@ lint_server:
     - master
   dependencies:
     - build_server
-
   script: source deployments/scripts/server_lint.sh
 
 .package_server:
@@ -38,6 +36,7 @@ lint_server:
   stage: package
   services:
     - docker:dind
+  script: source deployments/scripts/server_package.sh
 
 package_server:production:
   extends: .package_server
@@ -47,17 +46,18 @@ package_server:production:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-    GCR_URL : $GCR_REGION_URL
+    GCR_URL: $GCR_REGION_URL
   environment:
     name: prod
     url: http://turtleopedia.com
-  script: source deployments/scripts/server_package.sh
 
 
 .deploy_server: &deploy_server
   stage: deploy
   services:
     - docker:dind
+  script:
+    - source deployments/scripts/server_deploy_gcp.sh
 
 deploy_server:production:
   extends: .deploy_server
@@ -75,5 +75,3 @@ deploy_server:production:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-  script:
-    - source deployments/scripts/server_deploy_gcp.sh
