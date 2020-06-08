@@ -41,11 +41,18 @@ exports.postPosts = async (req, res, next) => {
 /* eslint-enable camelcase */
 
 exports.getPostById = async (req, res, next) => {
+  try{
   const {post} = req;
+  if(req.params.post_id)
+  post.no_of_views=post.no_of_views+1;
+  await post.save();
   return res.json({
     result: {post: post},
-    message: `Blog post with id ${req.params.post_id} returned successfully`,
+    message: `Blog post with id ${req.params.post_id} and views ${+post.no_of_views} returned successfully`,
   });
+} catch(e) {
+  return next(new ClientError({message:e.message}));
+}
 };
 
 exports.getPosts = async (req, res, next) => {

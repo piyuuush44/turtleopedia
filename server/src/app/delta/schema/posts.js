@@ -35,7 +35,7 @@ module.exports = {
   getPostById: {
     params: {
       post_id: Joi.string().required(),
-    },
+       },
   },
   deletePostById: {
     params: {
