@@ -24,5 +24,5 @@ gcloud container clusters get-credentials turtleopedia-production --zone=asia-so
 
 echo "Cluster auth set successfully"
 
-kubectl set image deployment/turtleopedia-production turtleopedia-sha256-1=$DOCKER_IMAGE_TAG:$CI_ENVIRONMENT_SLUG -n=turtleopedia-production
+kubectl set image deployment/turtleopedia-production turtleopedia-sha256-1=$CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG -n=turtleopedia-production
 #file:///$PROJECT_ROOT/deployments/gke/turtleopedia-production.yml

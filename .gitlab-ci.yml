@@ -4,7 +4,8 @@ variables:
   DEV_STAGE_NAME: dev
   PROD_STAGE_NAME: prod
   STAGING_STAGE_NAME: staging
-  SERVER_CI_REGISTRY_IMAGE: registry.gitlab.com/turtleopedia/turtleopedia
+  SERVER_CI_REGISTRY_IMAGE: asia.gcr.io/turtleopedia/turtleopedia
+  GCR_REGION_URL: https://asia.gcr.io
 
 stages:
   - build

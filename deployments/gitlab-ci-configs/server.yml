@@ -38,26 +38,28 @@ lint_server:
   stage: package
   services:
     - docker:dind
-  variables:
-    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
-    CI_ENVIRONMENT_SLUG: prod
-    DOCKER_IMAGE_TAG: 'asia.gcr.io/turtleopedia/turtleopedia'
-  script: source deployments/scripts/server_package.sh
 
-package_server:staging:
+package_server:production:
   extends: .package_server
   only:
     - master
+    - dev
+  variables:
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_ENVIRONMENT_SLUG: prod
+    GCR_REGION_URL: ${GCR_REGION_URL}
   environment:
     name: prod
     url: http://turtleopedia.com
+  script: source deployments/scripts/server_package.sh
+
 
 .deploy_server: &deploy_server
   stage: deploy
   services:
     - docker:dind
 
-deploy_server:staging:
+deploy_server:production:
   extends: .deploy_server
   image: google/cloud-sdk:latest
   services:
@@ -69,10 +71,9 @@ deploy_server:staging:
     name: prod
     url: https://$HEROKU_APP_NAME.herokuapp.com
   dependencies:
-    - package_server:staging
+    - package_server:production
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-    DOCKER_IMAGE_TAG: 'asia.gcr.io/turtleopedia/turtleopedia'
   script:
     - source deployments/scripts/server_deploy_gcp.sh
