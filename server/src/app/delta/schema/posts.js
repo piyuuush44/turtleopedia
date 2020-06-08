@@ -13,6 +13,8 @@ module.exports = {
           content: Joi.array().required(),
           is_top: Joi.boolean(),
           image_url: Joi.string(),
+          slug_url: Joi.string(),
+          feature_content: Joi.string(),
         }),
   },
   putUpdatePostById: {
@@ -60,8 +62,10 @@ module.exports = {
       comment_id: Joi.string().required(),
     },
   },
-  postFilterPost: {
-    body: {
+  getFilterPost: {
+    query: {
+      limit: Joi.number(),
+      offset: Joi.number(),
       category: Joi.string(),
       is_top: Joi.boolean(),
     },

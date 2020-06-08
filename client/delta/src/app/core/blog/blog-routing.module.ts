@@ -17,7 +17,7 @@ const routes: Routes = [
         path: 'singleBlog', component: SingleviewComponent
       },
       {
-        path: 'category', component: CategoriesComponent
+        path: 'category/:category_id', component: CategoriesComponent
       },
       {
         path: 'contact', component: ContactComponent

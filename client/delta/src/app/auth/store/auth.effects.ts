@@ -19,7 +19,7 @@ export class AuthEffects {
     map((data: AuthAction.UploadImages) => {
       return data.payload;
     }), switchMap((data: { profileImage: File, dobProof: File, addressProof: File }) => {
-      return this.http.post(endPoints.uploadProfileImages, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -42,7 +42,7 @@ export class AuthEffects {
     map((data: AuthAction.SetPassword) => {
       return data.payload;
     }), switchMap((data: { mobile: string, password: string }) => {
-      return this.http.post(endPoints.changePassword, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -60,7 +60,7 @@ export class AuthEffects {
       return data.payload;
     }),
     switchMap((data: { mobile: string, otp: number }) => {
-      return this.http.post(endPoints.verifyOtp, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -81,7 +81,7 @@ export class AuthEffects {
       return data.payload;
     }),
     switchMap((data: { type: string, mobile: string }) => {
-      return this.http.post(endPoints.sendOtp, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -107,7 +107,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap((data: {}) => {
-      return this.http.post(endPoints.editProfile, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -130,7 +130,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap((data: { mobile: number, password: string }) => {
-      return this.http.post(endPoints.signupUrl, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -168,7 +168,7 @@ export class AuthEffects {
   authSignIn = this.action.pipe(
     ofType(AuthAction.TRY_AUTH_SIGNIN),
     switchMap(() => {
-      return this.http.post(endPoints.authSignIn, {}, {observe: 'response'});
+      return this.http.post('', {}, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {
@@ -195,7 +195,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap((data: { mobile: string, password: string }) => {
-      return this.http.post(endPoints.loginUrl, data, {observe: 'response'});
+      return this.http.post('', data, {observe: 'response'});
     }),
     switchMap((response: HttpResponse<any>) => {
       if (response.status === 200) {

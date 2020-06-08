@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const siteUtils = require('../utils/website');
 const constants = require('../../../utils/constants');
+const ContactUs = require('../../../models/contact');
 
 exports.getWebsiteData = async (req, res, next) => {
   const data = {};
@@ -16,4 +17,22 @@ exports.getWebsiteData = async (req, res, next) => {
     },
     message: 'Website data found successfully',
   });
+};
+
+exports.postContactUs=async (req, res, next)=>{
+  try {
+    const {name, email, message} = req.body;
+    const contactus = new ContactUs();
+    contactus.name = name;
+    contactus.email=email;
+    contactus.message=message;
+
+    await contactus.save();
+
+    return res.json({
+      message: 'Thanks for Contacting Us, We will reply back shortly!',
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
 };

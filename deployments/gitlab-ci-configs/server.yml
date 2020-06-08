@@ -1,7 +1,6 @@
 build_server:
   stage: build
   image: node:13
-
   script: source deployments/scripts/server_build.sh
   artifacts:
     paths:
@@ -13,11 +12,10 @@ test_server:
   dependencies:
     - build_server
   services:
-    - mongo:4.2.5-bionic
+    - mongo:latest
   variables:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123
-
   script: source deployments/scripts/server_test.sh
 
 lint_server:
@@ -25,45 +23,47 @@ lint_server:
   image: node:13
   dependencies:
     - build_server
-
-
   script: source deployments/scripts/server_lint.sh
 
-.package_server: &package_server
+.package_server:
+  image: docker:git
   stage: package
   services:
     - docker:dind
-  variables:
-    CI_REGISTRY_IMAGE: skynet
   script: source deployments/scripts/server_package.sh
 
-package_server:staging:
+package_server:production:
   extends: .package_server
   only:
     - master
-    - dev
+  variables:
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_ENVIRONMENT_SLUG: prod
+    GCR_URL: ${GCR_REGION_URL}
   environment:
-    name: staging
-    url: st
+    name: prod
+    url: http://turtleopedia.com
+
 
 .deploy_server: &deploy_server
   stage: deploy
   services:
     - docker:dind
-
-deploy_server:staging:
-  extends: .deploy_server
-  image : ruby:latest
-  only:
-    - master
-    - dev
-  environment:
-    name: staging
-    url: https://$HEROKU_APP_NAME.herokuapp.com
-  variables:
-    HEROKU_APP_NAME: ${HEROKU_APP_STAGING}
-    HEROKU_API_KEY: ${HEROKU_API_KEY}
-  dependencies:
-    - package_server:staging
   script:
     - source deployments/scripts/server_deploy_gcp.sh
+
+deploy_server:production:
+  extends: .deploy_server
+  image: google/cloud-sdk:latest
+  services:
+    - docker:dind
+  only:
+    - master
+  environment:
+    name: prod
+    url: https://$HEROKU_APP_NAME.herokuapp.com
+  dependencies:
+    - package_server:production
+  variables:
+    CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
+    CI_ENVIRONMENT_SLUG: prod

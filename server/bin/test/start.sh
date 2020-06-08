@@ -27,16 +27,7 @@ docker-compose down --volumes
 print_ok "Starting the service up"
 docker-compose up -d
 
-## Wait for DB to startup
-#RETRIES=30
-#until PGPASSWORD=${DB_PASSWORD} psql -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER} -d ${DB_NAME} -c "select 1" > /dev/null 2>&1 || [ ${RETRIES} -eq 0 ]; do
-#  echo "Waiting for postgres, $((RETRIES--)) remaining attempts..."
-#  sleep 1
-#done
-#
-#mongodb://ballu:skynetballu123@127.0.0.1:27017/ballu_db?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
-#
-
+# checking for mongo to be up
 TIMEOUT=30
 until curl --output /dev/null --silent --fail localhost:27017; do
   printf '.'
