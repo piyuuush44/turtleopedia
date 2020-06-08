@@ -47,7 +47,7 @@ package_server:production:
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
-    GCR_REGION_URL: ${GCR_REGION_URL}
+    GCR_URL : $GCR_REGION_URL
   environment:
     name: prod
     url: http://turtleopedia.com

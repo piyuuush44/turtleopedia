@@ -10,6 +10,7 @@ docker build -f ./bin/$CI_ENVIRONMENT_SLUG/Dockerfile --pull -t $CI_REGISTRY_IMA
 
 echo "$GCP_SERVICE_KEY" >key.json
 
-docker login -u _json_key --password-stdin $GCR_REGION_URL <key.json
+echo "$GCR_URL"
+docker login -u _json_key --password-stdin $GCR_URL <key.json
 
 docker push $CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG
