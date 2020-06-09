@@ -22,7 +22,8 @@ export class BlogComponent implements OnInit, OnDestroy {
     blog: Blog;
     pageType: string;
     blogForm: FormGroup;
-
+    contentType = 1;
+    uploadImageUrl: string;
     // Private
     private _unsubscribeAll: Subject<any>;
 
@@ -94,10 +95,13 @@ export class BlogComponent implements OnInit, OnDestroy {
         return this._formBuilder.group({
             _id: [this.blog._id],
             title: [this.blog.title],
+            image_url: [this.blog.image_url],
+            is_top: [this.blog.is_top],
+            slug_url: [this.blog.slug_url],
             description: [this.blog.description],
             categories: [this.blog.category],
             tags: [this.blog.tags],
-            images: [this.blog.images],
+            content: [this.blog.content]
         });
     }
 
@@ -144,5 +148,89 @@ export class BlogComponent implements OnInit, OnDestroy {
         //         // Change the location with new one
         //         this._location.go('apps/blog/one/' + this.blog._id + '/' + this.blog.handle);
         //     });
+    }
+
+    addContent(text: string): void {
+        const content = this.blogForm.controls['content'].value
+        let finalContent;
+        if (this.contentType === 1) {
+            finalContent = {
+                type: 'text',
+                image_url: null,
+                text: text
+            }
+        } else if (this.contentType === 2) {
+            finalContent = {
+                type: 'image',
+                image_url: this.uploadImageUrl,
+                text: ''
+            }
+        } else {
+            finalContent = {
+                type: 'image',
+                image_url: this.uploadImageUrl,
+                text: text
+            }
+        }
+        content.push(finalContent)
+    }
+
+    editContent(text: string, index: number): void {
+        const content = this.blogForm.controls['content'].value
+        let finalContent;
+        if (this.contentType === 1) {
+            finalContent = {
+                type: 'text',
+                image_url: null,
+                text: text
+            }
+        } else if (this.contentType === 2) {
+            finalContent = {
+                type: 'image',
+                image_url: this.uploadImageUrl,
+                text: ''
+            }
+        } else {
+            finalContent = {
+                type: 'image',
+                image_url: this.uploadImageUrl,
+                text: text
+            }
+        }
+        content.push(finalContent)
+    }
+
+    changeType(type: string) {
+        if (type === 'text') {
+            this.contentType = 1
+        } else if (type === 'image') {
+            this.contentType = 2
+        } else {
+            this.contentType = 3
+        }
+    }
+
+    imageUpload = async (file) => {
+        // const bucketName = ''
+        // // Uploads a local file to the bucket
+        // await storage.bucket(bucketName).upload(file, {
+        //     // Support for HTTP requests made with `Accept-Encoding: gzip`
+        //     gzip: true,
+        //     // By setting the option `destination`, you can change the name of the
+        //     // object you are uploading to a bucket.
+        //     metadata: {
+        //         // Enable long-lived HTTP caching headers
+        //         // Use only if the contents of the file will never change
+        //         // (If the contents will change, use cacheControl: 'no-cache')
+        //         cacheControl: 'public, max-age=31536000',
+        //     },
+        // });
+        //
+        // console.log(`${file} uploaded to ${bucketName}.`);
+    }
+
+
+    imageUploadEdit(): void {
+
     }
 }

@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
     default: false,
   },
   image_url: {
-    type: Array,
+    type: String,
   },
   content: {
     type: Array,

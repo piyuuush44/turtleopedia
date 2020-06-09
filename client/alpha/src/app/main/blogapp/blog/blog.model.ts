@@ -4,11 +4,14 @@ import {FuseUtils} from '@fuse/utils';
 export class Blog {
     _id: string;
     title: string;
+    image_url: string;
+    is_top: boolean;
+    slug_url: string;
     handle: string;
     description: string;
     category: string[];
     tags: string[];
-    content: [];
+    content: Array<{ type: string, text: string, image_url: string }>;
     images: {
         default: boolean,
         id: string,
@@ -25,6 +28,9 @@ export class Blog {
         blog = blog || {};
         this._id = blog._id || FuseUtils.generateGUID();
         this.title = blog.title || '';
+        this.image_url = blog.image_url || '';
+        this.is_top = blog.is_top || false;
+        this.slug_url = blog.slug_url || '';
         this.description = blog.description || '';
         this.category = blog.categories || [];
         this.tags = blog.tags || [];

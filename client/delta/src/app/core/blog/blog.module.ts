@@ -13,6 +13,8 @@ import {AdvertisingComponent} from "./advertising/advertising.component";
 import {MasonryBoxComponent} from "./masonry-box/masonry-box.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
 import {BlogService} from "./blog.service";
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {BlogService} from "./blog.service";
     CategoriesComponent,
     AdvertisingComponent,
     MasonryBoxComponent,
-    SidebarComponent
+    SidebarComponent,
+    AboutusComponent,
+    PrivacypolicyComponent
   ],
   imports: [
     CommonModule,

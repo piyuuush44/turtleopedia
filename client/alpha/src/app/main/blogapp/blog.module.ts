@@ -23,6 +23,8 @@ import {BlogsComponent} from './blogs/blogs.component';
 import {BlogsService} from './blogs/blogs.service';
 import {BlogComponent} from './blog/blog.component';
 import {BlogService} from './blog/blog.service';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 
 const routes: Routes = [
     {
@@ -76,7 +78,9 @@ const routes: Routes = [
         }),
 
         FuseSharedModule,
-        FuseWidgetModule
+        FuseWidgetModule,
+        MatCheckboxModule,
+        MatButtonToggleModule
     ],
     providers: [
         BlogsService,

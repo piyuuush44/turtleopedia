@@ -84,6 +84,15 @@
                                     </textarea>
                                 </mat-form-field>
 
+
+                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                                    <mat-label>Blog Slug Url</mat-label>
+                                    <input matInput placeholder="Slug url"
+                                           name="slug_url"
+                                           formControlName="slug_url"
+                                           required>
+                                </mat-form-field>
+
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
 
                                     <mat-label>Categories</mat-label>
@@ -124,28 +133,146 @@
 
                                 </mat-form-field>
 
+                                <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+                                    <mat-button-toggle>Is top
+                                        <input type="checkbox" name="is_top"
+                                               formControlName="is_top">
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+
+                                <div class="tab-content p-24" fusePerfectScrollbar>
+                                    <div fxLayout="row wrap" fxLayoutAlign="start start">
+
+                                        <div class="blog-image" fxlayout="row" fxLayoutAlign="center center">
+                                            <img class="media"
+                                                 [src]="blog.image_url">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <input type="file" (change)="imageUpload()">
+                                    </div>
+                                </div>
+
                             </div>
 
                         </mat-tab>
 
-                        <mat-tab label="Main Content">
-
+                        <mat-tab label="Main Content" *ngIf="pageType==='new'">
                             <div class="tab-content p-24" fusePerfectScrollbar>
-                                <div fxLayout="row wrap" fxLayoutAlign="start start">
-
-                                    <div *ngIf="blog.images.length === 0"
-                                         class="blog-image" fxlayout="row" fxLayoutAlign="center center">
-                                        <img class="media"
-                                             [src]="'assets/images/ecommerce/blog-image-placeholder.png'">
-                                    </div>
-
-                                    <div *ngFor="let image of blog.images">
-                                        <div *ngIf="blog.images.length > 0"
-                                             class="blog-image" fxlayout="row" fxLayoutAlign="center center">
-                                            <img class="media" [src]="image.url">
-                                        </div>
-                                    </div>
+                                <mat-button-toggle-group value="primary"
+                                                         aria-label="Change type">
+                                    <mat-button-toggle (click)="changeType('text')"> Text</mat-button-toggle>
+                                    <mat-button-toggle (click)="changeType('image')"> Image</mat-button-toggle>
+                                    <mat-button-toggle (click)="changeType('text_and_image')"> Text and Image
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+                                <div *ngIf="contentType === 1">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="addContent(htmlTextAreaElement.value)">
+                                            <span>ADD</span>
+                                        </button>
+                                    </mat-form-field>
                                 </div>
+                                <div *ngIf="contentType === 2">
+                                    <input type="file" (change)="imageUpload()">
+                                </div>
+                                <div *ngIf="contentType === 3">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="addContent(htmlTextAreaElement.value)">
+                                            <span>ADD</span>
+                                        </button>
+                                    </mat-form-field>
+                                    <input type="file">
+                                </div>
+
+                            </div>
+
+                        </mat-tab>
+                        <mat-tab label="Main Content" *ngIf="pageType==='edit'">
+                            <div *ngFor="let cont of blog.content; let ind=index">
+                                <div *ngIf="cont.type==='text'">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="editContent(htmlTextAreaElement.value, ind)">
+                                            <span>Edit</span>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="cont.type==='image'">
+                                    <input type="file" (change)="imageUploadEdit()">
+                                </div>
+                                <div *ngIf="cont.type==='text_and_image'">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="editContent(htmlTextAreaElement.value, ind)">
+                                            <span>Edit</span>
+                                        </button>
+                                    </mat-form-field>
+                                    <input type="file" (change)="imageUpload()">
+                                </div>
+
+                            </div>
+                            <div class="tab-content p-24" fusePerfectScrollbar>
+                                <mat-button-toggle-group value="primary"
+                                                         aria-label="Change type">
+                                    <mat-button-toggle (click)="changeType('text')"> Text</mat-button-toggle>
+                                    <mat-button-toggle (click)="changeType('image')"> Image</mat-button-toggle>
+                                    <mat-button-toggle (click)="changeType('text_and_image')"> Text and Image
+                                    </mat-button-toggle>
+                                </mat-button-toggle-group>
+                                <div *ngIf="contentType === 1">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="addContent(htmlTextAreaElement.value)">
+                                            <span>ADD</span>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div *ngIf="contentType === 2">
+                                    <input type="file" (change)="imageUpload()">
+                                </div>
+                                <div *ngIf="contentType === 3">
+                                    <mat-form-field appearance="outline" floatLabel="always">
+                                        <mat-label>Blog Description</mat-label>
+                                        <textarea matInput placeholder="Blog Content"
+                                                  rows="5" #htmlTextAreaElement>
+                                    </textarea>
+                                        <button mat-raised-button
+                                                class="save-blog-button"
+                                                (click)="addContent(htmlTextAreaElement.value)">
+                                            <span>ADD</span>
+                                        </button>
+                                    </mat-form-field>
+                                    <input type="file" (change)="imageUpload()">
+                                </div>
+
                             </div>
 
                         </mat-tab>
