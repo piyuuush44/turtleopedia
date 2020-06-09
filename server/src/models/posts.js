@@ -18,6 +18,11 @@ const schema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  no_of_views: {
+    type: Number,
+    default: 0,
+    required: true,
+  },
   slug_url: {
     type: String,
   },
