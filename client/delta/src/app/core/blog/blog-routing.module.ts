@@ -5,6 +5,8 @@ import {BlogComponent} from "./blog.component";
 import {HomeComponent} from "./home/home.component";
 import {CategoriesComponent} from "./categories/categories.component";
 import {ContactComponent} from "./contact/contact.component";
+import {AboutusComponent} from "./aboutus/aboutus.component";
+import {PrivacypolicyComponent} from "./privacypolicy/privacypolicy.component";
 
 
 const routes: Routes = [
@@ -21,6 +23,12 @@ const routes: Routes = [
       },
       {
         path: 'contact', component: ContactComponent
+      },
+      {
+        path: 'about-us', component: AboutusComponent
+      },
+      {
+        path: 'privacy-policy', component: PrivacypolicyComponent
       },
     ]
   },
