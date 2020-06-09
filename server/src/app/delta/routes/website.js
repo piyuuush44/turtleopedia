@@ -13,4 +13,10 @@ module.exports = [
     controller: WebsiteController.postContactUs,
     schema_validation: Schema.postContactUs,
   },
+  {
+    method: 'post',
+    route: '/subscribe',
+    controller: WebsiteController.postEmailSubscription,
+    schema_validation: Schema.postEmailSubscription,
+  },
 ];
