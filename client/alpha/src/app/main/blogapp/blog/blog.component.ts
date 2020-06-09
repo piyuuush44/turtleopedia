@@ -29,13 +29,13 @@ export class BlogComponent implements OnInit, OnDestroy {
     /**
      * Constructor
      *
-     * @param {BlogService} _ecommerceBlogService
+     * @param {BlogService} _blogService
      * @param {FormBuilder} _formBuilder
      * @param {Location} _location
      * @param {MatSnackBar} _matSnackBar
      */
     constructor(
-        private _ecommerceBlogService: BlogService,
+        private _blogService: BlogService,
         private _formBuilder: FormBuilder,
         private _location: Location,
         private _matSnackBar: MatSnackBar
@@ -56,7 +56,7 @@ export class BlogComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         // Subscribe to update blog on changes
-        this._ecommerceBlogService.onBlogChanged
+        this._blogService.onBlogChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(blog => {
 
@@ -92,25 +92,12 @@ export class BlogComponent implements OnInit, OnDestroy {
      */
     createBlogForm(): FormGroup {
         return this._formBuilder.group({
-            id: [this.blog.id],
-            name: [this.blog.name],
-            handle: [this.blog.handle],
+            _id: [this.blog._id],
+            title: [this.blog.title],
             description: [this.blog.description],
-            categories: [this.blog.categories],
+            categories: [this.blog.category],
             tags: [this.blog.tags],
             images: [this.blog.images],
-            priceTaxExcl: [this.blog.priceTaxExcl],
-            priceTaxIncl: [this.blog.priceTaxIncl],
-            taxRate: [this.blog.taxRate],
-            comparedPrice: [this.blog.comparedPrice],
-            quantity: [this.blog.quantity],
-            sku: [this.blog.sku],
-            width: [this.blog.width],
-            height: [this.blog.height],
-            depth: [this.blog.depth],
-            weight: [this.blog.weight],
-            extraShippingFee: [this.blog.extraShippingFee],
-            active: [this.blog.active]
         });
     }
 
@@ -121,11 +108,11 @@ export class BlogComponent implements OnInit, OnDestroy {
         const data = this.blogForm.getRawValue();
         data.handle = FuseUtils.handleize(data.name);
 
-        this._ecommerceBlogService.saveBlog(data)
+        this._blogService.saveBlog(data)
             .then(() => {
 
                 // Trigger the subscription with new data
-                this._ecommerceBlogService.onBlogChanged.next(data);
+                this._blogService.onBlogChanged.next(data);
 
                 // Show the success message
                 this._matSnackBar.open('Blog saved', 'OK', {
@@ -140,22 +127,22 @@ export class BlogComponent implements OnInit, OnDestroy {
      */
     addBlog(): void {
         const data = this.blogForm.getRawValue();
-        data.handle = FuseUtils.handleize(data.name);
-
-        this._ecommerceBlogService.addBlog(data)
-            .then(() => {
-
-                // Trigger the subscription with new data
-                this._ecommerceBlogService.onBlogChanged.next(data);
-
-                // Show the success message
-                this._matSnackBar.open('Blog added', 'OK', {
-                    verticalPosition: 'top',
-                    duration: 2000
-                });
-
-                // Change the location with new one
-                this._location.go('apps/e-commerce/blogs/' + this.blog.id + '/' + this.blog.handle);
-            });
+        // data.handle = FuseUtils.handleize(data.name);
+        console.log(data)
+        // this._blogService.addBlog(data)
+        //     .then(() => {
+        //
+        //         // Trigger the subscription with new data
+        //         this._blogService.onBlogChanged.next(data);
+        //
+        //         // Show the success message
+        //         this._matSnackBar.open('Blog added', 'OK', {
+        //             verticalPosition: 'top',
+        //             duration: 2000
+        //         });
+        //
+        //         // Change the location with new one
+        //         this._location.go('apps/blog/one/' + this.blog._id + '/' + this.blog.handle);
+        //     });
     }
 }

@@ -25,7 +25,7 @@
                 <div fxLayout="column" fxLayoutAlign="start start"
                      [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">
                     <div class="h2" *ngIf="pageType ==='edit'">
-                        {{blog.name}}
+                        {{blog.title}}
                     </div>
                     <div class="h2" *ngIf="pageType ==='new'">
                         New Blog
@@ -68,10 +68,10 @@
                             <div class="tab-content p-24" fusePerfectScrollbar>
 
                                 <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Blog Name</mat-label>
+                                    <mat-label>Blog Title</mat-label>
                                     <input matInput placeholder="Blog Name"
                                            name="name"
-                                           formControlName="name"
+                                           formControlName="title"
                                            required>
                                 </mat-form-field>
 
@@ -90,9 +90,9 @@
 
                                     <mat-chip-list #categoryList name="categories" formControlName="categories">
 
-                                        <mat-chip *ngFor="let category of blog.categories"
-                                                  [removable]="true" (removed)="blog.removeCategory(category)">
-                                            {{category}}
+                                        <mat-chip *ngFor="let categ of blog.category"
+                                                  [removable]="true" (removed)="blog.removeCategory(categ)">
+                                            {{categ}}
                                             <mat-icon matChipRemove>cancel</mat-icon>
                                         </mat-chip>
 
@@ -128,7 +128,7 @@
 
                         </mat-tab>
 
-                        <mat-tab label="Blog Images">
+                        <mat-tab label="Main Content">
 
                             <div class="tab-content p-24" fusePerfectScrollbar>
                                 <div fxLayout="row wrap" fxLayoutAlign="start start">
@@ -150,126 +150,6 @@
 
                         </mat-tab>
 
-                        <mat-tab label="Pricing">
-
-                            <div class="tab-content p-24" fusePerfectScrollbar>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Tax Excluded Price</mat-label>
-                                    <input matInput placeholder="Tax Excluded Price"
-                                           name="priceTaxExcl"
-                                           formControlName="priceTaxExcl"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Tax Included Price</mat-label>
-                                    <input matInput placeholder="Tax Included Price"
-                                           name="priceTaxIncl"
-                                           formControlName="priceTaxIncl"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Tax Rate</mat-label>
-                                    <input matInput placeholder="Tax Rate"
-                                           name="taxRate"
-                                           formControlName="taxRate"
-                                           type="number">
-                                    <span matPrefix>&#37;&nbsp;</span>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Compared Price</mat-label>
-                                    <input matInput placeholder="Compared Price"
-                                           name="comparedPrice"
-                                           formControlName="comparedPrice"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
-                                    <mat-hint align="start">Add a compare price to show next to the real price
-                                    </mat-hint>
-                                </mat-form-field>
-
-                            </div>
-                        </mat-tab>
-
-                        <mat-tab label="Inventory">
-
-                            <div class="tab-content p-24" fusePerfectScrollbar>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>SKU</mat-label>
-                                    <input matInput placeholder="SKU"
-                                           name="sku"
-                                           formControlName="sku">
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Quantity</mat-label>
-                                    <input matInput placeholder="Quantity"
-                                           name="quantity"
-                                           formControlName="quantity"
-                                           type="number">
-                                </mat-form-field>
-
-                            </div>
-
-                        </mat-tab>
-
-                        <mat-tab label="Shipping">
-
-                            <div class="tab-content p-24" fusePerfectScrollbar fxLayout="column">
-
-                                <div fxLayout="row" fxLayoutAlign="space-between">
-
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Width</mat-label>
-                                        <input matInput placeholder="Width"
-                                               name="Width"
-                                               formControlName="width">
-                                        <span matSuffix>cm</span>
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Height</mat-label>
-                                        <input matInput placeholder="Height"
-                                               name="Height"
-                                               formControlName="height">
-                                        <span matSuffix>cm</span>
-                                    </mat-form-field>
-
-                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30">
-                                        <mat-label>Depth</mat-label>
-                                        <input matInput placeholder="Depth"
-                                               name="Depth"
-                                               formControlName="depth">
-                                        <span matSuffix>cm</span>
-                                    </mat-form-field>
-
-                                </div>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Weight</mat-label>
-                                    <input matInput placeholder="Weight"
-                                           name="Weight"
-                                           formControlName="weight">
-                                    <span matSuffix>kg</span>
-                                </mat-form-field>
-
-                                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
-                                    <mat-label>Extra Shipping Fee</mat-label>
-                                    <input matInput placeholder="Extra Shipping Fee"
-                                           name="extraShippingFee"
-                                           formControlName="extraShippingFee"
-                                           type="number">
-                                    <span matPrefix>$&nbsp;</span>
-                                </mat-form-field>
-
-                            </div>
-
-                        </mat-tab>
 
                     </mat-tab-group>
 
