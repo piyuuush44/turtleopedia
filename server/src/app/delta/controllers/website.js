@@ -19,13 +19,13 @@ exports.getWebsiteData = async (req, res, next) => {
   });
 };
 
-exports.postContactUs=async (req, res, next)=>{
+exports.postContactUs = async (req, res, next) => {
   try {
     const {name, email, message} = req.body;
     const contactus = new ContactUs();
     contactus.name = name;
-    contactus.email=email;
-    contactus.message=message;
+    contactus.email = email;
+    contactus.message = message;
 
     await contactus.save();
 
@@ -35,4 +35,10 @@ exports.postContactUs=async (req, res, next)=>{
   } catch (e) {
     return next(new ClientError({message: e.message}));
   }
+};
+
+exports.postUploadFiles = async (req, res, next) => {
+  return res.json({
+    message: 'Files uploaded successfully!',
+  });
 };

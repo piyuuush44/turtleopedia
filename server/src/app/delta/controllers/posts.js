@@ -15,6 +15,7 @@ exports.postPosts = async (req, res, next) => {
       image_url,
       slug_url,
       feature_content,
+      tags,
     } = req.body;
     const isTop = is_top ? is_top : false;
     const imageUrl = image_url ? image_url : '';
@@ -27,6 +28,7 @@ exports.postPosts = async (req, res, next) => {
     post.image_url = imageUrl;
     post.slug_url = slug_url;
     post.feature_content = feature_content;
+    post.tags = tags;
 
     await post.save();
 

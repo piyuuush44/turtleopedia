@@ -1,4 +1,6 @@
 const passport = require('passport');
+const multer = require('multer');
+const multerGoogleStorage = require('multer-google-storage');
 const asyncHandler = require('express-async-handler');
 const Comments = require('../../../models/comments');
 const Posts = require('../../../models/posts');
@@ -60,10 +62,24 @@ exports.isAuthentic = passport.authenticate('jwt', {session: false});
  */
 exports.checkUserExists = asyncHandler(async (req, res, next) => {
   const {id} = req.params;
-  const user =await User.findById(id);
+  const user = await User.findById(id);
   if (!user) {
     return next(new ClientError({message: `User not found for id: ${id}`}));
   }
   next();
 });
 
+/**
+ * This method is used to upload a file content in req.file to google storage
+ * returns an instance of multer middleware
+ */
+exports.uploadHandler = multer({
+  // storage: multer.memoryStorage(),
+  storage: multerGoogleStorage.storageEngine(
+      {
+        projectId: process.env.GCLOUD_PROJECT,
+        bucket: process.env.GCS_BUCKET,
+        keyFilename: process.env.GCS_KEYFILE,
+      },
+  ),
+});
