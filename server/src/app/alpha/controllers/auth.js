@@ -51,7 +51,8 @@ exports.postRegister = async (req, res, next) => {
     user = new User();
     user.email = req.body.email;
     user.password_hash = hash;
-
+    user.stage_history = [{stage: 'pending', time: date.now()}];
+    user.stage = 'pending';
     await user.save();
 
     const token = authUtils.signJwt(
@@ -124,3 +125,30 @@ exports.putProfileUpdate = async (req, res, next) => {
     return next(new ClientError({message: e}));
   }
 };
+
+exports.putUserActivate = async (req, res, next) => {
+  try {
+    const {user} = req;
+    user.stage = 'approved';
+    user.stageHistory = [...stageHistory].push({
+      stage: 'approved',
+      time: date.now(),
+    });
+  } catch (e) {
+    return next(new ClientError({message: e}));
+  }
+};
+
+exports.putUserDeactivate = async (req, res, next) => {
+  try {
+    const {user} = req;
+    user.stage = 'disabled';
+    user.stageHistory = stageHistory.push({
+      stage: 'disabled',
+      time: date.now(),
+    });
+  } catch (e) {
+    return next(new ClientError({message: e}));
+  }
+};
+

@@ -3,13 +3,25 @@ const Schema = require('../schema/auth');
 const Middleware = require('../middlewares/auth');
 
 module.exports = [
-// apis for auth
+  // apis for auth
   {
     // Register a new user
     method: 'post',
     route: '/register',
     schema_validation: Schema.postRegister,
     controller: Controller.postRegister,
+  },
+  {
+    // Activate a new user
+    method: 'put',
+    route: 'user/activate',
+    controller: Controller.putUserActivate,
+  },
+  {
+    // Dectivate a new user
+    method: 'put',
+    route: 'user/deactivate',
+    controller: Controller.putUserDeactivate,
   },
   {
     // logs in an user

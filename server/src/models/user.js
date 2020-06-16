@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const constants = require('../utils/constants');
 
 const schema = new mongoose.Schema({
   name: {type: String, required: false},
@@ -7,6 +8,14 @@ const schema = new mongoose.Schema({
   user_role: {
     type: Array,
     required: false,
+  },
+  stage: {
+    enum: constants.USER_STAGE_CATEGORIES,
+    default: 'pending',
+  },
+  stageHistory: {
+    type: Array,
+    default: [],
   },
 },
 {timestamps: true},
