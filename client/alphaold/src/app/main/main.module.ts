@@ -4,8 +4,8 @@ import {FuseSharedModule} from '@fuse/shared.module';
 import {StoreModule} from "@ngrx/store";
 // import {mainReducer} from "./main.reducer";
 import {EffectsModule} from "@ngrx/effects";
-import {AuthEffects} from "./authentication/store/auth.effects";
-import {AuthReducer} from "./authentication/store/auth.reducer";
+import {AuthEffects} from "../../../../alpha/src/app/auth/store/auth.effects";
+import {AuthReducer} from "../../../../alpha/src/app/auth/store/auth.reducer";
 
 const routes: Routes = [
     {
