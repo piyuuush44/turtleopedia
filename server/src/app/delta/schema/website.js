@@ -7,4 +7,11 @@ module.exports = {
           email: Joi.string().required(),
           message: Joi.string().required(),
         }),
-  }};
+  },
+  postEmailSubscription: {
+    body: Joi.object()
+        .keys({
+          email: Joi.string().required(),
+        }),
+  },
+};

@@ -2,6 +2,7 @@ const _ = require('lodash');
 const siteUtils = require('../utils/website');
 const constants = require('../../../utils/constants');
 const ContactUs = require('../../../models/contact');
+const EmailSubscription = require('../../../models/subscribe');
 
 exports.getWebsiteData = async (req, res, next) => {
   const data = {};
@@ -17,6 +18,21 @@ exports.getWebsiteData = async (req, res, next) => {
     },
     message: 'Website data found successfully',
   });
+};
+exports.postEmailSubscription = async (req, res, next)=> {
+  try {
+    const {email} = req.body;
+    const emailsubscription = new EmailSubscription();
+    emailsubscription.email = email;
+
+    await emailsubscription.save();
+
+    return res.json({
+      message: 'Subscribed Successfully! ',
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
 };
 
 exports.postContactUs = async (req, res, next) => {

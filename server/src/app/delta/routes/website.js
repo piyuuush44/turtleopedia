@@ -22,4 +22,10 @@ module.exports = [
       middlewares.uploadHandler.single('image'),
     ],
   },
+  {
+    method: 'post',
+    route: '/subscribe',
+    controller: WebsiteController.postEmailSubscription,
+    schema_validation: Schema.postEmailSubscription,
+  },
 ];
