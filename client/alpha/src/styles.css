@@ -4,3 +4,8 @@
 @import "assets/css/custom.css";
 @import "assets/plugins/bootstrap/css/bootstrap.min.css";
 @import "assets/plugins/font-awesome/css/all.min.css";
+
+.body {
+  background: #DAE6F6 !important;
+  color: #717BA2 !important;
+}

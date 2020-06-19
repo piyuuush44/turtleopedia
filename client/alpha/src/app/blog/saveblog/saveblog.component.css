@@ -1,0 +1,9 @@
+.fab {
+  display: flex;
+  text-align: center;
+}
+
+.img-fluid{
+  height: 30%;
+  width: 30%;
+}

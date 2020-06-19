@@ -1,11 +1,14 @@
+const path = require('path');
 const passport = require('passport');
 const multer = require('multer');
+const {v5} = require('uuid');
 const multerGoogleStorage = require('multer-google-storage');
 const asyncHandler = require('express-async-handler');
 const Comments = require('../../../models/comments');
 const Posts = require('../../../models/posts');
 const ClientError = require('../../../errors/client');
 const User = require('../../../models/user');
+const constants = require('../../../utils/constants');
 
 /**
  * This method checks if the post is available or not, and assigns
@@ -74,12 +77,21 @@ exports.checkUserExists = asyncHandler(async (req, res, next) => {
  * returns an instance of multer middleware
  */
 exports.uploadHandler = multer({
-  // storage: multer.memoryStorage(),
   storage: multerGoogleStorage.storageEngine(
       {
         projectId: process.env.GCLOUD_PROJECT,
         bucket: process.env.GCS_BUCKET,
         keyFilename: process.env.GCS_KEYFILE,
+        filename: (req, file, cb) => {
+          const ext = path.extname(file.originalname);
+          const fileName = `images/${v5.DNS}${ext}`;
+
+          // assigning file name array to req object
+          req.fileName = [
+            `${constants.GCS_URL}/${process.env.GCS_BUCKET}/${fileName}`,
+          ];
+          cb(null, fileName);
+        },
       },
   ),
 });

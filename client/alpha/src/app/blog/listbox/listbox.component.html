@@ -7,7 +7,7 @@
       </ol>
     </nav>
     <div class="page-options">
-      <a href="#" class="btn btn-primary" id="mail-compose">Compose</a>
+      <a routerLink="/blog/save" class="btn btn-primary" id="mail-compose">Compose</a>
     </div>
   </div>
   <div class="main-wrapper">
@@ -31,7 +31,7 @@
             </div>
             <ul class="inbox-list list-unstyled">
               <li>
-                <a href="javascript: void(0);">
+                <a (click)="togglePostView()" style="cursor: pointer">
                   <div class="mail-checkbox">
                     <div class="custom-control custom-checkbox form-group">
                       <input type="checkbox" class="custom-control-input" id="mail1">
@@ -68,3 +68,126 @@
     </div>
   </div>
 </div>
+
+<!--<div class="mailbox-compose">-->
+<!--  <div class="mailbox-compose-content">-->
+<!--    <div class="mailbox-compose-header">-->
+<!--      <h5>Compose Message</h5>-->
+<!--    </div>-->
+<!--    <div class="mailbox-compose-body">-->
+<!--      <form>-->
+<!--        <div class="form-group">-->
+<!--          <input type="email" class="form-control" id="compose-email" placeholder="To">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" placeholder="Subject">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <input type="text" class="form-control" placeholder="Cc">-->
+<!--        </div>-->
+<!--        <div class="form-group">-->
+<!--          <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>-->
+<!--        </div>-->
+<!--        <div class="compose-options">-->
+<!--          <a href="#"><i class="material-icons">text_format</i></a>-->
+<!--          <a href="#"><i class="material-icons">attach_file</i></a>-->
+<!--          <a href="#"><i class="material-icons">insert_link</i></a>-->
+<!--          <a href="#"><i class="material-icons">insert_emoticon</i></a>-->
+<!--          <a href="#"><i class="material-icons-outlined">insert_photo</i></a>-->
+<!--          <a href="#"><i class="material-icons">delete_outline</i></a>-->
+<!--        </div>-->
+<!--        <div class="compose-buttons">-->
+<!--          <a href="#" class="btn btn-block btn-success">Send</a>-->
+<!--          <a href="#" class="btn btn-block btn-danger">Cancel</a>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="modal fade show" *ngIf="showPost" id="exampleModalCenter" tabindex="-1" role="dialog"-->
+<!--     aria-labelledby="exampleModalCenterTitle" style="display: block; padding-right: 15px;" aria-modal="true">-->
+<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <i class="material-icons">close</i>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.-->
+<!--        Morbi leo risus, porta ac consectetur ac, vestibulum at eros.-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="mailbox-item-preview" *ngIf="showPost">
+  <div class="mail-container">
+    <div class="mail-header">
+      <div class="mail-title">
+        Notes have been uploaded for next exam
+      </div>
+    </div>
+    <div class="mail-info">
+      <div class="mail-author">
+        <img src="../../../assets/images/avatars/profile-image-2.png" alt="">
+        <div class="mail-author-info">
+          <span class="mail-author-name">William Adams</span>
+          <span class="mail-author-address">w.adams@gmail.com</span>
+        </div>
+      </div>
+      <div class="mail-other-info">
+        <span>18:01</span>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="mail-text">
+      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
+        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
+        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
+        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
+        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
+        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
+        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
+        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
+        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
+    </div>
+    <div class="mail-text">
+      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
+        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
+        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
+        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
+        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
+        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
+        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
+        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
+        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
+    </div>
+    <div class="mail-text">
+      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
+        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
+        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
+        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
+        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
+        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
+        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
+        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
+        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
+    </div>
+    <div class="mail-actions">
+      <button class="btn btn-secondary">Edit</button>
+      <button class="btn btn-dark" (click)="togglePostView()">Hide</button>
+      <button class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!--<div class="mailbox-compose-overlay"></div>-->
+<!--<div class="mailbox-item-overlay"></div>-->

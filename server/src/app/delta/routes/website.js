@@ -19,7 +19,7 @@ module.exports = [
     route: '/postUploadFiles',
     controller: WebsiteController.postUploadFiles,
     middlewares: [
-      middlewares.uploadHandler.single('hi'),
+      middlewares.uploadHandler.single('image'),
     ],
   },
 ];
