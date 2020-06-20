@@ -51,7 +51,7 @@ exports.postRegister = async (req, res, next) => {
     user = new User();
     user.email = req.body.email;
     user.password_hash = hash;
-    user.stage_history = [{stage: 'pending', time: date.now()}];
+    user.stage_history = [{stage: 'pending', time: Date.now()}];
     user.stage = 'pending';
     await user.save();
 
