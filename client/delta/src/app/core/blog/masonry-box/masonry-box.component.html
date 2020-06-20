@@ -1,26 +1,25 @@
 <section class="section first-section">
   <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" *ngIf="data.recent_posts.length>=3">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="assets/upload/garden_cat_03.jpg" alt="los angles" class="img-fluid">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{data.recent_posts[0].image_url}}" alt="los angles" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
-                <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                                         title="">{{data.recent_posts[0].category}}</a></span>
-                <h4><a href="garden-single.html" title="">{{data.recent_posts[0].title}}</a>
-                </h4>
-                <small><a href="garden-single.html" title="">{{data.recent_posts[0].createdAt}}</a></small>
-                <small><a href="#" title="">by Jayant </a></small>
+                <span class="bg-aqua">
+                  <a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
+                     title="">{{data.recent_posts[0].category}}
+                  </a>
+                </span>
                 <h4><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
                        title="">{{data.recent_posts[0].title}}</a></h4>
                 <small><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
@@ -29,22 +28,13 @@
               </div><!-- end meta -->
             </div><!-- end shadow-desc -->
           </div><!-- end shadow -->
-      </div>
+        </div>
 
-      <div class="carousel-item">
-        <img src="assets/upload/garden_cat_03.jpg" alt="los angles">
-      <div class="center-side">
-        <div class="masonry-box post-media">
-          <img src="{{data.recent_posts[1].image_url}}" alt="image not found" class="img-fluid">
+        <div class="carousel-item">
+          <img src="{{data.recent_posts[1].image_url}}" alt="los angles" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
-                <span class="bg-aqua"><a href="blog-category-01.html"
-                                         title="">{{data.recent_posts[0].category}}</a></span>
-                <h4><a href="garden-single.html" title="">{{data.recent_posts[0].title}}</a>
-                </h4>
-                <small><a href="garden-single.html" title="">{{data.recent_posts[0].createdAt}}</a></small>
-                <small><a href="#" title="">by Jessica</a></small>
                 <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
                                          title="">{{data.recent_posts[1].category}}</a></span>
                 <h4><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
@@ -59,12 +49,8 @@
       </div><!-- end left-side -->
 
       <div class="right-side hidden-md-down">
-        <div class="masonry-box post-media">
-          <img src="{{data.recent_posts[2].image_url}}" alt="" class="img-fluid">
-      </div>
-
-      <div class="carousel-item">
-        <img src="assets/upload/garden_cat_03.jpg" alt="los angles" class="img-fluid" >
+        <div class="carousel-item">
+          <img src="{{data.recent_posts[2].image_url}}" alt="los angles" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
@@ -79,8 +65,8 @@
               </div><!-- end meta -->
             </div><!-- end shadow-desc -->
           </div><!-- end shadow -->
+        </div>
       </div>
-    </div>
 
       <!-- Left and right controls -->
       <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">

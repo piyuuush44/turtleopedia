@@ -13,7 +13,7 @@ export interface CoreState {
 const initialState: CoreState = {
   data: new WebdataModel([], [], [], []),
   fitlerPosts: new FilterPostModel([], {},),
-  currentPost: new Posts('', '', '', '', [], false, [], [], '', '')
+  currentPost: new Posts('', '', '', '', '', [], false, [], [], '', '')
 };
 
 const reducer = createReducer(initialState,

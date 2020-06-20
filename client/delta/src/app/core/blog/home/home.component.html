@@ -11,13 +11,13 @@
       </div><!-- end col -->
 
       <div class="blog-meta big-meta col-md-8">
-        <span class="bg-aqua"><a routerLink="/blog/singleBlog" title="">{{post.category}}</a></span>
-        <h4><a routerLink="/blog/singleBlog" title="">{{post.title}}</a>
+        <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{post.slug_url}}" title="">{{post.category}}</a></span>
+        <h4><a routerLink="/blog/singleBlog/{{post.slug_url}}" title="">{{post.title}}</a>
         </h4>
         <p>{{post.feature_content}}</p>
-        <small><a routerLink="/blog/singleBlog" title=""><i class="fa fa-eye"></i> Total views</a></small>
-        <small><a routerLink="/blog/singleBlog" title="">{{post.createdAt}}</a></small>
-        <small><a routerLink="/blog/singleBlog" title="">by Matilda</a></small>
+        <small><a routerLink="/blog/singleBlog/{{post.slug_url}}" title=""><i class="fa fa-eye"></i> Total views</a></small>
+        <small><a routerLink="/blog/singleBlog/{{post.slug_url}}" title="">{{post.createdAt}}</a></small>
+        <small><a routerLink="/blog/singleBlog/{{post.slug_url}}" title="">by Matilda</a></small>
       </div><!-- end meta -->
     </div><!-- end blog-box -->
 
