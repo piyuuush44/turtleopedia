@@ -10,6 +10,7 @@ const schema = new mongoose.Schema({
     required: false,
   },
   stage: {
+    type: String,
     enum: constants.USER_STAGE_CATEGORIES,
     default: 'pending',
   },
