@@ -19,6 +19,7 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.uploadPicture(data).pipe(
           map((response: HttpResponse<any>) => {
+              alert('Uploaded blog post picture successfully!')
               return BlogActions.SAVE_BLOG_PICTURES({payload: response.body.result.fileUrl[0]})
             }
           ),
@@ -36,6 +37,7 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.uploadPicture(data).pipe(
           map((response: HttpResponse<any>) => {
+              alert('Uploaded blog content picture successfully!')
               return BlogActions.SAVE_BLOG_CONTENT_PICTURES({payload: response.body.result.fileUrl[0]})
             }
           ),
@@ -51,8 +53,10 @@ export class BlogEffects {
       ofType(BlogActions.TRY_FETCH_BLOGS),
       switchMap(() =>
         this.blogService.getBlog().pipe(
-          map((response: HttpResponse<any>) => {
-              return BlogActions.SAVE_BLOG_PICTURES(response.body.result.data)
+          map((response: any) => {
+              console.log(response)
+              console.log('piyush')
+              return BlogActions.SAVE_BLOGS({payload: response.results})
             }
           ),
           catchError(error => EMPTY
@@ -69,6 +73,8 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.saveBlog(data).pipe(
           map((response: HttpResponse<any>) => {
+              console.log(response.body)
+              this.router.navigate(['/blog/list'])
               return BlogActions.TRY_FETCH_BLOGS()
             }
           ),

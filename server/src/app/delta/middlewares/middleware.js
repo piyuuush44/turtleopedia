@@ -1,7 +1,7 @@
 const path = require('path');
 const passport = require('passport');
 const multer = require('multer');
-const {v5} = require('uuid');
+const randomstring = require('randomstring');
 const multerGoogleStorage = require('multer-google-storage');
 const asyncHandler = require('express-async-handler');
 const Comments = require('../../../models/comments');
@@ -28,6 +28,26 @@ exports.checkPostById = asyncHandler(async (req, res, next) => {
   req.post = post;
   next();
 });
+
+/**
+ * This method checks if the post is available by slug url or not, and assigns
+ * the {@link req.post}
+ * If the post is not found,
+ * it throws an 204 ie no content.
+ *
+ */
+exports.checkPostBySlugUrl = asyncHandler(async (req, res, next) => {
+  const postId = req.params.slug_url;
+  const post = await Posts.findOne({slug_url: postId});
+  if (!post) {
+    return next(new ClientError({
+      message: `Blog Post not found for id: ${postId}`,
+    }));
+  }
+  req.post = post;
+  next();
+});
+
 
 /**
  * This method checks if the comment is available or not, and assigns
@@ -84,7 +104,7 @@ exports.uploadHandler = multer({
         keyFilename: process.env.GCS_KEYFILE,
         filename: (req, file, cb) => {
           const ext = path.extname(file.originalname);
-          const fileName = `images/${v5.DNS}${ext}`;
+          const fileName = `images/${randomstring.generate(7)}${ext}`;
 
           // assigning file name array to req object
           req.fileName = [

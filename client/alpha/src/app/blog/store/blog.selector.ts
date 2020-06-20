@@ -11,6 +11,6 @@ export const blogStateContentImageUrlSelector = createSelector(
   blogState, (state: State) => state.content_image_url
 )
 
-export const blogStateblogsSelector = createSelector(
+export const blogStateBlogsSelector = createSelector(
   blogState, (state: State) => state.blogs
 )

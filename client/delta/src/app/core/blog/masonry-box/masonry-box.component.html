@@ -3,15 +3,17 @@
     <div class="masonry-blog clearfix" *ngIf="data.recent_posts.length>=3">
       <div class="left-side">
         <div class="masonry-box post-media">
-          <img src="assets/upload/garden_cat_01.jpg" alt="" class="img-fluid">
+          <img src="{{data.recent_posts[0].image_url}}" alt="" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
-                <span class="bg-aqua"><a href="blog-category-01.html"
+                <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
                                          title="">{{data.recent_posts[0].category}}</a></span>
-                <h4><a href="garden-single.html" title="">{{data.recent_posts[0].title}}</a></h4>
-                <small><a href="garden-single.html" title="">{{data.recent_posts[0].createdAt}}</a></small>
-                <small><a href="#" title="">by Amanda</a></small>
+                <h4><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
+                       title="">{{data.recent_posts[0].title}}</a></h4>
+                <small><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
+                          title="">{{data.recent_posts[0].createdAt}}</a></small>
+                <small><a title="">by Amanda</a></small>
               </div><!-- end meta -->
             </div><!-- end shadow-desc -->
           </div><!-- end shadow -->
@@ -20,15 +22,17 @@
 
       <div class="center-side">
         <div class="masonry-box post-media">
-          <img src="assets/upload/garden_cat_02.jpg" alt="image not found" class="img-fluid">
+          <img src="{{data.recent_posts[1].image_url}}" alt="image not found" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
-                <span class="bg-aqua"><a href="blog-category-01.html"
+                <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
                                          title="">{{data.recent_posts[1].category}}</a></span>
-                <h4><a href="garden-single.html" title="">{{data.recent_posts[0].title}}</a></h4>
-                <small><a href="garden-single.html" title="">{{data.recent_posts[0].createdAt}}</a></small>
-                <small><a href="#" title="">by Amada</a></small>
+                <h4><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
+                       title="">{{data.recent_posts[1].title}}</a></h4>
+                <small><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
+                          title="">{{data.recent_posts[1].createdAt}}</a></small>
+                <small><a title="">by Amada</a></small>
               </div><!-- end meta -->
             </div><!-- end shadow-desc -->
           </div><!-- end shadow -->
@@ -37,16 +41,18 @@
 
       <div class="right-side hidden-md-down">
         <div class="masonry-box post-media">
-          <img src="assets/upload/garden_cat_03.jpg" alt="" class="img-fluid">
+          <img src="{{data.recent_posts[2].image_url}}" alt="" class="img-fluid">
           <div class="shadoweffect">
             <div class="shadow-desc">
               <div class="blog-meta">
-                <span class="bg-aqua"><a href="blog-category-01.html"
-                                         title="">{{data.recent_posts[0].category}}</a></span>
-                <h4><a href="garden-single.html" title="">{{data.recent_posts[0].title}}</a>
+                <span class="bg-aqua"><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
+                                         title="">{{data.recent_posts[2].category}}</a></span>
+                <h4><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
+                       title="">{{data.recent_posts[2].title}}</a>
                 </h4>
-                <small><a href="garden-single.html" title="">{{data.recent_posts[0].createdAt}}</a></small>
-                <small><a href="#" title="">by Jessica</a></small>
+                <small><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
+                          title="">{{data.recent_posts[2].createdAt}}</a></small>
+                <small><a title="">by Jessica</a></small>
               </div><!-- end meta -->
             </div><!-- end shadow-desc -->
           </div><!-- end shadow -->

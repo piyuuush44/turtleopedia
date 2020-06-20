@@ -31,4 +31,9 @@ export class BlogService {
     // We do not subscribe here! We let the resolver take care of that...
     return this.http.get(websiteDataEndpoint, {observe: 'response'});
   }
+
+  getPostBySlugUrl(slug_url): Observable<any> {
+    const websiteDataEndpoint = `http://localhost:3000/delta/post/url/${slug_url}`;
+    return this.http.get(websiteDataEndpoint, {observe: 'response'})
+  }
 }

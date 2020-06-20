@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from "../blog.service";
 import {Blog} from "../blog.model";
 import * as BlogActions from "../store/blog.actions";
@@ -18,6 +18,7 @@ export class SaveblogComponent implements OnInit {
 
   content = []
   contentImageUrl = null
+  previewContentImage = []
   imageUrl = null
   postImage: File = null
   contentImage: File = null
@@ -49,33 +50,36 @@ export class SaveblogComponent implements OnInit {
     this._store.pipe(select(blogStateContentImageUrlSelector)).subscribe(
       value => {
         this.contentImageUrl = value
-
       }
     )
   }
 
+  get blogFormControls() {
+    return this.blogForm.controls;
+  }
+
   onSubmit() {
+    if (this.blogForm.invalid) {
+      return;
+    }
     const value = this.blogForm.getRawValue();
-    console.log(value)
-    // this._store.dispatch(BlogActions.SAVE_BLOG(value));
+    this._store.dispatch(BlogActions.SAVE_BLOG({payload: value}));
   }
 
   addContent(value: string) {
-    this.currentIndex++;
     this.content.push({type: value})
   }
 
   createBlogForm(): FormGroup {
     return this._formBuilder.group({
-      _id: [this.blog._id],
-      title: [this.blog.title],
-      image_url: [this.blog.image_url],
+      title: [this.blog.title, Validators.required],
+      image_url: [this.blog.image_url, Validators.required],
       is_top: [this.blog.is_top],
-      slug_url: [this.blog.slug_url],
-      description: [this.blog.description],
-      categories: [this.blog.category],
+      slug_url: [this.blog.slug_url, Validators.required],
+      feature_content: [this.blog.feature_content, Validators.required],
+      category: [this.blog.category, Validators.required],
       tags: [this.blog.tags],
-      content: [this.blog.content]
+      content: [this.blog.content, Validators.required]
     });
   }
 
@@ -93,7 +97,6 @@ export class SaveblogComponent implements OnInit {
     const content = this.blogForm.controls['content'].value
     content.push(finalContent)
     this.blogForm.controls['content'].patchValue(content)
-    console.log(this.blogForm.getRawValue())
     alert('Added successfully!')
   }
 
@@ -114,26 +117,26 @@ export class SaveblogComponent implements OnInit {
     data.append('image', this.postImage);
 
     this._store.dispatch(BlogActions.TRY_UPLOAD_BLOG_PICTURES({payload: data}))
-
     //todo toast here
   }
 
   contentImageUpload(image: any, index: number) {
+    this.currentIndex = index;
     this.contentImage = image.target.files[0] as File;
     const mimeType = this.contentImage.type;
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
 
-    // const reader = new FileReader();
-    // reader.readAsDataURL(this.contentImage);
-    // reader.onload = () => {
-    //   this.previewPostImage = reader.result;
-    // };
+    const reader = new FileReader();
+    reader.readAsDataURL(this.contentImage);
+    reader.onload = () => {
+      this.previewContentImage.push(reader.result);
+    };
     const data = new FormData();
     data.append('image', this.contentImage);
 
-    this._store.dispatch(BlogActions.TRY_UPLOAD_BLOG_PICTURES({payload: data}))
+    this._store.dispatch(BlogActions.TRY_UPLOAD_BLOG_CONTENT_PICTURES({payload: data}))
   }
 
 }

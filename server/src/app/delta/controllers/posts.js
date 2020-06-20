@@ -56,6 +56,21 @@ exports.getPostById = async (req, res, next) => {
   }
 };
 
+exports.getPostBySlugUrl = async (req, res, next) => {
+  try {
+    const {post} = req;
+    post.no_of_views += 1;
+    await post.save();
+    return res.json({
+      result: {post: post},
+      message: `
+      Blog post with slug url ${req.params.slug_url} returned successfully`,
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
+};
+
 exports.getPosts = async (req, res, next) => {
   const limit = +req.query.limit || 10;
   const offset = +req.query.offset || 0;

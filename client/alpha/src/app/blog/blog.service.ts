@@ -6,7 +6,6 @@ import * as ServerEndpoints from '../shared/endpoints';
   providedIn: 'root'
 })
 export class BlogService {
-  routeParams: any;
   blog: any;
 
   /**
@@ -21,7 +20,7 @@ export class BlogService {
 
 
   getBlog() {
-    return this._httpClient.get('api/e-commerce-blogs/' + this.routeParams.id);
+    return this._httpClient.get(ServerEndpoints.GET_POST);
   }
 
   /**
@@ -31,18 +30,9 @@ export class BlogService {
    * @returns {Promise<any>}
    */
   saveBlog(blog) {
-    return this._httpClient.post('api/e-commerce-blogs/' + blog.id, blog);
+    return this._httpClient.post(ServerEndpoints.SAVE_POST, blog);
   }
 
-  /**
-   * Add blog
-   *
-   * @param blog
-   * @returns {Promise<any>}
-   */
-  addBlog(blog) {
-    return this._httpClient.post('api/e-commerce-blogs/', blog);
-  }
 
   uploadPicture(data) {
     return this._httpClient.post(ServerEndpoints.IMAGE_UPLOAD_URL, data, {observe: 'response'})

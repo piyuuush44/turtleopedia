@@ -30,8 +30,8 @@
               </div>
             </div>
             <ul class="inbox-list list-unstyled">
-              <li>
-                <a (click)="togglePostView()" style="cursor: pointer">
+              <li *ngFor="let blog of blogs; let i=index">
+                <a (click)="togglePostView(i)" style="cursor: pointer">
                   <div class="mail-checkbox">
                     <div class="custom-control custom-checkbox form-group">
                       <input type="checkbox" class="custom-control-input" id="mail1">
@@ -42,7 +42,7 @@
                     <img src="../../../assets/images/avatars/profile-image.png"> <span>William Adams</span>
                   </div>
                   <div class="mail-title">
-                    Nullam quis risus eget urna mollis ornare vel eu leo
+                    {{blog.title}}
                   </div>
                   <div class="mail-date">
                     2hrs
@@ -52,7 +52,13 @@
                   </div>
                 </a>
               </li>
+
             </ul>
+            <div *ngIf="blogs.length===0" class="mail-author text-center">
+              <span
+                class="text-capitalize text-center font-weight-bold">No posts found!        Please add some!      </span>
+
+            </div>
             <div class="inbox-pagination">
               <nav>
                 <ul class="pagination">
@@ -132,7 +138,7 @@
   <div class="mail-container">
     <div class="mail-header">
       <div class="mail-title">
-        Notes have been uploaded for next exam
+        {{selectedBlog.title}}
       </div>
     </div>
     <div class="mail-info">
@@ -183,7 +189,7 @@
     </div>
     <div class="mail-actions">
       <button class="btn btn-secondary">Edit</button>
-      <button class="btn btn-dark" (click)="togglePostView()">Hide</button>
+      <button class="btn btn-dark" (click)="togglePostView(null)">Hide</button>
       <button class="btn btn-danger">Delete</button>
     </div>
   </div>

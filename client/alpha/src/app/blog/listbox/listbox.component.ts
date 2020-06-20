@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import * as BlogActions from "../store/blog.actions";
-import {blogStateblogsSelector} from "../store/blog.selector";
-import {AppState} from "../../store/app.reducer";
+import {blogStateBlogsSelector} from "../store/blog.selector";
 import {select, Store} from "@ngrx/store";
 import {Blog} from "../blog.model";
+import {BlogState} from "../store/blog.reducer";
 
 @Component({
   selector: 'app-listbox',
@@ -13,21 +13,24 @@ import {Blog} from "../blog.model";
 export class ListboxComponent implements OnInit {
   showPost = false
   blogs: Blog[]
+  selectedBlog: Blog;
 
-  constructor(private _store: Store<AppState>) {
+  constructor(private _store: Store<BlogState>) {
   }
 
   ngOnInit(): void {
     this._store.dispatch(BlogActions.TRY_FETCH_BLOGS());
 
-    this._store.pipe(select(blogStateblogsSelector)).subscribe(
+    this._store.pipe(select(blogStateBlogsSelector)).subscribe(
       value => {
+        console.log(value)
         this.blogs = value
       }
     )
   }
 
-  togglePostView() {
+  togglePostView(index: number) {
+    this.selectedBlog = this.blogs[index];
     this.showPost = !this.showPost
   }
 }
