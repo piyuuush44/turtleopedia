@@ -1,5 +1,5 @@
 const auth = require('./auth');
-const dashboard=require('./dashboard');
+// const dashboard=require('./dashboard');
 
 module.exports = () => {
   let routes = [];

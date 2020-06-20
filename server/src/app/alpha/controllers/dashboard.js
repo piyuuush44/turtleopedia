@@ -4,10 +4,10 @@ const ClientError = require('../../../errors').client;
 exports.getDashboardData = async (req, res, next) => {
   try {
     return res.json({
-      result:{
+      result: {
         featuredPosts: featuredPosts.getFeaturedPosts(),
       },
-      message:'Posts returned Successfully!'
+      message: 'Posts returned Successfully!',
     });
   } catch (e) {
     return next(new ClientError({message: e.message}));
