@@ -130,7 +130,7 @@ exports.putUserActivate = async (req, res, next) => {
   try {
     const {user} = req;
     user.stage = 'approved';
-    user.stageHistory = stageHistory.push({
+    user.stage_history = stage_history.push({
       stage: 'approved',
       time: date.now(),
     });
@@ -143,7 +143,7 @@ exports.putUserDeactivate = async (req, res, next) => {
   try {
     const {user} = req;
     user.stage = 'disabled';
-    user.stageHistory = stageHistory.push({
+    user.stage_history = stage_history.push({
       stage: 'disabled',
       time: date.now(),
     });

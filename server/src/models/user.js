@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
     enum: constants.USER_STAGE_CATEGORIES,
     default: 'pending',
   },
-  stageHistory: {
+  stage_history: {
     type: Array,
     default: [],
   },
