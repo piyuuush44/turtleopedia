@@ -5,6 +5,8 @@ import {AuthRoutingModule} from "./auth-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {AuthService} from "./auth.service";
 import {CommonModule} from "@angular/common";
+import {AuthGuardService} from "./auth-guard.service";
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -12,10 +14,12 @@ import {CommonModule} from "@angular/common";
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ]
 })
 export class AuthModule {

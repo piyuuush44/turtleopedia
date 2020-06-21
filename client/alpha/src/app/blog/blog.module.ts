@@ -11,11 +11,10 @@ import {BlogReducer} from "./store/blog.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {BlogEffects} from "./store/blog.effects";
 
-
 @NgModule({
   declarations: [
     ListboxComponent,
-    SaveblogComponent
+    SaveblogComponent,
   ],
   imports: [
     BlogRoutingModule,

@@ -24,8 +24,6 @@ const blogReducer = createReducer(initialState,
   on(BlogActions.SAVE_BLOG_CONTENT_PICTURES, (state, action) => ({...state, content_image_url: action.payload})),
   on(BlogActions.SAVE_BLOG_PICTURES, (state, action) => ({...state, image_url: action.payload})),
   on(BlogActions.SAVE_BLOGS, (state, action) => {
-    console.log(action.payload)
-    console.log('hi')
     return ({...state, blogs: action.payload})
   }),
 )

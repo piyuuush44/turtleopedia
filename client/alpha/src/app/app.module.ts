@@ -15,7 +15,9 @@ import {reducers} from "./store/app.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {AuthEffects} from "./auth/store/auth.effects";
 import {SharedModule} from "./shared/shared.module";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/auth.interceptor";
+import {ResponseIntercept} from "./shared/response.intercept";
 
 @NgModule({
   declarations: [
@@ -36,7 +38,10 @@ import {HttpClientModule} from "@angular/common/http";
     EffectsModule.forRoot([AuthEffects]),
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ResponseIntercept, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
