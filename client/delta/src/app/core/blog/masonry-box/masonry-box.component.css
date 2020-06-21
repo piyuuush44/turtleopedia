@@ -2,3 +2,13 @@
   width: 100% !important;
   height: 50vh;
 }
+.carousel-indicators li{
+	background-color: cornflowerblue!important;
+	width: 20px;
+  	height: 10px;
+  	border-radius: 50%;
+}
+
+.carousel-indicators .active {
+	background-color: blue!important;
+}
