@@ -29,6 +29,23 @@ export class CoreEffects {
     )
   );
 
+  fetchPostDataBySlugUrl$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoreAction.TRY_FETCH_POST_BY_SLUG_URL),
+      map((data) => data.payload),
+      switchMap((data) =>
+        this.blogService.getPostBySlugUrl(data).pipe(
+          map((response: HttpResponse<any>) => {
+              return CoreAction.SAVE_POST({payload: response.body.result.post})
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
   fetchFilteredPosts = createEffect(() =>
     this.actions$.pipe(
       ofType(CoreAction.TRY_FETCH_FILTER_POSTS),

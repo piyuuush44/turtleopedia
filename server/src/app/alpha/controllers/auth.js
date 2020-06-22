@@ -25,7 +25,7 @@ exports.postLogin = async (req, res, next) => {
 
     const token = authUtils.signJwt(
         {id: user._id},
-        process.env.ALPHA_JWT_SECRET_KEY,
+        process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
     return res.json({

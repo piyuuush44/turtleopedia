@@ -16,7 +16,7 @@ const routes: Routes = [
         path: 'home', component: HomeComponent
       },
       {
-        path: 'singleBlog', component: SingleviewComponent
+        path: 'singleBlog/:slug_url', component: SingleviewComponent
       },
       {
         path: 'category/:category_id', component: CategoriesComponent

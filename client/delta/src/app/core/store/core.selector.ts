@@ -11,3 +11,7 @@ export const coreStateWebsiteDataSelector = createSelector(
 export const coreStateFilterPostDataSelector = createSelector(
   coreState, (state: CoreState) => state.fitlerPosts
 )
+
+export const coreStateCurrentPostDataSelector = createSelector(
+  coreState, (state: CoreState) => state.currentPost
+)

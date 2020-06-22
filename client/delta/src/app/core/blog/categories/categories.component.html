@@ -8,7 +8,7 @@
               <div class="col-md-4">
                 <div class="post-media">
                   <a routerLink="/blog/home" title="">
-                    <img src="assets/upload/garden_sq_01.jpg" alt="" class="img-fluid">
+                    <img src="{{post.image_url}}" alt="" class="img-fluid">
                     <div class="hovereffect"></div>
                   </a>
                 </div><!-- end media -->
@@ -17,9 +17,7 @@
               <div class="blog-meta big-meta col-md-8">
                 <span class="bg-aqua"><a routerLink="/blog/home" title="">{{post.category}}</a></span>
                 <h4><a routerLink="/blog/home" title="">{{post.title}}</a></h4>
-                <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor.
-                  Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor
-                  odio.</p>
+                <p>{{post.feature_content}}</p>
                 <small><a routerLink="/blog/home" title=""><i class="fa fa-eye"></i> 1887</a></small>
                 <small><a routerLink="/blog/home" title="">{{post.createdAt}}</a></small>
                 <small><a href="#" title="">by Matilda</a></small>
@@ -44,7 +42,7 @@
 
         <hr class="invis">
 
-        <div class="row">
+        <div class="row" *ngIf="posts.results.length>5">
           <div class="col-md-12">
             <nav aria-label="Page navigation">
               <ul class="pagination justify-content-start">

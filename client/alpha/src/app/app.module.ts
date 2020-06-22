@@ -1,73 +1,48 @@
-import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterModule, Routes} from '@angular/router';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {TranslateModule} from '@ngx-translate/core';
-import 'hammerjs';
+import {NgModule} from '@angular/core';
 
-import {FuseModule} from '@fuse/fuse.module';
-import {FuseSharedModule} from '@fuse/shared.module';
-import {FuseProgressBarModule, FuseSidebarModule, FuseThemeOptionsModule} from '@fuse/components';
-
-import {fuseConfig} from 'app/fuse-config';
-
-import {AppComponent} from 'app/app.component';
-import {LayoutModule} from 'app/layout/layout.module';
-import {FakeDbService} from "./fake-db/fake-db.service";
-import {InMemoryWebApiModule} from "angular-in-memory-web-api";
-
-const appRoutes: Routes = [
-    {
-        path: '', redirectTo: 'apps/dashboards/analytics', pathMatch: 'full'
-    },
-    {
-        path: 'apps',
-        loadChildren: () => import( './main/main.module').then(module => module.MainModule)
-    },
-    {
-        path: '**',
-        redirectTo: 'sample'
-    }
-];
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {SidebarComponent} from './core/sidebar/sidebar.component';
+import {LoaderComponent} from './core/loader/loader.component';
+import {NavbarComponent} from './core/navbar/navbar.component';
+import {HeaderComponent} from './core/header/header.component';
+import {FooterComponent} from './core/footer/footer.component';
+import {HomeComponent} from './core/home/home.component';
+import {AuthModule} from "./auth/auth.module";
+import {StoreModule} from "@ngrx/store";
+import {reducers} from "./store/app.reducer";
+import {EffectsModule} from "@ngrx/effects";
+import {AuthEffects} from "./auth/store/auth.effects";
+import {SharedModule} from "./shared/shared.module";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./shared/auth.interceptor";
+import {ResponseIntercept} from "./shared/response.intercept";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-    ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-
-        TranslateModule.forRoot(),
-        InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay: 0,
-            passThruUnknownUrl: true
-        }),
-        // Material moment date module
-        MatMomentDateModule,
-        // Material
-        MatButtonModule,
-        MatIconModule,
-
-        // Fuse modules
-        FuseModule.forRoot(fuseConfig),
-        FuseProgressBarModule,
-        FuseSharedModule,
-        FuseSidebarModule,
-        FuseThemeOptionsModule,
-
-        // App modules
-        LayoutModule,
-    ],
-    bootstrap: [
-        AppComponent
-    ]
+  declarations: [
+    AppComponent,
+    SidebarComponent,
+    LoaderComponent,
+    NavbarComponent,
+    HeaderComponent,
+    FooterComponent,
+    HomeComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    AuthModule,
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects]),
+    SharedModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ResponseIntercept, multi: true},
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -11,6 +11,7 @@ module.exports = {
           )
               .required(),
           content: Joi.array().required(),
+          tags: Joi.array(),
           is_top: Joi.boolean(),
           image_url: Joi.string(),
           slug_url: Joi.string(),
@@ -25,6 +26,7 @@ module.exports = {
               ...constants.BLOG_POST_CATEGORIES,
           ).required(),
           content: Joi.array().required(),
+          tags: Joi.array(),
           is_top: Joi.boolean(),
           image_url: Joi.string(),
         }),
@@ -35,6 +37,11 @@ module.exports = {
   getPostById: {
     params: {
       post_id: Joi.string().required(),
+    },
+  },
+  getPostBySlugUrl: {
+    params: {
+      slug_url: Joi.string().required(),
     },
   },
   deletePostById: {

@@ -15,6 +15,7 @@ exports.postPosts = async (req, res, next) => {
       image_url,
       slug_url,
       feature_content,
+      tags,
     } = req.body;
     const isTop = is_top ? is_top : false;
     const imageUrl = image_url ? image_url : '';
@@ -27,6 +28,7 @@ exports.postPosts = async (req, res, next) => {
     post.image_url = imageUrl;
     post.slug_url = slug_url;
     post.feature_content = feature_content;
+    post.tags = tags;
 
     await post.save();
 
@@ -48,6 +50,21 @@ exports.getPostById = async (req, res, next) => {
     return res.json({
       result: {post: post},
       message: `Blog post with id ${req.params.post_id} returned successfully`,
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
+};
+
+exports.getPostBySlugUrl = async (req, res, next) => {
+  try {
+    const {post} = req;
+    post.no_of_views += 1;
+    await post.save();
+    return res.json({
+      result: {post: post},
+      message: `
+      Blog post with slug url ${req.params.slug_url} returned successfully`,
     });
   } catch (e) {
     return next(new ClientError({message: e.message}));

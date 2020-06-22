@@ -1,0 +1,29 @@
+<div class="connect-container align-content-stretch d-flex flex-wrap">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="auth-form">
+          <div class="row">
+            <div class="col">
+              <div class="logo-box">Connect</div>
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <input type="email" formControlName="email" class="form-control" id="email1"
+                         placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1"
+                         placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block btn-submit">Sign Up</button>
+                <div class="auth-options">
+                  <a routerLink="/login" class="forgot-link">Already have an account?</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -13,7 +13,7 @@
     <h2 class="widget-title">Recent Posts</h2>
     <div class="blog-list-widget" *ngFor="let post of data.recent_posts | slice:0:5 ">
       <div class="list-group">
-        <a href="garden-single.html"
+        <a routerLink="/blog/singleBlog/{{post.slug_url}}"
            class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="w-100 justify-content-between">
             <img src="{{post.image_url}}" alt="" class="img-fluid float-left">
@@ -26,7 +26,7 @@
     </div><!-- end blog-list -->
   </div><!-- end widget -->
 
-  <div class="widget">
+  <div class="widget" *ngIf="false">
     <h2 class="widget-title">Advertising</h2>
     <div class="banner-spot clearfix">
       <div class="banner-img">
@@ -35,7 +35,7 @@
     </div><!-- end banner -->
   </div><!-- end widget -->
 
-  <div class="widget">
+  <div class="widget" *ngIf="false">
     <h2 class="widget-title">Instagram Feed</h2>
     <div class="instagram-wrapper clearfix">
       <a href="#"><img src="assets/upload/garden_sq_01.jpg" alt="" class="img-fluid"></a>
