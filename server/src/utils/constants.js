@@ -3,11 +3,9 @@ const PHONE_REGEX = /^\+[0-9]{1,4}[0-9]{10}$/;
 const BLOG_POST_CATEGORIES = ['technology', 'lifestyle', 'entertainment'];
 const DELTA_POSTS_PAGINATED_URL = 'http://delta/posts?';
 const DELTA_CATEGORY_PAGINATED_URL = 'http://delta/filterPosts?';
-<<<<<<< HEAD
 const USER_STAGE_CATEGORIES = ['pending', 'approved', 'disabled'];
-=======
 const GCS_URL = 'https://storage.cloud.google.com';
->>>>>>> dev
+
 
 module.exports = {
   PHONE_REGEX: PHONE_REGEX,
@@ -15,9 +13,6 @@ module.exports = {
   BLOG_POST_CATEGORIES: BLOG_POST_CATEGORIES,
   DELTA_POSTS_PAGINATED_URL: DELTA_POSTS_PAGINATED_URL,
   DELTA_CATEGORY_PAGINATED_URL: DELTA_CATEGORY_PAGINATED_URL,
-<<<<<<< HEAD
   USER_STAGE_CATEGORIES: USER_STAGE_CATEGORIES,
-=======
   GCS_URL: GCS_URL,
->>>>>>> dev
 };
