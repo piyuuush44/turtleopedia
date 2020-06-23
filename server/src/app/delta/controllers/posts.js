@@ -1,17 +1,23 @@
-const Comments = require('../models/comments');
-const Posts = require('../models/posts');
+const Comments = require('../../../models/comments');
+const Posts = require('../../../models/posts');
 const ClientError = require('../../../errors').client;
 const controllerUtils = require('../../../utils/controller_utils');
 const constants = require('../../../utils/constants');
-
+/* eslint-disable camelcase */
 exports.postPosts = async (req, res, next) => {
   try {
     // const {user} = req;
-    // eslint-disable-next-line camelcase
-    const {title, category, content, is_top, image_url} = req.body;
-    // eslint-disable-next-line camelcase
+    const {
+      title,
+      category,
+      content,
+      is_top,
+      image_url,
+      slug_url,
+      feature_content,
+      tags,
+    } = req.body;
     const isTop = is_top ? is_top : false;
-    // eslint-disable-next-line camelcase
     const imageUrl = image_url ? image_url : '';
 
     const post = new Posts();
@@ -20,6 +26,9 @@ exports.postPosts = async (req, res, next) => {
     post.content = content;
     post.is_top = isTop;
     post.image_url = imageUrl;
+    post.slug_url = slug_url;
+    post.feature_content = feature_content;
+    post.tags = tags;
 
     await post.save();
 
@@ -31,13 +40,35 @@ exports.postPosts = async (req, res, next) => {
     return next(new ClientError({message: e.message}));
   }
 };
+/* eslint-enable camelcase */
 
 exports.getPostById = async (req, res, next) => {
-  const {post} = req;
-  return res.json({
-    result: {post: post},
-    message: `Blog post with id ${req.params.post_id} returned successfully`,
-  });
+  try {
+    const {post} = req;
+    post.no_of_views += 1;
+    await post.save();
+    return res.json({
+      result: {post: post},
+      message: `Blog post with id ${req.params.post_id} returned successfully`,
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
+};
+
+exports.getPostBySlugUrl = async (req, res, next) => {
+  try {
+    const {post} = req;
+    post.no_of_views += 1;
+    await post.save();
+    return res.json({
+      result: {post: post},
+      message: `
+      Blog post with slug url ${req.params.slug_url} returned successfully`,
+    });
+  } catch (e) {
+    return next(new ClientError({message: e.message}));
+  }
 };
 
 exports.getPosts = async (req, res, next) => {
@@ -124,15 +155,28 @@ exports.deleteCommentById = async (req, res, next) => {
   });
 };
 
-exports.postFilterPost = async (req, res, next) => {
-  const {category} = req.body;
-  const query = {};
-  if (category) {
-    query['category'] = category;
-  }
-  const posts = await Posts.find(query);
-  return res.json({
-    result: {posts: posts},
-    message: `Blog Posts with category ${category} returned successfully`,
-  });
+exports.getFilterPost = async (req, res, next) => {
+  const limit = +req.query.limit || 10;
+  const offset = +req.query.offset || 0;
+  const {category} = req.query;
+  const categoryArray = category ? category.split(',') :
+        constants.BLOG_POST_CATEGORIES;
+  const posts = await Posts.aggregate(
+      [
+        {
+          $match: {
+            category: {
+              $in: categoryArray,
+            },
+          },
+        },
+      ],
+  ).skip(offset).limit(limit);
+  const count = await Posts.count();
+  return res.json(controllerUtils.getPaginatedResponse(
+      posts,
+      count,
+      req.query,
+      constants.DELTA_CATEGORY_PAGINATED_URL,
+  ));
 };

@@ -23,6 +23,15 @@ module.exports = [
   },
   {
     method: 'get',
+    route: '/post/url/:slug_url',
+    controller: Controller.getPostBySlugUrl,
+    middlewares: [
+      Middleware.checkPostBySlugUrl,
+    ],
+    schema_validation: Schema.getPostBySlugUrl,
+  },
+  {
+    method: 'get',
     route: '/posts',
     controller: Controller.getPosts,
   },
@@ -73,9 +82,9 @@ module.exports = [
     schema_validation: Schema.deleteCommentById,
   },
   {
-    method: 'post',
+    method: 'get',
     route: '/filterPosts',
-    controller: Controller.postFilterPost,
-    schema_validation: Schema.postFilterPost,
+    controller: Controller.getFilterPost,
+    schema_validation: Schema.getFilterPost,
   },
 ];

@@ -1,5 +1,5 @@
 import {Action} from '@ngrx/store';
-import {ProfileModel} from '../../core/model/profile.model';
+// import {WebdataModel} from '../../core/model/profile.model';
 
 export const FETCH_SIGNUP_FIELDS = 'FETCH_SIGNUP_FIELDS';
 export const TRY_SIGNIN = 'TRY_SIGNIN';
@@ -45,12 +45,12 @@ export class SendOtp implements Action {
 
 }
 
-export class SetProfile implements Action {
-  readonly type = SET_PROFILE;
-
-  constructor(public payload: ProfileModel) {
-  }
-}
+// export class SetProfile implements Action {
+//   readonly type = SET_PROFILE;
+//
+//   constructor(public payload: WebdataModel) {
+//   }
+// }
 
 export class TryProfileEdit implements Action {
   readonly type = TRY_PROFILE_EDIT;
@@ -103,7 +103,7 @@ export type AuthActions =
   UploadImages |
   SetPassword |
   VerifyOtp | SendOtp |
-  SetProfile |
+  // SetProfile |
   TryProfileEdit |
   FetchSignupFields |
   TrySignUp |

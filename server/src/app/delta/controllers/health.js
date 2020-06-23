@@ -1,7 +1,5 @@
-const constants = require('../../../utils/constants');
-const utils = require('../../../utils/utils');
-
+const logger = require('../../../config/logger');
 exports.get = async (req, res) => {
-  console.log(utils.convertArrayKeyToString(constants.BLOG_POST_CATEGORIES));
-  return res.status(200).json('hello');
+  logger.info(process.env);
+  return res.status(200).json('Everything working really good......Great!!');
 };

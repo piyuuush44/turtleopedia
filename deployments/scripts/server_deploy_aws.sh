@@ -37,7 +37,7 @@ docker push "${ECR_URL}/${ECR_IMAGE_NAME}:latest-${CI_ENVIRONMENT_SLUG}"
 # definition with that same name and uses it here. Note that we also define CPU and memory
 # requirements here and give it a JSON file describing our task definition that I've saved
 # to my repository in a aws/ directory.
-aws ecs register-task-definition --family ${ECS_TASK_DEFINITION_NAME}-${CI_ENVIRONMENT_SLUG}	 --requires-compatibilities FARGATE --cpu ${ECS_CPU_SHARES} --memory ${ECS_MEMORY} --cli-input-json file:///$PROJECT_ROOT/deployments/aws/instanthome_task_definition-${CI_ENVIRONMENT_SLUG}.json  --region $AWS_REGION
+aws ecs register-task-definition --family ${ECS_TASK_DEFINITION_NAME}-${CI_ENVIRONMENT_SLUG} --requires-compatibilities FARGATE --cpu ${ECS_CPU_SHARES} --memory ${ECS_MEMORY} --cli-input-json file:///$PROJECT_ROOT/deployments/aws/instanthome_task_definition-${CI_ENVIRONMENT_SLUG}.json --region $AWS_REGION
 
 # Tell our service to use the latest version of task definition.
 aws ecs update-service --cluster instanthome-${CI_ENVIRONMENT_SLUG} --service instanthome --task-definition ${ECS_TASK_DEFINITION_NAME}-${CI_ENVIRONMENT_SLUG} --region $AWS_REGION

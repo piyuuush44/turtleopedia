@@ -1,17 +1,17 @@
 const asyncHandler = require('express-async-handler');
 const {celebrate} = require('celebrate');
-const balluRoutes = require('./ballu/routes')();
 const heliumRoutes = require('./helium/routes')();
 const neonRoutes = require('./neon/routes')();
 const deltaRoutes = require('./delta/routes')();
+const alphaRoutes = require('./alpha/routes')();
 
 module.exports = (app) => {
   let routes = [];
 
-  routes = routes.concat(balluRoutes);
   routes = routes.concat(heliumRoutes);
   routes = routes.concat(neonRoutes);
   routes = routes.concat(deltaRoutes);
+  routes = routes.concat(alphaRoutes);
 
   routes.forEach((r) => {
     const args = [];

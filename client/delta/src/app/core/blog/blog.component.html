@@ -8,7 +8,8 @@
         <router-outlet></router-outlet>
       </div><!-- end col -->
 
-      <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" *ngIf="router.url !== '/blog/contact'">
+      <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"
+           *ngIf="router.url !== '/blog/contact' && router.url !== '/blog/about-us'">
         <app-sidebar></app-sidebar>
       </div><!-- end col -->
     </div><!-- end row -->

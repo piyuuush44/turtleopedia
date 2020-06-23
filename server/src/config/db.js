@@ -7,16 +7,16 @@ const {
   MONGO_PASSWORD,
   MONGO_HOSTNAME,
   MONGO_PORT,
-  MONGO_DB_HELIUM,
+  MONGO_DB_DELTA,
   MONGO_URL_SUBSTRING,
 } = process.env;
 
 
 let url;
 if (process.env.NODE_ENV === 'local') {
-  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB_HELIUM}?authSource=admin`;
+  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB_DELTA}?authSource=admin`;
 } else {
-  url = `${MONGO_URL_SUBSTRING}://${MONGO_USERNAME}:${MONGO_PASSWORD}@${MONGO_HOSTNAME}/${MONGO_DB_HELIUM}`;
+  url = `${MONGO_URL_SUBSTRING}/${MONGO_DB_DELTA}`;
 }
 
 logger.info(url);
