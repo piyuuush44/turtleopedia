@@ -99,9 +99,9 @@ exports.checkUserExists = asyncHandler(async (req, res, next) => {
 exports.uploadHandler = multer({
   storage: multerGoogleStorage.storageEngine(
       {
-        projectId: process.env.GCLOUD_PROJECT,
-        bucket: process.env.GCS_BUCKET,
-        keyFilename: process.env.GCS_KEYFILE,
+        projectId: process.env.GCLOUD_PROJECT || 'turtleopedia',
+        bucket: process.env.GCS_BUCKET || 'turtleopedia_assets_production',
+        keyFilename: process.env.GCS_KEYFILE || 'keyfile.json',
         filename: (req, file, cb) => {
           const ext = path.extname(file.originalname);
           const fileName = `images/${randomstring.generate(7)}${ext}`;

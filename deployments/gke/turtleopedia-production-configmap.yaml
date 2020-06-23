@@ -10,10 +10,10 @@ data:
   MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia-production-ba3gv.gcp.mongodb.net
   NODE_ENV: production
   PORT: "3000"
-  GCS_BUCKET: turtleopedia_assets_production
-  GCLOUD_PROJECT: turtleopedia
-  GCS_KEYFILE: keyfile.json
-  TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
+  GCS_BUCKET: "turtleopedia_assets_production"
+  GCLOUD_PROJECT: "turtleopedia"
+  GCS_KEYFILE: "keyfile.json"
+  TURTLEOPEDIA_JWT_SECRET_KEY: "TURTLEOPEDIA_JWT_SECRET_KEY_LATEST"
 
 kind: ConfigMap
 metadata:
@@ -25,6 +25,5 @@ metadata:
     app: turtleopedia-production
   name: turtleopedia-production-config-61cb
   namespace: turtleopedia-production
-  resourceVersion: "162414"
   selfLink: /api/v1/namespaces/turtleopedia-production/configmaps/turtleopedia-production-config-61cb
   uid: 587a2b65-a8e9-11ea-a07f-42010aa00091
