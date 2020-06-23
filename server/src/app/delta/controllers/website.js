@@ -54,7 +54,6 @@ exports.postContactUs = async (req, res, next) => {
 };
 
 exports.postUploadFiles = async (req, res, next) => {
-
   return res.json({
     result: {
       fileUrl: req.fileName,
