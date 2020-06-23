@@ -13,7 +13,7 @@ data:
   GCS_BUCKET: "turtleopedia_assets_production"
   GCLOUD_PROJECT: "turtleopedia"
   GCS_KEYFILE: "keyfile.json"
-  TURTLEOPEDIA_JWT_SECRET_KEY: "TURTLEOPEDIA_JWT_SECRET_KEY_LATEST"
+  TURTLEOPEDIA_JWT_SECRET_KEY: "TURTLEOPEDIA_JWT_SECRET_KEY_HI"
 
 kind: ConfigMap
 metadata:
