@@ -1,5 +1,6 @@
 const WebsiteController = require('../controllers/website');
-const Schema=require('../schema/website');
+const Schema = require('../schema/website');
+const middlewares = require('../middlewares/middleware');
 
 module.exports = [
   {
@@ -12,5 +13,19 @@ module.exports = [
     route: '/contactus',
     controller: WebsiteController.postContactUs,
     schema_validation: Schema.postContactUs,
+  },
+  {
+    method: 'post',
+    route: '/postUploadFiles',
+    controller: WebsiteController.postUploadFiles,
+    middlewares: [
+      middlewares.uploadHandler.single('image'),
+    ],
+  },
+  {
+    method: 'post',
+    route: '/subscribe',
+    controller: WebsiteController.postEmailSubscription,
+    schema_validation: Schema.postEmailSubscription,
   },
 ];

@@ -23,6 +23,15 @@ module.exports = [
   },
   {
     method: 'get',
+    route: '/post/url/:slug_url',
+    controller: Controller.getPostBySlugUrl,
+    middlewares: [
+      Middleware.checkPostBySlugUrl,
+    ],
+    schema_validation: Schema.getPostBySlugUrl,
+  },
+  {
+    method: 'get',
     route: '/posts',
     controller: Controller.getPosts,
   },

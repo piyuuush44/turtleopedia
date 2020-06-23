@@ -1,0 +1,311 @@
+<div class="page-content">
+  <div class="page-info">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Blog Box</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Save</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="main-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title">
+          <p class="page-desc">Examples and usage guidelines for form control styles, layout options, and custom
+            components for creating a wide variety of forms.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Blog Title</h5>
+            <form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+
+                      <div class="form-group">
+                        <label>Blog Title</label>
+                        <input type="text" class="form-control" formControlName="title"
+                               required placeholder="Enter your blog title">
+                        <span class="text-danger"
+                              *ngIf="(blogFormControls.title.touched ) && blogFormControls.title.errors?.required">
+                                Name is required
+                            </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Enter Description</label>
+                        <textarea class="form-control" rows="2" placeholder="Enter what this blog is about ?"
+                                  required formControlName="feature_content"></textarea>
+                        <span class="text-danger"
+                              *ngIf="(blogFormControls.feature_content.touched ) && blogFormControls.feature_content.errors?.required">
+                                Description is required
+                            </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Blog Slug Url</label>
+                        <input type="text" class="form-control" formControlName="slug_url"
+                               required placeholder="Enter your blog slug url">
+                        <span class="text-danger"
+                              *ngIf="(blogFormControls.slug_url.touched ) && blogFormControls.slug_url.errors?.required">
+                                Slug url is required
+                            </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="form-group">
+                          <label>Blog Image</label>
+                          <div class="file-field">
+                            <div class="z-depth-1-half mb-4">
+                              <img [src]="previewPostImage" class="img-fluid"
+                                   alt="example placeholder">
+                            </div>
+                            <div class="">
+                              <div class="btn btn-mdb-color btn-rounded float-left">
+                                <span>Choose file</span>
+                                <input type="file" (change)="postImageUpload($event)">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Category</label>
+                        <select formControlName="category" class="form-control custom-select">
+                          <option value="entertainment" selected>Entertainment</option>
+                          <option value="luxury">Luxury</option>
+                          <option value="technology">Technology</option>
+                          <option value="lifestyle">Lifestyle</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="exampleFormControlSelect2">Tags</label>
+                        <select formControlName="tags" multiple class="form-control custom-select"
+                                id="exampleFormControlSelect2">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl col-md col-sm">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <select #selectBox class="custom-select form-control">
+                            <option selected="">Open this select menu</option>
+                            <option value="Text">Text</option>
+                            <option value="Code">Code</option>
+                            <option value="Image">Image</option>
+                            <option value="ImageText">Image + Text</option>
+                          </select>
+                          <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button" id="button-addon1"
+                                    (click)="addContent(selectBox.value)">
+                              Add Content
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngFor="let cont of content; let i=index">
+                <div class="col-xl col-md col-sm" *ngIf="cont.type==='Text'">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Enter Content</label>
+                        <textarea class="form-control" rows="5" #textContent></textarea>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary rounded-pill"
+                                  (click)="addFormContent(textContent.value, i)" [disabled]="cont.addButton">Add
+                          </button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl col-md col-sm" *ngIf="cont.type==='Code'">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Enter Code</label>
+                        <textarea class="form-control" #code rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary rounded-pill"
+                                  (click)="addFormContent(code.value, i)" [disabled]="cont.addButton">Add
+                          </button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl col-md col-sm" *ngIf="cont.type==='Image'">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="form-group">
+                        <div class="file-field">
+                          <div class="z-depth-1-half mb-4">
+                            <img
+                              src="{{previewContentImage[i] ? previewContentImage[i] : 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg'}}"
+                              class="img-fluid"
+                              alt="example placeholder">
+                          </div>
+                          <div class="">
+                            <div class="btn btn-mdb-color btn-rounded float-left">
+                              <span>Choose file</span>
+                              <input type="file" (change)="contentImageUpload($event, i)">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary rounded-pill"
+                                  (click)="addFormContent(null, i)" [disabled]="cont.addButton">Add
+                          </button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl col-md col-sm" *ngIf="cont.type==='ImageText'">
+                  <div class="card">
+                    <div class="card-body row">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <div class="file-field">
+                            <div class="z-depth-1-half mb-4">
+                              <img
+                                src="{{previewContentImage[i] ? previewContentImage[i] : 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg'}}"
+                                class="img-fluid"
+                                alt="example placeholder">
+                            </div>
+                            <div class="">
+                              <div class="btn btn-mdb-color btn-rounded float-left">
+                                <span>Choose file</span>
+                                <input type="file" (change)="contentImageUpload($event, i)">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-9">
+                        <div class="form-group">
+                          <label>Enter Text</label>
+                          <textarea class="form-control" #imageTextField rows="3"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-primary rounded-pill"
+                                  (click)="addFormContent(imageTextField.value, i)" [disabled]="cont.addButton">Add
+                          </button>
+                        </div>
+                        <div class="col-md-6">
+                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Top</h5>
+                      <div class="custom-control custom-switch">
+                        <input type="checkbox" formControlName="is_top" class="custom-control-input">
+                        <label class="custom-control-label">Show this into top posts ?</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" [disabled]="!blogForm.value" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -19,7 +19,24 @@ export class CoreEffects {
       switchMap(() =>
         this.blogService.getWebsiteData().pipe(
           map((response: HttpResponse<any>) => {
-              return CoreAction.SAVE_WEBSITE_DATA(response.body.result.data)
+              return CoreAction.SAVE_WEBSITE_DATA({payload: response.body.result.data})
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  fetchPostDataBySlugUrl$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CoreAction.TRY_FETCH_POST_BY_SLUG_URL),
+      map((data) => data.payload),
+      switchMap((data) =>
+        this.blogService.getPostBySlugUrl(data).pipe(
+          map((response: HttpResponse<any>) => {
+              return CoreAction.SAVE_POST({payload: response.body.result.post})
             }
           ),
           catchError(error => EMPTY
@@ -37,9 +54,9 @@ export class CoreEffects {
         return data['url']
       }),
       switchMap((url) =>
-        this.blogService.getFilteredPosts(url).pipe(
+        this.blogService.getFilteredPosts().pipe(
           map((response: HttpResponse<any>) => {
-            return CoreAction.SAVE_FILTER_POSTS_DATA(response.body)
+            return CoreAction.SAVE_FILTER_POSTS_DATA({payload: response.body})
           })
         )
       )

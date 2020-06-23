@@ -46,6 +46,7 @@ describe('getPostById', () => {
         post.title = 'hi';
         post.category = 'technology';
         post.content = [];
+       // post.no_of_views=post.no_of_views;
 
         const posts = await post.save();
 
@@ -53,9 +54,10 @@ describe('getPostById', () => {
 
         const response = await server.get(url);
 
-        // console.log(response.body);
+      //   console.log(response.body);
         expect(response.status)
             .toEqual(200);
+        expect(response.body.result.post.no_of_views).toEqual((posts.no_of_views+1));    
         expect(response.body.result.post._id).toMatch(posts._id.toString());
         expect(response.body.result.post.title).toEqual(posts.title);
         expect(response.body.result.post.category).toEqual(posts.category);

@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import * as endPoints from '../../shared/serverEndpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,11 @@ export class BlogService {
   }
 
   getWebsiteData(): Observable<any> {
-    const websiteDataEndpoint = "http://delta/webdata";
-
     // We do not subscribe here! We let the resolver take care of that...
-    return this.http.get(websiteDataEndpoint, {observe: 'response'});
+    return this.http.get(endPoints.WEBSITE_DATA, {observe: 'response'});
   }
 
-  getFilteredPosts(websiteDataEndpoint): Observable<any> {
-    // let websiteDataEndpoint = "http://delta/filterPosts";
+  getFilteredPosts(): Observable<any> {
     // if (categories) {
     //   websiteDataEndpoint += '?category=' + categories
     // }
@@ -29,6 +27,11 @@ export class BlogService {
     // }
 
     // We do not subscribe here! We let the resolver take care of that...
-    return this.http.get(websiteDataEndpoint, {observe: 'response'});
+    return this.http.get(endPoints.FILTER_POSTS, {observe: 'response'});
+  }
+
+  getPostBySlugUrl(slug_url): Observable<any> {
+    const websiteDataEndpoint = `${endPoints.POST_SLUG_URL}/${slug_url}`;
+    return this.http.get(websiteDataEndpoint, {observe: 'response'})
   }
 }

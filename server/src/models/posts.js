@@ -12,10 +12,15 @@ const schema = new mongoose.Schema({
     default: false,
   },
   image_url: {
-    type: Array,
+    type: String,
   },
   content: {
     type: Array,
+    required: true,
+  },
+  no_of_views: {
+    type: Number,
+    default: 0,
     required: true,
   },
   slug_url: {
