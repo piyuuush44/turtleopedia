@@ -5,11 +5,11 @@ import {Posts} from "../model/posts.model";
 
 export const SAVE_WEBSITE_DATA = createAction(
   'SAVE_WEBSITE_DATA',
-  props<WebdataModel>()
+  props<{ payload: WebdataModel }>()
 );
 export const SAVE_FILTER_POSTS_DATA = createAction(
   'SAVE_FILTER_POSTS_DATA',
-  props<FilterPostModel>()
+  props<{ payload: FilterPostModel }>()
 );
 
 export const TRY_FETCH_WEBSITE_DATA = createAction(

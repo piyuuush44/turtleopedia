@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://delta/'
+  apiUrl: 'http://34.93.238.173'
 };
 
 /*

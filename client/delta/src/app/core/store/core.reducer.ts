@@ -17,8 +17,8 @@ const initialState: CoreState = {
 };
 
 const reducer = createReducer(initialState,
-  on(CoreActions.SAVE_WEBSITE_DATA, (state, action) => ({...state, data: action})),
-  on(CoreActions.SAVE_FILTER_POSTS_DATA, ((state, action) => ({...state, fitlerPosts: action}))),
+  on(CoreActions.SAVE_WEBSITE_DATA, (state, action) => ({...state, data: action.payload})),
+  on(CoreActions.SAVE_FILTER_POSTS_DATA, ((state, action) => ({...state, fitlerPosts: action.payload}))),
   on(CoreActions.SAVE_POST, ((state, action) => ({...state, currentPost: action.payload}))),
 )
 
