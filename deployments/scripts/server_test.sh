@@ -25,6 +25,10 @@ export MONGO_DB_HELIUM=helium
 export MONGO_DB_DELTA=delta
 export DELTA_JWT_SECRET_KEY=DELTA_JWT_SECRET_KEY
 export ALPHA_JWT_SECRET_KEY=ALPHA_JWT_SECRET_KEY
+export GCS_BUCKET=turtleopedia_assets_dev
+export GCLOUD_PROJECT=turtleopedia
+export GCS_KEYFILE=keyfile.json
+export TURTLEOPEDIA_JWT_SECRET_KEY=TURTLEOPEDIA_JWT_SECRET_KEY
 
 # Run tests
 print_start 'Running the unit tests'
