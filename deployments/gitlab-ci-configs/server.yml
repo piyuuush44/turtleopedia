@@ -41,7 +41,7 @@ lint_server:
 package_server:production:
   extends: .package_server
   only:
-    - dev
+    - master
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
