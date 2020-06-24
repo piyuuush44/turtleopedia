@@ -13,6 +13,7 @@ pip install awscli
 
 # Set the cache-control max-age to 1 year for all files.
 
+echo "Printing access keys"
 echo "$AWS_ACCESS_KEY_ID"
 echo "$AWS_SECRET_ACCESS_KEY"
 
