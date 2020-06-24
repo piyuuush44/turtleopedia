@@ -12,6 +12,10 @@ pip install awscli
 # Sync the client/dist directory with the s3 bucket
 
 # Set the cache-control max-age to 1 year for all files.
+
+echo "$AWS_ACCESS_KEY_ID"
+echo "$AWS_SECRET_ACCESS_KEY"
+
 echo "Syncing with s3 bucket ${DEPLOYMENT_BUCKET}"
 aws s3 sync dist/ s3://${DEPLOYMENT_BUCKET} \
   --region ${AWS_REGION} \
