@@ -90,7 +90,6 @@ describe('registration api test cases', () => {
     };
     const url = '/alpha/register';
     const response = await server.post(url).send(body);
-    //console.log(response.body);
     expect(response.body.result.user.email).toEqual(body.email);
   });
   it('User Already Exist', async () => {

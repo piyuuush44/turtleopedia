@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../../../app');
 const Posts = require('../../../src/models/posts');
-
+const setup = require('../setup');
 const server = request(app);
 
 beforeEach(() => {
@@ -16,6 +16,7 @@ afterEach(async () => {
 describe('Create a new Post /delta/posts', () => {
   it('should return 200 for successful post entry to db',
       async () => {
+        const {mockedServer, token} = await setup.setupMocksAndServer();
         const url = '/delta/posts';
         const body = {
           title: 'title',
@@ -24,10 +25,11 @@ describe('Create a new Post /delta/posts', () => {
           slug_url: 'abcdef',
           feature_content: 'abc',
         };
-        const response = await server.post(url)
-            .send(body);
-        // console.log(response.body);
-        // console.log(response.status);
+        const response = await mockedServer.post(url)
+            .send(body).set({
+              Authorization: token,
+            });
+
         expect(response.status)
             .toEqual(200);
         expect(response.body.result.post.slug_url).toEqual(body.slug_url);
@@ -46,7 +48,7 @@ describe('getPostById', () => {
         post.title = 'hi';
         post.category = 'technology';
         post.content = [];
-       // post.no_of_views=post.no_of_views;
+        // post.no_of_views=post.no_of_views;
 
         const posts = await post.save();
 
@@ -54,10 +56,9 @@ describe('getPostById', () => {
 
         const response = await server.get(url);
 
-      //   console.log(response.body);
         expect(response.status)
             .toEqual(200);
-        expect(response.body.result.post.no_of_views).toEqual((posts.no_of_views+1));    
+        expect(response.body.result.post.no_of_views).toEqual((posts.no_of_views + 1));
         expect(response.body.result.post._id).toMatch(posts._id.toString());
         expect(response.body.result.post.title).toEqual(posts.title);
         expect(response.body.result.post.category).toEqual(posts.category);
@@ -92,7 +93,6 @@ describe('should update a post -> putUpdatePostById', () => {
     };
 
     const response = await server.put(url).send(body);
-    // console.log(response.body);
 
     expect(response.status)
         .toEqual(200);
@@ -127,7 +127,6 @@ describe('should delete a post -> deletePostById', () => {
     const url = `/delta/post/${posts._id}`;
     const response = await server.delete(url);
 
-    // console.log(response.body);
     expect(response.status)
         .toEqual(200);
   });

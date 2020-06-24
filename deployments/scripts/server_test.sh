@@ -25,6 +25,7 @@ export GCS_BUCKET=turtleopedia_assets_dev
 export GCLOUD_PROJECT=turtleopedia
 export GCS_KEYFILE=keyfile.json
 export TURTLEOPEDIA_JWT_SECRET_KEY=TURTLEOPEDIA_JWT_SECRET_KEY
+export AUTH0_TEST_ACCESS_TOKEN=AUTH0_TEST_ACCESS_TOKEN
 
 # Run tests
 print_start 'Running the unit tests'

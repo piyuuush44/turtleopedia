@@ -1,0 +1,180 @@
+# Build Step
+.build_alpha: &build_alpha
+  stage: build
+  image: node:13
+  script: source deployments/scripts/client_alpha_build.sh
+  artifacts:
+    paths:
+      - client/berlin/dist/
+      - client/berlin/node_modules/
+
+build_berlin:dev:
+  extends: .build_berlin
+  variables:
+    BASE_URL: ${DEV_API_URL}
+    SEGMENT_ID: ${DEV_SEGMENT_ID}
+    PUBLIC_URL: ${DEV_PUBLIC_URL}
+    NODE_ENV: ${DEV_STAGE_NAME}
+  environment:
+    name: dev
+  only:
+    - dev
+    - merge_requests
+    - feature/corporate_pages
+
+build_berlin:staging:
+  extends: .build_berlin
+  variables:
+    BASE_URL: ${STAGING_API_URL}
+    SEGMENT_ID: ${STAGING_SEGMENT_ID}
+    PUBLIC_URL: ${STAGING_PUBLIC_URL}
+    NODE_ENV: ${STAGING_STAGE_NAME}
+  environment:
+    name: staging
+  only:
+    - master
+
+build_berlin:prod:
+  extends: .build_berlin
+  variables:
+    BASE_URL: ${PROD_API_URL}
+    SEGMENT_ID: ${PROD_SEGMENT_ID}
+    PUBLIC_URL: ${PROD_BERLIN_PUBLIC_URL}
+    NODE_ENV: ${PROD_STAGE_NAME}
+  environment:
+    name: prod
+  only:
+    - /^berlin-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+# Test Step
+.test_berlin: &test_berlin
+  stage: test
+  image: node:12
+  script: source deployments/scripts/client_berlin_test.sh
+  artifacts:
+    paths:
+      - client/berlin/dist/
+
+test_berlin:dev:
+  extends: .test_berlin
+  dependencies:
+    - build_berlin:dev
+  environment:
+    name: dev
+  only:
+    - dev
+    - merge_requests
+    - feature/corporate_pages
+
+test_berlin:staging:
+  extends: .test_berlin
+  dependencies:
+    - build_berlin:staging
+  environment:
+    name: staging
+  only:
+    - master
+
+test_berlin:prod:
+  extends: .test_berlin
+  dependencies:
+    - build_berlin:prod
+  environment:
+    name: prod
+  only:
+    - /^berlin-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+# Lint Step
+.lint_berlin: &lint_berlin
+  stage: test
+  image: node:12
+  script: source deployments/scripts/client_berlin_lint.sh
+  artifacts:
+    paths:
+      - client/berlin/dist/
+
+lint_berlin:dev:
+  extends: .lint_berlin
+  dependencies:
+    - build_berlin:dev
+  environment:
+    name: dev
+  only:
+    - dev
+    - merge_requests
+
+lint_berlin:staging:
+  extends: .lint_berlin
+  dependencies:
+    - build_berlin:staging
+  environment:
+    name: staging
+  only:
+    - master
+
+lint_berlin:prod:
+  extends: .lint_berlin
+  dependencies:
+    - build_berlin:prod
+  environment:
+    name: prod
+  only:
+    - /^berlin-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+.deploy_berlin: &deploy_berlin
+  extends: .manual_step
+  stage: deploy
+  image: python:latest
+  script: source deployments/scripts/client_berlin_deploy.sh
+
+deploy_berlin:dev:
+  extends: .deploy_berlin
+  variables:
+    AWS_ACCOUNT: ${DEV_AWS_ACCOUNT}
+    AWS_ACCESS_KEY_ID: ${DEV_AWS_ACCESS_KEY}
+    AWS_REGION: ${DEV_AWS_REGION}
+    AWS_SECRET_ACCESS_KEY: ${DEV_AWS_SECRET_KEY}
+    DEPLOYMENT_BUCKET: ${DEV_BERLIN_DEPLOYMENT_BUCKET}
+    CFN_DISTRIBUTION_ID: ${DEV_BERLIN_CFN_DISTRIBUTION_ID}
+  only:
+    - dev
+    - feature/corporate_pages
+  dependencies:
+    - test_berlin:dev
+  environment:
+    name: dev
+    url: ${DEV_PUBLIC_URL}
+
+deploy_berlin:staging:
+  extends: .deploy_berlin
+  variables:
+    AWS_ACCOUNT: ${STAGING_AWS_ACCOUNT}
+    AWS_ACCESS_KEY_ID: ${STAGING_AWS_ACCESS_KEY}
+    AWS_REGION: ${STAGING_AWS_REGION}
+    AWS_SECRET_ACCESS_KEY: ${STAGING_AWS_SECRET_KEY}
+    DEPLOYMENT_BUCKET: ${STAGING_BERLIN_DEPLOYMENT_BUCKET}
+    CFN_DISTRIBUTION_ID: ${STAGING_BERLIN_CFN_DISTRIBUTION_ID}
+  only:
+    - master
+  dependencies:
+    - test_berlin:staging
+  environment:
+    name: staging
+    url: ${STAGING_PUBLIC_URL}
+
+deploy_berlin:prod:
+  extends: .deploy_berlin
+  variables:
+    AWS_ACCOUNT: ${PROD_AWS_ACCOUNT}
+    AWS_ACCESS_KEY_ID: ${PROD_AWS_ACCESS_KEY}
+    AWS_REGION: ${PROD_AWS_REGION}
+    AWS_SECRET_ACCESS_KEY: ${PROD_AWS_SECRET_KEY}
+    DEPLOYMENT_BUCKET: ${PROD_BERLIN_DEPLOYMENT_BUCKET}
+    CFN_DISTRIBUTION_ID: ${PROD_BERLIN_CFN_DISTRIBUTION_ID}
+  only:
+    - /^berlin-v[0-9]*\.[0-9]*\.[0-9]*$/
+  dependencies:
+    - test_berlin:prod
+  environment:
+    name: prod
+    url: https://corp.instanthome.com
