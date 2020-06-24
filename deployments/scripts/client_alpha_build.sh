@@ -12,4 +12,4 @@ npm install
 
 # Build
 echo "Building..."
-npm build
+npm run build
