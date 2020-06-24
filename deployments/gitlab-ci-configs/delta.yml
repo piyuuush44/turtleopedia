@@ -1,0 +1,54 @@
+# Build Step
+.build_delta: &build_delta
+  stage: build
+  image: node:13
+  script: source deployments/scripts/client_delta_build.sh
+  artifacts:
+    paths:
+      - client/delta/dist/
+      - client/delta/node_modules/
+
+build_delta:prod:
+  extends: .build_delta
+  environment:
+    name: prod
+  only:
+    - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+# Lint Step
+.lint_delta: &lint_delta
+  stage: test
+  image: node:13
+  script: source deployments/scripts/client_delta_lint.sh
+  artifacts:
+    paths:
+      - client/delta/dist/
+
+lint_delta:prod:
+  extends: .lint_delta
+  dependencies:
+    - build_delta:prod
+  environment:
+    name: prod
+  only:
+    - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
+
+.deploy_delta: &deploy_delta
+  stage: deploy
+  image: python:latest
+  script: source deployments/scripts/client_delta_deploy.sh
+
+deploy_delta:prod:
+  extends: .deploy_delta
+  variables:
+    AWS_ACCESS_KEY_ID: ${PROD_AWS_ACCESS_KEY}
+    AWS_SECRET_ACCESS_KEY: ${PROD_AWS_SECRET_KEY}
+    DEPLOYMENT_BUCKET: ${PROD_ALPHA_DEPLOYMENT_BUCKET}
+    CFN_DISTRIBUTION_ID: ${PROD_ALPHA_CFN_DISTRIBUTION_ID}
+  only:
+    - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
+  dependencies:
+    - lint_delta:prod
+  environment:
+    name: prod
+    url: https://www.turtleopedia.com
