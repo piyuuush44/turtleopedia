@@ -35,14 +35,14 @@ lint_server:
 package_server:production:
   extends: .package_server
   only:
-    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
   variables:
     CI_REGISTRY_IMAGE: ${SERVER_CI_REGISTRY_IMAGE}
     CI_ENVIRONMENT_SLUG: prod
     GCR_URL: ${GCR_REGION_URL}
   environment:
     name: prod
-    url: http://turtleopedia.com
+    url: http://api.turtleopedia.com
 
 
 .deploy_server: &deploy_server
@@ -58,10 +58,9 @@ deploy_server:production:
   services:
     - docker:dind
   only:
-    - master
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
   environment:
     name: prod
-    url: https://$HEROKU_APP_NAME.herokuapp.com
   dependencies:
     - package_server:production
   variables:

@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ListboxComponent} from "./listbox/listbox.component";
-import {SaveblogComponent} from "./saveblog/saveblog.component";
-import {AuthGuardService} from "../auth/auth-guard.service";
+import {ListboxComponent} from './listbox/listbox.component';
+import {SaveblogComponent} from './saveblog/saveblog.component';
+import {AuthGuardService} from '../auth/auth-guard.service';
 
 
 const routes: Routes = [

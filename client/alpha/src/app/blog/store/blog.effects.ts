@@ -6,8 +6,8 @@ import * as BlogActions from './blog.actions';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {EMPTY} from "rxjs";
-import {BlogService} from "../blog.service";
+import {EMPTY} from 'rxjs';
+import {BlogService} from '../blog.service';
 
 @Injectable()
 export class BlogEffects {
@@ -19,8 +19,8 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.uploadPicture(data).pipe(
           map((response: HttpResponse<any>) => {
-              alert('Uploaded blog post picture successfully!')
-              return BlogActions.SAVE_BLOG_PICTURES({payload: response.body.result.fileUrl[0]})
+              alert('Uploaded blog post picture successfully!');
+              return BlogActions.SAVE_BLOG_PICTURES({payload: response.body.result.fileUrl[0]});
             }
           ),
           catchError(error => EMPTY
@@ -37,8 +37,8 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.uploadPicture(data).pipe(
           map((response: HttpResponse<any>) => {
-              alert('Uploaded blog content picture successfully!')
-              return BlogActions.SAVE_BLOG_CONTENT_PICTURES({payload: response.body.result.fileUrl[0]})
+              alert('Uploaded blog content picture successfully!');
+              return BlogActions.SAVE_BLOG_CONTENT_PICTURES({payload: response.body.result.fileUrl[0]});
             }
           ),
           catchError(error => EMPTY
@@ -54,9 +54,9 @@ export class BlogEffects {
       switchMap(() =>
         this.blogService.getBlog().pipe(
           map((response: any) => {
-              console.log(response)
-              console.log('piyush')
-              return BlogActions.SAVE_BLOGS({payload: response.results})
+              console.log(response);
+              console.log('piyush');
+              return BlogActions.SAVE_BLOGS({payload: response.results});
             }
           ),
           catchError(error => EMPTY
@@ -73,9 +73,9 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.saveBlog(data).pipe(
           map((response: HttpResponse<any>) => {
-              console.log(response.body)
-              this.router.navigate(['/blog/list'])
-              return BlogActions.TRY_FETCH_BLOGS()
+              console.log(response.body);
+              this.router.navigate(['/blog/list']);
+              return BlogActions.TRY_FETCH_BLOGS();
             }
           ),
           catchError(error => EMPTY

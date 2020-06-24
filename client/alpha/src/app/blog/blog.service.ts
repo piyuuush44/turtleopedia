@@ -8,33 +8,21 @@ import * as ServerEndpoints from '../shared/endpoints';
 export class BlogService {
   blog: any;
 
-  /**
-   * Constructor
-   *
-   * @param {HttpClient} _httpClient
-   */
   constructor(
-    private _httpClient: HttpClient
+    private httpClient: HttpClient
   ) {
   }
 
-
   getBlog() {
-    return this._httpClient.get(ServerEndpoints.GET_POST);
+    return this.httpClient.get(ServerEndpoints.GET_POST);
   }
 
-  /**
-   * Save blog
-   *
-   * @param blog
-   * @returns {Promise<any>}
-   */
   saveBlog(blog) {
-    return this._httpClient.post(ServerEndpoints.SAVE_POST, blog);
+    return this.httpClient.post(ServerEndpoints.SAVE_POST, blog);
   }
 
 
   uploadPicture(data) {
-    return this._httpClient.post(ServerEndpoints.IMAGE_UPLOAD_URL, data, {observe: 'response'})
+    return this.httpClient.post(ServerEndpoints.IMAGE_UPLOAD_URL, data, {observe: 'response'});
   }
 }

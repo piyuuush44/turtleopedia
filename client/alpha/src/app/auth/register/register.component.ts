@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {AppState} from "../../store/app.reducer";
-import * as AuthActions from "../store/auth.actions";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Store} from '@ngrx/store';
+import {AppState} from '../../store/app.reducer';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +12,7 @@ import * as AuthActions from "../store/auth.actions";
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private _store: Store<AppState>) {
+  constructor(private formBuilder: FormBuilder, private store: Store<AppState>) {
   }
 
   ngOnInit(): void {
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   }
 
   createLoginForm(): FormGroup {
-    return this._formBuilder.group({
+    return this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     });
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     const value = this.registerForm.getRawValue();
-    this._store.dispatch(AuthActions.TRY_SIGNUP({payload: value}));
+    this.store.dispatch(AuthActions.TRY_SIGNUP({payload: value}));
   }
 
 }

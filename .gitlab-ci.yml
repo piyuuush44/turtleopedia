@@ -20,3 +20,4 @@ stages:
 
 include:
   - local: '/deployments/gitlab-ci-configs/server.yml'
+  - local: '/deployments/gitlab-ci-configs/alpha.yml'

@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {BlogService} from "../blog.service";
-import {Blog} from "../blog.model";
-import * as BlogActions from "../store/blog.actions";
-import {select, Store} from "@ngrx/store";
-import {BlogState} from "../store/blog.reducer";
-import {blogStateContentImageUrlSelector, blogStateImageUrlSelector} from "../store/blog.selector";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {BlogService} from '../blog.service';
+import {Blog} from '../blog.model';
+import * as BlogActions from '../store/blog.actions';
+import {select, Store} from '@ngrx/store';
+import {BlogState} from '../store/blog.reducer';
+import {blogStateContentImageUrlSelector, blogStateImageUrlSelector} from '../store/blog.selector';
 
 @Component({
   selector: 'app-saveblog',
@@ -16,19 +16,19 @@ export class SaveblogComponent implements OnInit {
   blog: Blog;
   blogForm: FormGroup;
 
-  content = []
-  contentImageUrl = null
-  previewContentImage = []
-  imageUrl = null
-  postImage: File = null
-  contentImage: File = null
-  previewPostImage: any = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg'
-  currentIndex: number
+  content = [];
+  contentImageUrl = null;
+  previewContentImage = [];
+  imageUrl = null;
+  postImage: File = null;
+  contentImage: File = null;
+  previewPostImage: any = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
+  currentIndex: number;
 
   constructor(
-    private _blogService: BlogService,
-    private _formBuilder: FormBuilder,
-    private _store: Store<BlogState>
+    private blogService: BlogService,
+    private formBuilder: FormBuilder,
+    private store: Store<BlogState>
   ) {
   }
 
@@ -36,22 +36,22 @@ export class SaveblogComponent implements OnInit {
     // Set the default
     this.blog = new Blog();
     this.currentIndex = 0;
-    this.content.push({type: 'Text', addButton: false})
+    this.content.push({type: 'Text', addButton: false});
     this.blogForm = this.createBlogForm();
 
-    this._store.pipe(select(blogStateImageUrlSelector)).subscribe(
+    this.store.pipe(select(blogStateImageUrlSelector)).subscribe(
       value => {
         this.previewPostImage = value;
         this.imageUrl = value;
-        this.blogForm.controls['image_url'].patchValue(this.imageUrl)
+        this.blogForm.controls.image_url.patchValue(this.imageUrl);
       }
-    )
+    );
 
-    this._store.pipe(select(blogStateContentImageUrlSelector)).subscribe(
+    this.store.pipe(select(blogStateContentImageUrlSelector)).subscribe(
       value => {
-        this.contentImageUrl = value
+        this.contentImageUrl = value;
       }
-    )
+    );
   }
 
   get blogFormControls() {
@@ -63,15 +63,15 @@ export class SaveblogComponent implements OnInit {
       return;
     }
     const value = this.blogForm.getRawValue();
-    this._store.dispatch(BlogActions.SAVE_BLOG({payload: value}));
+    this.store.dispatch(BlogActions.SAVE_BLOG({payload: value}));
   }
 
   addContent(value: string) {
-    this.content.push({type: value})
+    this.content.push({type: value});
   }
 
   createBlogForm(): FormGroup {
-    return this._formBuilder.group({
+    return this.formBuilder.group({
       title: [this.blog.title, Validators.required],
       image_url: [this.blog.image_url, Validators.required],
       is_top: [this.blog.is_top],
@@ -84,20 +84,20 @@ export class SaveblogComponent implements OnInit {
   }
 
   addFormContent(value: string, index: number) {
-    const type = this.content[index].type
+    const type = this.content[index].type;
     const finalContent = {
-      type: type,
+      type,
       text: value,
       imageUrl: null
-    }
+    };
     if (type === 'Image' || type === 'ImageText') {
       finalContent.imageUrl = this.contentImageUrl;
     }
 
-    const content = this.blogForm.controls['content'].value
-    content.push(finalContent)
-    this.blogForm.controls['content'].patchValue(content)
-    alert('Added successfully!')
+    const content = this.blogForm.controls.content.value;
+    content.push(finalContent);
+    this.blogForm.controls.content.patchValue(content);
+    alert('Added successfully!');
   }
 
   postImageUpload(image: any) {
@@ -116,8 +116,8 @@ export class SaveblogComponent implements OnInit {
     const data = new FormData();
     data.append('image', this.postImage);
 
-    this._store.dispatch(BlogActions.TRY_UPLOAD_BLOG_PICTURES({payload: data}))
-    //todo toast here
+    this.store.dispatch(BlogActions.TRY_UPLOAD_BLOG_PICTURES({payload: data}));
+    // todo toast here
   }
 
   contentImageUpload(image: any, index: number) {
@@ -136,7 +136,7 @@ export class SaveblogComponent implements OnInit {
     const data = new FormData();
     data.append('image', this.contentImage);
 
-    this._store.dispatch(BlogActions.TRY_UPLOAD_BLOG_CONTENT_PICTURES({payload: data}))
+    this.store.dispatch(BlogActions.TRY_UPLOAD_BLOG_CONTENT_PICTURES({payload: data}));
   }
 
 }

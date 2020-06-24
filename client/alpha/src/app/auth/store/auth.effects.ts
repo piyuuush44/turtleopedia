@@ -6,8 +6,8 @@ import * as AuthActions from './auth.actions';
 import {catchError, flatMap, map, switchMap} from 'rxjs/operators';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {EMPTY} from "rxjs";
-import {AuthService} from "../auth.service";
+import {EMPTY} from 'rxjs';
+import {AuthService} from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -19,11 +19,11 @@ export class AuthEffects {
       switchMap((data) =>
         this.authService.trySignIn(data).pipe(
           flatMap((response: HttpResponse<any>) => {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/home']);
               return [
                 AuthActions.LOGIN({payload: response.body.result.user}),
                 AuthActions.TRY_SET_TOKEN({payload: response.body.result.token})
-              ]
+              ];
             }
           ),
           catchError(error => EMPTY
@@ -40,11 +40,11 @@ export class AuthEffects {
       switchMap((data) =>
         this.authService.trySignUp(data).pipe(
           flatMap((response: HttpResponse<any>) => {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/home']);
               return [
                 AuthActions.LOGIN({payload: response.body.result.user}),
                 AuthActions.TRY_SET_TOKEN({payload: response.body.result.token})
-              ]
+              ];
             }
           ),
           catchError(error => EMPTY
