@@ -1,21 +1,22 @@
 apiVersion: v1
 data:
+  ALPHA_JWT_SECRET_KEY: ALPHA_JWT_SECRET_KEY
+  BALLU_JWT_SECRET_KEY: BALLU_JWT_SECRET_KEY
+  DELTA_JWT_SECRET_KEY: DELTA_JWT_SECRET_KEY
   GCLOUD_PROJECT: my-turtleopedia
   GCS_BUCKET: turtleopedia_assets_prod
   GCS_KEYFILE: keyfile.json
   JWT_SECRET_KEY: JWT_SECRET_KEY
   MONGO_DB_DELTA: MONGO_DB_DELTA
   MONGO_DB_HELIUM: MONGO_DB_HELIUM
-  MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia-production-ba3gv.gcp.mongodb.net
+  MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia:ET6qUjmbJnnxRrtF@turtleopedia-production-ba3gv.gcp.mongodb.net
   NODE_ENV: production
   PORT: "3000"
   TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
 kind: ConfigMap
 metadata:
-  creationTimestamp: "2020-06-23T17:05:54Z"
   labels:
     app: turtleopedia
   name: turtleopedia-config-vkbk
   namespace: turtleopedia
   selfLink: /api/v1/namespaces/turtleopedia/configmaps/turtleopedia-config-vkbk
-  uid: cc83bee7-b573-11ea-afa0-42010aa0008c
