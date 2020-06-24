@@ -2,6 +2,11 @@ build_server:
   stage: build
   image: node:13
   script: source deployments/scripts/server_build.sh
+  only:
+    - dev
+    - master
+    - merge_requests
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
   artifacts:
     paths:
       - server/node_modules/
@@ -17,6 +22,11 @@ test_server:
     MONGO_INITDB_ROOT_USERNAME: ballu
     MONGO_INITDB_ROOT_PASSWORD: skynetballu123
   script: source deployments/scripts/server_test.sh
+  only:
+    - dev
+    - master
+    - merge_requests
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
 
 lint_server:
   stage: test
@@ -24,6 +34,12 @@ lint_server:
   dependencies:
     - build_server
   script: source deployments/scripts/server_lint.sh
+  only:
+    - dev
+    - master
+    - merge_requests
+    - /^api-v[0-9]*\.[0-9]*\.[0-9]*$/
+
 
 .package_server:
   image: docker:git
