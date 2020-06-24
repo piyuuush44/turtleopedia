@@ -39,7 +39,7 @@ lint_alpha:prod:
   script: source deployments/scripts/client_alpha_deploy.sh
 
 deploy_alpha:prod:
-  extends: .deploy_berlin
+  extends: .deploy_alpha
   variables:
     AWS_ACCESS_KEY_ID: ${PROD_AWS_ACCESS_KEY}
     AWS_SECRET_ACCESS_KEY: ${PROD_AWS_SECRET_KEY}
