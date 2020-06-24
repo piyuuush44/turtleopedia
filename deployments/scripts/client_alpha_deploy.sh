@@ -13,8 +13,7 @@ pip install awscli
 
 # Set the cache-control max-age to 1 year for all files.
 echo "Syncing with s3 bucket ${DEPLOYMENT_BUCKET}"
-ls
-aws s3 sync ./dist/ s3://${DEPLOYMENT_BUCKET} \
+aws s3 sync dist/ s3://${DEPLOYMENT_BUCKET} \
   --delete \
   --exclude index.html \
   --cache-control max-age=31536000,public
