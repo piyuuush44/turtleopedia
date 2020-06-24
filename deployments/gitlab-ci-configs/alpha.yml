@@ -27,7 +27,7 @@ build_alpha:prod:
 lint_alpha:prod:
   extends: .lint_alpha
   dependencies:
-    - lint_alpha:prod
+    - build_alpha:prod
   environment:
     name: prod
   only:
