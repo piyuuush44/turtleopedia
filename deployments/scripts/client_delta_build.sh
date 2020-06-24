@@ -12,4 +12,4 @@ npm install
 
 # Build
 echo "Building..."
-npm build --prod --aot
+npm run build
