@@ -41,6 +41,8 @@ lint_alpha:prod:
 deploy_alpha:prod:
   extends: .deploy_alpha
   variables:
+    AWS_ACCOUNT: ${PROD_AWS_ACCOUNT}
+    AWS_REGION: ${PROD_AWS_REGION}
     AWS_ACCESS_KEY_ID: ${PROD_AWS_ACCESS_KEY}
     AWS_SECRET_ACCESS_KEY: ${PROD_AWS_SECRET_KEY}
     DEPLOYMENT_BUCKET: ${PROD_ALPHA_DEPLOYMENT_BUCKET}
