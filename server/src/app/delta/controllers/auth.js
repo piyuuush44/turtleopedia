@@ -25,7 +25,7 @@ exports.postLogin = async (req, res, next) => {
 
     const token = authUtils.signJwt(
         {id: user._id},
-        process.env.DELTA_JWT_SECRET_KEY,
+        process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
     return res.json({
@@ -56,7 +56,7 @@ exports.postRegister = async (req, res, next) => {
 
     const token = authUtils.signJwt(
         {id: user._id},
-        process.env.DELTA_JWT_SECRET_KEY,
+        process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
     return res.json({
@@ -79,7 +79,7 @@ exports.postPasswordReset = async (req, res, next) => {
 
     const token = authUtils.signJwt(
         {id: user._id},
-        process.env.DELTA_JWT_SECRET_KEY,
+        process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
         authUtils.getJwtExpirationTime(),
     );
     return res.json({

@@ -6,7 +6,7 @@ const constants = require('../../../utils/constants');
 /* eslint-disable camelcase */
 exports.postPosts = async (req, res, next) => {
   try {
-    // const {user} = req;
+    const {user} = req;
     const {
       title,
       category,
@@ -29,6 +29,7 @@ exports.postPosts = async (req, res, next) => {
     post.slug_url = slug_url;
     post.feature_content = feature_content;
     post.tags = tags;
+    post.user_id = user._id;
 
     await post.save();
 

@@ -7,9 +7,9 @@ module.exports = [
     method: 'post',
     route: '/posts',
     controller: Controller.postPosts,
-    // middlewares: [
-    //   Middleware.is,
-    // ],
+    middlewares: [
+      Middleware.isAuthentic,
+    ],
     schema_validation: Schema.postPosts,
   },
   {

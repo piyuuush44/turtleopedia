@@ -33,5 +33,5 @@ exports.jwtStrategyCallback = async (jwtPayload, done) => {
 };
 passport.use(new JwtStrategy({
   jwtFromRequest: extractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET_KEY,
+  secretOrKey: process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
 }, exports.jwtStrategyCallback));

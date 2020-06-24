@@ -2,6 +2,8 @@ import * as AuthActions from './auth.actions';
 import {Action, createReducer, on} from "@ngrx/store";
 import {ProfileModel} from "../profile.model";
 
+const profile: ProfileModel = localStorage.getItem('profile') ? JSON.parse(localStorage.getItem('profile')) : null;
+
 export interface AuthState {
   profile: ProfileModel,
   token: string,
@@ -9,7 +11,7 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  profile: new ProfileModel(),
+  profile: profile ? new ProfileModel(profile._id, profile.email, profile.stage) : new ProfileModel(),
   token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
   authenticated: localStorage.getItem('token') !== null
 };

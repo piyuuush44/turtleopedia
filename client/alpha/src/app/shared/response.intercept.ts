@@ -5,10 +5,11 @@ import * as AuthActions from '../auth/store/auth.actions';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {AuthState} from '../auth/store/auth.reducer';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class ResponseIntercept implements HttpInterceptor {
-  constructor(private store: Store<AuthState>) {
+  constructor(private store: Store<AuthState>, private router: Router) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,6 +21,7 @@ export class ResponseIntercept implements HttpInterceptor {
           alert('Unauthorized Request !! You will be logged out now.');
           setTimeout(() => {
             this.store.dispatch(AuthActions.LOGOUT());
+            this.router.navigate(['/login'])
           }, 2000);
         }
       }

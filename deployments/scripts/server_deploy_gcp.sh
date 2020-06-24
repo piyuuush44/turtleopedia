@@ -20,13 +20,11 @@ echo "Zone set successfully"
 gcloud container clusters get-credentials turtleopedia --zone=asia-south1-b
 echo "Cluster auth set successfully"
 
-#kubectl apply -f ../deployments/gke/turtleopedia-production-configmap.yaml
-#kubectl apply -f file:///$PROJECT_ROOT/deployments/gke/turtleopedia-production-configmap.yaml
+kubectl apply -f ../deployments/gke/turtleopedia-production-configmap.yaml
+echo "Config set applied !"
 
 kubectl delete --all pods -n=turtleopedia
 echo "All previous pods deleted successfully"
 
-kubectl set image deployment/turtleopedia turtleopedia=$CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG -n=turtleopedia
+kubectl set image deployment/turtleopedia turtleopedia-1=$CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG -n=turtleopedia
 echo "Latest GCR Image set successfully"
-
-#
