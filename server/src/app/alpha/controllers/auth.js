@@ -22,6 +22,7 @@ exports.postLogin = async (req, res, next) => {
         message: 'Invalid request! Wrong Password',
       }));
     }
+    logger.info('Hey');
     logger.info(process.env.TURTLEOPEDIA_JWT_SECRET_KEY);
 
     const token = authUtils.signJwt(
