@@ -19,6 +19,10 @@ export class AuthEffects {
       switchMap((data) =>
         this.authService.trySignIn(data).pipe(
           flatMap((response: HttpResponse<any>) => {
+              if (response.body.error) {
+                alert(response.body.error.message);
+                return EMPTY;
+              }
               this.router.navigate(['/home']);
               return [
                 AuthActions.LOGIN({payload: response.body.result.user}),
@@ -40,6 +44,10 @@ export class AuthEffects {
       switchMap((data) =>
         this.authService.trySignUp(data).pipe(
           flatMap((response: HttpResponse<any>) => {
+              if (response.body.error) {
+                alert(response.body.error.message);
+                return EMPTY;
+              }
               this.router.navigate(['/home']);
               return [
                 AuthActions.LOGIN({payload: response.body.result.user}),
