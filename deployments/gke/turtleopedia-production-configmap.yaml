@@ -4,8 +4,8 @@ data:
   GCS_BUCKET: turtleopedia_assets_prod
   GCS_KEYFILE: keyfile.json
   JWT_SECRET_KEY: JWT_SECRET_KEY
-  MONGO_DB_DELTA: MONGO_DB_DELTA
-  MONGO_DB_HELIUM: MONGO_DB_HELIUM
+  MONGO_DB_DELTA: delta
+  MONGO_DB_HELIUM: helium
   MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia:ET6qUjmbJnnxRrtF@turtleopedia-production-ba3gv.gcp.mongodb.net
   NODE_ENV: production
   PORT: "3000"
