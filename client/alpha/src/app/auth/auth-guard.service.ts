@@ -32,10 +32,12 @@ export class AuthGuardService implements CanActivate {
               state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.isAuthorized) {
       this.router.navigate(['/login']);
+      return false;
     }
     if (this.profile.stage !== 'approved') {
       alert('Please ask your administrator to approve your account!');
       this.router.navigate(['/login']);
+      return false;
     }
     return this.isAuthorized;
   }

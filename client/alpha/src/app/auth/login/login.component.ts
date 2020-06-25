@@ -26,8 +26,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  get loginFormControls() {
+    return this.loginForm.controls;
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) {
+      return;
+    }
+    if (this.loginFormControls.email.value.indexOf('@') === -1) {
+      alert('Please enter valid email')
       return;
     }
     const value = this.loginForm.getRawValue();

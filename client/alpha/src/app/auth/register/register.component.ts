@@ -26,8 +26,16 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  get registerFormControls() {
+    return this.registerForm.controls;
+  }
+
   onSubmit() {
     if (this.registerForm.invalid) {
+      return;
+    }
+    if (this.registerFormControls.email.value.indexOf('@') === -1) {
+      alert('Please enter valid email')
       return;
     }
     const value = this.registerForm.getRawValue();
