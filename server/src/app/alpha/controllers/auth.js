@@ -22,9 +22,6 @@ exports.postLogin = async (req, res, next) => {
         message: 'Invalid request! Wrong Password',
       }));
     }
-    logger.info('Hey');
-    logger.info(process.env.TURTLEOPEDIA_JWT_SECRET_KEY);
-
     const token = authUtils.signJwt(
         {id: user._id},
         process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
@@ -57,7 +54,6 @@ exports.postRegister = async (req, res, next) => {
     user.stage = 'pending';
     await user.save();
 
-    logger.info(process.env.TURTLEOPEDIA_JWT_SECRET_KEY);
     const token = authUtils.signJwt(
         {id: user._id},
         process.env.TURTLEOPEDIA_JWT_SECRET_KEY,
