@@ -1,1 +1,1 @@
-export const blogCategories = ['Technology', 'Lifestyle', 'Entertainment']
+export const blogCategories = ['Technology', 'Lifestyle', 'Entertainment'];

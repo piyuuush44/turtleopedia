@@ -4,7 +4,7 @@ const BLOG_POST_CATEGORIES = ['technology', 'lifestyle', 'entertainment'];
 const DELTA_POSTS_PAGINATED_URL = 'http://delta/posts?';
 const DELTA_CATEGORY_PAGINATED_URL = 'http://delta/filterPosts?';
 const USER_STAGE_CATEGORIES = ['pending', 'approved', 'disabled'];
-const GCS_URL = 'https://storage.cloud.google.com';
+const GCS_URL = 'https://storage.googleapis.com';
 
 
 module.exports = {

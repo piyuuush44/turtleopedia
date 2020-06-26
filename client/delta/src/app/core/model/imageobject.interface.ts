@@ -1,4 +1,4 @@
 export interface ImageObject {
-  link: String;
+  link: string;
 }
 

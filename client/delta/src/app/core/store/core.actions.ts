@@ -1,7 +1,7 @@
-import {createAction, props} from "@ngrx/store";
-import {WebdataModel} from "../model/webdata.model";
-import {FilterPostModel} from "../model/filterPost.model";
-import {Posts} from "../model/posts.model";
+import {createAction, props} from '@ngrx/store';
+import {WebdataModel} from '../model/webdata.model';
+import {FilterPostModel} from '../model/filterPost.model';
+import {Posts} from '../model/posts.model';
 
 export const SAVE_WEBSITE_DATA = createAction(
   'SAVE_WEBSITE_DATA',
@@ -14,12 +14,12 @@ export const SAVE_FILTER_POSTS_DATA = createAction(
 
 export const TRY_FETCH_WEBSITE_DATA = createAction(
   'TRY_FETCH_WEBSITE_DATA',
-)
+);
 
 export const TRY_FETCH_POST_BY_SLUG_URL = createAction(
   'TRY_FETCH_POST_BY_SLUG_URL',
-  props<{ payload: String }>()
-)
+  props<{ payload: string }>()
+);
 
 export const SAVE_POST = createAction(
   'SAVE_POST',
@@ -27,5 +27,5 @@ export const SAVE_POST = createAction(
 );
 export const TRY_FETCH_FILTER_POSTS = createAction(
   'TRY_FETCH_FILTER_POSTS',
-  props<{ url: String }>()
-)
+  props<{ payload: string }>()
+);

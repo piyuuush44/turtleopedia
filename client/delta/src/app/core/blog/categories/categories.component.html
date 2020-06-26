@@ -1,32 +1,32 @@
 <section class="section wb">
   <div class="container">
     <div class="row">
-      <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="page-wrapper">
           <div class="blog-list clearfix">
             <div class="blog-box row" *ngFor="let post of posts.results">
               <div class="col-md-4">
                 <div class="post-media">
                   <a routerLink="/blog/home" title="">
-                    <img src="{{post.image_url}}" alt="" class="img-fluid">
+                    <img src="{{post.image_url}}" alt="" class="img-fluid-cat">
                     <div class="hovereffect"></div>
                   </a>
                 </div><!-- end media -->
               </div><!-- end col -->
 
               <div class="blog-meta big-meta col-md-8">
-                <span class="bg-aqua"><a routerLink="/blog/home" title="">{{post.category}}</a></span>
+                <span class="bg-aqua"><a routerLink="/blog/home" title="">{{post.category|titlecase}}</a></span>
                 <h4><a routerLink="/blog/home" title="">{{post.title}}</a></h4>
                 <p>{{post.feature_content}}</p>
-                <small><a routerLink="/blog/home" title=""><i class="fa fa-eye"></i> 1887</a></small>
-                <small><a routerLink="/blog/home" title="">{{post.createdAt}}</a></small>
+                <small><a routerLink="/blog/home" title=""><i class="fa fa-eye"></i> {{post.no_of_views}}</a></small>
+                <small><a routerLink="/blog/home" title="">{{post.createdAt|date}}</a></small>
                 <small><a href="#" title="">by Matilda</a></small>
               </div><!-- end meta -->
             </div><!-- end blog-box -->
 
             <hr class="invis">
 
-            <div class="row">
+            <div class="row" *ngIf="false">
               <div class="col-lg-10 offset-lg-1">
                 <div class="banner-spot clearfix">
                   <div class="banner-img">

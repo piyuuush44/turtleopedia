@@ -7,8 +7,8 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ToastService} from '../../shared/toast/toast.service';
-import {BlogService} from "../blog/blog.service";
-import {EMPTY} from "rxjs";
+import {BlogService} from '../blog/blog.service';
+import {EMPTY} from 'rxjs';
 
 @Injectable()
 export class CoreEffects {
@@ -19,7 +19,7 @@ export class CoreEffects {
       switchMap(() =>
         this.blogService.getWebsiteData().pipe(
           map((response: HttpResponse<any>) => {
-              return CoreAction.SAVE_WEBSITE_DATA({payload: response.body.result.data})
+              return CoreAction.SAVE_WEBSITE_DATA({payload: response.body.result.data});
             }
           ),
           catchError(error => EMPTY
@@ -36,7 +36,7 @@ export class CoreEffects {
       switchMap((data) =>
         this.blogService.getPostBySlugUrl(data).pipe(
           map((response: HttpResponse<any>) => {
-              return CoreAction.SAVE_POST({payload: response.body.result.post})
+              return CoreAction.SAVE_POST({payload: response.body.result.post});
             }
           ),
           catchError(error => EMPTY
@@ -49,19 +49,16 @@ export class CoreEffects {
   fetchFilteredPosts = createEffect(() =>
     this.actions$.pipe(
       ofType(CoreAction.TRY_FETCH_FILTER_POSTS),
-      map((data) => {
-        console.log('fetchFilteredPosts', data)
-        return data['url']
-      }),
+      map((data) => data.payload),
       switchMap((url) =>
-        this.blogService.getFilteredPosts().pipe(
+        this.blogService.getFilteredPosts(url).pipe(
           map((response: HttpResponse<any>) => {
-            return CoreAction.SAVE_FILTER_POSTS_DATA({payload: response.body})
+            return CoreAction.SAVE_FILTER_POSTS_DATA({payload: response.body});
           })
         )
       )
     )
-  )
+  );
 
   constructor(
     private actions$: Actions,
