@@ -10,6 +10,7 @@ import {StoreModule} from '@ngrx/store';
 import {BlogReducer} from './store/blog.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {BlogEffects} from './store/blog.effects';
+import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {BlogEffects} from './store/blog.effects';
     SaveblogComponent,
   ],
   imports: [
+    CKEditorModule,
     BlogRoutingModule,
     ReactiveFormsModule,
     CommonModule,

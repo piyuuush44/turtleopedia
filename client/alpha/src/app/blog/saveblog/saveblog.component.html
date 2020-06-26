@@ -41,15 +41,16 @@
                   </div>
                 </div>
               </div>
-
               <div class="row">
                 <div class="col-xl">
                   <div class="card">
                     <div class="card-body">
                       <div class="form-group">
                         <label>Enter Description</label>
-                        <textarea class="form-control" rows="2" placeholder="Enter what this blog is about ?"
-                                  required formControlName="feature_content"></textarea>
+                        <ckeditor [editor]="Editor" data="<p>Enter the Description!</p>"
+                                  formControlName="feature_content"
+                                  (ready)="onReady($event)"></ckeditor>
+
                         <span class="text-danger"
                               *ngIf="(blogFormControls.feature_content.touched ) && blogFormControls.feature_content.errors?.required">
                                 Description is required
@@ -173,12 +174,15 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Enter Content</label>
-                        <textarea class="form-control" rows="5" #textContent></textarea>
+                        <ckeditor [editor]="Editor" data="" #textContent
+                                  (ready)="onReady($event)"></ckeditor>
+
                       </div>
                       <div class="form-group">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
-                                  (click)="addFormContent(textContent.value, i)" [disabled]="cont.addButton">Add
+                                  (click)="addFormContent(textContent.editorInstance.getData(), i)"
+                                  [disabled]="cont.addButton">Add
                           </button>
                         </div>
                         <div class="col-md-6">
@@ -193,12 +197,14 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Enter Code</label>
-                        <textarea class="form-control" #code rows="3"></textarea>
+                        <ckeditor [editor]="Editor" data="" #code
+                                  (ready)="onReady($event)"></ckeditor>
                       </div>
                       <div class="form-group">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
-                                  (click)="addFormContent(code.value, i)" [disabled]="cont.addButton">Add
+                                  (click)="addFormContent(code.editorInstance.getData(), i)"
+                                  [disabled]="cont.addButton">Add
                           </button>
                         </div>
                         <div class="col-md-6">
@@ -266,13 +272,15 @@
                       <div class="col-md-9">
                         <div class="form-group">
                           <label>Enter Text</label>
-                          <textarea class="form-control" #imageTextField rows="3"></textarea>
+                          <ckeditor [editor]="Editor" data="" #imageTextField
+                                    (ready)="onReady($event)"></ckeditor>
                         </div>
                       </div>
                       <div class="form-group">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
-                                  (click)="addFormContent(imageTextField.value, i)" [disabled]="cont.addButton">Add
+                                  (click)="addFormContent(imageTextField.editorInstance.getData(), i)"
+                                  [disabled]="cont.addButton">Add
                           </button>
                         </div>
                         <div class="col-md-6">
@@ -299,7 +307,6 @@
                   </div>
                 </div>
               </div>
-
               <button type="submit" [disabled]="!blogForm.valid" class="btn btn-primary">Submit</button>
             </form>
           </div>

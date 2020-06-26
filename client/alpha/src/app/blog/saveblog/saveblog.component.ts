@@ -6,6 +6,7 @@ import * as BlogActions from '../store/blog.actions';
 import {select, Store} from '@ngrx/store';
 import {BlogState} from '../store/blog.reducer';
 import {blogStateContentImageUrlSelector, blogStateImageUrlSelector} from '../store/blog.selector';
+import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
 @Component({
   selector: 'app-saveblog',
@@ -13,6 +14,7 @@ import {blogStateContentImageUrlSelector, blogStateImageUrlSelector} from '../st
   styleUrls: ['./saveblog.component.css']
 })
 export class SaveblogComponent implements OnInit {
+  public Editor = DecoupledEditor;
   blog: Blog;
   blogForm: FormGroup;
 
@@ -139,4 +141,10 @@ export class SaveblogComponent implements OnInit {
     this.store.dispatch(BlogActions.TRY_UPLOAD_BLOG_CONTENT_PICTURES({payload: data}));
   }
 
+  public onReady(editor) {
+    editor.ui.getEditableElement().parentElement.insertBefore(
+      editor.ui.view.toolbar.element,
+      editor.ui.getEditableElement()
+    );
+  }
 }

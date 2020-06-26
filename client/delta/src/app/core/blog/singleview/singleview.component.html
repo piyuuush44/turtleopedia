@@ -48,8 +48,8 @@
           <div class="blog-content">
             <div *ngFor="let cont of post.content">
               <div class="pp text-only" *ngIf="cont.type==='Text'">
-                <p>
-                  {{cont.text}}
+                <p [innerHTML]="cont.text">
+
                 </p>
 
                 <!--              <h3><strong>Maecenas non convallis quam, eu sodales justo. Pellentesque quis lectus elit. Lorem ipsum-->
@@ -58,7 +58,7 @@
               </div><!-- end pp -->
 
               <div class="pp code-only" *ngIf="cont.type==='Code'">
-                <p> {{cont.text}}
+                <p [innerHTML]="cont.text">
                 </p>
 
                 <!--              <h3><strong>Maecenas non convallis quam, eu sodales justo. Pellentesque quis lectus elit. Lorem ipsum-->
@@ -67,9 +67,6 @@
               </div><!-- end pp -->
               <div class="pp image-only" *ngIf="cont.type==='Image'">
                 <img src=" {{cont.imageUrl}}" alt="" class="img-fluid img-fullwidth">
-              </div>
-              <div class="pp strong-text" *ngIf="cont.type==='StrongText'">
-                <h3><strong> {{cont.text}}</strong></h3>
               </div>
               <div class="pp text-list" *ngIf="cont.type==='TextList'">
 
