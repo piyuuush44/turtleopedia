@@ -49,12 +49,9 @@ export class CoreEffects {
   fetchFilteredPosts = createEffect(() =>
     this.actions$.pipe(
       ofType(CoreAction.TRY_FETCH_FILTER_POSTS),
-      map((data) => {
-        console.log('fetchFilteredPosts', data)
-        return data['url']
-      }),
+      map((data) => data.payload),
       switchMap((url) =>
-        this.blogService.getFilteredPosts().pipe(
+        this.blogService.getFilteredPosts(url).pipe(
           map((response: HttpResponse<any>) => {
             return CoreAction.SAVE_FILTER_POSTS_DATA({payload: response.body})
           })

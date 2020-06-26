@@ -27,5 +27,5 @@ export const SAVE_POST = createAction(
 );
 export const TRY_FETCH_FILTER_POSTS = createAction(
   'TRY_FETCH_FILTER_POSTS',
-  props<{ url: String }>()
+  props<{ payload: String }>()
 )

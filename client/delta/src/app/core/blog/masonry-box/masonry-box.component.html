@@ -1,7 +1,6 @@
 <section class="section first-section">
   <div class="container">
-    <div id="myCarousel" class="carousel slide carousel-multi-item" data-ride="carousel" >
-
+    <div id="myCarousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
 
@@ -9,202 +8,209 @@
         <div class="carousel-item active">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[0]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[0].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
-                  <span class="bg-aqua card-text">
+                  <span class="bg-aqua card-text text-white">
                     <a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                       title="">{{data.recent_posts[0].category}}
+                       title="">{{data.recent_posts[0].category|titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                         title="">{{data.recent_posts[0].title}}</a></h4>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
+                                            title="">{{data.recent_posts[0].title}}</a></h5>
                   <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                            title="">{{data.recent_posts[0].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                                              title="">{{data.recent_posts[0].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-4 ">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[1]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[1].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
                   <span class="bg-aqua card-text">
+
+
                     <a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
-                       title="">{{data.recent_posts[1].category}}
+                       title="">{{data.recent_posts[1].category | titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
-                         title="">{{data.recent_posts[1].title}}</a></h4>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
+                                            title="">{{data.recent_posts[1].title}}</a></h5>
                   <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[1].slug_url}}"
-                            title="">{{data.recent_posts[1].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                                              title="">{{data.recent_posts[1].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-4 ">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[2]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[2].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
                   <span class="bg-aqua card-text">
+
+
                     <a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
-                       title="">{{data.recent_posts[2].category}}
+                       title="">{{data.recent_posts[2].category | titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
-                         title="">{{data.recent_posts[2].title}}</a></h4>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
+                                            title="">{{data.recent_posts[2].title}}</a></h5>
                   <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[2].slug_url}}"
-                            title="">{{data.recent_posts[2].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                                              title="">{{data.recent_posts[2].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
+
           </div>
 
         </div>
-        <!--/.First slide-->
-
-        <!--Second slide-->
         <div class="carousel-item">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[3]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[3].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
                   <span class="bg-aqua card-text">
+
+
                     <a routerLink="/blog/singleBlog/{{data.recent_posts[3].slug_url}}"
-                       title="">{{data.recent_posts[3].category}}
+                       title="">{{data.recent_posts[3].category | titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[3].slug_url}}"
-                         title="">{{data.recent_posts[3].title}}</a></h4>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[3].slug_url}}"
+                                            title="">{{data.recent_posts[3].title}}</a></h5>
                   <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[3].slug_url}}"
-                            title="">{{data.recent_posts[3].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                                              title="">{{data.recent_posts[3].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-4 ">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[4]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[4].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
                   <span class="bg-aqua card-text">
+
+
                     <a routerLink="/blog/singleBlog/{{data.recent_posts[4].slug_url}}"
-                       title="">{{data.recent_posts[4].category}}
+                       title="">{{data.recent_posts[4].category | titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[4].slug_url}}"
-                         title="">{{data.recent_posts[4].title}}</a></h4>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[4].slug_url}}"
+                                            title="">{{data.recent_posts[4].title}}</a></h5>
                   <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[4].slug_url}}"
-                            title="">{{data.recent_posts[4].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                                              title="">{{data.recent_posts[4].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[5]">
+              <div class="card mb-2">
+                <img class="card-img-top" src="{{data.recent_posts[5].image_url}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <span class="bg-aqua card-text">
+
+
+                    <a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
+                       title="">{{data.recent_posts[5].category | titlecase}}
+                    </a>
+                  </span>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
+                                            title="">{{data.recent_posts[5].title}}</a></h5>
+                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
+                                              title="">{{data.recent_posts[5].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-4 ">
-              <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
-                <div class="card-body">
-                  <span class="bg-aqua card-text">
-                    <a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
-                       title="">{{data.recent_posts[5].category}}
-                    </a>
-                  </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
-                         title="">{{data.recent_posts[5].title}}</a></h4>
-                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[5].slug_url}}"
-                            title="">{{data.recent_posts[5].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
-        <!--/.Second slide-->
-
-        <!--Third slide-->
         <div class="carousel-item">
 
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[6]">
               <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
+                <img class="card-img-top" src="{{data.recent_posts[6].image_url}}"
+                     alt="Card image cap">
                 <div class="card-body">
                   <span class="bg-aqua card-text">
-                    <a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                       title="">{{data.recent_posts[6].category}}
+
+
+                    <a routerLink="/blog/singleBlog/{{data.recent_posts[6].slug_url}}"
+                       title="">{{data.recent_posts[6].category | titlecase}}
                     </a>
                   </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                         title="">{{data.recent_posts[6].title}}</a></h4>
-                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                            title="">{{data.recent_posts[6].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[6].slug_url}}"
+                                            title="">{{data.recent_posts[6].title}}</a></h5>
+                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[6].slug_url}}"
+                                              title="">{{data.recent_posts[6].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[7]">
+              <div class="card mb-2">
+                <img class="card-img-top" src="{{data.recent_posts[7].image_url}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <span class="bg-aqua card-text">
+
+
+                    <a routerLink="/blog/singleBlog/{{data.recent_posts[7].slug_url}}"
+                       title="">{{data.recent_posts[7].category | titlecase}}
+                    </a>
+                  </span>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[7].slug_url}}"
+                                            title="">{{data.recent_posts[7].title}}</a></h5>
+                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[7].slug_url}}"
+                                              title="">{{data.recent_posts[7].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-lg-4 col-sm-4" *ngIf="data.recent_posts[8]">
+              <div class="card mb-2">
+                <img class="card-img-top" src="{{data.recent_posts[8].image_url}}"
+                     alt="Card image cap">
+                <div class="card-body">
+                  <span class="bg-aqua card-text">
+
+
+                    <a routerLink="/blog/singleBlog/{{data.recent_posts[8].slug_url}}"
+                       title="">{{data.recent_posts[8].category | titlecase}}
+                    </a>
+                  </span>
+                  <h5 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[8].slug_url}}"
+                                            title="">{{data.recent_posts[8].title}}</a></h5>
+                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[8].slug_url}}"
+                                              title="">{{data.recent_posts[8].createdAt|date}}</a></small>
+                  <small class="card-text"><a title=""> By Amanda</a></small>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-4 ">
-              <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
-                <div class="card-body">
-                  <span class="bg-aqua card-text">
-                    <a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                       title="">{{data.recent_posts[7].category}}
-                    </a>
-                  </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                         title="">{{data.recent_posts[7].title}}</a></h4>
-                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                            title="">{{data.recent_posts[7].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-4 ">
-              <div class="card mb-2">
-                <img class="card-img-top" src="assets/upload/garden_cat_03.jpg"
-                  alt="Card image cap">
-                <div class="card-body">
-                  <span class="bg-aqua card-text">
-                    <a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                       title="">{{data.recent_posts[8].category}}
-                    </a>
-                  </span>
-                  <h4 class="card-title"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                         title="">{{data.recent_posts[8].title}}</a></h4>
-                  <small class="card-text"><a routerLink="/blog/singleBlog/{{data.recent_posts[0].slug_url}}"
-                            title="">{{data.recent_posts[8].createdAt}}</a></small>
-                  <small class="card-text"><a title="">by Amanda</a></small>
-                </div>
-              </div>
-            </div>
           </div>
 
         </div>
-        <!--/.Third slide-->
-        <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
+
+
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
       </div>
     </div>
   </div>

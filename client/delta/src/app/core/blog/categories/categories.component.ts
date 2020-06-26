@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe(params => {
       this.category_id = params.get('category_id')
     });
-    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({url: 'http://delta/filterPosts?category=' + this.category_id.toLowerCase() + '&limit=6&offset=0'}));
+    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: '?category=' + this.category_id.toLowerCase() + '&limit=6&offset=0'}));
 
     this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
       value => {

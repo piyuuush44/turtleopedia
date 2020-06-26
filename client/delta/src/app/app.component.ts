@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(CoreActions.TRY_FETCH_WEBSITE_DATA());
+    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: ''}));
   }
 
   title = 'delta';

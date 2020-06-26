@@ -1,7 +1,13 @@
 .blog-box, .row {
   padding: 10px !important;
 }
+
 body {
-    font: 20px Montserrat, sans-serif;
-    line-height: 1.8;
-  }
+  font: 20px Montserrat, sans-serif;
+  line-height: 1.8;
+}
+
+.img-fluid-home-post {
+  height: 200px;
+  width: 100%;
+}

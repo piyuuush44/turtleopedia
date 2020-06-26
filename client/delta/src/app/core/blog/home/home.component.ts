@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({url: 'http://delta/filterPosts?limit=6&offset=0'}));
+    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: ''}));
 
     this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
       value => {
