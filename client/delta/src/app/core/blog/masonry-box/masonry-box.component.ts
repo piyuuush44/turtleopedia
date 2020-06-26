@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {WebdataModel} from "../../model/webdata.model";
-import {select, Store} from "@ngrx/store";
-import {AppState} from "../../../store/app.reducer";
-import {coreStateWebsiteDataSelector} from "../../store/core.selector";
+import {WebdataModel} from '../../model/webdata.model';
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../../store/app.reducer';
+import {coreStateWebsiteDataSelector} from '../../store/core.selector';
 
 @Component({
   selector: 'app-masonry-box',
@@ -18,9 +18,9 @@ export class MasonryBoxComponent implements OnInit {
   ngOnInit(): void {
     this.store.pipe(select(coreStateWebsiteDataSelector)).subscribe(
       value => {
-        this.data = value
+        this.data = value;
       }
-    )
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-blog',
@@ -16,9 +16,9 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(
       value => {
-        this.showMasonBox = this.location.path() === '/blog/home'
+        this.showMasonBox = this.location.path() === '/blog/home';
       }
-    )
+    );
 
   }
 

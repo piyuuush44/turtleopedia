@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {blogCategories} from "../../../shared/constants";
+import {blogCategories} from '../../../shared/constants';
 
 @Component({
   selector: 'app-header',
@@ -7,12 +7,12 @@ import {blogCategories} from "../../../shared/constants";
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  data: Array<String>;
+  data: Array<string>;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.data = blogCategories
+    this.data = blogCategories;
   }
 }

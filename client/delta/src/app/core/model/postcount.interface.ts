@@ -1,4 +1,5 @@
 export interface PostCount {
-  _id: String;
-  count: Number;
+  // tslint:disable-next-line
+  _id: string;
+  count: number;
 }
