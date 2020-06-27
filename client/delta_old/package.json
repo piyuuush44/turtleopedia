@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port=4300",
+    "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,11 +19,11 @@
     "@angular/platform-browser": "~9.0.5",
     "@angular/platform-browser-dynamic": "~9.0.5",
     "@angular/router": "~9.0.5",
-    "@ngrx/effects": "^9.2.0",
-    "@ngrx/store": "^9.2.0",
+    "@ngrx/effects": "^9.1.2",
+    "@ngrx/store": "^9.1.2",
     "bootstrap": "^4.5.0",
     "jquery": "^3.5.1",
-    "rxjs": "^6.5.5",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
