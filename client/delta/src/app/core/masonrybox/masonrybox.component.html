@@ -3,21 +3,21 @@
         <div class="owl-big-banner owl-carousel" #carousel>
             <div class="item">
                 <div class="overlay"></div>
-                <img src="{{data.top_posts[0].image_url}}" alt="">
+                <img src="{{data.top_posts[0] ? data.top_posts[0].image_url:''}}" alt="">
                 <div class="item-content">
                     <div class="main-content">
                         <div class="meta-category">
-                            <span>{{data.top_posts[0].category}}</span>
+                            <span>{{data.top_posts[0] ? data.top_posts[0].category : ''}}</span>
                         </div>
-                        <a routerLink="/b/singleBlog/{{data.top_posts[0].slug_url}}">
-                            <h4>{{data.top_posts[0].title| slice: 0:50 }}{{data.top_posts[0].title.length > 50 ? '...' : ''}}</h4>
+                        <a routerLink="/b/singleBlog/{{data.top_posts[0] ? data.top_posts[0].slug_url : ''}}">
+                            <h4>{{data.top_posts[0] ? (data.top_posts[0].title| slice: 0:50) : ''}}{{data.top_posts[0] ? (data.top_posts[0].title.length > 50 ? '...' : '') : ''}}</h4>
                         </a>
                         <ul class="post-info">
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[0].slug_url}}">{{data.top_posts[0].createdAt|date}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[0] ? data.top_posts[0].slug_url:''}}">{{data.top_posts[0] ? (data.top_posts[0].createdAt|date) : ''}}</a>
                             </li>
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[0].slug_url}}">{{data.top_posts[0].no_of_views}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[0] ? data.top_posts[0].slug_url:''}}">{{data.top_posts[0] ? data.top_posts[0].no_of_views : ''}}</a>
                             </li>
                         </ul>
                     </div>
@@ -25,21 +25,21 @@
             </div>
             <div class="item">
                 <div class="overlay"></div>
-                <img src="{{data.top_posts[1].image_url}}" alt="">
+                <img src="{{data.top_posts[1] ? data.top_posts[1].image_url:''}}" alt="">
                 <div class="item-content">
                     <div class="main-content">
                         <div class="meta-category">
-                            <span>{{data.top_posts[1].category}}</span>
+                            <span>{{data.top_posts[1] ? data.top_posts[1].category : ''}}</span>
                         </div>
-                        <a routerLink="/b/singleBlog/{{data.top_posts[1].slug_url}}">
-                            <h4>{{data.top_posts[1].title|slice: 0:50}}{{data.top_posts[1].title.length > 50 ? '...' : ''}}</h4>
+                        <a routerLink="/b/singleBlog/{{data.top_posts[1] ? data.top_posts[1].slug_url : ''}}">
+                            <h4>{{data.top_posts[1] ? (data.top_posts[1].title| slice: 0:50) : ''}}{{data.top_posts[1] ? (data.top_posts[1].title.length > 50 ? '...' : '') : ''}}</h4>
                         </a>
                         <ul class="post-info">
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[1].slug_url}}">{{data.top_posts[1].createdAt|date}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[1] ? data.top_posts[1].slug_url:''}}">{{data.top_posts[1] ? (data.top_posts[1].createdAt|date) : ''}}</a>
                             </li>
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[1].slug_url}}">{{data.top_posts[1].no_of_views}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[1] ? data.top_posts[1].slug_url:''}}">{{data.top_posts[1] ? data.top_posts[1].no_of_views : ''}}</a>
                             </li>
                         </ul>
                     </div>
@@ -47,21 +47,21 @@
             </div>
             <div class="item">
                 <div class="overlay"></div>
-                <img src="{{data.top_posts[2].image_url}}" alt="">
+                <img src="{{data.top_posts[2] ? data.top_posts[2].image_url:''}}" alt="">
                 <div class="item-content">
                     <div class="main-content">
                         <div class="meta-category">
-                            <span>{{data.top_posts[2].category}}</span>
+                            <span>{{data.top_posts[2] ? data.top_posts[2].category : ''}}</span>
                         </div>
-                        <a routerLink="/b/singleBlog/{{data.top_posts[2].slug_url}}">
-                            <h4>{{data.top_posts[2].title|slice: 0:50}}{{data.top_posts[2].title.length > 50 ? '...' : ''}}</h4>
+                        <a routerLink="/b/singleBlog/{{data.top_posts[2] ? data.top_posts[0].slug_url : ''}}">
+                            <h4>{{data.top_posts[2] ? (data.top_posts[2].title| slice: 0:50) : ''}}{{data.top_posts[2] ? (data.top_posts[2].title.length > 50 ? '...' : '') : ''}}</h4>
                         </a>
                         <ul class="post-info">
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[2].slug_url}}">{{data.top_posts[2].createdAt|date}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[2] ? data.top_posts[2].slug_url:''}}">{{data.top_posts[2] ? (data.top_posts[2].createdAt|date) : ''}}</a>
                             </li>
                             <li>
-                                <a routerLink="/b/singleBlog/{{data.top_posts[2].slug_url}}">{{data.top_posts[2].no_of_views}}</a>
+                                <a routerLink="/b/singleBlog/{{data.top_posts[2] ? data.top_posts[2].slug_url:''}}">{{data.top_posts[2] ? data.top_posts[2].no_of_views : ''}}</a>
                             </li>
                         </ul>
                     </div>
