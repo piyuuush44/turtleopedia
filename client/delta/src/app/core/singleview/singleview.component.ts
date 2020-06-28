@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {Posts} from "../../../../../delta_old/src/app/core/model/posts.model";
-import {AppState} from "../../../../../delta_old/src/app/store/app.reducer";
-import * as CoreActions from "../../../../../delta_old/src/app/core/store/core.actions";
-import {coreStateCurrentPostDataSelector} from "../../../../../delta_old/src/app/core/store/core.selector";
-import {ActivatedRoute, Router} from "@angular/router";
-import {select, Store} from "@ngrx/store";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Posts} from '../model/posts.model';
+import {AppState} from '../../store/app.reducer';
+import * as CoreActions from '../store/core.actions';
+import {coreStateCurrentPostDataSelector} from '../store/core.selector';
+import {ActivatedRoute, Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
 
 @Component({
     selector: 'app-singleview',
     templateUrl: './singleview.component.html',
     styleUrls: ['./singleview.component.css']
 })
-export class SingleviewComponent implements OnInit {
+export class SingleviewComponent implements OnInit, OnDestroy {
     slugUrl: string;
     post: Posts;
 
@@ -27,7 +27,7 @@ export class SingleviewComponent implements OnInit {
 
         this.store.pipe(select(coreStateCurrentPostDataSelector)).subscribe(
             value => {
-                console.log('hi', value)
+                console.log('hi', value);
                 this.post = value;
             }
         );

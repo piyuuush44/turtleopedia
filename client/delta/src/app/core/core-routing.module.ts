@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {CoreComponent} from "./core.component";
-import {HomeComponent} from "./home/home.component";
-import {SingleviewComponent} from "./singleview/singleview.component";
-import {CategoryComponent} from "./category/category.component";
+import {CoreComponent} from './core.component';
+import {HomeComponent} from './home/home.component';
+import {SingleviewComponent} from './singleview/singleview.component';
+import {CategoryComponent} from './category/category.component';
 
 const routes: Routes = [
     {

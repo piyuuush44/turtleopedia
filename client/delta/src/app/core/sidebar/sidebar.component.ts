@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {WebdataModel} from "../../../../../delta_old/src/app/core/model/webdata.model";
-import {AppState} from "../../../../../delta_old/src/app/store/app.reducer";
-import {coreStateWebsiteDataSelector} from "../../../../../delta_old/src/app/core/store/core.selector";
-import {select, Store} from "@ngrx/store";
+import {WebdataModel} from '../model/webdata.model';
+import {AppState} from '../../store/app.reducer';
+import {coreStateWebsiteDataSelector} from '../store/core.selector';
+import {select, Store} from '@ngrx/store';
 
 @Component({
     selector: 'app-sidebar',

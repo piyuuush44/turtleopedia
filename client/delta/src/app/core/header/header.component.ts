@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {blogCategories} from "../../shared/constants";
+import {blogCategories} from '../../shared/constants';
 
 @Component({
     selector: 'app-header',

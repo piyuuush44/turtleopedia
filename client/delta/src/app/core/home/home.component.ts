@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FilterPostModel} from "../model/filterPost.model";
-import {AppState} from "../../store/app.reducer";
-import * as CoreActions from "../store/core.actions";
-import {coreStateFilterPostDataSelector} from "../store/core.selector";
-import {select, Store} from "@ngrx/store";
+import {FilterPostModel} from '../model/filterPost.model';
+import {AppState} from '../../store/app.reducer';
+import * as CoreActions from '../store/core.actions';
+import {coreStateFilterPostDataSelector} from '../store/core.selector';
+import {select, Store} from '@ngrx/store';
 
 @Component({
     selector: 'app-home',
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {
-                console.log(value)
+                console.log(value);
                 this.posts = value;
             }
         );

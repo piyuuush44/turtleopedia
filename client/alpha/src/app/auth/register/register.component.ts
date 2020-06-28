@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     if (this.registerFormControls.email.value.indexOf('@') === -1) {
-      alert('Please enter valid email')
+      alert('Please enter valid email');
       return;
     }
     const value = this.registerForm.getRawValue();
