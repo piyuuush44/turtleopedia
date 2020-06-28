@@ -1,0 +1,28 @@
+<app-loader></app-loader>
+
+<app-header></app-header>
+
+<!-- change class -->
+<div class="change-class"></div>
+
+<app-searchbox></app-searchbox>
+
+<app-masonrybox *ngIf="router.url === '/b/home'"></app-masonrybox>
+
+<section class="medium-gap standard-home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-lg-4">
+                <app-sidebar></app-sidebar>
+            </div>
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>
+
+<a href="#" class="go-top"><i class="fa fa-angle-up"></i></a>
+
