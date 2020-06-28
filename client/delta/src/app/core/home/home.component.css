@@ -1,0 +1,13 @@
+.post-image img {
+    height: 320px !important;
+    width: 100% !important;
+}
+
+
+/* For width 400px and larger: */
+@media only screen and (min-width: 300px) and (max-width: 700px){
+    .post-image img {
+        height: 130px !important;
+        width: 100% !important;
+    }
+}

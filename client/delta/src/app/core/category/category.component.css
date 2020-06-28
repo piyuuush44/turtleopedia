@@ -1,0 +1,29 @@
+.big-post img {
+    width: 100% !important;
+    height: 400px !important;
+}
+
+/* For width 400px and larger: */
+@media only screen and (min-width: 300px) and (max-width: 700px) {
+    .standard-post .big-post img {
+        height: 130px !important;
+        width: 100% !important;
+    }
+}
+
+.recent-post img {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+/* For width 400px and larger: */
+@media only screen and (min-width: 300px) and (max-width: 700px) {
+    .standard-post .recent-post img {
+        height: 130px !important;
+        width: 100% !important;
+    }
+}
+
+.down-content {
+    height: 350px !important;
+}

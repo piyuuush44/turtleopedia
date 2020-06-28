@@ -16,7 +16,19 @@ import {SearchboxComponent} from './searchbox/searchbox.component';
 
 
 @NgModule({
-    declarations: [HomeComponent, HeaderComponent, FooterComponent, SidebarComponent, CoreComponent, SingleviewComponent, CategoryComponent, LoaderComponent, MasonryboxComponent, AdvertisementComponent, SearchboxComponent],
+    declarations: [
+        HomeComponent,
+        HeaderComponent,
+        FooterComponent,
+        SidebarComponent,
+        CoreComponent,
+        SingleviewComponent,
+        CategoryComponent,
+        LoaderComponent,
+        MasonryboxComponent,
+        AdvertisementComponent,
+        SearchboxComponent
+    ],
     imports: [
         CommonModule,
         CoreRoutingModule,

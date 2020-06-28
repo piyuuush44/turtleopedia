@@ -1,4 +1,8 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {WebdataModel} from "../../../../../delta_old/src/app/core/model/webdata.model";
+import {AppState} from "../../../../../delta_old/src/app/store/app.reducer";
+import {coreStateWebsiteDataSelector} from "../../../../../delta_old/src/app/core/store/core.selector";
+import {select, Store} from "@ngrx/store";
 
 declare var $: any;
 
@@ -9,8 +13,9 @@ declare var $: any;
 })
 export class MasonryboxComponent implements OnInit, AfterViewInit {
     @ViewChild('carousel') el: ElementRef;
+    data: WebdataModel = new WebdataModel([], [], [], ['lifestyle']);
 
-    constructor() {
+    constructor(private store: Store<AppState>) {
     }
 
     ngAfterViewInit(): void {
@@ -47,5 +52,10 @@ export class MasonryboxComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.store.pipe(select(coreStateWebsiteDataSelector)).subscribe(
+            value => {
+                this.data = value;
+            }
+        );
     }
 }

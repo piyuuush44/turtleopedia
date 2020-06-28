@@ -13,28 +13,28 @@ import {coreStateFilterPostDataSelector} from '../../store/core.selector';
 })
 export class CategoriesComponent implements OnInit, OnDestroy {
 
-  categoryId: string;
-  posts: FilterPostModel = new FilterPostModel([], []);
+    categoryId: string;
+    posts: FilterPostModel = new FilterPostModel([], []);
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>, private router: Router) {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-  }
+    constructor(private route: ActivatedRoute, private store: Store<AppState>, private router: Router) {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    }
 
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.categoryId = params.get('category_id');
-    });
-    this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: '?category=' + this.categoryId.toLowerCase() + '&limit=6&offset=0'}));
+    ngOnInit(): void {
+      this.route.paramMap.subscribe(params => {
+        this.categoryId = params.get('category_id');
+      });
+      this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: '?category=' + this.categoryId.toLowerCase() + '&limit=6&offset=0'}));
 
-    this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
-      value => {
-        this.posts = value;
-      }
-    );
-  }
+      this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
+        value => {
+          this.posts = value;
+        }
+      );
+    }
 
-  ngOnDestroy() {
-    this.categoryId = null;
-    this.posts = null;
-  }
+    ngOnDestroy() {
+      this.categoryId = null;
+      this.posts = null;
+    }
 }
