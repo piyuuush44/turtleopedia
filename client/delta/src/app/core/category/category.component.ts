@@ -33,7 +33,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
                 this.posts = value;
                 if (this.posts.results && this.posts.results.length === 0) {
                     alert('No post found!');
-                    top.location.href = '/';
+                    this.router.navigate(['/b/home'])
                 }
             }
         );
