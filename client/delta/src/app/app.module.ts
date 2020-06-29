@@ -13,7 +13,7 @@ import {AuthEffects} from './auth/store/auth.effects';
 import {CoreEffects} from './core/store/core.effects';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
-import {LoaderInterceptorService} from "./shared/loader.interceptor";
+import {LoaderInterceptorService} from './shared/loader.interceptor';
 
 @NgModule({
     declarations: [

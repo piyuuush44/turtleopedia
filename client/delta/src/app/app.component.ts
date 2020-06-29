@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AppState} from './store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as CoreActions from './core/store/core.actions';
-import {NavigationEnd, Router} from "@angular/router";
+import {NavigationEnd, Router} from '@angular/router';
 
 
 // declare ga as a function to set and sent the events
-declare let gtag: Function;
+declare let gtag: any;
 
 @Component({
     selector: 'app-root',
@@ -26,10 +26,10 @@ export class AppComponent implements OnInit {
             if (event instanceof NavigationEnd) {
                 gtag('config', 'xx-xxxxx-xx',
                     {
-                        'page_path': event.urlAfterRedirects
+                        page_path: event.urlAfterRedirects
                     }
                 );
             }
-        })
+        });
     }
 }
