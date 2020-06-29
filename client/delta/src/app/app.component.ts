@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: ''}));
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                gtag('config', 'xx-xxxxx-xx',
+                gtag('config', 'UA-171131634-1',
                     {
                         page_path: event.urlAfterRedirects
                     }
