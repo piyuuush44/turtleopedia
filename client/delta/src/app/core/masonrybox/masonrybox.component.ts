@@ -19,6 +19,7 @@ export class MasonryboxComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        console.log('hi');
         $(this.el.nativeElement).owlCarousel({
                 loop: true,
                 nav: true,

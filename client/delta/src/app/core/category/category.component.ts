@@ -5,6 +5,7 @@ import * as CoreActions from '../../core/store/core.actions';
 import {coreStateFilterPostDataSelector} from '../store/core.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
+import * as endPoints from '../../shared/serverEndpoints';
 
 @Component({
     selector: 'app-category',
@@ -12,7 +13,8 @@ import {select, Store} from '@ngrx/store';
     styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit, OnDestroy {
-
+    pageNumber = 1;
+    pageLimit = 5;
     categoryId: string;
     posts: FilterPostModel = new FilterPostModel([], {next: null, previous: null});
 
@@ -23,10 +25,13 @@ export class CategoryComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
             this.categoryId = params.get('category_id');
+            const limit = this.pageLimit * this.pageNumber;
+            const offset = limit - this.pageLimit;
+            const url = `${endPoints.FILTER_POSTS}?category=${
+                this.categoryId.toLowerCase()
+            }&limit=${limit}&offset=${offset}`;
+            this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
         });
-        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS(
-            {payload: '?category=' + this.categoryId.toLowerCase() + '&limit=6&offset=0'}
-        ));
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {
@@ -44,4 +49,11 @@ export class CategoryComponent implements OnInit, OnDestroy {
         this.posts = null;
     }
 
+    paginateForward() {
+        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: this.posts._links.next}));
+    }
+
+    paginateBackward() {
+        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: this.posts._links.previous}));
+    }
 }

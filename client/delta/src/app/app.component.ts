@@ -3,6 +3,7 @@ import {AppState} from './store/app.reducer';
 import {Store} from '@ngrx/store';
 import * as CoreActions from './core/store/core.actions';
 import {NavigationEnd, Router} from '@angular/router';
+import * as endPoints from './shared/serverEndpoints';
 
 
 // declare ga as a function to set and sent the events
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(CoreActions.TRY_FETCH_WEBSITE_DATA());
-        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: ''}));
+        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: endPoints.FILTER_POSTS}));
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 gtag('config', 'UA-171131634-1',

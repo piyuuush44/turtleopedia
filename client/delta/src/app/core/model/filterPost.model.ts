@@ -4,7 +4,7 @@ export class FilterPostModel {
     constructor(
         public results: Posts[],
         // tslint:disable-next-line
-        public _link: {
+        public _links: {
             previous: string,
             next: string,
         }
