@@ -3,6 +3,8 @@
 .env/
 coverage/
 
+**/dist/
+
 # Miscellaneous
 *.class
 *.log
