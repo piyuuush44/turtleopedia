@@ -4,7 +4,7 @@ import {AppState} from '../../store/app.reducer';
 import * as CoreActions from '../store/core.actions';
 import {coreStateFilterPostDataSelector} from '../store/core.selector';
 import {select, Store} from '@ngrx/store';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -12,8 +12,8 @@ import {ActivatedRoute} from "@angular/router";
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    pageNumber: number = 1;
-    pageLimit: number = 5;
+    pageNumber = 1;
+    pageLimit = 5;
     posts: FilterPostModel = new FilterPostModel([], {next: null, previous: null});
 
     constructor(private store: Store<AppState>, private route: ActivatedRoute) {
