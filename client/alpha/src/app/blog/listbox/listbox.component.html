@@ -134,7 +134,7 @@
 <!--</div>-->
 
 
-<div class="mailbox-item-preview" *ngIf="showPost">
+<div class="mailbox-item-preview border-5" *ngIf="showPost">
   <div class="mail-container">
     <div class="mail-header">
       <div class="mail-title">
@@ -145,47 +145,32 @@
       <div class="mail-author">
         <img src="../../../assets/images/avatars/profile-image-2.png" alt="">
         <div class="mail-author-info">
-          <span class="mail-author-name">William Adams</span>
-          <span class="mail-author-address">w.adams@gmail.com</span>
+          <span class="mail-author-name">{{selectedBlog.user_id.email}}</span>
+          <!--          <span class="mail-author-address">w.adams@gmail.com</span>-->
         </div>
       </div>
       <div class="mail-other-info">
-        <span>18:01</span>
+        <span>{{selectedBlog.created_at|date}}</span>
       </div>
     </div>
     <div class="divider"></div>
-    <div class="mail-text">
-      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
-        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
-        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
-        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
-        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
-        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
-        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
-        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
-        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
-    </div>
-    <div class="mail-text">
-      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
-        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
-        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
-        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
-        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
-        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
-        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
-        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
-        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
-    </div>
-    <div class="mail-text">
-      <p>Dear Sir/Madam,<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit molestie
-        ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum leo, vitae
-        posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus, tellus ut
-        consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero sit amet
-        felis tincidunt mattis.<br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ante id elit
-        molestie ornare. Pellentesque porttitor facilisis risus, sit amet semper ante efficitur et. Etiam quis rutrum
-        leo, vitae posuere augue. Donec odio leo, dapibus id sollicitudin vel, luctus sit amet justo. Aenean cursus,
-        tellus ut consectetur commodo, est dolor fringilla mauris, nec tristique magna orci in diam. Cras eget libero
-        sit amet felis tincidunt mattis.<br><br>Waiting your reply ASAP,<br>Thanks in advance.</p>
+    <div *ngFor="let cont of selectedBlog.content">
+      <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
+      <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
+      </blockquote>
+      <img src="{{cont.imageUrl}}" alt="" *ngIf="cont.type==='Image'">
+      <div class="row" *ngIf="cont.type==='ImageText'">
+        <div class="col-md-4">
+          <img src="{{cont.imageUrl}}" alt="" style="width: 200px; height: 200px">
+        </div>
+        <div class="col-md-8">
+          <p class="first-paragraph" [innerHTML]="cont.text"></p>
+        </div>
+      </div>
+      <iframe style="width: 100%; height: 300px; border: none;"
+              src="{{cont.videoUrl}}"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
     </div>
     <div class="mail-actions">
       <button class="btn btn-secondary">Edit</button>
@@ -194,6 +179,3 @@
     </div>
   </div>
 </div>
-
-<!--<div class="mailbox-compose-overlay"></div>-->
-<!--<div class="mailbox-item-overlay"></div>-->

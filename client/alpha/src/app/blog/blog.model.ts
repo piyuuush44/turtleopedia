@@ -12,7 +12,7 @@ export class Blog {
   category: string[];
   tags: string[];
   user_id: ProfileModel;
-  content: Array<{ type: string, text: string, image_url: string }>;
+  content: Array<{ type: string, text: string, imageUrl: string, videoUrl: string }>;
   created_at: string;
   updated_at: string;
   images: {

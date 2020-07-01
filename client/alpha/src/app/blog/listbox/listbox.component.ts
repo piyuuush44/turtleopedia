@@ -23,7 +23,6 @@ export class ListboxComponent implements OnInit {
 
     this.store.pipe(select(blogStateBlogsSelector)).subscribe(
       value => {
-        console.log(value);
         this.blogs = value;
       }
     );
