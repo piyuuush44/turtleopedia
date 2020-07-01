@@ -30,6 +30,7 @@ exports.setupMocksAndServer = async () => {
     mockedServer: server,
     token: token,
     accessToken: process.env.AUTH0_TEST_ACCESS_TOKEN,
+    user: user,
   };
 };
 

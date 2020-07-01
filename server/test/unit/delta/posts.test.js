@@ -44,21 +44,26 @@ describe('Create a new Post /delta/posts', () => {
 describe('getPostById', () => {
   it('should return 200 for for id passed in parameter of a post',
       async () => {
+        const {mockedServer, token, user} = await setup.setupMocksAndServer();
         const post = new Posts();
         post.title = 'hi';
         post.category = 'technology';
         post.content = [];
+        post.user_id = user._id;
         // post.no_of_views=post.no_of_views;
 
         const posts = await post.save();
 
         const url = `/delta/post/${posts._id}`;
 
-        const response = await server.get(url);
+        const response = await mockedServer.get(url).set({
+          Authorization: token,
+        });
 
         expect(response.status)
             .toEqual(200);
-        expect(response.body.result.post.no_of_views).toEqual((posts.no_of_views + 1));
+        expect(response.body.result.post.no_of_views)
+            .toEqual((posts.no_of_views + 1));
         expect(response.body.result.post._id).toMatch(posts._id.toString());
         expect(response.body.result.post.title).toEqual(posts.title);
         expect(response.body.result.post.category).toEqual(posts.category);
@@ -77,10 +82,12 @@ describe('getPostById', () => {
 
 describe('should update a post -> putUpdatePostById', () => {
   it('should update the post by ID ', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
     const post = new Posts();
     post.title = 'hi';
     post.category = 'technology';
     post.content = [];
+    post.user_id = user._id;
 
     const posts = await post.save();
 
@@ -92,7 +99,9 @@ describe('should update a post -> putUpdatePostById', () => {
       content: [],
     };
 
-    const response = await server.put(url).send(body);
+    const response = await mockedServer.put(url).send(body).set({
+      Authorization: token,
+    });
 
     expect(response.status)
         .toEqual(200);
@@ -118,14 +127,17 @@ describe('should update a post -> putUpdatePostById', () => {
 
 describe('should delete a post -> deletePostById', () => {
   it('delete a post by id', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
     const post = new Posts();
     post.title = 'hi';
     post.category = 'technology';
     post.content = [];
-
+    post.user_id = user._id;
     const posts = await post.save();
     const url = `/delta/post/${posts._id}`;
-    const response = await server.delete(url);
+    const response = await mockedServer.delete(url).set({
+      Authorization: token,
+    });
 
     expect(response.status)
         .toEqual(200);
@@ -143,14 +155,17 @@ describe('should delete a post -> deletePostById', () => {
 
 describe('should get a posts by category -> getFilterPost', () => {
   it('should get the posts by category ', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
     const post = new Posts();
     post.title = 'hi';
     post.category = 'technology';
     post.content = [];
-
+    post.user_id = user._id;
     const posts = await post.save();
     const url = `/delta/filterPosts?category=${posts.category}`;
-    const response = await server.get(url);
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
     expect(response.status)
         .toEqual(200);
     expect(response.body.results[0].category).toEqual(posts.category);
