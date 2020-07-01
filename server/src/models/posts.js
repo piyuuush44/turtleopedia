@@ -31,8 +31,7 @@ const schema = new mongoose.Schema({
   },
   tags: {type: Array},
   user_id: {
-    // todo in future keep required as true
-    type: mongoose.Schema.Types.ObjectID, ref: 'Users', required: false,
+    type: mongoose.Schema.Types.ObjectID, ref: 'users', required: true,
   },
   category: {
     type: String,
@@ -48,4 +47,4 @@ schema.post('save', () => {
 });
 
 const myDB = mongoose.connection.useDb(process.env.MONGO_DB_DELTA);
-module.exports = myDB.model('Posts', schema);
+module.exports = myDB.model('posts', schema);

@@ -1,4 +1,5 @@
-/* tslint:disable */
+import {ProfileModel} from "../auth/profile.model";
+
 export class Blog {
   _id: string;
   title: string;
@@ -9,7 +10,10 @@ export class Blog {
   feature_content: string;
   category: string[];
   tags: string[];
+  user_id: ProfileModel;
   content: Array<{ type: string, text: string, image_url: string }>;
+  created_at: string;
+  updated_at: string;
   images: {
     default: boolean,
     id: string,
@@ -34,5 +38,8 @@ export class Blog {
     this.tags = blog.tags || [];
     this.images = blog.images || [];
     this.content = blog.contact || [];
+    this.user_id = blog.user_id || null;
+    this.created_at = blog.created_at || null;
+    this.updated_at = blog.updated_at || null;
   }
 }

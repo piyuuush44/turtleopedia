@@ -39,13 +39,13 @@
                     </div>
                   </div>
                   <div class="mail-author">
-                    <img src="../../../assets/images/avatars/profile-image.png"> <span>William Adams</span>
+                    <img src="../../../assets/images/avatars/profile-image.png"> <span>{{blog.user_id.email}}</span>
                   </div>
                   <div class="mail-title">
                     {{blog.title}}
                   </div>
                   <div class="mail-date">
-                    2hrs
+                    {{blog.created_at|date}}
                   </div>
                   <div class="mail-star">
                     <i class="material-icons">star_border</i>

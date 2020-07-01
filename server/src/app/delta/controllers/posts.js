@@ -1,5 +1,6 @@
 const Comments = require('../../../models/comments');
 const Posts = require('../../../models/posts');
+const Users = require('../../../models/user');
 const ClientError = require('../../../errors').client;
 const controllerUtils = require('../../../utils/controller_utils');
 const constants = require('../../../utils/constants');
@@ -75,7 +76,8 @@ exports.getPostBySlugUrl = async (req, res, next) => {
 exports.getPosts = async (req, res, next) => {
   const limit = +req.query.limit || 10;
   const offset = +req.query.offset || 0;
-  const posts = await Posts.find().skip(offset).limit(limit);
+  const posts = await Posts.find().skip(offset).limit(limit)
+      .populate({path: 'user_id', model: Users});
   const count = await Posts.count();
   return res.json(controllerUtils.getPaginatedResponse(
       posts,

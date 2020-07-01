@@ -14,4 +14,4 @@ schema.post('save', () => {
 });
 
 const myDB = mongoose.connection.useDb(process.env.MONGO_DB_DELTA);
-module.exports = myDB.model('Comments', schema);
+module.exports = myDB.model('subscription', schema);

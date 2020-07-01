@@ -23,4 +23,4 @@ const schema = new mongoose.Schema({
 );
 
 const myDB = mongoose.connection.useDb(process.env.MONGO_DB_DELTA);
-module.exports = myDB.model('Users', schema);
+module.exports = myDB.model('users', schema);

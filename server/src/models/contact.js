@@ -9,4 +9,4 @@ const schema = new mongoose.Schema({
 );
 
 const myDB = mongoose.connection.useDb(process.env.MONGO_DB_DELTA);
-module.exports = myDB.model('Contact', schema);
+module.exports = myDB.model('contact', schema);
