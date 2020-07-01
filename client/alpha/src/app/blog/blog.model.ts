@@ -21,7 +21,7 @@ export class Blog {
     url: string,
     type: string
   }[];
-  
+
   constructor(blog?) {
     blog = blog || {};
     this._id = blog._id || null;
