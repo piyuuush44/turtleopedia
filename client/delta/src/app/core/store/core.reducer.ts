@@ -5,24 +5,24 @@ import {FilterPostModel} from '../model/filterPost.model';
 import {Posts} from '../model/posts.model';
 
 export interface CoreState {
-  data: WebdataModel;
-  currentPost: Posts;
-  fitlerPosts: FilterPostModel;
+    data: WebdataModel;
+    currentPost: Posts;
+    filterPosts: FilterPostModel;
 }
 
 const initialState: CoreState = {
-  data: new WebdataModel([], [], [], []),
-  fitlerPosts: new FilterPostModel([], {}, ),
-  currentPost: new Posts('', '', '', '', 0, '', [], false, [], [], '', '')
+    data: new WebdataModel([], [], [], []),
+    filterPosts: new FilterPostModel([], {next: null, previous: null},),
+    currentPost: new Posts('', '', '', '', 0, '', [], false, [], [], '', '')
 };
 
 const reducer = createReducer(initialState,
-  on(CoreActions.SAVE_WEBSITE_DATA, (state, action) => ({...state, data: action.payload})),
-  on(CoreActions.SAVE_FILTER_POSTS_DATA, ((state, action) => ({...state, fitlerPosts: action.payload}))),
-  on(CoreActions.SAVE_POST, ((state, action) => ({...state, currentPost: action.payload}))),
+    on(CoreActions.SAVE_WEBSITE_DATA, (state, action) => ({...state, data: action.payload})),
+    on(CoreActions.SAVE_FILTER_POSTS_DATA, ((state, action) => ({...state, filterPosts: action.payload}))),
+    on(CoreActions.SAVE_POST, ((state, action) => ({...state, currentPost: action.payload}))),
 );
 
 
 export function CoreReducer(state: CoreState | undefined, action: Action) {
-  return reducer(state, action);
+    return reducer(state, action);
 }

@@ -4,6 +4,7 @@ import {AppState} from '../../store/app.reducer';
 import * as CoreActions from '../store/core.actions';
 import {coreStateFilterPostDataSelector} from '../store/core.selector';
 import {select, Store} from '@ngrx/store';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-home',
@@ -11,17 +12,24 @@ import {select, Store} from '@ngrx/store';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    posts: FilterPostModel = new FilterPostModel([], []);
+    pageNumber: number = 1;
+    pageLimit: number = 5;
+    posts: FilterPostModel = new FilterPostModel([], {next: null, previous: null});
 
-    constructor(private store: Store<AppState>) {
+    constructor(private store: Store<AppState>, private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {
-        this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: ''}));
+        this.route.paramMap.subscribe(params => {
+            this.pageNumber = +params.get('page_number');
+            const limit = this.pageLimit * this.pageNumber;
+            const offset = limit - this.pageLimit;
+            const url = `?limit=${limit}&offset=${offset}`;
+            this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
+        });
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {
-                console.log(value);
                 this.posts = value;
             }
         );

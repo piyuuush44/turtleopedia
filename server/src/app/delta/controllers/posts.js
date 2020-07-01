@@ -157,7 +157,7 @@ exports.deleteCommentById = async (req, res, next) => {
 };
 
 exports.getFilterPost = async (req, res, next) => {
-  const limit = +req.query.limit || 10;
+  const limit = +req.query.limit || 5;
   const offset = +req.query.offset || 0;
   const {category} = req.query;
   const categoryArray = category ? category.split(',') :

@@ -14,7 +14,7 @@ import {select, Store} from '@ngrx/store';
 export class CategoryComponent implements OnInit, OnDestroy {
 
     categoryId: string;
-    posts: FilterPostModel = new FilterPostModel([], []);
+    posts: FilterPostModel = new FilterPostModel([], {next: null, previous: null});
 
     constructor(private route: ActivatedRoute, private store: Store<AppState>, private router: Router) {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;

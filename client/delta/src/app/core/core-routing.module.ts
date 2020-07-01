@@ -9,7 +9,7 @@ const routes: Routes = [
     {
         path: 'b', component: CoreComponent, children: [
             {
-                path: 'home', component: HomeComponent
+                path: 'home/:page_number', component: HomeComponent
             },
             {
                 path: 'singleBlog/:slug_url', component: SingleviewComponent

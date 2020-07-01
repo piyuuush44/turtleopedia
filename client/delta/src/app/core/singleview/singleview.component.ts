@@ -27,7 +27,6 @@ export class SingleviewComponent implements OnInit, OnDestroy {
 
         this.store.pipe(select(coreStateCurrentPostDataSelector)).subscribe(
             value => {
-                console.log('hi', value);
                 this.post = value;
             }
         );

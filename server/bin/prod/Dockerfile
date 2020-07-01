@@ -1,5 +1,5 @@
 # specify the node base image with your desired version node:<version>
-FROM node:13
+FROM node:14
 
 # Exposing our application's default port
 EXPOSE 3000
