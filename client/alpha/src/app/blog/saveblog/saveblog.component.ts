@@ -1,12 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BlogService} from '../blog.service';
-import {Blog} from '../blog.model';
+import {Blog} from '../models/blog.model';
 import * as BlogActions from '../store/blog.actions';
 import {select, Store} from '@ngrx/store';
 import {BlogState} from '../store/blog.reducer';
-import {blogStateContentImageUrlSelector, blogStateImageUrlSelector} from '../store/blog.selector';
+import {
+  blogStateBlogsSelector,
+  blogStateContentImageUrlSelector,
+  blogStateImageUrlSelector
+} from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
+import {ActivatedRoute} from "@angular/router";
+import {FilterPostModel} from "../models/filterPost.model";
 
 @Component({
   selector: 'app-saveblog',
@@ -26,17 +32,33 @@ export class SaveblogComponent implements OnInit {
   contentImage: File = null;
   previewPostImage: any = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
   currentIndex: number;
+  id: string;
+  editMode = false;
+  blogs: FilterPostModel;
 
   constructor(
     private blogService: BlogService,
     private formBuilder: FormBuilder,
-    private store: Store<BlogState>
+    private store: Store<BlogState>,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
+    this.store.pipe(select(blogStateBlogsSelector)).subscribe(
+      value => {
+        this.blogs = value;
+      }
+    );
+    this.route.paramMap.subscribe(params => {
+      if (params.get('id')) {
+        this.id = params.get('id');
+        this.editMode = true;
+      }
+    });
     // Set the default
-    this.blog = new Blog();
+    this.blog = this.editMode ? new Blog(this.blogs.results.find((blog => blog._id === this.id))) : new Blog();
+
     this.currentIndex = 0;
     this.content.push({type: 'Text', addButton: false});
     this.blogForm = this.createBlogForm();
@@ -65,7 +87,8 @@ export class SaveblogComponent implements OnInit {
       return;
     }
     const value = this.blogForm.getRawValue();
-    this.store.dispatch(BlogActions.SAVE_BLOG({payload: value}));
+    const action = BlogActions.SAVE_BLOG({payload: value})
+    this.store.dispatch(action);
   }
 
   addContent(value: string) {

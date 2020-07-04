@@ -23,15 +23,15 @@
                 </div>
               </div>
               <div class="inbox-page-count">
-                Showing 1-50 of 3089
+                Showing {{blogs.results.length}} results
               </div>
               <div class="inbox-search">
                 <input type="text" class="form-control" id="searchInbox" placeholder="Search inbox">
               </div>
             </div>
             <ul class="inbox-list list-unstyled">
-              <li *ngFor="let blog of blogs; let i=index">
-                <a (click)="togglePostView(i)" style="cursor: pointer">
+              <li *ngFor="let blog of blogs.results; let i=index">
+                <a style="cursor: pointer">
                   <div class="mail-checkbox">
                     <div class="custom-control custom-checkbox form-group">
                       <input type="checkbox" class="custom-control-input" id="mail1">
@@ -41,7 +41,7 @@
                   <div class="mail-author">
                     <img src="../../../assets/images/avatars/profile-image.png"> <span>{{blog.user_id.email}}</span>
                   </div>
-                  <div class="mail-title">
+                  <div class="mail-title" (click)="togglePostView(i)">
                     {{blog.title}}
                   </div>
                   <div class="mail-date">
@@ -50,11 +50,12 @@
                   <div class="mail-star">
                     <i class="material-icons">star_border</i>
                   </div>
+                  <button class="btn btn-primary rounded-pill" (click)="onEdit(i)">Edit</button>
                 </a>
               </li>
 
             </ul>
-            <div *ngIf="blogs.length===0" class="mail-author text-center">
+            <div *ngIf="blogs.results.length === 0" class="mail-author text-center">
               <span
                 class="text-capitalize text-center font-weight-bold">No posts found!        Please add some!      </span>
 
@@ -62,9 +63,15 @@
             <div class="inbox-pagination">
               <nav>
                 <ul class="pagination">
-                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+                  <li class="page-item" *ngIf="blogs._links.previous"><a style="cursor: pointer"
+                                                                         (click)="paginateBackward()"
+                                                                         class="page-link">Previous</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link">{{pageNumber}}</a></li>
+                  <li class="page-item" *ngIf="blogs._links.next"><a style="cursor: pointer" (click)="paginateForward()"
+                                                                     class="page-link">Next</a>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -74,64 +81,6 @@
     </div>
   </div>
 </div>
-
-<!--<div class="mailbox-compose">-->
-<!--  <div class="mailbox-compose-content">-->
-<!--    <div class="mailbox-compose-header">-->
-<!--      <h5>Compose Message</h5>-->
-<!--    </div>-->
-<!--    <div class="mailbox-compose-body">-->
-<!--      <form>-->
-<!--        <div class="form-group">-->
-<!--          <input type="email" class="form-control" id="compose-email" placeholder="To">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <input type="text" class="form-control" placeholder="Subject">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <input type="text" class="form-control" placeholder="Cc">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--          <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>-->
-<!--        </div>-->
-<!--        <div class="compose-options">-->
-<!--          <a href="#"><i class="material-icons">text_format</i></a>-->
-<!--          <a href="#"><i class="material-icons">attach_file</i></a>-->
-<!--          <a href="#"><i class="material-icons">insert_link</i></a>-->
-<!--          <a href="#"><i class="material-icons">insert_emoticon</i></a>-->
-<!--          <a href="#"><i class="material-icons-outlined">insert_photo</i></a>-->
-<!--          <a href="#"><i class="material-icons">delete_outline</i></a>-->
-<!--        </div>-->
-<!--        <div class="compose-buttons">-->
-<!--          <a href="#" class="btn btn-block btn-success">Send</a>-->
-<!--          <a href="#" class="btn btn-block btn-danger">Cancel</a>-->
-<!--        </div>-->
-<!--      </form>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="modal fade show" *ngIf="showPost" id="exampleModalCenter" tabindex="-1" role="dialog"-->
-<!--     aria-labelledby="exampleModalCenterTitle" style="display: block; padding-right: 15px;" aria-modal="true">-->
-<!--  <div class="modal-dialog modal-dialog-centered" role="document">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <i class="material-icons">close</i>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam.-->
-<!--        Morbi leo risus, porta ac consectetur ac, vestibulum at eros.-->
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--        <button type="button" class="btn btn-primary">Save changes</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
 
 <div class="mailbox-item-preview border-5" *ngIf="showPost">

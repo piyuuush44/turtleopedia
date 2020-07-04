@@ -1,4 +1,4 @@
-import {ProfileModel} from '../auth/profile.model';
+import {ProfileModel} from '../../auth/profile.model';
 
 // tslint:disable
 export class Blog {

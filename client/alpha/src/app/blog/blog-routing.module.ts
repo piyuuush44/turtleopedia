@@ -12,11 +12,15 @@ const routes: Routes = [
   {
     path: 'save', component: SaveblogComponent, canActivate: [AuthGuardService]
   },
+  {
+    path: 'edit/:id', component: SaveblogComponent, canActivate: [AuthGuardService]
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+// @ts-ignore
 export class BlogRoutingModule {
 }

@@ -13,12 +13,12 @@ export class BlogService {
   ) {
   }
 
-  getBlog() {
-    return this.httpClient.get(ServerEndpoints.GET_POST);
+  getBlog(url:string) {
+    return this.httpClient.get(url, {observe: 'response'});
   }
 
   saveBlog(blog) {
-    return this.httpClient.post(ServerEndpoints.SAVE_POST, blog);
+    return this.httpClient.post(ServerEndpoints.SAVE_POST, blog, {observe: 'response'});
   }
 
 
