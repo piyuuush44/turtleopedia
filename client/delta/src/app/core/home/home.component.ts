@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
         const offset = limit - this.pageLimit;
         const url = `${endPoints.FILTER_POSTS}?limit=${limit}&offset=${offset}`;
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
+        this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: 'Turtleopedia'}));
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {

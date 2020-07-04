@@ -30,7 +30,7 @@ import {SeoService} from "./shared/seo.service";
         EffectsModule.forRoot([AuthEffects, CoreEffects]),
     ],
     providers: [
-        SeoService,
+        // SeoService,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ResponseIntercept, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true}

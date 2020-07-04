@@ -5,7 +5,7 @@ import * as CoreActions from './core/store/core.actions';
 import {NavigationEnd, Router} from '@angular/router';
 import * as endPoints from './shared/serverEndpoints';
 import {SeoService} from "./shared/seo.service";
-
+import * as env from "../environments/environment";
 // declare ga as a function to set and sent the events
 declare let gtag: any;
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
     constructor(
         private store: Store<AppState>,
         private router: Router,
-        private seoService: SeoService,
+        // private seoService: SeoService,
     ) {
     }
 
@@ -30,12 +30,14 @@ export class AppComponent implements OnInit {
         this.store.dispatch(CoreActions.TRY_FETCH_WEBSITE_DATA());
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: endPoints.FILTER_POSTS}));
         this.router.events.subscribe(event => {
-            if (event instanceof NavigationEnd) {
-                gtag('config', 'UA-171131634-1',
-                    {
-                        page_path: event.urlAfterRedirects
-                    }
-                );
+            if (env.environment.production) {
+                if (event instanceof NavigationEnd) {
+                    gtag('config', 'UA-171131634-1',
+                        {
+                            page_path: event.urlAfterRedirects
+                        }
+                    );
+                }
             }
         });
     }
