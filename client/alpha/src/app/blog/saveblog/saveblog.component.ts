@@ -11,8 +11,8 @@ import {
   blogStateImageUrlSelector
 } from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import {ActivatedRoute} from "@angular/router";
-import {FilterPostModel} from "../models/filterPost.model";
+import {ActivatedRoute} from '@angular/router';
+import {FilterPostModel} from '../models/filterPost.model';
 
 @Component({
   selector: 'app-saveblog',
@@ -87,7 +87,7 @@ export class SaveblogComponent implements OnInit {
       return;
     }
     const value = this.blogForm.getRawValue();
-    const action = BlogActions.SAVE_BLOG({payload: value})
+    const action = BlogActions.SAVE_BLOG({payload: value});
     this.store.dispatch(action);
   }
 

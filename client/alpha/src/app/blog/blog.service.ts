@@ -13,7 +13,7 @@ export class BlogService {
   ) {
   }
 
-  getBlog(url:string) {
+  getBlog(url: string) {
     return this.httpClient.get(url, {observe: 'response'});
   }
 

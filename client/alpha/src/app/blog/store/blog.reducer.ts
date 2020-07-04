@@ -1,7 +1,7 @@
 import * as BlogActions from './blog.actions';
 import {Action, createReducer, on} from '@ngrx/store';
 import {AppState} from '../../store/app.reducer';
-import {FilterPostModel} from "../models/filterPost.model";
+import {FilterPostModel} from '../models/filterPost.model';
 
 
 export interface BlogState extends AppState {
