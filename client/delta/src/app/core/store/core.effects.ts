@@ -66,7 +66,6 @@ export class CoreEffects {
             ofType(CoreAction.SET_PAGE_TITLE),
             map((data) => data.payload),
             switchMap((pageTitle) => {
-                console.log('piyush singh title', this.meta.getTag('name=viewport'))
                 this.title.setTitle(pageTitle)
                 return EMPTY
             })
