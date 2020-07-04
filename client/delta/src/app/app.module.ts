@@ -14,6 +14,7 @@ import {CoreEffects} from './core/store/core.effects';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {LoaderInterceptorService} from './shared/loader.interceptor';
+import {SeoService} from "./shared/seo.service";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,7 @@ import {LoaderInterceptorService} from './shared/loader.interceptor';
         EffectsModule.forRoot([AuthEffects, CoreEffects]),
     ],
     providers: [
+        SeoService,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ResponseIntercept, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true}
