@@ -19,7 +19,7 @@
                         <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
                         <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
                         </blockquote>
-                        <img src="{{cont.image_url}}" alt="" *ngIf="cont.type==='Image'">
+                        <img src="{{cont.imageUrl}}" alt="" *ngIf="cont.type==='Image'">
                         <div class="row" *ngIf="cont.type==='ImageText'">
                             <div class="col-md-4">
                                 <img src="{{cont.imageUrl}}" alt="">
