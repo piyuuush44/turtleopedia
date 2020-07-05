@@ -33,7 +33,7 @@ export class Blog {
     this.category = blog.category || [];
     this.tags = blog.tags || [];
     this.images = blog.images || [];
-    this.content = blog.contact || [];
+    this.content = blog.content || [];
     this.user_id = blog.user_id || null;
     this.created_at = blog.created_at || null;
     this.updated_at = blog.updated_at || null;

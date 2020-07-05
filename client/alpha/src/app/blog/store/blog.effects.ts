@@ -66,6 +66,23 @@ export class BlogEffects {
     )
   );
 
+  tryFetchBlogById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.TRY_FETCH_BLOG_BY_ID),
+      map((data) => data.payload),
+      switchMap((id) =>
+        this.blogService.getBlogById(id).pipe(
+          map((response: any) => {
+              return BlogActions.SET_EDITABLE_BLOG({payload: response.body.result.post});
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
   trySaveBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BlogActions.SAVE_BLOG),
@@ -74,6 +91,27 @@ export class BlogEffects {
         this.blogService.saveBlog(data).pipe(
           map((response: HttpResponse<any>) => {
               console.log(response.body);
+              this.router.navigate(['/blog/list']);
+              const limit = 10;
+              const offset = 0;
+              const url = `${endPoints.GET_POST}?limit=${limit}&offset=${offset}`;
+              return BlogActions.TRY_FETCH_BLOGS({payload: url});
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  tryUpdateBlog$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.UPDATE_BLOG),
+      map((data) => data.payload),
+      switchMap((data) =>
+        this.blogService.updateBlogById(data.id, data.blog).pipe(
+          map((response: HttpResponse<any>) => {
               this.router.navigate(['/blog/list']);
               const limit = 10;
               const offset = 0;

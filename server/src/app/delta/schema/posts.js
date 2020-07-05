@@ -29,6 +29,8 @@ module.exports = {
           tags: Joi.array(),
           is_top: Joi.boolean(),
           image_url: Joi.string(),
+          slug_url: Joi.string(),
+          feature_content: Joi.string(),
         }),
     params: {
       post_id: Joi.string().required(),

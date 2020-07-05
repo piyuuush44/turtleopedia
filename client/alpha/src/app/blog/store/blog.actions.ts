@@ -32,7 +32,22 @@ export const TRY_FETCH_BLOGS = createAction(
   props<{ payload: string }>()
 );
 
+export const SET_EDITABLE_BLOG = createAction(
+  'SET_EDITABLE_BLOG',
+  props<{ payload: Blog }>()
+);
+
+export const TRY_FETCH_BLOG_BY_ID = createAction(
+  'TRY_FETCH_BLOG_BY_ID',
+  props<{ payload: string }>()
+);
+
 export const SAVE_BLOG = createAction(
   'SAVE_BLOG',
   props<{ payload: Blog }>()
+);
+
+export const UPDATE_BLOG = createAction(
+  'UPDATE_BLOG',
+  props<{ payload: { blog: Blog, id: string } }>()
 );
