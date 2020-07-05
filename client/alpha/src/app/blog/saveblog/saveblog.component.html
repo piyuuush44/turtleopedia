@@ -174,7 +174,7 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Enter Content</label>
-                        <ckeditor [editor]="Editor" data="" #textContent
+                        <ckeditor [editor]="Editor" data="{{editMode?cont.text:''}}" #textContent
                                   (ready)="onReady($event)"></ckeditor>
 
                       </div>
@@ -182,11 +182,13 @@
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(textContent.editorInstance.getData(), i)"
-                                  [disabled]="cont.addButton">Add
+                                  [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
+                            Delete
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -197,18 +199,20 @@
                     <div class="card-body">
                       <div class="form-group">
                         <label>Enter Code</label>
-                        <ckeditor [editor]="Editor" data="" #code
+                        <ckeditor [editor]="Editor" data="{{editMode?cont.text:''}}" #code
                                   (ready)="onReady($event)"></ckeditor>
                       </div>
                       <div class="form-group">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(code.editorInstance.getData(), i)"
-                                  [disabled]="cont.addButton">Add
+                                  [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
+                            Delete
+                          </button>
                         </div>
                       </div>
 
@@ -237,11 +241,14 @@
                       <div class="form-group">
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
-                                  (click)="addFormContent(null, i)" [disabled]="cont.addButton">Add
+                                  (click)="addFormContent(null, i)"
+                                  [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
+                            Delete
+                          </button>
                         </div>
                       </div>
 
@@ -272,7 +279,7 @@
                       <div class="col-md-9">
                         <div class="form-group">
                           <label>Enter Text</label>
-                          <ckeditor [editor]="Editor" data="" #imageTextField
+                          <ckeditor [editor]="Editor" data="{{editMode?cont.text:''}}" #imageTextField
                                     (ready)="onReady($event)"></ckeditor>
                         </div>
                       </div>
@@ -280,11 +287,13 @@
                         <div class="col-md-6">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(imageTextField.editorInstance.getData(), i)"
-                                  [disabled]="cont.addButton">Add
+                                  [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
                         <div class="col-md-6">
-                          <button type="button" class="btn btn-secondary rounded-pill">Delete</button>
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
+                            Delete
+                          </button>
                         </div>
                       </div>
 
@@ -316,3 +325,4 @@
   </div>
 </div>
 
+{{blogForm.value|json}}

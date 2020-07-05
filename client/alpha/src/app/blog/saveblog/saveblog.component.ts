@@ -6,13 +6,12 @@ import * as BlogActions from '../store/blog.actions';
 import {select, Store} from '@ngrx/store';
 import {BlogState} from '../store/blog.reducer';
 import {
-  blogStateBlogsSelector,
   blogStateContentImageUrlSelector,
-  blogStateImageUrlSelector
+  blogStateImageUrlSelector,
+  blogStateEditableBlogSelector
 } from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import {ActivatedRoute} from "@angular/router";
-import {FilterPostModel} from "../models/filterPost.model";
 
 @Component({
   selector: 'app-saveblog',
@@ -21,20 +20,21 @@ import {FilterPostModel} from "../models/filterPost.model";
 })
 export class SaveblogComponent implements OnInit {
   public Editor = DecoupledEditor;
-  blog: Blog;
+  blog = new Blog();
   blogForm: FormGroup;
 
   content = [];
   contentImageUrl = null;
   previewContentImage = [];
-  imageUrl = null;
   postImage: File = null;
   contentImage: File = null;
   previewPostImage: any = 'https://mdbootstrap.com/img/Photos/Others/placeholder.jpg';
   currentIndex: number;
   id: string;
   editMode = false;
-  blogs: FilterPostModel;
+  currentEditBlog: Blog;
+
+  isContentImageEdited = []
 
   constructor(
     private blogService: BlogService,
@@ -45,29 +45,41 @@ export class SaveblogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.pipe(select(blogStateBlogsSelector)).subscribe(
-      value => {
-        this.blogs = value;
-      }
-    );
-    this.route.paramMap.subscribe(params => {
-      if (params.get('id')) {
-        this.id = params.get('id');
-        this.editMode = true;
-      }
-    });
-    // Set the default
-    this.blog = this.editMode ? new Blog(this.blogs.results.find((blog => blog._id === this.id))) : new Blog();
-
+    // initial configs for blog form
     this.currentIndex = 0;
     this.content.push({type: 'Text', addButton: false});
     this.blogForm = this.createBlogForm();
 
+    this.route.paramMap.subscribe(params => {
+      if (params.get('id')) {
+        this.id = params.get('id');
+        this.store.dispatch(BlogActions.TRY_FETCH_BLOG_BY_ID({payload: this.id}));
+        this.editMode = true;
+      }
+    });
+    this.store.pipe(select(blogStateEditableBlogSelector)).subscribe(
+      value => {
+        if (value) {
+          this.currentEditBlog = value;
+          this.blog = new Blog(this.currentEditBlog);
+
+          this.content = [];
+          this.currentEditBlog.content.forEach((value, index) => {
+            if (value.type === 'Image' || value.type === 'ImageText') {
+              this.previewContentImage[index] = value.imageUrl
+            }
+            this.content.push(value)
+          });
+          this.previewPostImage = this.currentEditBlog.image_url;
+          this.blogForm = this.createBlogForm();
+        }
+      }
+    );
+
     this.store.pipe(select(blogStateImageUrlSelector)).subscribe(
       value => {
         this.previewPostImage = value;
-        this.imageUrl = value;
-        this.blogForm.controls.image_url.patchValue(this.imageUrl);
+        this.blogForm.controls.image_url.patchValue(value);
       }
     );
 
@@ -83,11 +95,16 @@ export class SaveblogComponent implements OnInit {
   }
 
   onSubmit() {
+    let action;
     if (this.blogForm.invalid) {
       return;
     }
     const value = this.blogForm.getRawValue();
-    const action = BlogActions.SAVE_BLOG({payload: value})
+    if (this.editMode) {
+      action = BlogActions.UPDATE_BLOG({payload: {blog: value, id: this.id}});
+    } else {
+      action = BlogActions.SAVE_BLOG({payload: value})
+    }
     this.store.dispatch(action);
   }
 
@@ -116,11 +133,24 @@ export class SaveblogComponent implements OnInit {
       imageUrl: null
     };
     if (type === 'Image' || type === 'ImageText') {
-      finalContent.imageUrl = this.contentImageUrl;
+      if (this.editMode) {
+        const editIndex = this.isContentImageEdited.findIndex(value1 => value1 === index)
+        if (editIndex > -1) {
+          finalContent.imageUrl = this.contentImageUrl;
+        }
+      } else {
+        finalContent.imageUrl = this.contentImageUrl;
+      }
     }
 
     const content = this.blogForm.controls.content.value;
-    content.push(finalContent);
+
+    if (this.editMode) {
+      content[index] = finalContent;
+    } else {
+      content.push(finalContent);
+    }
+
     this.blogForm.controls.content.patchValue(content);
     alert('Added successfully!');
   }
@@ -156,12 +186,21 @@ export class SaveblogComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(this.contentImage);
     reader.onload = () => {
-      this.previewContentImage.push(reader.result);
+      this.previewContentImage[index] = reader.result;
     };
     const data = new FormData();
     data.append('image', this.contentImage);
 
     this.store.dispatch(BlogActions.TRY_UPLOAD_BLOG_CONTENT_PICTURES({payload: data}));
+
+    if (this.editMode) {
+      this.isContentImageEdited.push(this.currentIndex);
+    }
+  }
+
+  deleteContent(index: number) {
+    this.content.splice(index, 1);
+    this.blogForm.controls.content.patchValue(this.content);
   }
 
   public onReady(editor) {
