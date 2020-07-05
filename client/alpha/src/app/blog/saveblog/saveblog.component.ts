@@ -68,7 +68,7 @@ export class SaveblogComponent implements OnInit {
             if (valueFound.type === 'Image' || valueFound.type === 'ImageText') {
               this.previewContentImage[index] = valueFound.imageUrl;
             }
-            this.content.push(value);
+            this.content.push(valueFound);
           });
           this.previewPostImage = this.currentEditBlog.image_url;
           this.blogForm = this.createBlogForm();
