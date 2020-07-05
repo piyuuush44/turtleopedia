@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {Blog} from '../models/blog.model';
-import {FilterPostModel} from "../models/filterPost.model";
+import {FilterPostModel} from '../models/filterPost.model';
 
 export const TRY_UPLOAD_BLOG_PICTURES = createAction(
   'TRY_UPLOAD_BLOG_PICTURES',

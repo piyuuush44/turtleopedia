@@ -11,7 +11,7 @@ import {
   blogStateEditableBlogSelector
 } from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-saveblog',
@@ -34,7 +34,7 @@ export class SaveblogComponent implements OnInit {
   editMode = false;
   currentEditBlog: Blog;
 
-  isContentImageEdited = []
+  isContentImageEdited = [];
 
   constructor(
     private blogService: BlogService,
@@ -64,11 +64,11 @@ export class SaveblogComponent implements OnInit {
           this.blog = new Blog(this.currentEditBlog);
 
           this.content = [];
-          this.currentEditBlog.content.forEach((value, index) => {
-            if (value.type === 'Image' || value.type === 'ImageText') {
-              this.previewContentImage[index] = value.imageUrl
+          this.currentEditBlog.content.forEach((valueFound, index) => {
+            if (valueFound.type === 'Image' || valueFound.type === 'ImageText') {
+              this.previewContentImage[index] = valueFound.imageUrl;
             }
-            this.content.push(value)
+            this.content.push(value);
           });
           this.previewPostImage = this.currentEditBlog.image_url;
           this.blogForm = this.createBlogForm();
@@ -103,7 +103,7 @@ export class SaveblogComponent implements OnInit {
     if (this.editMode) {
       action = BlogActions.UPDATE_BLOG({payload: {blog: value, id: this.id}});
     } else {
-      action = BlogActions.SAVE_BLOG({payload: value})
+      action = BlogActions.SAVE_BLOG({payload: value});
     }
     this.store.dispatch(action);
   }
@@ -134,7 +134,7 @@ export class SaveblogComponent implements OnInit {
     };
     if (type === 'Image' || type === 'ImageText') {
       if (this.editMode) {
-        const editIndex = this.isContentImageEdited.findIndex(value1 => value1 === index)
+        const editIndex = this.isContentImageEdited.findIndex(value1 => value1 === index);
         if (editIndex > -1) {
           finalContent.imageUrl = this.contentImageUrl;
         }

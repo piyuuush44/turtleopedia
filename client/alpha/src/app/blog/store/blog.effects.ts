@@ -8,7 +8,7 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {EMPTY} from 'rxjs';
 import {BlogService} from '../blog.service';
-import * as endPoints from "../../shared/endpoints";
+import * as endPoints from '../../shared/endpoints';
 
 @Injectable()
 // @ts-ignore

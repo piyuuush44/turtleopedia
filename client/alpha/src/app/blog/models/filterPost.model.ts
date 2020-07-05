@@ -1,4 +1,4 @@
-import {Blog} from "./blog.model";
+import {Blog} from './blog.model';
 
 export class FilterPostModel {
   constructor(

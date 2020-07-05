@@ -4,9 +4,9 @@ import {blogStateBlogsSelector} from '../store/blog.selector';
 import {select, Store} from '@ngrx/store';
 import {Blog} from '../models/blog.model';
 import {BlogState} from '../store/blog.reducer';
-import {FilterPostModel} from "../models/filterPost.model";
-import * as endPoints from "../../shared/endpoints";
-import {ActivatedRoute, Router} from "@angular/router";
+import {FilterPostModel} from '../models/filterPost.model';
+import * as endPoints from '../../shared/endpoints';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-listbox',
@@ -51,7 +51,7 @@ export class ListboxComponent implements OnInit {
   }
 
   onEdit(index: number) {
-    this.router.navigate([`../edit/${this.blogs.results[index]._id}`], {relativeTo: this.route})
+    this.router.navigate([`../edit/${this.blogs.results[index]._id}`], {relativeTo: this.route});
   }
 
 }
