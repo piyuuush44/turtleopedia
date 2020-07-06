@@ -9,8 +9,8 @@ cd $PROJECT_ROOT/client/delta
 npm install -g firebase-tools
 echo "Installed firebase tools"
 
-firebase use --token $FIREBASE_DEPLOY_KEY my-turtleopedia
-echo "Added project"
+firebase use --token $FIREBASE_DEPLOY_KEY $FIREBASE_CI_PROJECT
+echo "Added project $FIREBASE_CI_PROJECT"
 
 echo "Deploying now"
 firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
