@@ -23,6 +23,7 @@ build_delta:prod:
   artifacts:
     paths:
       - client/delta/dist/
+      - client/delta/node_modules
 
 lint_delta:prod:
   extends: .lint_delta
