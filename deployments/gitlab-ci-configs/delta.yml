@@ -41,7 +41,7 @@ lint_delta:prod:
 deploy_delta:prod:
   extends: .deploy_delta
   variables:
-    AWS_REGION: ${PROD_AWS_REGION}
+    FIREBASE_DEPLOY_KEY: ${FIREBASE_DEPLOY_KEY}
   only:
     - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
   dependencies:
