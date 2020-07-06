@@ -10,11 +10,11 @@ echo "$FIREBASE_DEPLOY_KEY"
 
 npm install -g firebase-tools
 echo "Installed firebase tools"
+echo "Added project $FIREBASE_DEPLOY_KEY"
 
 firebase projects:list --token $FIREBASE_DEPLOY_KEY
 
 #firebase use --token $FIREBASE_DEPLOY_KEY $FIREBASE_CI_PROJECT
-echo "Added project $FIREBASE_DEPLOY_KEY"
 
 echo "Deploying now"
 firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY --project $FIREBASE_CI_PROJECT
