@@ -13,6 +13,9 @@ import {LoaderComponent} from './loader/loader.component';
 import {MasonryboxComponent} from './masonrybox/masonrybox.component';
 import {AdvertisementComponent} from './advertisement/advertisement.component';
 import {SearchboxComponent} from './searchbox/searchbox.component';
+import {AboutusComponent} from './aboutus/aboutus.component';
+import {ContactComponent} from './contact/contact.component';
+import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import {SearchboxComponent} from './searchbox/searchbox.component';
         LoaderComponent,
         MasonryboxComponent,
         AdvertisementComponent,
-        SearchboxComponent
+        SearchboxComponent,
+        AboutusComponent,
+        ContactComponent,
+        PrivacypolicyComponent
     ],
     imports: [
         CommonModule,

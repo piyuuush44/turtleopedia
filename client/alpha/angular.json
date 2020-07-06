@@ -28,8 +28,20 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "src/assets/plugins/jquery/jquery-3.4.1.min.js",
+              "src/assets/plugins/bootstrap/popper.min.js",
+              "src/assets/plugins/bootstrap/js/bootstrap.min.js",
+              "src/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
+              "src/assets/plugins/jquery-sparkline/jquery.sparkline.min.js",
+              "src/assets/plugins/apexcharts/dist/apexcharts.min.js",
+              "src/assets/plugins/blockui/jquery.blockUI.js",
+              "src/assets/plugins/flot/jquery.flot.min.js",
+              "src/assets/plugins/flot/jquery.flot.time.min.js",
+              "src/assets/plugins/flot/jquery.flot.symbol.min.js",
+              "src/assets/plugins/flot/jquery.flot.resize.min.js",
+              "src/assets/plugins/flot/jquery.flot.tooltip.min.js",
+              "src/assets/js/connect.min.js",
+              "src/assets/js/pages/dashboard.js"
             ]
           },
           "configurations": {

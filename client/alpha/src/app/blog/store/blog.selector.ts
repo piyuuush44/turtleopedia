@@ -12,5 +12,9 @@ export const blogStateContentImageUrlSelector = createSelector(
 );
 
 export const blogStateBlogsSelector = createSelector(
-  blogState, (state: State) => state.blogs
+  blogState, (state: State) => state.filterPostResult
+);
+
+export const blogStateEditableBlogSelector = createSelector(
+  blogState, (state: State) => state.editableBlog
 );

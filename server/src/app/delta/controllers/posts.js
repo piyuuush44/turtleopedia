@@ -86,15 +86,29 @@ exports.getPosts = async (req, res, next) => {
       constants.DELTA_POSTS_PAGINATED_URL,
   ));
 };
-
+/* eslint-disable camelcase */
 exports.putUpdatePostById = async (req, res, next) => {
   try {
     const {post} = req;
-    const {title, category, content} = req.body;
+    const {
+      title,
+      category,
+      content,
+      is_top,
+      image_url,
+      slug_url,
+      feature_content,
+      tags,
+    } = req.body;
 
     post.title = title;
     post.category = category;
     post.content = content;
+    post.is_top = is_top;
+    post.image_url = image_url;
+    post.slug_url = slug_url;
+    post.feature_content = feature_content;
+    post.tags = tags;
 
     await post.save();
 
@@ -106,6 +120,7 @@ exports.putUpdatePostById = async (req, res, next) => {
     return next(new ClientError({message: e.message}));
   }
 };
+/* eslint-enable camelcase */
 
 exports.deletePostById = async (req, res, next) => {
   const {_id} = req.post;

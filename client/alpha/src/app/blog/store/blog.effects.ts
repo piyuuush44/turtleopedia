@@ -8,10 +8,11 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {EMPTY} from 'rxjs';
 import {BlogService} from '../blog.service';
+import * as endPoints from '../../shared/endpoints';
 
 @Injectable()
+// @ts-ignore
 export class BlogEffects {
-
   tryUploadPicture$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BlogActions.TRY_UPLOAD_BLOG_PICTURES),
@@ -51,12 +52,28 @@ export class BlogEffects {
   tryFetchBlog$ = createEffect(() =>
     this.actions$.pipe(
       ofType(BlogActions.TRY_FETCH_BLOGS),
-      switchMap(() =>
-        this.blogService.getBlog().pipe(
+      map((data) => data.payload),
+      switchMap((url) =>
+        this.blogService.getBlog(url).pipe(
           map((response: any) => {
-              console.log(response);
-              console.log('piyush');
-              return BlogActions.SAVE_BLOGS({payload: response.results});
+              return BlogActions.SAVE_BLOGS({payload: response.body});
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  tryFetchBlogById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.TRY_FETCH_BLOG_BY_ID),
+      map((data) => data.payload),
+      switchMap((id) =>
+        this.blogService.getBlogById(id).pipe(
+          map((response: any) => {
+              return BlogActions.SET_EDITABLE_BLOG({payload: response.body.result.post});
             }
           ),
           catchError(error => EMPTY
@@ -75,7 +92,31 @@ export class BlogEffects {
           map((response: HttpResponse<any>) => {
               console.log(response.body);
               this.router.navigate(['/blog/list']);
-              return BlogActions.TRY_FETCH_BLOGS();
+              const limit = 10;
+              const offset = 0;
+              const url = `${endPoints.GET_POST}?limit=${limit}&offset=${offset}`;
+              return BlogActions.TRY_FETCH_BLOGS({payload: url});
+            }
+          ),
+          catchError(error => EMPTY
+          )
+        )
+      )
+    )
+  );
+
+  tryUpdateBlog$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(BlogActions.UPDATE_BLOG),
+      map((data) => data.payload),
+      switchMap((data) =>
+        this.blogService.updateBlogById(data.id, data.blog).pipe(
+          map((response: HttpResponse<any>) => {
+              this.router.navigate(['/blog/list']);
+              const limit = 10;
+              const offset = 0;
+              const url = `${endPoints.GET_POST}?limit=${limit}&offset=${offset}`;
+              return BlogActions.TRY_FETCH_BLOGS({payload: url});
             }
           ),
           catchError(error => EMPTY
