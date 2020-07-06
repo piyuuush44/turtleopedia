@@ -23,7 +23,7 @@ import {SeoService} from "./shared/seo.service";
     imports: [
         CoreModule,
         HttpClientModule,
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'serverApp' }),
         AppRoutingModule,
         BrowserAnimationsModule,
         StoreModule.forRoot(reducers),
