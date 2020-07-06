@@ -1,20 +1,3 @@
-## Build Step
-#.build_delta: &build_delta
-#  stage: build
-#  image: node:13
-#  script: source deployments/scripts/client_delta_build.sh
-#  artifacts:
-#    paths:
-#      - client/delta/dist/
-#      - client/delta/node_modules/
-#
-#build_delta:prod:
-#  extends: .build_delta
-#  environment:
-#    name: prod
-#  only:
-#    - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
-
 # Lint Step
 .lint_delta: &lint_delta
   stage: test
@@ -26,8 +9,6 @@
 
 lint_delta:prod:
   extends: .lint_delta
-  dependencies:
-    - build_delta:prod
   environment:
     name: prod
   only:
