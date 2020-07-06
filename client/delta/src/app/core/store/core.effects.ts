@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 import {ToastService} from '../../shared/toast/toast.service';
 import {BlogService} from '../blog.service';
 import {EMPTY} from 'rxjs';
-import {Meta, Title} from "@angular/platform-browser";
+import {Meta, Title} from '@angular/platform-browser';
 
 @Injectable()
 export class CoreEffects {
@@ -66,22 +66,22 @@ export class CoreEffects {
             ofType(CoreAction.SET_PAGE_TITLE),
             map((data) => data.payload),
             switchMap((pageTitle) => {
-                this.title.setTitle(pageTitle)
-                return EMPTY
+                this.title.setTitle(pageTitle);
+                return EMPTY;
             })
         ), {dispatch: false}
-    )
+    );
 
     setPageMetaTags = createEffect(
         () => this.actions$.pipe(
             ofType(CoreAction.SET_PAGE_META_TAGS),
             map((data) => data.payload),
             switchMap((metaTags) => {
-                this.meta.addTags(metaTags, true)
-                return EMPTY
+                this.meta.addTags(metaTags, true);
+                return EMPTY;
             })
         ), {dispatch: false}
-    )
+    );
 
     constructor(
         private meta: Meta,

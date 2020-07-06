@@ -5,8 +5,8 @@ import * as CoreActions from '../store/core.actions';
 import {coreStateCurrentPostDataSelector} from '../store/core.selector';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import {filter, map, mergeMap} from "rxjs/operators";
-import {SeoService} from "../../shared/seo.service";
+import {filter, map, mergeMap} from 'rxjs/operators';
+import {SeoService} from '../../shared/seo.service';
 
 @Component({
     selector: 'app-singleview',

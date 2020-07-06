@@ -1,7 +1,7 @@
 import 'zone.js/dist/zone-node';
-import 'localstorage-polyfill'
+import 'localstorage-polyfill';
 
-global['localStorage'] = localStorage;
+global.localStorage = localStorage;
 
 import {ngExpressEngine} from '@nguniversal/express-engine';
 import * as express from 'express';

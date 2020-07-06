@@ -5,7 +5,7 @@ import {FilterPostModel} from '../model/filterPost.model';
 import {Posts} from '../model/posts.model';
 
 export interface CoreState {
-    pageTitle: string
+    pageTitle: string;
     data: WebdataModel;
     currentPost: Posts;
     filterPosts: FilterPostModel;
@@ -14,7 +14,7 @@ export interface CoreState {
 const initialState: CoreState = {
     pageTitle: 'Turtleopedia',
     data: new WebdataModel([], [], [], []),
-    filterPosts: new FilterPostModel([], {next: null, previous: null},),
+    filterPosts: new FilterPostModel([], {next: null, previous: null}, ),
     currentPost: new Posts('', '', '', '', 0, '', [], false, [], [], '', '')
 };
 

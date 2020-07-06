@@ -14,7 +14,7 @@ import {CoreEffects} from './core/store/core.effects';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {LoaderInterceptorService} from './shared/loader.interceptor';
-import {SeoService} from "./shared/seo.service";
+import {SeoService} from './shared/seo.service';
 
 @NgModule({
     declarations: [

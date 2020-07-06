@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Meta, Title} from "@angular/platform-browser";
-import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {select, Store} from "@ngrx/store";
-import {pageTitleSelector} from "../core/store/core.selector";
-import {filter, map, mergeMap} from "rxjs/operators";
-import {AppState} from "../store/app.reducer";
+import {Meta, Title} from '@angular/platform-browser';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {select, Store} from '@ngrx/store';
+import {pageTitleSelector} from '../core/store/core.selector';
+import {filter, map, mergeMap} from 'rxjs/operators';
+import {AppState} from '../store/app.reducer';
 import validate = WebAssembly.validate;
 
 @Injectable({
@@ -21,7 +21,7 @@ export class SeoService {
                     filter((event) => event instanceof NavigationEnd),
                     map(() => this.route),
                     map((myRoute) => {
-                        while (myRoute.firstChild) myRoute = myRoute.firstChild;
+                        while (myRoute.firstChild) { myRoute = myRoute.firstChild; }
                         return myRoute;
                     }),
                     filter((route) => route.outlet === 'primary'),
@@ -29,9 +29,9 @@ export class SeoService {
                 )
                     .subscribe(() => {
                         this.updateTitle(value);
-                        this.updateOgUrl("event['ogUrl']");
-                        //Updating Description tag dynamically with title
-                        this.updateDescription('value.feature_content')
+                        this.updateOgUrl('event[\'ogUrl\']');
+                        // Updating Description tag dynamically with title
+                        this.updateDescription('value.feature_content');
                     });
 
             }
@@ -43,11 +43,11 @@ export class SeoService {
     }
 
     updateOgUrl(url: string) {
-        this.meta.updateTag({name: 'og:url', content: url})
+        this.meta.updateTag({name: 'og:url', content: url});
     }
 
     updateDescription(desc: string) {
-        this.meta.updateTag({name: 'description', content: desc})
+        this.meta.updateTag({name: 'description', content: desc});
     }
 
 }
