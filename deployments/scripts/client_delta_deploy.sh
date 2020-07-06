@@ -6,6 +6,8 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/client/delta
 
+echo "$FIREBASE_DEPLOY_KEY"
+
 npm install -g firebase-tools
 echo "Installed firebase tools"
 
