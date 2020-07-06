@@ -14,7 +14,6 @@ import {CoreEffects} from './core/store/core.effects';
 import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {LoaderInterceptorService} from './shared/loader.interceptor';
-import {SeoService} from './shared/seo.service';
 
 @NgModule({
     declarations: [
@@ -23,14 +22,13 @@ import {SeoService} from './shared/seo.service';
     imports: [
         CoreModule,
         HttpClientModule,
-        BrowserModule.withServerTransition({ appId: 'serverApp' }),
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         AppRoutingModule,
         BrowserAnimationsModule,
         StoreModule.forRoot(reducers),
         EffectsModule.forRoot([AuthEffects, CoreEffects]),
     ],
     providers: [
-        // SeoService,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: ResponseIntercept, multi: true},
         {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true}
