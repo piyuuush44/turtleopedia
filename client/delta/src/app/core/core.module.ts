@@ -33,7 +33,7 @@ import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
         SearchboxComponent,
         AboutusComponent,
         ContactComponent,
-        PrivacypolicyComponent  
+        PrivacypolicyComponent
     ],
     imports: [
         CommonModule,
