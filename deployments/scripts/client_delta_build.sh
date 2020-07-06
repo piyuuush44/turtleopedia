@@ -12,4 +12,4 @@ npm install
 
 # Build
 echo "Building..."
-npm run build
+npm run build:ssr
