@@ -4,7 +4,6 @@ import {AppState} from '../../store/app.reducer';
 import * as CoreActions from '../store/core.actions';
 import {coreStateFilterPostDataSelector} from '../store/core.selector';
 import {select, Store} from '@ngrx/store';
-import {ActivatedRoute} from '@angular/router';
 import * as endPoints from '../../shared/serverEndpoints';
 
 @Component({
@@ -25,7 +24,7 @@ export class HomeComponent implements OnInit {
         const offset = limit - this.pageLimit;
         const url = `${endPoints.FILTER_POSTS}?limit=${limit}&offset=${offset}`;
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
-        this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: 'Turtleopedia'}));
+        this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: 'Turtleopedia: The Complete Blog'}));
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {
