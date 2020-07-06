@@ -72,6 +72,17 @@ export class CoreEffects {
         ), {dispatch: false}
     )
 
+    setPageMetaTags = createEffect(
+        () => this.actions$.pipe(
+            ofType(CoreAction.SET_PAGE_META_TAGS),
+            map((data) => data.payload),
+            switchMap((metaTags) => {
+                this.meta.addTags(metaTags, true)
+                return EMPTY
+            })
+        ), {dispatch: false}
+    )
+
     constructor(
         private meta: Meta,
         private title: Title,

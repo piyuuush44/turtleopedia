@@ -34,3 +34,8 @@ export const SET_PAGE_TITLE = createAction(
     'SET_PAGE_TITLE',
     props<{ payload: string }>()
 );
+
+export const SET_PAGE_META_TAGS = createAction(
+    'SET_PAGE_META_TAGS',
+    props<{ payload: Array<{ name: string, content: string }> }>()
+);

@@ -31,6 +31,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
                 this.categoryId.toLowerCase()
             }&limit=${limit}&offset=${offset}`;
             this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
+            this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: `${this.categoryId}: Turtleopedia`}));
+
         });
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
