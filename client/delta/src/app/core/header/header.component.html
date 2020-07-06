@@ -5,8 +5,8 @@
             <li class="has-sub"><a routerLink="/b/home">Home <i class="sub-icon fa fa-angle-down"></i></a>
             </li>
             <li *ngFor="let d of data"><a routerLink="/b/category/{{d}}">{{d}}</a></li>
-            <li><a href="pages-about-me-v1.html">About</a></li>
-            <li><a href="pages-contact-me-v2.html">Contact Us</a></li>
+            <li><a routerLink="/b/about-us">About</a></li>
+            <li><a routerLink="/b/contact">Contact Us</a></li>
         </ul>
     </div>
 </div>
@@ -17,10 +17,10 @@
         <div class="row">
             <div class="col-lg-4 align-self-center">
                 <ul class="social-icons">
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    <li><a href="https://www.facebook.com/Turtleopediacom-108463810928346"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://twitter.com/turtleopedia"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/turtleopedia/"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="https://www.instagram.com/_Turtleopedia_/"><i class="fa fa-instagram"></i></a></li>
                 </ul>
             </div>
             <div class="col-lg-4 align-self-center">
@@ -46,7 +46,7 @@
     <div class="container expanded">
         <div class="header-wrap">
             <div class="header-logo">
-                <a href="index.html"><img src="assets/images/version/Turtelopedia.png" alt=""></a>
+                <a routerLink="index.html"><img src="assets/images/version/Turtelopedia.png" alt=""></a>
             </div>
             <div class="header-nav">
                 <ul class="main-menu">
@@ -57,8 +57,8 @@
                             <li *ngFor="let d of data"><a routerLink="/b/category/{{d}}">{{d}}</a></li>
                         </ul>
                     </li>
-                    <li><a href="pages-about-me-v1.html">About</a></li>
-                    <li><a href="pages-contact-me-v2.html">Contact</a></li>
+                    <li><a routerLink="/b/about-us">About</a></li>
+                    <li><a routerLink="/b/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="header-widgets">
