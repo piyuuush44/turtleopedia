@@ -42,6 +42,7 @@ deploy_delta:prod:
   extends: .deploy_delta
   variables:
     FIREBASE_DEPLOY_KEY: ${FIREBASE_DEPLOY_KEY}
+    FIREBASE_CI_PROJECT: ${FIREBASE_CI_PROJECT}
   only:
     - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
   dependencies:
