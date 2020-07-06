@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "my-turtleopedia": {
+      "hosting": {
+        "delta": [
+          "my-turtleopedia"
+        ]
+      }
+    }
+  }
+}
