@@ -9,13 +9,13 @@ cd $PROJECT_ROOT/client/delta
 echo "$FIREBASE_DEPLOY_KEY"
 
 npm install -g firebase-tools
-npm install -g @angular/cli
 echo "Installed firebase tools"
 
 firebase use --token $FIREBASE_DEPLOY_KEY $FIREBASE_CI_PROJECT
 echo "Added project $FIREBASE_CI_PROJECT"
 
 echo "Deploying now"
+npm i
 ng deploy
 #firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
 echo "Deployed"
