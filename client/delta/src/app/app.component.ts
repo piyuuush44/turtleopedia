@@ -5,7 +5,6 @@ import * as CoreActions from './core/store/core.actions';
 import {NavigationEnd, Router} from '@angular/router';
 import * as endPoints from './shared/serverEndpoints';
 import * as env from '../environments/environment';
-import {Meta} from '@angular/platform-browser';
 
 // declare ga as a function to set and sent the events
 declare let gtag: any;
@@ -33,14 +32,16 @@ export class AppComponent implements OnInit {
             name: 'og:type',
             content: 'A complete blog related to technology, lifestyle, entertainment'
         },
-
         {
             name: 'og:title',
             content: 'Turtleopedia, The complete Blog'
         },
-
         {
             name: 'og:description',
+            content: 'A blog where anyone can explain concepts and issues in a more personalized manner, which can help us prepare for our future and others too.'
+        },
+        {
+            name: 'description',
             content: 'A blog where anyone can explain concepts and issues in a more personalized manner, which can help us prepare for our future and others too.'
         },
         {

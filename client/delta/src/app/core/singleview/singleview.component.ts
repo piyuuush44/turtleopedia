@@ -53,9 +53,12 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                         name: 'og:title',
                         content: value.title
                     },
-
                     {
                         name: 'og:description',
+                        content: value.feature_content
+                    },
+                    {
+                        name: 'description',
                         content: value.feature_content
                     },
                     {
