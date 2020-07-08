@@ -55,11 +55,11 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                     },
                     {
                         name: 'og:description',
-                        content: value.feature_content
+                        content: this.removeTags(value.feature_content)
                     },
                     {
                         name: 'description',
-                        content: value.feature_content
+                        content: this.removeTags(value.feature_content)
                     },
                     {
                         name: 'og:image',
@@ -74,6 +74,14 @@ export class SingleviewComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.slugUrl = null;
         this.post = null;
+    }
+
+    removeTags(str) {
+        if ((str === null) || (str === ''))
+            return false;
+        else
+            str = str.toString();
+        return str.replace(/(<([^>]+)>)/ig, '');
     }
 
 }
