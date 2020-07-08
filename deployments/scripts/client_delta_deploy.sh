@@ -6,9 +6,6 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/client/delta
 
-ls
-ls dist/delta
-
 echo "$FIREBASE_DEPLOY_KEY"
 
 npm install -g firebase-tools
@@ -18,5 +15,5 @@ firebase use --token $FIREBASE_DEPLOY_KEY $FIREBASE_CI_PROJECT
 echo "Added project $FIREBASE_CI_PROJECT"
 
 echo "Deploying now"
-firebase deploy --only hosting --non-interactive --token $FIREBASE_DEPLOY_KEY
+firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
 echo "Deployed"
