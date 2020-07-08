@@ -79,7 +79,7 @@ export class CoreEffects {
             switchMap((metaTags) => {
                 metaTags.forEach(tag => {
                     this.meta.updateTag({name: tag.name, content: tag.content});
-                })
+                });
                 return EMPTY;
             })
         ), {dispatch: false}

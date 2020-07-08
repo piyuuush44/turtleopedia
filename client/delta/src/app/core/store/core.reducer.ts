@@ -12,7 +12,7 @@ export interface CoreState {
 
 const initialState: CoreState = {
     data: new WebdataModel([], [], [], []),
-    filterPosts: new FilterPostModel([], {next: null, previous: null},),
+    filterPosts: new FilterPostModel([], {next: null, previous: null}, ),
     currentPost: new Posts('', '', '', '', 0, '', '', false, [], [], '', '')
 };
 
