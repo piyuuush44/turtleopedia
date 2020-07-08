@@ -5,6 +5,8 @@ coverage/
 
 **/dist/
 
+**/.firebase/
+
 # Miscellaneous
 *.class
 *.log
