@@ -26,6 +26,6 @@
     }
   ],
   "functions": {
-    "source": "dist/delta/server"
+    "source": "dist"
   }
 }
