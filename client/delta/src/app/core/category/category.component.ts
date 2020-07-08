@@ -32,16 +32,39 @@ export class CategoryComponent implements OnInit, OnDestroy {
             }&limit=${limit}&offset=${offset}`;
             this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
             this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: `${this.categoryId}: Turtleopedia`}));
-
         });
 
         this.store.pipe(select(coreStateFilterPostDataSelector)).subscribe(
             value => {
-                this.posts = value;
-                if (this.posts.results && this.posts.results.length === 0) {
+
+                if (value.results && value.results.length === 0) {
                     alert('No post found!');
                     this.router.navigate(['/b/home']);
                 }
+                this.posts = value;
+
+                const metaTags = [
+                    {
+                        name: 'keywords',
+                        content: 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript'
+                    },
+                    {
+                        name: 'og:url',
+                        content: `https://www.turtleopedia.com/b/category/${this.categoryId}`
+                    },
+                    {
+                        name: 'og:type',
+                        content: 'A complete blog related to technology, lifestyle, entertainment'
+                    },
+
+                    {
+                        name: 'og:title',
+                        content: `Turtleopedia : ${this.categoryId}`
+                    },
+
+                ];
+                this.store.dispatch(CoreActions.SET_PAGE_META_TAGS({payload: metaTags}));
+
             }
         );
     }

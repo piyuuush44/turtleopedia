@@ -34,6 +34,36 @@ export class SingleviewComponent implements OnInit, OnDestroy {
             value => {
                 this.post = value;
                 this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: value.title}));
+
+                const metaTags = [
+                    {
+                        name: 'keywords',
+                        content: 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript'
+                    },
+                    {
+                        name: 'og:url',
+                        content: `https://www.turtleopedia.com/b/singleBlog/${value.slug_url}`
+                    },
+                    {
+                        name: 'og:type',
+                        content: 'A complete blog related to technology, lifestyle, entertainment'
+                    },
+
+                    {
+                        name: 'og:title',
+                        content: value.title
+                    },
+
+                    {
+                        name: 'og:description',
+                        content: value.feature_content
+                    },
+                    {
+                        name: 'og:image',
+                        content: value.image_url
+                    }
+                ];
+                this.store.dispatch(CoreActions.SET_PAGE_META_TAGS({payload: metaTags}));
             }
         );
     }

@@ -77,7 +77,9 @@ export class CoreEffects {
             ofType(CoreAction.SET_PAGE_META_TAGS),
             map((data) => data.payload),
             switchMap((metaTags) => {
-                this.meta.addTags(metaTags, true);
+                metaTags.forEach(tag => {
+                    this.meta.updateTag({name: tag.name, content: tag.content});
+                })
                 return EMPTY;
             })
         ), {dispatch: false}

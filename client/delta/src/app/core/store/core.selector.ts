@@ -15,7 +15,3 @@ export const coreStateFilterPostDataSelector = createSelector(
 export const coreStateCurrentPostDataSelector = createSelector(
     coreState, (state: CoreState) => state.currentPost
 );
-
-export const pageTitleSelector = createSelector(
-    coreState, (state: CoreState) => state.pageTitle
-);

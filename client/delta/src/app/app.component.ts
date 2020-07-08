@@ -18,14 +18,13 @@ declare let gtag: any;
 export class AppComponent implements OnInit {
     constructor(
         private store: Store<AppState>,
-        private router: Router,
-        private meta: Meta
+        private router: Router
     ) {
     }
 
     title = 'delta';
     metaTags = [
-        {name: 'keywords', content: 'TypeScript, Angular'},
+        {name: 'keywords', content: 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript'},
         {
             name: 'og:url',
             content: 'https://www.turtleopedia.com'
@@ -42,11 +41,11 @@ export class AppComponent implements OnInit {
 
         {
             name: 'og:description',
-            content: 'How much does culture influence creative thinking?'
+            content: 'A blog where anyone can explain concepts and issues in a more personalized manner, which can help us prepare for our future and others too.'
         },
         {
             name: 'og:image',
-            content: 'http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg'
+            content: 'https://storage.googleapis.com/turtleopedia_assets_prod/images/logo.png'
         }
     ];
 

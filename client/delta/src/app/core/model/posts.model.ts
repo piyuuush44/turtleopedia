@@ -1,5 +1,3 @@
-import {ImageObject} from './imageobject.interface';
-
 // tslint:disable
 export class Posts {
   constructor(
@@ -9,7 +7,7 @@ export class Posts {
     public feature_content: string,
     public no_of_views: number,
     public slug_url: string,
-    public image_url: ImageObject[],
+    public image_url: string,
     public is_top: Boolean,
     public content: [],
     public tags: [],
