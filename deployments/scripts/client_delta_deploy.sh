@@ -15,5 +15,6 @@ firebase use --token $FIREBASE_DEPLOY_KEY $FIREBASE_CI_PROJECT
 echo "Added project $FIREBASE_CI_PROJECT"
 
 echo "Deploying now"
-firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
+ng deploy
+#firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
 echo "Deployed"
