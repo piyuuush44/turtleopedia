@@ -77,10 +77,12 @@ export class SingleviewComponent implements OnInit, OnDestroy {
     }
 
     removeTags(str) {
-        if ((str === null) || (str === ''))
+        if ((str === null) || (str === '')) {
             return false;
-        else
+        }
+        else {
             str = str.toString();
+        }
         return str.replace(/(<([^>]+)>)/ig, '');
     }
 
