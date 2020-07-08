@@ -16,6 +16,6 @@ echo "Added project $FIREBASE_CI_PROJECT"
 
 echo "Deploying now"
 npm i
-ng deploy
+npm run deploy
 #firebase deploy --non-interactive --token $FIREBASE_DEPLOY_KEY
 echo "Deployed"

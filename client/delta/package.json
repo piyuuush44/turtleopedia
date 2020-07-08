@@ -11,7 +11,8 @@
     "dev:ssr": "ng run delta:serve-ssr",
     "serve:ssr": "node dist/delta/server/main.js",
     "build:ssr": "ng build --prod --aot && ng run delta:server:production",
-    "prerender": "ng run delta:prerender"
+    "prerender": "ng run delta:prerender",
+    "deploy": "ng deploy"
   },
   "private": true,
   "dependencies": {
