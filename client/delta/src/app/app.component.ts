@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
         {name: 'keywords', content: 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript'},
         {
             name: 'og:url',
-            content: 'https://turtleopedia.com'
+            content: 'https://www.turtleopedia.com'
         },
         {
             name: 'og:type',
