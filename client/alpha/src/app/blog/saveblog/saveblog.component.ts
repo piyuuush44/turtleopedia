@@ -209,10 +209,10 @@ export class SaveblogComponent implements OnInit {
     }
     const finalIndex = index + 1;
 
-    const data = this.content[index]
-    console.log(data)
+    const data = this.content[index];
+    console.log(data);
     this.content.splice(index, 1);
-    this.content.splice(finalIndex, 0, data)
+    this.content.splice(finalIndex, 0, data);
     this.blogForm.controls.content.patchValue(this.content);
   }
 
@@ -222,10 +222,10 @@ export class SaveblogComponent implements OnInit {
     }
     const finalIndex = index - 1;
 
-    const data = this.content[index]
+    const data = this.content[index];
 
     this.content.splice(index, 1);
-    this.content.splice(finalIndex, 0, data)
+    this.content.splice(finalIndex, 0, data);
     this.blogForm.controls.content.patchValue(this.content);
   }
 
