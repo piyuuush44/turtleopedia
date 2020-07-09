@@ -33,7 +33,7 @@ exports.verifyJwt = (token, privateKey) => jwt.verify(token, privateKey);
  * in future from today.
  */
 function getJwtExpirationTime() {
-  return Math.floor(Date.now() / 1000) + (60 * 24 * 60);
+  return Math.floor(Date.now() / 1000) + (60 * 24 * 60 * 30);
 }
 
 exports.getJwtExpirationTime = getJwtExpirationTime;
