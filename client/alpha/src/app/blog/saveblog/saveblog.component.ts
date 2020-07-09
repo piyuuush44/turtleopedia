@@ -203,6 +203,32 @@ export class SaveblogComponent implements OnInit {
     this.blogForm.controls.content.patchValue(this.content);
   }
 
+  downshiftContent(index: number) {
+    if (index === (this.content.length - 1)) {
+      return;
+    }
+    const finalIndex = index + 1;
+
+    const data = this.content[index]
+    console.log(data)
+    this.content.splice(index, 1);
+    this.content.splice(finalIndex, 0, data)
+    this.blogForm.controls.content.patchValue(this.content);
+  }
+
+  upshiftContent(index: number) {
+    if (index === 0) {
+      return;
+    }
+    const finalIndex = index - 1;
+
+    const data = this.content[index]
+
+    this.content.splice(index, 1);
+    this.content.splice(finalIndex, 0, data)
+    this.blogForm.controls.content.patchValue(this.content);
+  }
+
   public onReady(editor) {
     editor.ui.getEditableElement().parentElement.insertBefore(
       editor.ui.view.toolbar.element,
