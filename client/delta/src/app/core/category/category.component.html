@@ -5,7 +5,7 @@
                 <div class="post-image">
                     <a routerLink="/b/singleBlog/{{posts.results[0].slug_url}}"><img
                             src="{{posts.results[0].image_url}}"
-                            alt=""></a>
+                            alt="Post main image"></a>
                 </div>
                 <div class="down-content">
                     <div class="meta-category">
@@ -39,7 +39,7 @@
         <div class="col-lg-6" *ngFor="let post of posts.results | slice: 1 :7">
             <div class="standard-post recent-post">
                 <div class="post-image">
-                    <a routerLink="/b/singleBlog/{{post.slug_url}}"><img src="{{post.image_url}}" alt=""></a>
+                    <a routerLink="/b/singleBlog/{{post.slug_url}}"><img src="{{post.image_url}}" alt="Post image"></a>
                 </div>
                 <div class="down-content">
                     <a routerLink="/b/singleBlog/{{post.slug_url}}">

@@ -10,7 +10,7 @@
                         <li *ngFor="let recent of data.recent_posts | slice:0:5 ">
                             <a routerLink="/b/singleBlog/{{recent.slug_url}}">
                                 <div class="left-image">
-                                    <img src="{{recent.image_url}}" alt="">
+                                    <img src="{{recent.image_url}}" alt="Recent post image">
                                     <span>{{recent.no_of_views}}</span>
                                 </div>
                                 <div class="right-content">
