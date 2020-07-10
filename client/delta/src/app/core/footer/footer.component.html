@@ -8,24 +8,9 @@
                             <h4><a routerLink="/b/home">Turtleopedia</a></h4>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3">
-                                <div class="instagram-item">
-                                    <img src="https://placehold.it/255x220" alt="Instagram Image">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="instagram-item">
-                                    <img src="https://placehold.it/255x220" alt="Instagram Image">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="instagram-item">
-                                    <img src="https://placehold.it/255x220" alt="Instagram Image">
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="instagram-item">
-                                    <img src="https://placehold.it/255x220" alt="Instagram Image">
+                            <div class="col-lg-3" *ngFor="let post of data.recent_posts| slice:0:4">
+                                <div class="instagram-item" routerLink="/b/singleBlog/{{post.slug_url}}">
+                                    <img src="{{post.image_url}}" alt="Instagram Image">
                                 </div>
                             </div>
                         </div>
