@@ -126,6 +126,8 @@ export class SaveblogComponent implements OnInit {
   }
 
   addFormContent(value: string, index: number) {
+    const content = this.blogForm.controls.content.value;
+
     const type = this.content[index].type;
     const finalContent = {
       type,
@@ -137,13 +139,14 @@ export class SaveblogComponent implements OnInit {
         const editIndex = this.isContentImageEdited.findIndex(value1 => value1 === index);
         if (editIndex > -1) {
           finalContent.imageUrl = this.contentImageUrl;
+        }else {
+          finalContent.imageUrl = content[index].imageUrl;
         }
       } else {
         finalContent.imageUrl = this.contentImageUrl;
       }
     }
 
-    const content = this.blogForm.controls.content.value;
 
     if (this.editMode) {
       content[index] = finalContent;
@@ -210,7 +213,6 @@ export class SaveblogComponent implements OnInit {
     const finalIndex = index + 1;
 
     const data = this.content[index];
-    console.log(data);
     this.content.splice(index, 1);
     this.content.splice(finalIndex, 0, data);
     this.blogForm.controls.content.patchValue(this.content);
