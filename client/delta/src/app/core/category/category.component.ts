@@ -75,10 +75,12 @@ export class CategoryComponent implements OnInit, OnDestroy {
     }
 
     paginateForward() {
+        this.pageNumber += 1;
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: this.posts._links.next}));
     }
 
     paginateBackward() {
+        this.pageNumber -= 1;
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: this.posts._links.previous}));
     }
 }
