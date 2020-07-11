@@ -11,9 +11,9 @@
                 <div class="down-content">
                     <h1>{{post.title}}</h1>
                     <ul class="post-info">
-                        <li><a href="#">{{post.createdAt|date}}</a></li>
-                        <li><a href="#">Admin</a></li>
-                        <li><a href="#">{{post.no_of_views}}</a></li>
+                        <li><a>{{post.createdAt|date}}</a></li>
+                        <li><a>Admin</a></li>
+                        <li><a>{{post.no_of_views}}</a></li>
                     </ul>
                     <div *ngFor="let cont of post.content">
                         <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
@@ -40,18 +40,18 @@
                             <div class="tags">
                                 <ul class="tags">
                                     <li><i class="fa fa-tag"></i></li>
-                                    <li><a href="#">Beauty</a>,</li>
-                                    <li><a href="#">Fashion</a>,</li>
-                                    <li><a href="#">Lifestyle</a></li>
+                                    <li><a>Beauty</a>,</li>
+                                    <li><a>Fashion</a>,</li>
+                                    <li><a>Lifestyle</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-5 col-md-6">
                             <ul class="share-post">
                                 <li><i class="fa fa-share-alt"></i></li>
-                                <li><a href="#">Facebook</a>,</li>
-                                <li><a href="#">Twitter</a>,</li>
-                                <li><a href="#">Pinterest</a></li>
+                                <li><a>Facebook</a>,</li>
+                                <li><a>Twitter</a>,</li>
+                                <li><a>Pinterest</a></li>
                             </ul>
                         </div>
                     </div>
@@ -68,11 +68,11 @@
                     <p>Franzen tumeric sriracha and quinoa goard next level. Cold-pressed kinfolk cronut shoreditch
                         freegan kistrater selfies.</p>
                     <ul class="social-icons">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                        <li><a><i class="fa fa-facebook"></i></a></li>
+                        <li><a><i class="fa fa-twitter"></i></a></li>
+                        <li><a><i class="fa fa-linkedin"></i></a></li>
+                        <li><a><i class="fa fa-rss"></i></a></li>
+                        <li><a><i class="fa fa-behance"></i></a></li>
                     </ul>
                 </div>
             </div>
