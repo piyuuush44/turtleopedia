@@ -22,7 +22,6 @@ cd $PROJECT_ROOT/client/delta
 
 # make the directory where sitemap files will be stored
 mkdir -p $SITEMAP_DESTINATION
-ls ${PROJECT_ROOT}/client/delta/dist/dist/browser
 
 date
 print_ok "Starting generate_sitemap script"
