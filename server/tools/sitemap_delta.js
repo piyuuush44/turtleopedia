@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+require('../src/config/db');
 const {argv} = require('yargs')
     .scriptName('delta-sitemap-generator')
     .usage('Usage: $0 -d [path]')
@@ -31,7 +31,7 @@ const route = argv.r;
  */
 const getPostLinks = async () => {
   const posts = await Post.find({});
-  return posts.map((post) => post.slug_url);
+  return posts.map((post) => `${process.env.BASE_URL}/b/singleBlog/${post.slug_url}`);
 };
 /**
  * Converts the given js object input into xml and writes it to a file
