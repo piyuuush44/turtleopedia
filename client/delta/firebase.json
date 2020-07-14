@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "delta",
-      "public": "dist/dist/browser",
+      "public": "dist/browser",
       "ignore": [
         "**/.*"
       ],
