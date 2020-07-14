@@ -8,8 +8,13 @@ source setup.sh
 
 PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
-cd $PROJECT_ROOT/client/delta
+# moving the pointer to server's directory
+cd $PROJECT_ROOT/server
+# Install the server dependencies
+echo "Installing Server dependencies..."
+npm install
 
+cd $PROJECT_ROOT/client/delta
 # Install the dependencies
 echo "Installing dependencies..."
 npm install
