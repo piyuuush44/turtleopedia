@@ -22,8 +22,8 @@ const DATE = moment(new Date()).format('YYYY-MM-DD');
 const NUM_LINKS = 10000;
 const XML_NAMESPACE = 'http://www.sitemaps.org/schemas/sitemap/0.9';
 
-const destination = argv.d || '/tmp';
-const route = argv.r;
+const destination = argv._[0] || '/tmp';
+const route = argv._[1];
 
 /**
  * It creates links of all posts in format like
@@ -31,7 +31,8 @@ const route = argv.r;
  */
 const getPostLinks = async () => {
   const posts = await Post.find({});
-  return posts.map((post) => `${process.env.BASE_URL}/b/singleBlog/${post.slug_url}`);
+  return posts.map((post) =>
+    `${process.env.BASE_URL}/b/singleBlog/${post.slug_url}`);
 };
 /**
  * Converts the given js object input into xml and writes it to a file

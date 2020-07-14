@@ -2,7 +2,7 @@
 
 set -e
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 cd $DIR
 source setup.sh
 
@@ -15,19 +15,20 @@ cd $PROJECT_ROOT/server
 ROUTE=sitemap
 SITEMAP_DESTINATION=${PROJECT_ROOT}/client/delta/dist/dist/browser/${ROUTE}
 
-yarn install
+npm install
 
 # moving the pointer to london's directory
 cd $PROJECT_ROOT/client/delta
 
 # make the directory where sitemap files will be stored
 mkdir -p $SITEMAP_DESTINATION
+ls ${PROJECT_ROOT}/client/delta/dist/dist/browser
 
 date
 print_ok "Starting generate_sitemap script"
 
 # generating sitemap package
-npm run generate_sitemap -d $SITEMAP_DESTINATION -r $ROUTE
+npm run generate_sitemap --d $SITEMAP_DESTINATION --r $ROUTE
 
 date
 
