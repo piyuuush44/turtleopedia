@@ -2,10 +2,10 @@
 .sitemap_delta: &sitemap_delta
   stage: sitemap
   image: node:13
-  script: source deployments/scripts/client_delta_package.sh
+  script: source deployments/scripts/client_delta_sitemap.sh
   artifacts:
     paths:
-      - client/delta/sitemap
+      - client/delta/src/sitemap
 
 sitemap_delta:prod:
   extends: .sitemap_delta

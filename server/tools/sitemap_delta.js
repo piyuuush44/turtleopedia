@@ -154,7 +154,7 @@ const main = async () => {
 
   await Promise.all(listOfLinks.map(async (l, index) => {
     const fileName = `sitemap-${index}.xml`;
-    const filePath = `${destination}/${fileName}`;
+    const filePath = `${destination}/${route}/${fileName}`;
 
     let urlPath;
     if (route) {

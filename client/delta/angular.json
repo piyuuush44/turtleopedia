@@ -23,7 +23,7 @@
               "src/favicon.ico",
               "src/assets",
               "src/sitemap",
-              "src/sitemap/sitemap.xml",
+              "src/sitemap.xml",
               "src/.htaccess"
             ],
             "styles": [
@@ -149,7 +149,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/server",
+            "outputPath": "dist/dist/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "externalDependencies": [

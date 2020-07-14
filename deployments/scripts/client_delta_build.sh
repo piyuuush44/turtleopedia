@@ -6,6 +6,8 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/client/delta
 
+ls
+
 # Install the dependencies
 echo "Installing dependencies..."
 npm install
