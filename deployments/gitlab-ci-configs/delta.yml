@@ -10,6 +10,11 @@
 
 build_delta:prod:
   extends: .build_delta
+  variables:
+    NODE_ENV: production
+    BASE_URL: https://www.turtleopedia.com
+    MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia:ET6qUjmbJnnxRrtF@turtleopedia-production-ba3gv.gcp.mongodb.net
+    MONGO_DB_DELTA: delta
   environment:
     name: prod
   only:
