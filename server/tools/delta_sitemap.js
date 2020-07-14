@@ -30,10 +30,8 @@ const route = argv.r;
  * Domain/home/b/
  */
 const getPostLinks = async() => {
-        const postsUrl = await Post.find({ url: slug_url });
-        return postsUrl.map(url => {
-            return url.slug_url;
-        });
+        let posts = await Post.find({});
+        return posts.map(post => post.slug_url);
     }
     /**
      * Converts the given js object input into xml and writes it to a file
