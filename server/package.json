@@ -24,6 +24,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "mime": "^2.4.6",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.7",
     "morgan": "^1.9.1",
     "morgan-json": "^1.1.0",
@@ -34,6 +35,8 @@
     "randomstring": "^1.1.5",
     "uuid": "^8.1.0",
     "winston": "^3.2.1",
+    "xml-js": "^1.6.11",
+    "yargs": "^15.4.1",
     "ytdl-core": "^2.1.2"
   },
   "devDependencies": {

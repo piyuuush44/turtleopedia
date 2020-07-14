@@ -12,7 +12,8 @@
     "serve:ssr": "node dist/delta/server/main.js",
     "build:ssr": "ng build --prod --aot && ng run delta:server:production",
     "prerender": "ng run delta:prerender",
-    "deploy": "ng deploy"
+    "deploy": "ng deploy",
+    "generate_sitemap": "node ../../server/tools/sitemap_delta.js"
   },
   "private": true,
   "dependencies": {

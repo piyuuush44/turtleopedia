@@ -34,6 +34,24 @@ lint_delta:prod:
   only:
     - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
 
+# Package Step -- this required build step
+.package_delta: &package_delta
+  stage: package
+  image: node:13
+  script: source deployments/scripts/client_delta_package.sh
+  artifacts:
+    paths:
+      - client/delta/dist/
+
+package_london:prod:
+  extends: .package_delta
+  variables:
+    NODE_ENV: production
+    BASE_URL: https://www.turtleopedia.com
+  only:
+    - master
+    - /^delta-v[0-9]*\.[0-9]*\.[0-9]*$/
+
 .deploy_delta: &deploy_delta
   stage: deploy
   image: node:13
