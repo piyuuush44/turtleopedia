@@ -8,9 +8,10 @@ variables:
   GCR_REGION_URL: https://asia.gcr.io
 
 stages:
-  - package
+  - sitemap
   - build
   - test
+  - package
   - deploy
 
 # For manual triggering Step

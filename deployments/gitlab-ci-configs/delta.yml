@@ -1,14 +1,14 @@
-# Package Step -- this required build step
-.package_delta: &package_delta
-  stage: package
+# Sitemap Step -- this required build step
+.sitemap_delta: &sitemap_delta
+  stage: sitemap
   image: node:13
   script: source deployments/scripts/client_delta_package.sh
   artifacts:
     paths:
       - client/delta/sitemap
 
-package_delta:prod:
-  extends: .package_delta
+sitemap_delta:prod:
+  extends: .sitemap_delta
   variables:
     NODE_ENV: production
     BASE_URL: https://www.turtleopedia.com
@@ -31,7 +31,7 @@ package_delta:prod:
 build_delta:prod:
   extends: .build_delta
   dependencies:
-    - package_delta:prod
+    - sitemap_delta:prod
   environment:
     name: prod
   only:
