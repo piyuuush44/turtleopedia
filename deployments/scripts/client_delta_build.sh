@@ -6,7 +6,9 @@ PROJECT_ROOT=$(git rev-parse --show-toplevel)
 
 cd $PROJECT_ROOT/client/delta
 
-ls
+ls src/sitemap
+ls src/
+
 
 # Install the dependencies
 echo "Installing dependencies..."

@@ -5,7 +5,7 @@
   script: source deployments/scripts/client_delta_sitemap.sh
   artifacts:
     paths:
-      - client/delta/src/sitemap
+      - client/delta/src
 
 sitemap_delta:prod:
   extends: .sitemap_delta
