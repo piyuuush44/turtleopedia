@@ -11,3 +11,15 @@
         width: 100% !important;
     }
 }
+
+.standard-post .down-content h1 {
+    font-family: "Cormorant", Arial, Helvetica, serif;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    font-size: 28px;
+    line-height: 30px;
+    text-transform: capitalize;
+    font-weight: 700;
+    text-align: center;
+    transition: all .3s;
+}

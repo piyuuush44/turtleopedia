@@ -1,6 +1,6 @@
 const functions = require('firebase-functions');
 
-const expressApp = require('./dist/server/main').app();
+const expressApp = require('./server/main').app();
 
 exports.ssr = functions
   .region('us-central1')

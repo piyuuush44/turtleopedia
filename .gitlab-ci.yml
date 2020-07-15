@@ -8,6 +8,7 @@ variables:
   GCR_REGION_URL: https://asia.gcr.io
 
 stages:
+  - sitemap
   - build
   - test
   - package

@@ -13,15 +13,18 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/dist/browser",
+            "outputPath": "dist/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              "src/robots.txt",
               "src/favicon.ico",
               "src/assets",
+              "src/sitemap",
+              "src/sitemap.xml",
               "src/.htaccess"
             ],
             "styles": [
