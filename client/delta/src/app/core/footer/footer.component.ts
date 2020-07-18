@@ -11,7 +11,7 @@ import {coreStateWebsiteDataSelector} from '../store/core.selector';
 })
 export class FooterComponent implements OnInit, AfterViewInit {
     @ViewChild('advertisement') editor: ElementRef<HTMLElement>;
-    script = '<script type="text/javascript" src="https://www.topdisplaynetwork.com/6ef12e1a3b2a9b1784c7e7d57421e05c/invoke.js"></script>'
+    script = '<script type="text/javascript" src="https://www.topdisplaynetwork.com/6ef12e1a3b2a9b1784c7e7d57421e05c/invoke.js"></script>';
 
     data: WebdataModel = new WebdataModel([], [], [], ['lifestyle']);
 

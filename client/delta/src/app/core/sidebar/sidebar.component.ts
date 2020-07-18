@@ -3,7 +3,7 @@ import {WebdataModel} from '../model/webdata.model';
 import {AppState} from '../../store/app.reducer';
 import {coreStateWebsiteDataSelector} from '../store/core.selector';
 import {select, Store} from '@ngrx/store';
-import {DOCUMENT} from "@angular/common";
+import {DOCUMENT} from '@angular/common';
 
 @Component({
     selector: 'app-sidebar',
@@ -13,13 +13,11 @@ import {DOCUMENT} from "@angular/common";
 export class SidebarComponent implements OnInit, AfterViewInit {
     @ViewChild('advertisement') editor: ElementRef<HTMLElement>;
 
-    script = '<script type="text/javascript" src="https://www.topdisplaynetwork.com/eb5e935bad1970b8efd3a3435a711be1/invoke.js"></script>'
+    script = '<script type="text/javascript" src="https://www.topdisplaynetwork.com/eb5e935bad1970b8efd3a3435a711be1/invoke.js"></script>';
     data: WebdataModel = new WebdataModel([], [], [], ['lifestyle']);
 
     constructor(
         private store: Store<AppState>,
-        private renderer2: Renderer2,
-        @Inject(DOCUMENT) private document
     ) {
     }
 
