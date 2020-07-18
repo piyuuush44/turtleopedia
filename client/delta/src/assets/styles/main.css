@@ -1674,7 +1674,7 @@ section.above-header ul.search-item li a:hover {
     position: relative;
     border: 1px solid #eee;
     padding: 54px 30px 30px 30px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
 }
 
 .instagram-footer .instagram-account .widget-content .widget-header {
