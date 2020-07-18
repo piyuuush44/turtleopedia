@@ -16,6 +16,8 @@ import {SearchboxComponent} from './searchbox/searchbox.component';
 import {AboutusComponent} from './aboutus/aboutus.component';
 import {ContactComponent} from './contact/contact.component';
 import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
+import {LoadScriptDirective} from './advertisement/advertisement-directive';
+import {LoadAdScriptDirective} from './advertisement/advertisement2-directive';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
         SearchboxComponent,
         AboutusComponent,
         ContactComponent,
-        PrivacypolicyComponent
+        PrivacypolicyComponent,
+        LoadScriptDirective,
+        LoadAdScriptDirective
     ],
     imports: [
         CommonModule,
