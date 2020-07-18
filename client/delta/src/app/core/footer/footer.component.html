@@ -8,11 +8,15 @@
                             <h4><a routerLink="/b/home">Turtleopedia</a></h4>
                         </div>
                         <div class="row">
-                            <div class="col-lg-3" *ngFor="let post of data.recent_posts| slice:0:4">
-                                <div class="instagram-item" routerLink="/b/singleBlog/{{post.slug_url}}">
-                                    <img src="{{post.image_url}}" alt="Instagram Image">
-                                </div>
+
+                            <div class="col-lg-3" #advertisement>
+
                             </div>
+                            <!--                            <div class="col-lg-3" *ngFor="let post of data.recent_posts| slice:0:4">-->
+                            <!--                                <div class="instagram-item" routerLink="/b/singleBlog/{{post.slug_url}}">-->
+                            <!--                                    <img src="{{post.image_url}}" alt="Instagram Image">-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
                 </div>
