@@ -182,12 +182,16 @@ exports.getFilterPost = async (req, res, next) => {
   const posts = await Posts.aggregate(
       [
         {
+          $sort: {createdAt: -1},
+        },
+        {
           $match: {
             category: {
               $in: categoryArray,
             },
           },
         },
+
       ],
   ).skip(offset).limit(limit);
   const count = await Posts.count();
