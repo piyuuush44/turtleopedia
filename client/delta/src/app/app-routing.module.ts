@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {NotfoundComponent} from "./core/notfound/notfound.component";
+import {NotfoundComponent} from './core/notfound/notfound.component';
 
 const routes: Routes = [
     {path: '', redirectTo: '/b/home', pathMatch: 'full'},
