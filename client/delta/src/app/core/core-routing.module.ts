@@ -1,12 +1,13 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {CoreComponent} from './core.component';
-import {HomeComponent} from './home/home.component';
-import {SingleviewComponent} from './singleview/singleview.component';
-import {CategoryComponent} from './category/category.component';
-import {ContactComponent} from './contact/contact.component';
-import {AboutusComponent} from './aboutus/aboutus.component';
-import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { CoreComponent } from './core.component';
+import { HomeComponent } from './home/home.component';
+import { SingleviewComponent } from './singleview/singleview.component';
+import { CategoryComponent } from './category/category.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
     {
@@ -30,6 +31,9 @@ const routes: Routes = [
                 path: 'privacy-policy', component: PrivacypolicyComponent
             },
         ]
+    },
+    {
+        path: '**', component: NotfoundComponent
     },
 ];
 
