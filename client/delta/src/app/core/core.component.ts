@@ -14,4 +14,8 @@ export class CoreComponent implements OnInit {
     ngOnInit(): void {
     }
 
+    navigateToTop(){
+        window.scrollTo(0, 0);
+    }
+
 }
