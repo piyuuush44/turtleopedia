@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {WebdataModel} from '../model/webdata.model';
 import {AppState} from '../../store/app.reducer';
 import {coreStateWebsiteDataSelector} from '../store/core.selector';
@@ -10,9 +10,13 @@ import {select, Store} from '@ngrx/store';
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+    @ViewChild('advertisement') editor: ElementRef<HTMLElement>;
+
     data: WebdataModel = new WebdataModel([], [], [], ['lifestyle']);
 
-    constructor(private store: Store<AppState>) {
+    constructor(
+        private store: Store<AppState>,
+    ) {
     }
 
     ngOnInit(): void {

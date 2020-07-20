@@ -10,6 +10,7 @@ import {coreStateWebsiteDataSelector} from '../store/core.selector';
     styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
+
     data: WebdataModel = new WebdataModel([], [], [], ['lifestyle']);
 
     constructor(private store: Store<AppState>) {
