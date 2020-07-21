@@ -5,7 +5,7 @@ import * as CoreActions from '../store/core.actions';
 import {coreStateCurrentPostDataSelector} from '../store/core.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import {templateJitUrl} from "@angular/compiler";
+import {templateJitUrl} from '@angular/compiler';
 
 @Component({
     selector: 'app-singleview',
@@ -43,12 +43,12 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                     value.tags.forEach((tag, index) => {
                         // for last index
                         if (index === value.tags.length - 1) {
-                            this.tagString += `${tag}`
+                            this.tagString += `${tag}`;
                         } else {
                             // for other indexes
-                            this.tagString += `${tag},`
+                            this.tagString += `${tag},`;
                         }
-                    })
+                    });
                 }
 
                 const metaTags = [
