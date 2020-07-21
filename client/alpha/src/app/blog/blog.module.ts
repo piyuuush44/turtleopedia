@@ -11,6 +11,10 @@ import {BlogReducer} from './store/blog.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {BlogEffects} from './store/blog.effects';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatIconModule} from "@angular/material/icon";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
     ReactiveFormsModule,
     CommonModule,
     StoreModule.forFeature('blogState', BlogReducer),
-    EffectsModule.forFeature([BlogEffects])
+    EffectsModule.forFeature([BlogEffects]),
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule
   ],
   providers: [
     BlogService

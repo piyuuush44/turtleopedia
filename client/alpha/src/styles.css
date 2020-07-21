@@ -9,3 +9,6 @@
   background: #DAE6F6 !important;
   color: #717BA2 !important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

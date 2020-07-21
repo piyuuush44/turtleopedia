@@ -90,8 +90,6 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.saveBlog(data).pipe(
           map((response: HttpResponse<any>) => {
-              console.log(response.body);
-              this.router.navigate(['/blog/list']);
               const limit = 10;
               const offset = 0;
               const url = `${endPoints.GET_POST}?limit=${limit}&offset=${offset}`;
@@ -112,7 +110,6 @@ export class BlogEffects {
       switchMap((data) =>
         this.blogService.updateBlogById(data.id, data.blog).pipe(
           map((response: HttpResponse<any>) => {
-              this.router.navigate(['/blog/list']);
               const limit = 10;
               const offset = 0;
               const url = `${endPoints.GET_POST}?limit=${limit}&offset=${offset}`;

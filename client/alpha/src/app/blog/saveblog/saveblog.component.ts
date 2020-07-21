@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {BlogService} from '../blog.service';
 import {Blog} from '../models/blog.model';
 import * as BlogActions from '../store/blog.actions';
@@ -11,7 +11,12 @@ import {
   blogStateEditableBlogSelector
 } from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {map, startWith} from "rxjs/operators";
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from "@angular/material/autocomplete";
+import {MatChipInputEvent} from "@angular/material/chips";
+import {Observable} from "rxjs";
+import {COMMA, ENTER} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-saveblog',
@@ -19,6 +24,20 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./saveblog.component.css']
 })
 export class SaveblogComponent implements OnInit, OnDestroy {
+
+
+  visible = true;
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  filteredTags: Observable<string[]>;
+  tags: string[] = [];
+  allTags: string[] = [];
+
+  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+
   public Editor = DecoupledEditor;
   blog = new Blog();
   blogForm: FormGroup;
@@ -41,10 +60,12 @@ export class SaveblogComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private store: Store<BlogState>,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
   ngOnInit(): void {
+
     // initial configs for blog form
     this.currentIndex = 0;
     this.content.push({type: 'Text', addButton: false});
@@ -64,12 +85,16 @@ export class SaveblogComponent implements OnInit, OnDestroy {
           this.blog = new Blog(this.currentEditBlog);
 
           this.content = [];
+          this.tags = [];
+          this.allTags = [];
           this.currentEditBlog.content.forEach((valueFound, index) => {
             if (valueFound.type === 'Image' || valueFound.type === 'ImageText') {
               this.previewContentImage[index] = valueFound.imageUrl;
             }
             this.content.push(valueFound);
           });
+          this.tags = this.currentEditBlog.tags ? this.currentEditBlog.tags : [];
+          this.allTags = this.currentEditBlog.tags ? this.currentEditBlog.tags : [];
           this.previewPostImage = this.currentEditBlog.image_url;
           this.blogForm = this.createBlogForm();
         }
@@ -88,6 +113,11 @@ export class SaveblogComponent implements OnInit, OnDestroy {
         this.contentImageUrl = value;
       }
     );
+
+    this.filteredTags = this.blogFormControls.tags.valueChanges.pipe(
+      startWith(null),
+      map((tag: string | null) => tag ? this.filterTags(tag) : this.allTags.slice()));
+
   }
 
   get blogFormControls() {
@@ -95,6 +125,11 @@ export class SaveblogComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    this.saveBlog();
+    this.router.navigate(['/blog/list']);
+  }
+
+  saveBlog() {
     let action;
     if (this.blogForm.invalid) {
       return;
@@ -237,6 +272,46 @@ export class SaveblogComponent implements OnInit, OnDestroy {
       editor.ui.getEditableElement()
     );
   }
+
+  addTag(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our tag
+    if ((value || '').trim()) {
+      this.tags = Object.assign([], this.tags);
+      this.tags.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.blogForm.controls.tags.setValue(this.tags);
+  }
+
+  removeTag(tag: string): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+    this.blogForm.controls.tags.setValue(this.tags);
+
+  }
+
+  selectedTag(event: MatAutocompleteSelectedEvent): void {
+    this.tags = Object.assign([], this.tags);
+    this.tags.push(event.option.viewValue);
+    this.tagInput.nativeElement.value = '';
+    this.blogForm.controls.tags.setValue(this.tags);
+  }
+
+  private filterTags(value: string): string[] {
+    return this.allTags.filter(tag => tag.toLowerCase().indexOf(value) === 0);
+  }
+
 
   ngOnDestroy() {
     this.content = null;
