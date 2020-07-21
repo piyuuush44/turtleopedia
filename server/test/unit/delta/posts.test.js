@@ -171,6 +171,58 @@ describe('should get a posts by category -> getFilterPost', () => {
     expect(response.body.results[0].category).toEqual(posts.category);
     expect(response.body.results[0].title).toEqual(posts.title);
   });
+  it('should filter the posts by createdAt ascending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
+
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
+
+    const url = `/delta/filterPosts?sortBy=createdAt,asc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeLessThan(date2);
+  });
+  it('should filter the posts by createdAt descending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
+
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
+
+    const url = `/delta/filterPosts?sortBy=createdAt,desc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeGreaterThan(date2);
+  });
   it('should return error that no post is found for the given category',
       async () => {
         const url = `/delta/filterPosts`;
