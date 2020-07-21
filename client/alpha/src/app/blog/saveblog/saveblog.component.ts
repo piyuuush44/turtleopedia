@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BlogService} from '../blog.service';
 import {Blog} from '../models/blog.model';
@@ -18,7 +18,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './saveblog.component.html',
   styleUrls: ['./saveblog.component.css']
 })
-export class SaveblogComponent implements OnInit {
+export class SaveblogComponent implements OnInit, OnDestroy {
   public Editor = DecoupledEditor;
   blog = new Blog();
   blogForm: FormGroup;
@@ -139,7 +139,7 @@ export class SaveblogComponent implements OnInit {
         const editIndex = this.isContentImageEdited.findIndex(value1 => value1 === index);
         if (editIndex > -1) {
           finalContent.imageUrl = this.contentImageUrl;
-        }else {
+        } else {
           finalContent.imageUrl = content[index].imageUrl;
         }
       } else {
@@ -236,5 +236,14 @@ export class SaveblogComponent implements OnInit {
       editor.ui.view.toolbar.element,
       editor.ui.getEditableElement()
     );
+  }
+
+  ngOnDestroy() {
+    this.content = null;
+    this.blogForm = null;
+    this.blog = null;
+    this.contentImageUrl = null;
+    this.previewContentImage = null;
+    this.currentEditBlog = null;
   }
 }

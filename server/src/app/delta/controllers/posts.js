@@ -191,7 +191,6 @@ exports.getFilterPost = async (req, res, next) => {
             },
           },
         },
-
       ],
   ).skip(offset).limit(limit);
   const count = await Posts.count();
