@@ -5,6 +5,7 @@ import * as CoreActions from '../store/core.actions';
 import {coreStateCurrentPostDataSelector} from '../store/core.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
+import {templateJitUrl} from "@angular/compiler";
 
 @Component({
     selector: 'app-singleview',
@@ -14,6 +15,7 @@ import {select, Store} from '@ngrx/store';
 export class SingleviewComponent implements OnInit, OnDestroy {
     slugUrl: string;
     post: Posts;
+    tagString = 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript';
 
     constructor(
         private route: ActivatedRoute,
@@ -35,10 +37,24 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                 this.post = value;
                 this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: value.title}));
 
+                if (value.tags) {
+                    this.tagString = '';
+                    // stringfying all tags
+                    value.tags.forEach((tag, index) => {
+                        // for last index
+                        if (index === value.tags.length - 1) {
+                            this.tagString += `${tag}`
+                        } else {
+                            // for other indexes
+                            this.tagString += `${tag},`
+                        }
+                    })
+                }
+
                 const metaTags = [
                     {
                         name: 'keywords',
-                        content: 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript'
+                        content: this.tagString
                     },
                     {
                         name: 'og:url',
@@ -46,7 +62,7 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                     },
                     {
                         name: 'og:type',
-                        content: 'A complete blog related to technology, lifestyle, entertainment'
+                        content: value.title
                     },
 
                     {
@@ -79,8 +95,7 @@ export class SingleviewComponent implements OnInit, OnDestroy {
     removeTags(str) {
         if ((str === null) || (str === '')) {
             return false;
-        }
-        else {
+        } else {
             str = str.toString();
         }
         return str.replace(/(<([^>]+)>)/ig, '');

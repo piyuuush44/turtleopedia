@@ -40,3 +40,7 @@
 blockquote p {
     color: green !important;
 }
+
+p {
+    font-weight: 800 !important;
+}
