@@ -171,6 +171,46 @@ describe('should get a posts by category -> getFilterPost', () => {
     expect(response.body.results[0].category).toEqual(posts.category);
     expect(response.body.results[0].title).toEqual(posts.title);
   });
+  it('should return zero post if is_active is false ',
+      async () => {
+        const url = `/delta/filterPosts`;
+        const {mockedServer, token, user} = await setup.setupMocksAndServer();
+        const post = new Posts();
+        post.title = 'hi';
+        post.is_active = false;
+        post.category = 'technology';
+        post.content = [];
+        post.user_id = user._id;
+        await post.save();
+
+        const response = await mockedServer.get(url).set({
+          Authorization: token,
+        });
+        expect(response.status)
+            .toEqual(200);
+        expect(response.body.results.length).toEqual(0);
+      });
+  it('should return post successfully if is_active is true ',
+      async () => {
+        const url = `/delta/filterPosts`;
+        const {mockedServer, token, user} = await setup.setupMocksAndServer();
+        const post = new Posts();
+        post.title = 'hi';
+        post.is_active = true;
+        post.category = 'technology';
+        post.content = [];
+        post.user_id = user._id;
+        const posts = await post.save();
+
+        const response = await mockedServer.get(url).set({
+          Authorization: token,
+        });
+        expect(response.status)
+            .toEqual(200);
+        expect(response.body.results.length).toEqual(1);
+        expect(response.body.results[0].is_active).toEqual(true);
+        expect(response.body.results[0].title).toEqual(posts.title);
+      });
   it('should return error that no post is found for the given category',
       async () => {
         const url = `/delta/filterPosts`;
