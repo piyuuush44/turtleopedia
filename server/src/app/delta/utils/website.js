@@ -10,7 +10,7 @@ exports.categoryCount = async () => Posts.aggregate(
       }],
 );
 
-exports.getRecentPosts = async () => Posts.find().limit(6)
+exports.getRecentPosts = async () => Posts.find({is_active: true}).limit(6)
     .sort({createdAt: '-1'});
 
-exports.getTopPosts = async () => Posts.find({is_top: true});
+exports.getTopPosts = async () => Posts.find({is_top: true, is_active: true});

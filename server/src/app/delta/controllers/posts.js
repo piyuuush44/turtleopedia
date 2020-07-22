@@ -185,11 +185,16 @@ exports.getFilterPost = async (req, res, next) => {
           $sort: {createdAt: -1},
         },
         {
-          $match: {
-            category: {
-              $in: categoryArray,
+          $match: [
+            {
+              category: {
+                $in: categoryArray,
+              },
             },
-          },
+            {
+              is_active: true,
+            },
+          ],
         },
       ],
   ).skip(offset).limit(limit);

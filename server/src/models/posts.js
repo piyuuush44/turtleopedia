@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
   image_url: {
     type: String,
   },
