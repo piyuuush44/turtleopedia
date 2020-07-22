@@ -182,19 +182,19 @@ exports.getFilterPost = async (req, res, next) => {
   const posts = await Posts.aggregate(
       [
         {
-          $sort: {createdAt: -1},
+          $match: {
+            is_active: {$eq: true},
+          },
         },
         {
-          $match: [
-            {
-              category: {
-                $in: categoryArray,
-              },
+          $match: {
+            category: {
+              $in: categoryArray,
             },
-            {
-              is_active: true,
-            },
-          ],
+          },
+        },
+        {
+          $sort: {createdAt: -1},
         },
       ],
   ).skip(offset).limit(limit);
