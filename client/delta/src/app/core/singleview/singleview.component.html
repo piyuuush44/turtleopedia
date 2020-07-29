@@ -37,12 +37,10 @@
                     <br>
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
-                            <div class="tags">
+                            <div class="tags" *ngIf="post.tags.length>0">
                                 <ul class="tags">
                                     <li><i class="fa fa-tag"></i></li>
-                                    <li><a>Beauty</a>,</li>
-                                    <li><a>Fashion</a>,</li>
-                                    <li><a>Lifestyle</a></li>
+                                    <li *ngFor="let tag of post.tags| slice:0:3"><a>{{tag}}</a>,</li>
                                 </ul>
                             </div>
                         </div>
