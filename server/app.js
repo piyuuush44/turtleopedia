@@ -61,9 +61,18 @@ app.use(morgan(morganFormat, {stream: logger.stream}));
 
 registerAllRoutes(app);
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  res.json(createError(404));
+app.use((req, res) => {
+  /* Undefined route */
+  if (req.xhr) {
+    /* Handle XHR errors by responding with JSON */
+    res.status(404).json({
+      error: 'Not found',
+    });
+  } else {
+    res.status(404).send('404 - Not found');
+  }
 });
+
 const getErrorResponse = (httpStatus, message) => ({
   error: {
     httpStatus: httpStatus,
