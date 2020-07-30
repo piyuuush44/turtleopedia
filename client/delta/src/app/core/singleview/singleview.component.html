@@ -15,7 +15,7 @@
                         <li><a>Admin</a></li>
                         <li><a>{{post.no_of_views}}</a></li>
                     </ul>
-                    <div *ngFor="let cont of post.content">
+                    <div *ngFor="let cont of post.content;let i=index">
                         <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
                         <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
                         </blockquote>
@@ -33,7 +33,9 @@
                                 src="{{cont.videoUrl}}"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
+                        <div *ngIf="i%3" appLoadScript></div>
                     </div>
+                    <div appLoadScript></div>
                     <br>
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
