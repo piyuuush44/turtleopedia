@@ -4,7 +4,7 @@ import {Directive, ElementRef, AfterViewInit} from '@angular/core';
     selector: '[appLoadScript]'
 })
 export class LoadScriptDirective implements AfterViewInit {
-    //3*1 ad
+    // 3*1 ad
     constructor(private el: ElementRef) {
 
     }
