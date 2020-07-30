@@ -33,9 +33,11 @@
                                 src="{{cont.videoUrl}}"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
-                        <div *ngIf="i%3" appLoadScript></div>
+                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>
+
                     </div>
-                    <div appLoadScript></div>
+                    <br>
+                    <div appLoadScript class="p-3"></div>
                     <br>
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
