@@ -20,7 +20,7 @@
                         <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
                         </blockquote>
                         <img src="{{cont.imageUrl}}" alt="Post content image" *ngIf="cont.type==='Image'"
-                             class="content-image">
+                             class="content-image p-2">
                         <div class="row" *ngIf="cont.type==='ImageText'">
                             <div class="col-md-4">
                                 <img src="{{cont.imageUrl}}" alt="Post content image">
@@ -33,7 +33,7 @@
                                 src="{{cont.videoUrl}}"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
-                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>
+<!--                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>-->
 
                     </div>
                     <br>
