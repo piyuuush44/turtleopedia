@@ -3,18 +3,18 @@ data:
   GCLOUD_PROJECT: my-turtleopedia
   GCS_BUCKET: turtleopedia_assets_prod
   GCS_KEYFILE: keyfile.json
-  JWT_SECRET_KEY: JWT_SECRET_KEY
   MONGO_DB_DELTA: delta
-  MONGO_DB_HELIUM: helium
   MONGO_URL_SUBSTRING: mongodb+srv://turtleopedia:ET6qUjmbJnnxRrtF@turtleopedia-production-ba3gv.gcp.mongodb.net
   NODE_ENV: production
   PORT: "3000"
   TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
-  TURTLEOPEDIA_JWT_SECRET_KEY_2: TURTLEOPEDIA_JWT_SECRET_KEY_2
 kind: ConfigMap
 metadata:
+
   labels:
     app: turtleopedia
-  name: turtleopedia-config-vkbk
+  name: turtleopedia-config-qlqx
   namespace: turtleopedia
-  selfLink: /api/v1/namespaces/turtleopedia/configmaps/turtleopedia-config-vkbk
+  resourceVersion: "1259"
+  selfLink: /api/v1/namespaces/turtleopedia/configmaps/turtleopedia-config-qlqx
+
