@@ -13,7 +13,6 @@ module.exports = {
           content: Joi.array().required(),
           tags: Joi.array(),
           is_top: Joi.boolean(),
-          is_active: Joi.boolean(),
           image_url: Joi.string(),
           slug_url: Joi.string(),
           feature_content: Joi.string(),
@@ -29,7 +28,6 @@ module.exports = {
           content: Joi.array().required(),
           tags: Joi.array(),
           is_top: Joi.boolean(),
-          is_active: Joi.boolean(),
           image_url: Joi.string(),
           slug_url: Joi.string(),
           feature_content: Joi.string(),
@@ -75,6 +73,7 @@ module.exports = {
   },
   getFilterPost: {
     query: {
+      sortBy: Joi.string(),
       limit: Joi.number(),
       offset: Joi.number(),
       category: Joi.string(),

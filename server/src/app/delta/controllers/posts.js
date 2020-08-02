@@ -74,18 +74,31 @@ exports.getPostBySlugUrl = async (req, res, next) => {
 };
 
 exports.getPosts = async (req, res, next) => {
+  let sort;
   const limit = +req.query.limit || 10;
   const offset = +req.query.offset || 0;
-  const posts = await Posts.find().skip(offset).limit(limit)
+  const sortBy = req.query.sortBy;
+  const postsQuery = Posts.find().skip(offset).limit(limit)
       .populate({path: 'user_id', model: Users});
   const count = await Posts.count();
+  if (sortBy) {
+    const finalSortValue = sortBy.split(',');
+    if (finalSortValue[1] === 'asc') {
+      sort = {createdAt: 1};
+    } else {
+      sort = {createdAt: -1};
+    }
+    postsQuery.sort(sort);
+  }
+  const finalResult = await postsQuery;
   return res.json(controllerUtils.getPaginatedResponse(
-      posts,
+      finalResult,
       count,
       req.query,
       constants.DELTA_POSTS_PAGINATED_URL,
   ));
 };
+
 /* eslint-disable camelcase */
 exports.putUpdatePostById = async (req, res, next) => {
   try {
@@ -174,29 +187,43 @@ exports.deleteCommentById = async (req, res, next) => {
 };
 
 exports.getFilterPost = async (req, res, next) => {
+  let sort;
+
   const limit = +req.query.limit || 5;
   const offset = +req.query.offset || 0;
+  const sortBy = req.query.sortBy;
   const {category} = req.query;
   const categoryArray = category ? category.split(',') :
         constants.BLOG_POST_CATEGORIES;
+
+  const aggregateArray = [{
+    $match:
+      {
+        category: {
+          $in: categoryArray,
+        },
+      },
+  },
+  {
+    $match:
+      {
+        is_active: true,
+      },
+  }];
+
+  if (sortBy) {
+    const finalSortValue = sortBy.split(',');
+    if (finalSortValue[1] === 'asc') {
+      sort = {createdAt: 1};
+    } else {
+      sort = {createdAt: -1};
+    }
+    aggregateArray.push({
+      $sort: sort,
+    });
+  }
   const posts = await Posts.aggregate(
-      [
-        {
-          $match: {
-            is_active: {$eq: true},
-          },
-        },
-        {
-          $match: {
-            category: {
-              $in: categoryArray,
-            },
-          },
-        },
-        {
-          $sort: {createdAt: -1},
-        },
-      ],
+      aggregateArray,
   ).skip(offset).limit(limit);
   const count = await Posts.count();
   return res.json(controllerUtils.getPaginatedResponse(
