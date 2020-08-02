@@ -154,78 +154,78 @@ describe('should delete a post -> deletePostById', () => {
 
 
 describe('should get a posts by category -> getFilterPost', () => {
-    it('should get the posts by category ', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        const posts = await post.save();
-        const url = `/delta/filterPosts?category=${posts.category}`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
-        expect(response.status)
-            .toEqual(200);
-        expect(response.body.results[0].category).toEqual(posts.category);
-        expect(response.body.results[0].title).toEqual(posts.title);
+  it('should get the posts by category ', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    const posts = await post.save();
+    const url = `/delta/filterPosts?category=${posts.category}`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
     });
-    it('should filter the posts by createdAt ascending', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        await post.save();
+    expect(response.status)
+        .toEqual(200);
+    expect(response.body.results[0].category).toEqual(posts.category);
+    expect(response.body.results[0].title).toEqual(posts.title);
+  });
+  it('should filter the posts by createdAt ascending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
 
-        const post2 = new Posts();
-        post2.title = 'hi';
-        post2.category = 'technology';
-        post2.content = [];
-        post2.user_id = user._id;
-        await post2.save();
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
 
-        const url = `/delta/filterPosts?sortBy=createdAt,asc`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
-        const date1 = new Date(response.body.results[0].createdAt).getTime();
-        const date2 = new Date(response.body.results[1].createdAt).getTime();
-        expect(response.status)
-            .toEqual(200);
-        expect(date1).toBeLessThan(date2);
+    const url = `/delta/filterPosts?sortBy=createdAt,asc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
     });
-    it('should filter the posts by createdAt descending', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        await post.save();
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeLessThan(date2);
+  });
+  it('should filter the posts by createdAt descending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
 
-        const post2 = new Posts();
-        post2.title = 'hi';
-        post2.category = 'technology';
-        post2.content = [];
-        post2.user_id = user._id;
-        await post2.save();
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
 
-        const url = `/delta/filterPosts?sortBy=createdAt,desc`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
-        const date1 = new Date(response.body.results[0].createdAt).getTime();
-        const date2 = new Date(response.body.results[1].createdAt).getTime();
-        expect(response.status)
-            .toEqual(200);
-        expect(date1).toBeGreaterThan(date2);
+    const url = `/delta/filterPosts?sortBy=createdAt,desc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
     });
-    it('should return error that no post is found for the given category',
-        async() => {
-            const url = `/delta/filterPosts`;
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeGreaterThan(date2);
+  });
+  // it('should return error that no post is found for the given category',
+  //     async() => {
+  //         const url = `/delta/filterPosts`;
   it('should get the posts by category ', async () => {
     const {mockedServer, token, user} = await setup.setupMocksAndServer();
     const post = new Posts();
@@ -287,101 +287,96 @@ describe('should get a posts by category -> getFilterPost', () => {
       async () => {
         const url = `/delta/filterPosts`;
 
-            const response = await server.get(url);
-            expect(response.status)
-                .toEqual(200);
-            expect(response.body.results.length).toEqual(0);
-        });
+        const response = await server.get(url);
+        expect(response.status)
+            .toEqual(200);
+        expect(response.body.results.length).toEqual(0);
+      });
 
 
-    //  todo jayant add test case when limit is one offset is zero
-    //    todo add test case when limit is one offset is one
-    //    todo add test when more than one category are passed to this api
+  //  todo jayant add test case when limit is one offset is zero
+  //    todo add test case when limit is one offset is one
+  //    todo add test when more than one category are passed to this api
 });
 
 
 describe('should get all posts -> getPosts', () => {
-    it('should all the posts ', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        const posts = await post.save();
+  it('should all the posts ', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    const posts = await post.save();
+    const url = `/delta/posts`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
+    expect(response.status)
+        .toEqual(200);
+    expect(response.body.results[0].category).toEqual(posts.category);
+    expect(response.body.results[0].title).toEqual(posts.title);
+  });
+  it('should filter the posts by createdAt ascending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
+
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
+
+    const url = `/delta/posts?sortBy=createdAt,asc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeLessThan(date2);
+  });
+  it('should filter the posts by createdAt descending', async () => {
+    const {mockedServer, token, user} = await setup.setupMocksAndServer();
+    const post = new Posts();
+    post.title = 'hi';
+    post.category = 'technology';
+    post.content = [];
+    post.user_id = user._id;
+    await post.save();
+
+    const post2 = new Posts();
+    post2.title = 'hi';
+    post2.category = 'technology';
+    post2.content = [];
+    post2.user_id = user._id;
+    await post2.save();
+
+    const url = `/delta/posts?sortBy=createdAt,desc`;
+    const response = await mockedServer.get(url).set({
+      Authorization: token,
+    });
+    const date1 = new Date(response.body.results[0].createdAt).getTime();
+    const date2 = new Date(response.body.results[1].createdAt).getTime();
+    expect(response.status)
+        .toEqual(200);
+    expect(date1).toBeGreaterThan(date2);
+  });
+  it('should return error that no post is found for the given category',
+      async () => {
         const url = `/delta/posts`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
+
+        const response = await server.get(url);
         expect(response.status)
             .toEqual(200);
-        expect(response.body.results[0].category).toEqual(posts.category);
-        expect(response.body.results[0].title).toEqual(posts.title);
-    });
-    it('should filter the posts by createdAt ascending', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        await post.save();
-
-        const post2 = new Posts();
-        post2.title = 'hi';
-        post2.category = 'technology';
-        post2.content = [];
-        post2.user_id = user._id;
-        await post2.save();
-
-        const url = `/delta/posts?sortBy=createdAt,asc`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
-        const date1 = new Date(response.body.results[0].createdAt).getTime();
-        const date2 = new Date(response.body.results[1].createdAt).getTime();
-        expect(response.status)
-            .toEqual(200);
-        expect(date1).toBeLessThan(date2);
-    });
-    it('should filter the posts by createdAt descending', async() => {
-        const { mockedServer, token, user } = await setup.setupMocksAndServer();
-        const post = new Posts();
-        post.title = 'hi';
-        post.category = 'technology';
-        post.content = [];
-        post.user_id = user._id;
-        await post.save();
-
-        const post2 = new Posts();
-        post2.title = 'hi';
-        post2.category = 'technology';
-        post2.content = [];
-        post2.user_id = user._id;
-        await post2.save();
-
-        const url = `/delta/posts?sortBy=createdAt,desc`;
-        const response = await mockedServer.get(url).set({
-            Authorization: token,
-        });
-        const date1 = new Date(response.body.results[0].createdAt).getTime();
-        const date2 = new Date(response.body.results[1].createdAt).getTime();
-        expect(response.status)
-            .toEqual(200);
-        expect(date1).toBeGreaterThan(date2);
-    });
-    it('should return error that no post is found for the given category',
-        async() => {
-            const url = `/delta/posts`;
-
-            const response = await server.get(url);
-            expect(response.status)
-                .toEqual(200);
-            expect(response.body.results.length).toEqual(0);
-        });
-
-
-    //  todo jayant add test case when limit is one offset is zero
-    //    todo add test case when limit is one offset is one
-    //    todo add test when more than one category are passed to this api
+        expect(response.body.results.length).toEqual(0);
+      });
 });

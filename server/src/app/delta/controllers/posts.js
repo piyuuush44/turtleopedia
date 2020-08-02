@@ -98,6 +98,7 @@ exports.getPosts = async (req, res, next) => {
       constants.DELTA_POSTS_PAGINATED_URL,
   ));
 };
+
 /* eslint-disable camelcase */
 exports.putUpdatePostById = async (req, res, next) => {
   try {
@@ -196,11 +197,18 @@ exports.getFilterPost = async (req, res, next) => {
         constants.BLOG_POST_CATEGORIES;
 
   const aggregateArray = [{
-    $match: {
-      category: {
-        $in: categoryArray,
+    $match:
+      {
+        category: {
+          $in: categoryArray,
+        },
       },
-    },
+  },
+  {
+    $match:
+      {
+        is_active: true,
+      },
   }];
 
   if (sortBy) {
