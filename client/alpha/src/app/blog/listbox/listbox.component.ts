@@ -25,7 +25,7 @@ export class ListboxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const url = `${endPoints.GET_POST}?limit=${this.limit}&offset=${this.offset}`;
+    const url = `${endPoints.GET_POST}?limit=${this.limit}&offset=${this.offset}&sortBy=createdAt,desc`;
     this.store.dispatch(BlogActions.TRY_FETCH_BLOGS({payload: url}));
 
     this.store.pipe(select(blogStateBlogsSelector)).subscribe(
