@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {select, Store} from "@ngrx/store";
-import {AppState} from "../../store/app.reducer";
-import {authStateProfileSelector} from "../../auth/store/auth.selector";
-import {ProfileModel} from "../../auth/profile.model";
+import {select, Store} from '@ngrx/store';
+import {AppState} from '../../store/app.reducer';
+import {authStateProfileSelector} from '../../auth/store/auth.selector';
+import {ProfileModel} from '../../auth/profile.model';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
       value => {
         this.profile = value;
       }
-    )
+    );
   }
 
 }

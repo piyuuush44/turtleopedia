@@ -12,11 +12,11 @@ import {
 } from '../store/blog.selector';
 import * as DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import {ActivatedRoute, Router} from '@angular/router';
-import {map, startWith} from "rxjs/operators";
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from "@angular/material/autocomplete";
-import {MatChipInputEvent} from "@angular/material/chips";
-import {Observable} from "rxjs";
-import {COMMA, ENTER} from "@angular/cdk/keycodes";
+import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
+import {MatChipInputEvent} from '@angular/material/chips';
+import {Observable} from 'rxjs';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
 @Component({
   selector: 'app-saveblog',
