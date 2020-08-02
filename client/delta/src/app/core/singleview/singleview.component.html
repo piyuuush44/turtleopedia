@@ -15,12 +15,12 @@
                         <li><a>Admin</a></li>
                         <li><a>{{post.no_of_views}}</a></li>
                     </ul>
-                    <div *ngFor="let cont of post.content">
+                    <div *ngFor="let cont of post.content;let i=index">
                         <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
                         <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
                         </blockquote>
                         <img src="{{cont.imageUrl}}" alt="Post content image" *ngIf="cont.type==='Image'"
-                             class="content-image">
+                             class="content-image p-2">
                         <div class="row" *ngIf="cont.type==='ImageText'">
                             <div class="col-md-4">
                                 <img src="{{cont.imageUrl}}" alt="Post content image">
@@ -33,16 +33,18 @@
                                 src="{{cont.videoUrl}}"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
+<!--                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>-->
+
                     </div>
+                    <br>
+                    <div appLoadScript class="p-3"></div>
                     <br>
                     <div class="row">
                         <div class="col-lg-7 col-md-6">
-                            <div class="tags">
+                            <div class="tags" *ngIf="post.tags.length>0">
                                 <ul class="tags">
                                     <li><i class="fa fa-tag"></i></li>
-                                    <li><a>Beauty</a>,</li>
-                                    <li><a>Fashion</a>,</li>
-                                    <li><a>Lifestyle</a></li>
+                                    <li *ngFor="let tag of post.tags| slice:0:3"><a>{{tag}}</a>,</li>
                                 </ul>
                             </div>
                         </div>

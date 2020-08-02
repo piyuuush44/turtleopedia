@@ -123,20 +123,40 @@
                 </div>
               </div>
 
+
               <div class="row">
                 <div class="col-xl">
                   <div class="card">
                     <div class="card-body">
-                      <div class="form-group">
-                        <label for="exampleFormControlSelect2">Tags</label>
-                        <select formControlName="tags" multiple class="form-control custom-select"
-                                id="exampleFormControlSelect2">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                        </select>
+                      <div class="form-group d-flex m-4">
+
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #chipList aria-label="Tag selection">
+                            <mat-chip
+                              *ngFor="let tag of tags"
+                              [selectable]="selectable"
+                              [removable]="removable"
+                              (removed)="removeTag(tag)">
+                              {{tag}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input
+                              placeholder="New tag..."
+                              #tagInput
+                              formControlName="tags"
+                              [matAutocomplete]="auto"
+                              [matChipInputFor]="chipList"
+                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              (matChipInputTokenEnd)="addTag($event)">
+                          </mat-chip-list>
+                          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedTag($event)">
+                            <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                              {{tag}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+
+
                       </div>
                     </div>
                   </div>
@@ -212,18 +232,29 @@
                         <ckeditor [editor]="Editor" data="{{editMode?cont.text:''}}" #code
                                   (ready)="onReady($event)"></ckeditor>
                       </div>
-                      <div class="form-group">
-                        <div class="col-md-6">
+                      <div class="form-group button-section">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(code.editorInstance.getData(), i)"
                                   [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
                             Delete
                           </button>
                         </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="upshiftContent(i)">
+                            Upshift
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="downshiftContent(i)">
+                            Downshift
+                          </button>
+                        </div>
+
                       </div>
 
                     </div>
@@ -248,18 +279,29 @@
                           </div>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <div class="col-md-6">
+                      <div class="form-group button-section">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(null, i)"
                                   [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
                             Delete
                           </button>
                         </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="upshiftContent(i)">
+                            Upshift
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="downshiftContent(i)">
+                            Downshift
+                          </button>
+                        </div>
+
                       </div>
 
                     </div>
@@ -293,18 +335,30 @@
                                     (ready)="onReady($event)"></ckeditor>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <div class="col-md-6">
+                      <div class="form-group button-section">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-primary rounded-pill"
                                   (click)="addFormContent(imageTextField.editorInstance.getData(), i)"
                                   [disabled]="cont.addButton">{{editMode === true ? 'Edit' : 'Add'}}
                           </button>
+
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3 col-lg-3 col-sm-3">
                           <button type="button" class="btn btn-secondary rounded-pill" (click)="deleteContent(i)">
                             Delete
                           </button>
                         </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="upshiftContent(i)">
+                            Upshift
+                          </button>
+                        </div>
+                        <div class="col-md-3 col-lg-3 col-sm-3">
+                          <button type="button" class="btn btn-secondary rounded-pill" (click)="downshiftContent(i)">
+                            Downshift
+                          </button>
+                        </div>
+
                       </div>
 
                     </div>
@@ -326,7 +380,19 @@
                   </div>
                 </div>
               </div>
-              <button type="submit" [disabled]="!blogForm.valid" class="btn btn-primary">Submit</button>
+              <div class="form-group button-section">
+
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                  <button type="submit" [disabled]="!blogForm.valid" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                  <button type="button" [disabled]="!blogForm.valid" class="btn btn-primary" (click)="saveBlog()">Save
+                    and
+                    Continue
+                  </button>
+
+                </div>
+              </div>
             </form>
           </div>
         </div>

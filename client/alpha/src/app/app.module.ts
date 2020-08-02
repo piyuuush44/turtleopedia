@@ -18,6 +18,7 @@ import {SharedModule} from './shared/shared.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptor} from './shared/auth.interceptor';
 import {ResponseIntercept} from './shared/response.intercept';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ResponseIntercept} from './shared/response.intercept';
     AuthModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

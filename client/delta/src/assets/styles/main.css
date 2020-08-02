@@ -3253,8 +3253,8 @@ section.large-gap {
 .standard-post .down-content p {
     margin-top: 15px;
     text-align: center;
-    border-bottom: 1px dashed #eee;
-    margin-bottom: 25px;
+    /*border-bottom: 1px dashed #eee;*/
+    /*margin-bottom: 25px;*/
     padding-bottom: 25px;
 }
 

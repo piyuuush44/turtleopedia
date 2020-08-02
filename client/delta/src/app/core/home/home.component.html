@@ -19,26 +19,27 @@
                         <li><a>Admin</a></li>
                     </ul>
                     <p [innerHTML]="post.feature_content"></p>
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="comments-info">
-                                <i class="fa fa-eye"></i>
-                                <span>{{post.no_of_views}}</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6">
-                            <ul class="share-post">
-                                <li><i class="fa fa-share-alt"></i></li>
-                                <li><a>Facebook</a>,</li>
-                                <li><a>Twitter</a>,</li>
-                                <li><a>Pinterest</a></li>
-                            </ul>
-                        </div>
+                    <div class="row d-flex justify-content-center">
+                        <!--                        <div class="col-lg-6 col-md-6">-->
+                        <!--                            <div class="comments-info">-->
+                        <!--                                <i class="fa fa-eye"></i>-->
+                        <!--                                <span>{{post.no_of_views}}</span>-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="col-lg-12 col-md-12 col-xs-12">-->
+                        <ul class="share-post">
+                            <li><i class="fa fa-share-alt"></i></li>
+                            <li><a>Facebook</a>,</li>
+                            <li><a>Twitter</a>,</li>
+                            <li><a>Pinterest</a></li>
+                        </ul>
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12" *ngIf="posts._links">
+
+        <div class="col-lg-12 d-flex justify-content-center" *ngIf="posts._links">
             <ul class="pagination">
                 <li *ngIf="posts._links.previous"><a (click)="paginateBackward()"><i class="fa fa-angle-left"></i></a>
                 </li>
@@ -46,5 +47,9 @@
                 <li *ngIf="posts._links.next"><a (click)="paginateForward()"><i class="fa fa-angle-right"></i></a></li>
             </ul>
         </div>
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div appLoadScript class="p-3"></div>
+        </div>
+
     </div>
 </div>

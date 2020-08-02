@@ -11,3 +11,7 @@
 .form-group.button-section {
   display: flex;
 }
+
+.example-chip-list {
+  width: 100%;
+}
