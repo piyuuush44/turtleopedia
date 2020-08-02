@@ -10,11 +10,8 @@ data:
   TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
 kind: ConfigMap
 metadata:
-
   labels:
     app: turtleopedia
   name: turtleopedia-config-qlqx
   namespace: turtleopedia
-  resourceVersion: "1259"
   selfLink: /api/v1/namespaces/turtleopedia/configmaps/turtleopedia-config-qlqx
-
