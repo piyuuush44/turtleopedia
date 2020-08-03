@@ -14,7 +14,7 @@ export class LoadScriptDirective implements AfterViewInit {
         node.src = 'https://insnative.com/na/waWQiOjEwNTE3NDYsInNpZCI6MTA1NjU2Miwid2lkIjoxMTMwNzQsInNyYyI6Mn0=eyJ.js';
         node.type = 'text/javascript';
         node.async = true;
-        this.el.nativeElement.appendChild(node);
+        // this.el.nativeElement.appendChild(node);
     }
 
 }
