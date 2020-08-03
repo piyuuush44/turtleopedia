@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     ngOnInit(): void {
         const limit = this.pageLimit * this.pageNumber;
         const offset = limit - this.pageLimit;
-        const url = `${endPoints.FILTER_POSTS}?limit=${limit}&offset=${offset}`;
+        const url = `${endPoints.FILTER_POSTS}?limit=${limit}&offset=${offset}&sortBy=createdAt,desc`;
         this.store.dispatch(CoreActions.TRY_FETCH_FILTER_POSTS({payload: url}));
         this.store.dispatch(CoreActions.SET_PAGE_TITLE({payload: 'Turtleopedia: The Complete Blog'}));
 

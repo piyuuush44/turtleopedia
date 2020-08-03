@@ -16,12 +16,12 @@
                         <li><a>{{post.no_of_views}}</a></li>
                     </ul>
                     <div *ngFor="let cont of post.content;let i=index">
-                        <p class="first-paragraph" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
+                        <p class="first-paragraph m-1" *ngIf="cont.type ==='Text'" [innerHTML]="cont.text"></p>
                         <blockquote *ngIf="cont.type==='Code'" [innerHTML]="cont.text">
                         </blockquote>
                         <img src="{{cont.imageUrl}}" alt="Post content image" *ngIf="cont.type==='Image'"
                              class="content-image p-2">
-                        <div class="row" *ngIf="cont.type==='ImageText'">
+                        <div class="row m-1" *ngIf="cont.type==='ImageText'">
                             <div class="col-md-4">
                                 <img src="{{cont.imageUrl}}" alt="Post content image">
                             </div>
