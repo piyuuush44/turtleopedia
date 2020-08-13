@@ -7,7 +7,7 @@ import {blogCategories} from '../../shared/constants';
     styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    data: Array<string>;
+    data: Array<{name:string, type:string}>;
 
     constructor() {
     }
