@@ -54,7 +54,7 @@
                     </li>
                     <li class="menu-item-has-children"><a>Categories <i class="sub-icon fa fa-angle-down"></i></a>
                         <ul class="sub-menu">
-                            <li *ngFor="let d of data"><a routerLink="/b/category/{{d}}">{{d}}</a></li>
+                            <li *ngFor="let d of data"><a routerLink="/b/category/{{d.type}}">{{d.name}}</a></li>
                         </ul>
                     </li>
                     <li><a routerLink="/b/about-us">About</a></li>
