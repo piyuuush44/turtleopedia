@@ -1,6 +1,13 @@
 const BCRYPT_HASH_ROUNDS = 10;
 const PHONE_REGEX = /^\+[0-9]{1,4}[0-9]{10}$/;
-const BLOG_POST_CATEGORIES = ['technology', 'lifestyle', 'entertainment'];
+const BLOG_POST_CATEGORIES = [
+  'technology',
+  'lifestyle',
+  'entertainment',
+  'review',
+  'management',
+  'caseAnalysis',
+];
 const DELTA_POSTS_PAGINATED_URL = 'https://api.turtleopedia.com/delta/posts?';
 const DELTA_CATEGORY_PAGINATED_URL = 'https://api.turtleopedia.com/delta/filterPosts?';
 const USER_STAGE_CATEGORIES = ['pending', 'approved', 'disabled'];
