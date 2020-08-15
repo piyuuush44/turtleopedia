@@ -6,6 +6,9 @@ set -e
 source ./bin/setup.sh
 
 date
+print_ok "seeding the database"
+node ./db/seeds
+print_ok "seeding done"
 
 print_ok "Stating the server"
 ./node_modules/.bin/nodemon ./bin/www

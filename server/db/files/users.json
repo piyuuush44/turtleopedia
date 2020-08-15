@@ -1,0 +1,122 @@
+[
+  {
+    "_id": {
+      "$oid": "5ef35d3656b7b400176e8d37"
+    },
+    "user_role": [],
+    "stage": "approved",
+    "stage_history": [
+      {
+        "stage": "pending",
+        "time": {
+          "$numberLong": "1593007414419"
+        }
+      }
+    ],
+    "email": "piyush@turtleopedia.com",
+    "password_hash": "$2b$10$EoO9NuVOlluQ8WzpyupFtuhYohay2zy58tDa1xYMlG4ahec/vZK3y",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1593007414423"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1593007414423"
+      }
+    },
+    "__v": {
+      "$numberInt": "0"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5ef4949993f81f000aa6f8e3"
+    },
+    "user_role": [],
+    "stage": "approved",
+    "stage_history": [
+      {
+        "stage": "pending",
+        "time": {
+          "$numberLong": "1593087129639"
+        }
+      }
+    ],
+    "email": "jayant@turtleopedia.com",
+    "password_hash": "$2b$10$VMwwzQnh/aR6hu1CN5ZACezjN7B99S.5qa6o0wOCmqAin4cstEnMG",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1593087129644"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1593087129644"
+      }
+    },
+    "__v": {
+      "$numberInt": "0"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5ef494b693f81f000aa6f8e4"
+    },
+    "user_role": [],
+    "stage": "approved",
+    "stage_history": [
+      {
+        "stage": "pending",
+        "time": {
+          "$numberLong": "1593087158832"
+        }
+      }
+    ],
+    "email": "rishabh@turtleopedia.com",
+    "password_hash": "$2b$10$MKiGBz81x5tT49W9FseAH.E5FZjesqd5KwGcY8EFivHY3VongGomO",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1593087158833"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1593087158833"
+      }
+    },
+    "__v": {
+      "$numberInt": "0"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5ef494c393f81f000aa6f8e5"
+    },
+    "user_role": [],
+    "stage": "approved",
+    "stage_history": [
+      {
+        "stage": "pending",
+        "time": {
+          "$numberLong": "1593087171503"
+        }
+      }
+    ],
+    "email": "manish@turtleopedia.com",
+    "password_hash": "$2b$10$huDsD4Z5QtohF4uMIdxl0OdIPIX6Kq0y1TW2iHaw72jAb7bmcZhK6",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1593087171503"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1593087171503"
+      }
+    },
+    "__v": {
+      "$numberInt": "0"
+    }
+  }
+]
