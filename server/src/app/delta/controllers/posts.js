@@ -231,9 +231,10 @@ exports.getFilterPost = async (req, res, next) => {
 
   // total post count
   const count = await Posts.aggregate(aggregateArray).count('title');
+  console.log(count[0]['title']);
   return res.json(controllerUtils.getPaginatedResponse(
       posts,
-      count,
+      count[0]['title'],
       req.query,
       constants.DELTA_CATEGORY_PAGINATED_URL,
   ));

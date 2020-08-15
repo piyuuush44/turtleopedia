@@ -2,7 +2,7 @@
 
 set -e
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 cd $DIR
 source setup.sh
 
@@ -26,6 +26,7 @@ export GCLOUD_PROJECT=turtleopedia
 export GCS_KEYFILE=keyfile.json
 export TURTLEOPEDIA_JWT_SECRET_KEY=TURTLEOPEDIA_JWT_SECRET_KEY
 export AUTH0_TEST_ACCESS_TOKEN=AUTH0_TEST_ACCESS_TOKEN
+export BASE_URL=http://localhost:3000
 
 # Run tests
 print_start 'Running the unit tests'
