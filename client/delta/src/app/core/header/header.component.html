@@ -4,7 +4,7 @@
         <ul class="mobile-menu">
             <li class="has-sub"><a routerLink="/b/home">Home <i class="sub-icon fa fa-angle-down"></i></a>
             </li>
-            <li *ngFor="let d of data"><a routerLink="/b/category/{{d}}">{{d}}</a></li>
+            <li *ngFor="let d of data"><a routerLink="/b/category/{{d.type}}">{{d.name}}</a></li>
             <li><a routerLink="/b/about-us">About</a></li>
             <li><a routerLink="/b/contact">Contact Us</a></li>
         </ul>
