@@ -288,6 +288,7 @@ describe('should get a posts by category -> getFilterPost', () => {
         const url = `/delta/filterPosts`;
 
         const response = await server.get(url);
+        console.log(response);
         expect(response.status)
             .toEqual(200);
         expect(response.body.results.length).toEqual(0);
