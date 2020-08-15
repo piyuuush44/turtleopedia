@@ -26,6 +26,7 @@ const addPost = async (data, uId) => {
   post.slug_url = data.slug_url;
   post.feature_content = data.feature_content;
   post.tags = data.tags;
+  post.is_active = data.is_active;
   post.user_id = uId;
 
   return await post.save();

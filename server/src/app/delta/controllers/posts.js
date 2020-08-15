@@ -198,18 +198,19 @@ exports.getFilterPost = async (req, res, next) => {
 
   const aggregateArray = [{
     $match:
-      {
-        category: {
-          $in: categoryArray,
-        },
-      },
+            {
+              category: {
+                $in: categoryArray,
+              },
+            },
   },
   {
     $match:
-      {
-        is_active: true,
-      },
-  }];
+                {
+                  is_active: true,
+                },
+  },
+  ];
 
   if (sortBy) {
     const finalSortValue = sortBy.split(',');
@@ -222,10 +223,14 @@ exports.getFilterPost = async (req, res, next) => {
       $sort: sort,
     });
   }
+
+  // posts based on query
   const posts = await Posts.aggregate(
       aggregateArray,
   ).skip(offset).limit(limit);
-  const count = await Posts.count();
+
+  // total post count
+  const count = await Posts.aggregate(aggregateArray).count('title');
   return res.json(controllerUtils.getPaginatedResponse(
       posts,
       count,

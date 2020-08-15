@@ -25,7 +25,7 @@ exports.getPaginatedResponse = (dbResponse, totalCount, query, baseUrl) => {
 
   // If there are more records, include the next link
   if (totalCount > offset + dbResponse.length) {
-    const newQuery = Object.assign({}, query);
+    const newQuery = {...query};
     newQuery.offset = offset + dbResponse.length;
     response._links.next = baseUrl + querystring.stringify(newQuery);
   }

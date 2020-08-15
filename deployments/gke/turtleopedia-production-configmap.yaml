@@ -8,6 +8,7 @@ data:
   NODE_ENV: production
   PORT: "3000"
   TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
+  BASE_URL: https://api.turtleopedia.com
 kind: ConfigMap
 metadata:
   labels:

@@ -8,11 +8,15 @@ const BLOG_POST_CATEGORIES = [
   'management',
   'caseAnalysis',
 ];
-const DELTA_POSTS_PAGINATED_URL = 'https://api.turtleopedia.com/delta/posts?';
-const DELTA_CATEGORY_PAGINATED_URL = 'https://api.turtleopedia.com/delta/filterPosts?';
-const USER_STAGE_CATEGORIES = ['pending', 'approved', 'disabled'];
-const GCS_URL = 'https://storage.googleapis.com';
+const DELTA_POSTS_PAGINATED_URL =
+    `${process.env.BASE_URL}/delta/posts?`;
 
+const DELTA_CATEGORY_PAGINATED_URL =
+    `${process.env.BASE_URL}/delta/filterPosts?`;
+
+const USER_STAGE_CATEGORIES = ['pending', 'approved', 'disabled'];
+
+const GCS_URL = 'https://storage.googleapis.com';
 
 module.exports = {
   PHONE_REGEX: PHONE_REGEX,
