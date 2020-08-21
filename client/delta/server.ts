@@ -25,14 +25,14 @@ export function app(): express.Express {
     server.set('view engine', 'html');
     server.set('views', distFolder);
 
-    server.get('*', (req, res, next) => {
-        const host = req.header('host');
-        if (host.match(/^www\..*/i)) {
-            next();
-        } else {
-            res.redirect(301, 'https://www.turtleopedia.com' + req.url);
-        }
-    });
+    // server.get('*', (req, res, next) => {
+    //     const host = req.header('host');
+    //     if (host.match(/^www\..*/i)) {
+    //         next();
+    //     } else {
+    //         res.redirect(301, 'https://www.turtleopedia.com' + req.url);
+    //     }
+    // });
 
     // Example Express Rest API endpoints
     // server.get('/api/**', (req, res) => { });
