@@ -26,6 +26,15 @@ export function app(): express.Express {
     server.set('view engine', 'html');
     server.set('views', distFolder);
 
+    server.get('*', function(req, res, next) {
+        let host = req.header("host");
+        if (host.match(/^www\..*/i)) {
+            next();
+        } else {
+            res.redirect(301, "https://www." + host + req.url);
+        }
+    })
+
     // Example Express Rest API endpoints
     // server.get('/api/**', (req, res) => { });
     // Serve static files from /browser
