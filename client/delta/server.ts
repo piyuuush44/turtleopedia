@@ -30,7 +30,7 @@ export function app(): express.Express {
         if (host.match(/^www\..*/i)) {
             next();
         } else {
-            res.redirect(301, 'https://www.' + host + req.url);
+            res.redirect(301, 'https://www.turtleopedia.com' + req.url);
         }
     });
 
