@@ -1,9 +1,6 @@
 import 'zone.js/dist/zone-node';
 import 'localstorage-polyfill';
 import 'reflect-metadata';
-
-global.localStorage = localStorage;
-
 import {ngExpressEngine} from '@nguniversal/express-engine';
 import * as express from 'express';
 import {join} from 'path';
@@ -11,6 +8,8 @@ import {join} from 'path';
 import {AppServerModule} from './src/main.server';
 import {APP_BASE_HREF} from '@angular/common';
 import {existsSync} from 'fs';
+
+global.localStorage = localStorage;
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -26,14 +25,14 @@ export function app(): express.Express {
     server.set('view engine', 'html');
     server.set('views', distFolder);
 
-    server.get('*', function(req, res, next) {
-        let host = req.header("host");
+    server.get('*', (req, res, next) => {
+        const host = req.header('host');
         if (host.match(/^www\..*/i)) {
             next();
         } else {
-            res.redirect(301, "https://www." + host + req.url);
+            res.redirect(301, 'https://www.' + host + req.url);
         }
-    })
+    });
 
     // Example Express Rest API endpoints
     // server.get('/api/**', (req, res) => { });
