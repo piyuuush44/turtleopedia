@@ -14,10 +14,10 @@ echo "Authenticated the key"
 gcloud config set project my-turtleopedia
 echo "Project set successfully"
 
-gcloud config set compute/zone asia-south1-b
+gcloud config set compute/zone asia-southeast1-b
 echo "Zone set successfully"
 
-gcloud container clusters get-credentials turtleopedia --zone=us-central1-a
+gcloud container clusters get-credentials turtleopedia --zone=asia-southeast1-a
 echo "Cluster auth set successfully"
 
 kubectl apply -f ../deployments/gke/turtleopedia-production-configmap.yaml

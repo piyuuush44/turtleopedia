@@ -1,5 +1,6 @@
 apiVersion: v1
 data:
+  BASE_URL: https://api.turtleopedia.com
   GCLOUD_PROJECT: my-turtleopedia
   GCS_BUCKET: turtleopedia_assets_prod
   GCS_KEYFILE: keyfile.json
@@ -8,11 +9,10 @@ data:
   NODE_ENV: production
   PORT: "3000"
   TURTLEOPEDIA_JWT_SECRET_KEY: TURTLEOPEDIA_JWT_SECRET_KEY
-  BASE_URL: https://api.turtleopedia.com
 kind: ConfigMap
 metadata:
   labels:
-    app: turtleopedia
-  name: turtleopedia-config-qlqx
-  namespace: turtleopedia
-  selfLink: /api/v1/namespaces/turtleopedia/configmaps/turtleopedia-config-qlqx
+    app: api-service
+  name: api-service-config-g4ky
+  namespace: default
+  selfLink: /api/v1/namespaces/default/configmaps/api-service-config-g4ky
