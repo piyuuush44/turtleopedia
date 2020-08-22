@@ -26,5 +26,5 @@ echo "Config set applied !"
 kubectl delete --all pods -n=turtleopedia
 echo "All previous pods deleted successfully"
 
-kubectl set image deployment/turtleopedia turtleopedia-1=$CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG -n=turtleopedia
+kubectl set image deployment/api-service turtleopedia-1=$CI_REGISTRY_IMAGE:$CI_ENVIRONMENT_SLUG
 echo "Latest GCR Image set successfully"
