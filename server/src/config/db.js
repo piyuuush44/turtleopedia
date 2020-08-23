@@ -35,5 +35,4 @@ mongoose.connect(url, options)
       logger.error(util.inspect(error));
     });
 
-
 module.exports = mongoose;

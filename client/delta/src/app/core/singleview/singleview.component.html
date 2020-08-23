@@ -33,7 +33,7 @@
                                 src="{{cont.videoUrl}}"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen="" *ngIf="cont.type==='Video'"></iframe>
-<!--                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>-->
+                        <!--                        <div appLoadScript *ngIf="i%5===0 && i!==0" class="p-3"></div>-->
 
                     </div>
                     <br>
@@ -51,9 +51,21 @@
                         <div class="col-lg-5 col-md-6">
                             <ul class="share-post">
                                 <li><i class="fa fa-share-alt"></i></li>
-                                <li><a>Facebook</a>,</li>
-                                <li><a>Twitter</a>,</li>
-                                <li><a>Pinterest</a></li>
+                                <li>
+                                    <a target="_blank"
+                                       href="https://www.facebook.com/sharer/sharer.php?u=https://www.turtleopedia.com/b/singleBlog/{{post.slug_url}}">
+                                        Facebook</a>,
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                       href="http://www.twitter.com/share?url=https://www.turtleopedia.com/b/singleBlog/{{post.slug_url}}">
+                                        Twitter</a>,
+                                </li>
+                                <li>
+                                    <a target="_blank"
+                                       href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.turtleopedia.com/b/singleBlog/{{slugUrl}}">
+                                        Linkedin</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
