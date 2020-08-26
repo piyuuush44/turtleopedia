@@ -146,18 +146,27 @@ exports.deletePostById = async (req, res, next) => {
 
 exports.postComment = async (req, res, next) => {
   try {
-    const {text, parentCommentId} = req.body;
+    const parentCommentId = req.body.parent_comment_id;
+
+    const {message} = req.body;
     const comment = new Comments();
     comment.post_id = req.post._id;
-    comment.text = text;
-    comment.user_id = req.user._id;
+    comment.message = message;
+    comment.name = req.body.name;
+    comment.email = req.body.email;
+    const finalComment = await comment.save();
 
     if (parentCommentId) {
       comment.parent_comment_id = parentCommentId;
+      const parentComment = await Comments.findById(parentCommentId);
+      if (!parentComment.child_comments) {
+        parentComment.child_comments = [];
+      }
+      parentComment.child_comments.push(finalComment._id);
+      await parentComment.save();
     }
-    await comment.save();
     return res.json({
-      result: {comment: comment},
+      result: {comment: finalComment},
       message: 'Comment created successfully',
     });
   } catch (e) {
@@ -169,8 +178,8 @@ exports.getCommentsByPost = async (req, res, next) => {
   const {_id} = req.post;
   const query = {};
   query['post_id'] = _id;
+  const comments = await Comments.find(query).populate('child_comments');
 
-  const comments = await Comments.find(query);
   return res.json({
     result: {comments: comments},
     message: `Comments returned successfully for post id: ${_id}`,

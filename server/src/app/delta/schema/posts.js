@@ -57,7 +57,9 @@ module.exports = {
     },
     body: {
       parent_comment_id: Joi.string(),
-      text: Joi.string().required(),
+      message: Joi.string().required(),
+      name: Joi.string().required(),
+      email: Joi.string().required(),
     },
   },
   getCommentsByPost: {

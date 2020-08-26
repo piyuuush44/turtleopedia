@@ -5,7 +5,7 @@ import * as CoreActions from '../store/core.actions';
 import {coreStateCurrentPostDataSelector} from '../store/core.selector';
 import {ActivatedRoute, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
-import {templateJitUrl} from '@angular/compiler';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-singleview',
@@ -16,8 +16,10 @@ export class SingleviewComponent implements OnInit, OnDestroy {
     slugUrl: string;
     post: Posts;
     tagString = 'Technology,Nodejs, Lifestyle, Fashion, Angular, Php, Promises, Javascript';
+    commentForm: FormGroup;
 
     constructor(
+        private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private store: Store<AppState>,
         private router: Router,
@@ -26,6 +28,7 @@ export class SingleviewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.commentForm = this.createCommentForm();
 
         this.route.paramMap.subscribe(params => {
             this.slugUrl = params.get('slug_url');
@@ -85,6 +88,23 @@ export class SingleviewComponent implements OnInit, OnDestroy {
                 this.store.dispatch(CoreActions.SET_PAGE_META_TAGS({payload: metaTags}));
             }
         );
+    }
+
+    createCommentForm(): FormGroup {
+        return this.formBuilder.group({
+            name: ['', Validators.required],
+            email: ['', Validators.required],
+            message: ['', Validators.required],
+        });
+    }
+
+    onPostComment() {
+        this.store.dispatch(CoreActions.TRY_SAVE_COMMENT({
+            payload: {
+                comment: this.commentForm.value,
+                postId: this.post._id
+            }
+        }));
     }
 
     ngOnDestroy() {

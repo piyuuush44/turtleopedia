@@ -20,6 +20,7 @@ import {LoadScriptDirective} from './advertisement/advertisement-directive';
 import {LoadAdScriptDirective} from './advertisement/advertisement2-directive';
 import { NotfoundComponent } from './notfound/notfound.component';
 import {LoadScriptYlinkDirective} from './advertisement/advertisement-ylink-directive';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import {LoadScriptYlinkDirective} from './advertisement/advertisement-ylink-dire
     imports: [
         CommonModule,
         CoreRoutingModule,
+        ReactiveFormsModule,
     ]
 })
 export class CoreModule {

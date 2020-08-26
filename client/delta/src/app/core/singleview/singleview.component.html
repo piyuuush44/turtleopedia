@@ -97,7 +97,7 @@
                 <li><a href="#">Next Post</a></li>
             </ul>
         </div>
-        <div class="col-lg-12" *ngIf="false">
+        <div class="col-lg-12">
             <div class="widget-post comments">
                 <div class="widget-header">
                     <h4>3 Comments</h4>
@@ -141,36 +141,56 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12" *ngIf="false">
+        <div class="col-lg-12">
             <div class="widget-post leave-comment">
                 <div class="widget-header">
                     <h4>Leave a comment</h4>
                 </div>
                 <div class="widget-content">
                     <div class="contact-form">
-                        <form id="contact" action="#" method="post">
+                        <form [formGroup]="commentForm" (ngSubmit)="onPostComment()">
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <fieldset>
                                         <input name="name" type="text" class="form-control" id="name"
-                                               placeholder="Your name..." required="">
+                                               placeholder="Your name..." required formControlName="name">
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <fieldset>
                                         <input name="email" type="text" class="form-control" id="email"
-                                               pattern="[^ @]*@[^ @]*" placeholder="Your email..." required="">
+                                               pattern="[^ @]*@[^ @]*" placeholder="Your email..." required
+                                               formControlName="email">
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <textarea name="message" rows="6" class="form-control" id="message"
-                                                  placeholder="Your comment..." required=""></textarea>
+                                                  placeholder="Your comment..." required
+                                                  formControlName="message"></textarea>
                                     </fieldset>
                                 </div>
+                                <div class="col-lg-12 alert-danger"
+                                     *ngIf="commentForm.controls.email.errors && commentForm.controls.email.touched">
+                                    <div *ngIf="commentForm.controls.email.errors.required">
+                                        Please enter the email
+                                    </div>
+                                    <div *ngIf="commentForm.controls.name.errors.required">
+                                        Please enter your name
+                                    </div>
+                                    <div *ngIf="commentForm.controls.message.errors.required">
+                                        Please enter the Message
+                                    </div>
+                                    <div *ngIf="commentForm.controls.email.errors.pattern">
+                                        Please enter a valid email
+                                    </div>
+                                </div>
+
+
                                 <div class="col-lg-12">
                                     <fieldset>
-                                        <button type="submit" id="form-submit" class="filled-button">Post Comment
+                                        <button type="submit" [disabled]="!commentForm.valid" class="filled-button">Post
+                                            Comment
                                         </button>
                                     </fieldset>
                                 </div>

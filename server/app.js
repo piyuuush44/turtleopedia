@@ -92,18 +92,18 @@ app.use((err, req, res, next) => {
 
   if (isCelebrate(err)) {
     if (err.joi.details && err.joi.details.length > 0) {
-      res.send(createError(400, err.joi.details[0].message));
+      res.status(400).send(createError(400, err.joi.details[0].message));
     } else {
-      res.send(createError(400, 'Input validation error'));
+      res.status(400).send(createError(400, 'Input validation error'));
     }
   } else if (err.name === 'UnauthorizedError') {
-    res.send(createError(
+    res.status(401).send(createError(
         401,
         'Unauthorized. Missing or invalid token',
     ));
   } else if (err instanceof AppError) {
     if (err instanceof ServerError) {
-      res.send(createError(
+      res.status(err.httpStatus).send(createError(
           err.httpStatus,
           'Looks like something went wrong.' +
                 ' Please wait and try again in a few minutes.',
@@ -111,14 +111,14 @@ app.use((err, req, res, next) => {
     } else {
       // All HTTP requests must have a response,
       // so let's send back an error with its httpStatus and message
-      res.send(getErrorResponse(
+      res.status(err.httpStatus).send(getErrorResponse(
           err.httpStatus,
           err.message,
       ));
     }
   } else {
     // If it is an uncaught exception, pass it back as an Internal Server Error
-    res.send(
+    res.status(500).send(
         createError(
             500,
             'Looks like something went wrong.' +

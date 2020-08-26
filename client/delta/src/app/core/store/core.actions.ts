@@ -3,10 +3,16 @@ import {WebdataModel} from '../model/webdata.model';
 import {FilterPostModel} from '../model/filterPost.model';
 import {Posts} from '../model/posts.model';
 
+export const TRY_SAVE_COMMENT = createAction(
+    'TRY_SAVE_COMMENT',
+    props<{ payload: { comment: { name: string, email: string, message: string }, postId: string } }>()
+);
+
 export const SAVE_WEBSITE_DATA = createAction(
     'SAVE_WEBSITE_DATA',
     props<{ payload: WebdataModel }>()
 );
+
 export const SAVE_FILTER_POSTS_DATA = createAction(
     'SAVE_FILTER_POSTS_DATA',
     props<{ payload: FilterPostModel }>()

@@ -14,6 +14,23 @@ import {Meta, Title} from '@angular/platform-browser';
 @Injectable()
 export class CoreEffects {
 
+    trySaveComment = createEffect(() =>
+        this.actions$.pipe(
+            ofType(CoreAction.TRY_SAVE_COMMENT),
+            map((data) => data.payload),
+            switchMap((data) =>
+                this.blogService.saveComment(data.comment, data.postId).pipe(
+                    map((response: HttpResponse<any>) => {
+                            return CoreAction.SAVE_WEBSITE_DATA({payload: response.body.result.data});
+                        }
+                    ),
+                    catchError(error => EMPTY
+                    )
+                )
+            )
+        )
+    );
+
     fetchWebsiteData$ = createEffect(() =>
         this.actions$.pipe(
             ofType(CoreAction.TRY_FETCH_WEBSITE_DATA),

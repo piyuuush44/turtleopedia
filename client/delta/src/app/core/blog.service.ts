@@ -10,6 +10,13 @@ export class BlogService {
     constructor(private http: HttpClient) {
     }
 
+    saveComment(data, postId): Observable<any> {
+        const postCommentEndpoint = `${endPoints.POST_COMMENT}`.replace('$S', postId);
+
+        // We do not subscribe here! We let the resolver take care of that...
+        return this.http.post(postCommentEndpoint, data, {observe: 'response'});
+    }
+
     getWebsiteData(): Observable<any> {
         // We do not subscribe here! We let the resolver take care of that...
         return this.http.get(endPoints.WEBSITE_DATA, {observe: 'response'});
